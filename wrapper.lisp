@@ -135,7 +135,7 @@
          (when (and (not ,context) ,ctx)
            (destroy-context ,ctx))))))
 
-(defmacro with-window ((name &key (open nil open-p) (flags :none)) &body body)
+(defmacro with-window ((name &key (open nil open-p) (flags 0)) &body body)
   "Execute body within an ImGui window. Automatically calls End."
   (let ((open-var (gensym "OPEN"))
         (result-var (gensym "RESULT")))
@@ -150,10 +150,12 @@
               ,@body)
          (end)))))
 
-(defmacro with-child ((str-id &key (size-x 0.0) (size-y 0.0) (child-flags :none) (window-flags :none)) &body body)
+(defmacro with-child ((str-id &key (size-x 0.0) (size-y 0.0) (child-flags 0) (window-flags 0)) &body body)
   "Execute body within a child window. Automatically calls EndChild."
-  `(progn
-     (when (begin-child ,str-id ,size-x ,size-y ,child-flags ,window-flags)
+  `(cffi:with-foreign-object (size '(:struct vec2))
+     (setf (cffi:foreign-slot-value size '(:struct vec2) 'x) (float ,size-x))
+     (setf (cffi:foreign-slot-value size '(:struct vec2) 'y) (float ,size-y))
+     (when (begin-child ,str-id size ,child-flags ,window-flags)
        (unwind-protect
             (progn ,@body)
          (end-child)))))
@@ -176,24 +178,27 @@
 
 (defmacro with-style-color ((idx color) &body body)
   "Execute body with a temporary style color."
-  `(progn
-     (with-vec4 (col ,color)
-       (push-style-color ,idx col))
-     (unwind-protect
-          (progn ,@body)
-       (pop-style-color 1))))
+  (let ((c (gensym "COLOR")))
+    `(let ((,c ,color))
+       (push-style-color-xyzw ,idx (vec4-x ,c) (vec4-y ,c) (vec4-z ,c) (vec4-w ,c))
+       (unwind-protect
+            (progn ,@body)
+         (pop-style-color-ex 1)))))
 
 (defmacro with-style-colors ((&rest color-specs) &body body)
   "Execute body with multiple temporary style colors.
    COLOR-SPECS is a list of (idx color) pairs."
   (let ((count (length color-specs)))
     `(progn
-       ,@(loop for (idx color) in color-specs
-               collect `(with-vec4 (col ,color)
-                          (push-style-color ,idx col)))
+       ,@(mapcar (lambda (spec)
+                   (destructuring-bind (idx color) spec
+                     (let ((c (gensym "COLOR")))
+                       `(let ((,c ,color))
+                          (push-style-color-xyzw ,idx (vec4-x ,c) (vec4-y ,c) (vec4-z ,c) (vec4-w ,c))))))
+                 color-specs)
        (unwind-protect
             (progn ,@body)
-         (pop-style-color ,count)))))
+         (pop-style-color-ex ,count)))))
 
 (defmacro with-style-var ((idx val) &body body)
   "Execute body with a temporary style variable."
@@ -201,7 +206,7 @@
      (push-style-var ,idx ,val)
      (unwind-protect
           (progn ,@body)
-       (pop-style-var 1))))
+       (pop-style-var-ex 1))))
 
 (defmacro with-font ((font) &body body)
   "Execute body with a specific font."
@@ -219,20 +224,20 @@
 (defun button-colored (label color &key (size-x 0.0) (size-y 0.0))
   "Create a button with custom color."
   (with-style-color (:button color)
-    (button label size-x size-y)))
+    (button-xy label (float size-x) (float size-y))))
 
-(defun input-float-simple (label value &key (step 0.0) (step-fast 0.0) (format "%.3f") (flags :none))
+(defun input-float-simple (label value &key (step 0.0) (step-fast 0.0) (format "%.3f") (flags 0))
   "Simplified input-float that returns the new value."
   (cffi:with-foreign-object (val :float)
     (setf (cffi:mem-ref val :float) (float value))
-    (input-float label val step step-fast format flags)
+    (input-float-ex label val step step-fast format flags)
     (cffi:mem-ref val :float)))
 
-(defun input-int-simple (label value &key (step 1) (step-fast 100) (flags :none))
+(defun input-int-simple (label value &key (step 1) (step-fast 100) (flags 0))
   "Simplified input-int that returns the new value."
   (cffi:with-foreign-object (val :int)
     (setf (cffi:mem-ref val :int) value)
-    (input-int label val step step-fast flags)
+    (input-int-ex label val step step-fast flags)
     (cffi:mem-ref val :int)))
 
 (defun checkbox-simple (label checked)
@@ -242,21 +247,21 @@
     (checkbox label val)
     (cffi:mem-ref val :bool)))
 
-(defun slider-float-simple (label value min max &key (format "%.3f") (flags :none))
+(defun slider-float-simple (label value min max &key (format "%.3f") (flags 0))
   "Simplified slider-float that returns the new value."
   (cffi:with-foreign-object (val :float)
     (setf (cffi:mem-ref val :float) (float value))
-    (slider-float label val (float min) (float max) format flags)
+    (slider-float-ex label val (float min) (float max) format flags)
     (cffi:mem-ref val :float)))
 
-(defun slider-int-simple (label value min max &key (format "%d") (flags :none))
+(defun slider-int-simple (label value min max &key (format "%d") (flags 0))
   "Simplified slider-int that returns the new value."
   (cffi:with-foreign-object (val :int)
     (setf (cffi:mem-ref val :int) value)
-    (slider-int label val min max format flags)
+    (slider-int-ex label val min max format flags)
     (cffi:mem-ref val :int)))
 
-(defun color-edit-simple (label color &key (flags :none))
+(defun color-edit-simple (label color &key (flags 0))
   "Simplified color editor that returns the new color as a vec4."
   (cffi:with-foreign-object (col :float 4)
     (setf (cffi:mem-aref col :float 0) (vec4-x color))
@@ -270,14 +275,14 @@
                    :z (cffi:mem-aref col :float 2)
                    :w (cffi:mem-aref col :float 3))))
 
-(defmacro with-tree-node ((label &key (flags :none)) &body body)
+(defmacro with-tree-node ((label &key (flags 0)) &body body)
   "Execute body if tree node is open. Automatically calls TreePop."
   `(when (tree-node-ex ,label ,flags)
      (unwind-protect
           (progn ,@body)
        (tree-pop))))
 
-(defmacro with-collapsing-header ((label &key (flags :none)) &body body)
+(defmacro with-collapsing-header ((label &key (flags 0)) &body body)
   "Execute body if collapsing header is open."
   `(when (collapsing-header ,label ,flags)
      ,@body))
@@ -303,14 +308,14 @@
           (progn ,@body)
        (end-menu))))
 
-(defmacro with-popup ((str-id &key (flags :none)) &body body)
+(defmacro with-popup ((str-id &key (flags 0)) &body body)
   "Execute body within a popup."
   `(when (begin-popup ,str-id ,flags)
      (unwind-protect
           (progn ,@body)
        (end-popup))))
 
-(defmacro with-popup-modal ((name &key (open nil open-p) (flags :none)) &body body)
+(defmacro with-popup-modal ((name &key (open nil open-p) (flags 0)) &body body)
   "Execute body within a modal popup."
   (let ((open-var (gensym "OPEN")))
     `(let ((,open-var ,(if open-p open t)))
@@ -323,7 +328,7 @@
               (progn ,@body)
            (end-popup))))))
 
-(defmacro with-table ((str-id columns &key (flags :none) (outer-size-x 0.0) (outer-size-y 0.0) (inner-width 0.0)) &body body)
+(defmacro with-table ((str-id columns &key (flags 0) (outer-size-x 0.0) (outer-size-y 0.0) (inner-width 0.0)) &body body)
   "Execute body within a table."
   `(when (begin-table ,str-id ,columns ,flags ,outer-size-x ,outer-size-y ,inner-width)
      (unwind-protect
@@ -332,27 +337,15 @@
 
 (defun same-line (&optional (offset-from-start-x 0.0) (spacing -1.0))
   "Keep next item on same line."
-  (cl-dear-imgui::same-line offset-from-start-x spacing))
-
-(defun separator ()
-  "Draw a horizontal separator."
-  (cl-dear-imgui::separator))
-
-(defun spacing ()
-  "Add vertical spacing."
-  (cl-dear-imgui::spacing))
-
-(defun dummy (size-x size-y)
-  "Add invisible dummy item of specified size."
-  (cl-dear-imgui::dummy size-x size-y))
+  (same-line-ex (float offset-from-start-x) (float spacing)))
 
 (defun indent (&optional (indent-w 0.0))
   "Indent content."
-  (cl-dear-imgui::indent indent-w))
+  (indent-ex (float indent-w)))
 
 (defun unindent (&optional (indent-w 0.0))
   "Unindent content."
-  (cl-dear-imgui::unindent indent-w))
+  (unindent-ex (float indent-w)))
 
 (defmethod print-object ((obj vec2) stream)
   (print-unreadable-object (obj stream :type t)
@@ -389,4 +382,4 @@
           with-main-menu-bar with-menu-bar with-menu
           with-popup with-popup-modal
           with-table
-          same-line separator spacing dummy indent unindent))
+          same-line indent unindent))
