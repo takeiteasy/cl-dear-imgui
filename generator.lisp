@@ -414,10 +414,7 @@
                              (getf metadata :structs))
 
     ;; Functions
-    (generate-functions stream (getf metadata :functions))
-
-    ;; ARM64 ABI shims (not in JSON — hand-written C wrappers in dcimgui.cpp)
-    (generate-arm64-shims stream)))
+    (generate-functions stream (getf metadata :functions))))
 
 (defun generate-library-definition (stream)
   "Generate define-foreign-library form for dcimgui."
@@ -894,68 +891,6 @@ Used to handle out-pointer parameters that are incorrectly typed as :STRING.")
        (format stream "  (~A ~S)~%"
                lisp-name
                cffi-type)))))
-
-;;; ============================================================================
-;;; ARM64 ABI Shims
-;;; ============================================================================
-
-(defun generate-arm64-shims (stream)
-  "Emit CFFI defcfun forms for the 9 dcimgui manual C wrappers that take
-individual float arguments in place of ImVec2/ImVec4 struct-by-value parameters.
-
-On ARM64 (e.g., Apple Silicon), the ABI passes structs containing only floats
-via the Homogeneous Floating-point Aggregate (HFA) convention, which CFFI/SBCL
-cannot replicate correctly when calling foreign code. dcimgui provides these
-*XY / *XYZW variants to work around this.
-
-These functions are NOT in dcimgui.json (they are written by hand in dcimgui.cpp),
-so the generator emits them explicitly here."
-  (format stream "~%;;; ============================================================================~%")
-  (format stream ";;; ARM64 ABI Shims~%")
-  (format stream ";;; On ARM64, ImVec2/ImVec4 by-value args use HFA calling convention which~%")
-  (format stream ";;; CFFI/SBCL cannot reproduce. These _XY/_XYZW variants take individual~%")
-  (format stream ";;; floats instead and are provided as hand-written wrappers in dcimgui.cpp.~%")
-  (format stream ";;; ============================================================================~%~%")
-
-  ;; ImGui_SetNextWindowPosXY(x, y, cond, px, py)
-  (format stream "(defcfun (\"ImGui_SetNextWindowPosXY\" set-next-window-pos-xy) :VOID~%")
-  (format stream "  (x :FLOAT) (y :FLOAT) (cond :INT) (px :FLOAT) (py :FLOAT))~%~%")
-
-  ;; ImGui_SetNextWindowSizeXY(w, h, cond)
-  (format stream "(defcfun (\"ImGui_SetNextWindowSizeXY\" set-next-window-size-xy) :VOID~%")
-  (format stream "  (w :FLOAT) (h :FLOAT) (cond :INT))~%~%")
-
-  ;; ImGui_BeginChildXY(str_id, w, h, child_flags, window_flags) -> bool
-  (format stream "(defcfun (\"ImGui_BeginChildXY\" begin-child-xy) :BOOL~%")
-  (format stream "  (str-id :STRING) (w :FLOAT) (h :FLOAT)~%")
-  (format stream "  (child-flags :INT) (window-flags :INT))~%~%")
-
-  ;; ImGui_ButtonXY(label, w, h) -> bool
-  (format stream "(defcfun (\"ImGui_ButtonXY\" button-xy) :BOOL~%")
-  (format stream "  (label :STRING) (w :FLOAT) (h :FLOAT))~%~%")
-
-  ;; ImGui_BeginListBoxXY(label, w, h) -> bool
-  (format stream "(defcfun (\"ImGui_BeginListBoxXY\" begin-list-box-xy) :BOOL~%")
-  (format stream "  (label :STRING) (w :FLOAT) (h :FLOAT))~%~%")
-
-  ;; ImGui_SelectableXY(label, selected, flags, w, h) -> bool
-  (format stream "(defcfun (\"ImGui_SelectableXY\" selectable-xy) :BOOL~%")
-  (format stream "  (label :STRING) (selected :BOOL) (flags :INT)~%")
-  (format stream "  (w :FLOAT) (h :FLOAT))~%~%")
-
-  ;; ImGui_ColorButtonXY(desc_id, r, g, b, a, flags, w, h) -> bool
-  (format stream "(defcfun (\"ImGui_ColorButtonXY\" color-button-xy) :BOOL~%")
-  (format stream "  (desc-id :STRING)~%")
-  (format stream "  (r :FLOAT) (g :FLOAT) (b :FLOAT) (a :FLOAT)~%")
-  (format stream "  (flags :INT) (w :FLOAT) (h :FLOAT))~%~%")
-
-  ;; ImGui_PushStyleVarXY(idx, x, y)
-  (format stream "(defcfun (\"ImGui_PushStyleVarXY\" push-style-var-xy) :VOID~%")
-  (format stream "  (idx :INT) (x :FLOAT) (y :FLOAT))~%~%")
-
-  ;; ImGui_PushStyleColorXYZW(idx, r, g, b, a)
-  (format stream "(defcfun (\"ImGui_PushStyleColorXYZW\" push-style-color-xyzw) :VOID~%")
-  (format stream "  (idx :INT) (r :FLOAT) (g :FLOAT) (b :FLOAT) (a :FLOAT))~%~%"))
 
 (format t "~%;; cl-dear-imgui/generator loaded.~%")
 (format t ";; Usage: (cl-dear-imgui/generator:generate-bindings \"dcimgui.json\" \"package.lisp\" \"bindings.lisp\")~%~%")

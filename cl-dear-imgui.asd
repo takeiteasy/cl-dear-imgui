@@ -9,7 +9,8 @@
   :depends-on (#:cffi)
   :components ((:file "package")
                (:file "bindings")
-               (:file "wrapper")))
+               (:file "wrapper")
+               (:file "shim")))
 
 (asdf:defsystem #:cl-dear-imgui/generator
   :description "Generator for cl-dear-imgui bindings from dcimgui.json"
