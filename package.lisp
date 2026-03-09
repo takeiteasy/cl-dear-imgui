@@ -32,6 +32,7 @@
    #:backend-flags-renderer-has-vtx-offset
    #:begin
    #:begin-child
+   #:begin-child-frame
    #:begin-child-frame-ex
    #:begin-child-id
    #:begin-combo
@@ -42,21 +43,28 @@
    #:begin-item-tooltip
    #:begin-list-box
    #:begin-main-menu-bar
+   #:begin-menu
    #:begin-menu-bar
    #:begin-menu-ex
+   #:begin-multi-select
    #:begin-multi-select-ex
    #:begin-popup
+   #:begin-popup-context-item
    #:begin-popup-context-item-ex
+   #:begin-popup-context-void
    #:begin-popup-context-void-ex
+   #:begin-popup-context-window
    #:begin-popup-context-window-ex
    #:begin-popup-modal
    #:begin-tab-bar
    #:begin-tab-item
+   #:begin-table
    #:begin-table-ex
    #:begin-tooltip
    #:bullet
    #:bullet-text
    #:bullet-text-v
+   #:button
    #:button-ex
    #:button-flags
    #:button-flags-enable-nav
@@ -66,6 +74,7 @@
    #:button-flags-mouse-button-right
    #:button-flags-none
    #:calc-item-width
+   #:calc-text-size
    #:calc-text-size-ex
    #:checkbox
    #:checkbox-flags-int-ptr
@@ -151,6 +160,7 @@
    #:collapsing-header
    #:collapsing-header-bool-ptr
    #:color
+   #:color-button
    #:color-button-ex
    #:color-convert-float4to-u32
    #:color-convert-hsvto-rgb
@@ -196,8 +206,12 @@
    #:color-picker3
    #:color-picker4
    #:color-set-hsv
+   #:columns
    #:columns-ex
+   #:combo
+   #:combo-callback
    #:combo-callback-ex
+   #:combo-char
    #:combo-char-ex
    #:combo-ex
    #:combo-flags
@@ -211,6 +225,7 @@
    #:combo-flags-none
    #:combo-flags-popup-align-left
    #:combo-flags-width-fit-preview
+   #:combo-obsolete
    #:combo-obsolete-ex
    #:cond
    #:cond-always
@@ -274,17 +289,29 @@
    #:drag-drop-flags-source-no-disable-hover
    #:drag-drop-flags-source-no-hold-to-open-others
    #:drag-drop-flags-source-no-preview-tooltip
+   #:drag-float
    #:drag-float-ex
+   #:drag-float-range2
    #:drag-float-range2ex
+   #:drag-float2
    #:drag-float2ex
+   #:drag-float3
    #:drag-float3ex
+   #:drag-float4
    #:drag-float4ex
+   #:drag-int
    #:drag-int-ex
+   #:drag-int-range2
    #:drag-int-range2ex
+   #:drag-int2
    #:drag-int2ex
+   #:drag-int3
    #:drag-int3ex
+   #:drag-int4
    #:drag-int4ex
+   #:drag-scalar
    #:drag-scalar-ex
+   #:drag-scalar-n
    #:drag-scalar-nex
    #:draw-callback
    #:draw-channel
@@ -327,28 +354,42 @@
    #:draw-list--try-merge-draw-cmds
    #:draw-list-add-bezier-cubic
    #:draw-list-add-bezier-quadratic
+   #:draw-list-add-callback
    #:draw-list-add-callback-ex
+   #:draw-list-add-circle
    #:draw-list-add-circle-ex
    #:draw-list-add-circle-filled
    #:draw-list-add-concave-poly-filled
    #:draw-list-add-convex-poly-filled
    #:draw-list-add-draw-cmd
+   #:draw-list-add-ellipse
    #:draw-list-add-ellipse-ex
+   #:draw-list-add-ellipse-filled
    #:draw-list-add-ellipse-filled-ex
+   #:draw-list-add-image
    #:draw-list-add-image-ex
+   #:draw-list-add-image-quad
    #:draw-list-add-image-quad-ex
    #:draw-list-add-image-rounded
+   #:draw-list-add-line
    #:draw-list-add-line-ex
+   #:draw-list-add-ngon
    #:draw-list-add-ngon-ex
    #:draw-list-add-ngon-filled
    #:draw-list-add-polyline
+   #:draw-list-add-quad
    #:draw-list-add-quad-ex
    #:draw-list-add-quad-filled
+   #:draw-list-add-rect
    #:draw-list-add-rect-ex
+   #:draw-list-add-rect-filled
    #:draw-list-add-rect-filled-ex
    #:draw-list-add-rect-filled-multi-color
+   #:draw-list-add-text
    #:draw-list-add-text-ex
+   #:draw-list-add-text-im-font-ptr
    #:draw-list-add-text-im-font-ptr-ex
+   #:draw-list-add-triangle
    #:draw-list-add-triangle-ex
    #:draw-list-add-triangle-filled
    #:draw-list-channels-merge
@@ -368,6 +409,7 @@
    #:draw-list-path-bezier-cubic-curve-to
    #:draw-list-path-bezier-quadratic-curve-to
    #:draw-list-path-clear
+   #:draw-list-path-elliptical-arc-to
    #:draw-list-path-elliptical-arc-to-ex
    #:draw-list-path-fill-concave
    #:draw-list-path-fill-convex
@@ -478,6 +520,7 @@
    #:font-baked-find-glyph-no-fallback
    #:font-baked-get-char-advance
    #:font-baked-is-glyph-loaded
+   #:font-calc-text-size-a
    #:font-calc-text-size-aex
    #:font-calc-word-wrap-position
    #:font-calc-word-wrap-position-a
@@ -489,6 +532,7 @@
    #:font-flags-no-load-glyphs
    #:font-flags-none
    #:font-get-debug-name
+   #:font-get-font-baked
    #:font-get-font-baked-ex
    #:font-glyph
    #:font-glyph-ranges-builder
@@ -502,12 +546,15 @@
    #:font-is-glyph-in-font
    #:font-is-glyph-range-unused
    #:font-is-loaded
+   #:font-render-char
    #:font-render-char-ex
    #:font-render-text
    #:get-allocator-functions
    #:get-background-draw-list
    #:get-clipboard-text
+   #:get-color-u32
    #:get-color-u32ex
+   #:get-color-u32im-u32
    #:get-color-u32im-u32ex
    #:get-color-u32im-vec4
    #:get-column-index
@@ -593,11 +640,59 @@
    #:hovered-flags-root-window
    #:hovered-flags-stationary
    #:id
+   #:im-backend-flags
+   #:im-button-flags
+   #:im-child-flags
+   #:im-col
+   #:im-color-edit-flags
+   #:im-combo-flags
+   #:im-cond
+   #:im-config-flags
+   #:im-data-type
+   #:im-dir
+   #:im-drag-drop-flags
+   #:im-draw-flags
+   #:im-draw-list-flags
+   #:im-focused-flags
+   #:im-font-atlas-flags
+   #:im-font-flags
+   #:im-hovered-flags
+   #:im-input-flags
+   #:im-input-text-flags
+   #:im-item-flags
+   #:im-key
+   #:im-list-clipper-flags
+   #:im-mouse-button
+   #:im-mouse-cursor
+   #:im-mouse-source
+   #:im-multi-select-flags
+   #:im-popup-flags
+   #:im-selectable-flags
+   #:im-selection-request-type
+   #:im-slider-flags
+   #:im-sort-direction
+   #:im-style-var
+   #:im-tab-bar-flags
+   #:im-tab-item-flags
+   #:im-table-bg-target
+   #:im-table-column-flags
+   #:im-table-flags
+   #:im-table-row-flags
+   #:im-texture-format
+   #:im-texture-status
+   #:im-tree-node-flags
+   #:im-viewport-flags
+   #:im-window-flags
+   #:image
+   #:image-button
    #:image-button-ex
    #:image-ex
    #:image-im-vec4
+   #:image-with-bg
    #:image-with-bg-ex
+   #:indent
    #:indent-ex
+   #:input-double
    #:input-double-ex
    #:input-flags
    #:input-flags-none
@@ -611,16 +706,24 @@
    #:input-flags-route-over-focused
    #:input-flags-route-unless-bg-focused
    #:input-flags-tooltip
+   #:input-float
    #:input-float-ex
+   #:input-float2
    #:input-float2ex
+   #:input-float3
    #:input-float3ex
+   #:input-float4
    #:input-float4ex
+   #:input-int
    #:input-int-ex
    #:input-int2
    #:input-int3
    #:input-int4
+   #:input-scalar
    #:input-scalar-ex
+   #:input-scalar-n
    #:input-scalar-nex
+   #:input-text
    #:input-text-callback
    #:input-text-callback-data
    #:input-text-callback-data-clear-selection
@@ -656,7 +759,9 @@
    #:input-text-flags-password
    #:input-text-flags-read-only
    #:input-text-flags-word-wrap
+   #:input-text-multiline
    #:input-text-multiline-ex
+   #:input-text-with-hint
    #:input-text-with-hint-ex
    #:invisible-button
    #:io
@@ -674,6 +779,7 @@
    #:io-clear-input-keys
    #:io-clear-input-mouse
    #:io-set-app-accepting-events
+   #:io-set-key-event-native-data
    #:io-set-key-event-native-data-ex
    #:is-any-item-active
    #:is-any-item-focused
@@ -681,6 +787,7 @@
    #:is-any-mouse-down
    #:is-item-activated
    #:is-item-active
+   #:is-item-clicked
    #:is-item-clicked-ex
    #:is-item-deactivated
    #:is-item-deactivated-after-edit
@@ -692,12 +799,15 @@
    #:is-item-visible
    #:is-key-chord-pressed
    #:is-key-down
+   #:is-key-pressed
    #:is-key-pressed-ex
    #:is-key-released
+   #:is-mouse-clicked
    #:is-mouse-clicked-ex
    #:is-mouse-double-clicked
    #:is-mouse-down
    #:is-mouse-dragging
+   #:is-mouse-hovering-rect
    #:is-mouse-hovering-rect-ex
    #:is-mouse-pos-valid
    #:is-mouse-released
@@ -883,7 +993,9 @@
    #:label-text
    #:label-text-v
    #:list-box
+   #:list-box-callback
    #:list-box-callback-ex
+   #:list-box-obsolete
    #:list-box-obsolete-ex
    #:list-clipper
    #:list-clipper-begin
@@ -908,6 +1020,7 @@
    #:mem-alloc-func
    #:mem-free
    #:mem-free-func
+   #:menu-item
    #:menu-item-bool-ptr
    #:menu-item-ex
    #:mod-alt
@@ -976,8 +1089,12 @@
    #:platform-io
    #:platform-io-clear-platform-handlers
    #:platform-io-clear-renderer-handlers
+   #:plot-histogram
+   #:plot-histogram-callback
    #:plot-histogram-callback-ex
    #:plot-histogram-ex
+   #:plot-lines
+   #:plot-lines-callback
    #:plot-lines-callback-ex
    #:plot-lines-ex
    #:pop-button-repeat
@@ -986,7 +1103,9 @@
    #:pop-id
    #:pop-item-flag
    #:pop-item-width
+   #:pop-style-color
    #:pop-style-color-ex
+   #:pop-style-var
    #:pop-style-var-ex
    #:pop-tab-stop
    #:pop-text-wrap-pos
@@ -1025,14 +1144,18 @@
    #:radio-button
    #:radio-button-int-ptr
    #:render
+   #:reset-mouse-drag-delta
    #:reset-mouse-drag-delta-ex
    #:s16
    #:s32
    #:s64
    #:s8
+   #:same-line
    #:same-line-ex
    #:save-ini-settings-to-disk
    #:save-ini-settings-to-memory
+   #:selectable
+   #:selectable-bool-ptr
    #:selectable-bool-ptr-ex
    #:selectable-ex
    #:selectable-flags
@@ -1056,7 +1179,6 @@
    #:selection-external-storage
    #:selection-external-storage-apply-requests
    #:selection-request
-   #:selection-request-type
    #:selection-request-type-none
    #:selection-request-type-set-all
    #:selection-request-type-set-range
@@ -1078,6 +1200,7 @@
    #:set-item-key-owner
    #:set-item-tooltip
    #:set-item-tooltip-v
+   #:set-keyboard-focus-here
    #:set-keyboard-focus-here-ex
    #:set-mouse-cursor
    #:set-nav-cursor-visible
@@ -1093,6 +1216,7 @@
    #:set-next-window-collapsed
    #:set-next-window-content-size
    #:set-next-window-focus
+   #:set-next-window-pos
    #:set-next-window-pos-ex
    #:set-next-window-scroll
    #:set-next-window-size
@@ -1121,6 +1245,7 @@
    #:show-debug-log-window
    #:show-demo-window
    #:show-font-selector
+   #:show-idstack-tool-window
    #:show-idstack-tool-window-ex
    #:show-metrics-window
    #:show-stack-tool-window
@@ -1129,6 +1254,7 @@
    #:show-user-guide
    #:size-callback
    #:size-callback-data
+   #:slider-angle
    #:slider-angle-ex
    #:slider-flags
    #:slider-flags-always-clamp
@@ -1142,15 +1268,25 @@
    #:slider-flags-no-speed-tweaks
    #:slider-flags-none
    #:slider-flags-wrap-around
+   #:slider-float
    #:slider-float-ex
+   #:slider-float2
    #:slider-float2ex
+   #:slider-float3
    #:slider-float3ex
+   #:slider-float4
    #:slider-float4ex
+   #:slider-int
    #:slider-int-ex
+   #:slider-int2
    #:slider-int2ex
+   #:slider-int3
    #:slider-int3ex
+   #:slider-int4
    #:slider-int4ex
+   #:slider-scalar
    #:slider-scalar-ex
+   #:slider-scalar-n
    #:slider-scalar-nex
    #:small-button
    #:sort-direction
@@ -1333,6 +1469,7 @@
    #:table-header
    #:table-headers-row
    #:table-next-column
+   #:table-next-row
    #:table-next-row-ex
    #:table-row-flags
    #:table-row-flags-headers
@@ -1340,6 +1477,7 @@
    #:table-set-bg-color
    #:table-set-column-enabled
    #:table-set-column-index
+   #:table-setup-column
    #:table-setup-column-ex
    #:table-setup-scroll-freeze
    #:table-sort-specs
@@ -1370,7 +1508,9 @@
    #:text-filter-is-active
    #:text-filter-pass-filter
    #:text-link
+   #:text-link-open-url
    #:text-link-open-urlex
+   #:text-unformatted
    #:text-unformatted-ex
    #:text-v
    #:text-wrapped
@@ -1386,14 +1526,12 @@
    #:texture-data-get-tex-ref
    #:texture-data-set-status
    #:texture-data-set-tex-id
-   #:texture-format
    #:texture-format-alpha8
    #:texture-format-rgba32
    #:texture-id
    #:texture-rect
    #:texture-ref
    #:texture-ref-get-tex-id
-   #:texture-status
    #:texture-status-destroyed
    #:texture-status-ok
    #:texture-status-want-create
@@ -1441,6 +1579,7 @@
    #:u32
    #:u64
    #:u8
+   #:unindent
    #:unindent-ex
    #:vec2
    #:vec4
@@ -1478,8 +1617,11 @@
    #:viewport-flags-owned-by-app
    #:viewport-get-center
    #:viewport-get-work-center
+   #:vslider-float
    #:vslider-float-ex
+   #:vslider-int
    #:vslider-int-ex
+   #:vslider-scalar
    #:vslider-scalar-ex
    #:wchar
    #:wchar16

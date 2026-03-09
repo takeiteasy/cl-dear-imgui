@@ -29,16 +29,10 @@
         (setf *current-metadata* metadata)
         (setf *struct-names* (build-struct-names-set (getf metadata :structs)))
 
-        (format t "Generating package file: ~A~%" package-file)
-        (generate-package-file package-file metadata)
-
-        (format t "Generating bindings file: ~A~%" bindings-file)
-        (generate-bindings-file bindings-file metadata)
-
-        ;; Collect by-value-struct functions, generate shims, then check coverage
+        ;; Collect by-value functions and compute shim names FIRST so they
+        ;; can be included in the package exports.
         (let* ((by-value      (collect-by-value-struct-functions (getf metadata :functions)))
                (manual-cov   (parse-shim-covered-names effective-shim))
-               ;; Only generate shims for functions NOT already covered manually
                (need-shim    (remove-if
                               (lambda (fn)
                                 (let ((orig (gethash "original_fully_qualified_name" fn)))
@@ -47,7 +41,19 @@
                (gen-cpp      (make-pathname :name "abi_shim_generated" :type "cpp"
                                             :defaults effective-shim))
                (gen-lisp     (make-pathname :name "shim_generated" :type "lisp"
-                                            :defaults effective-shim)))
+                                            :defaults effective-shim))
+               ;; Pre-compute shim lisp names for export (exclude varargs functions).
+               ;; Use the original function name as the Lisp symbol (matching generate-lisp-shim).
+               (shim-exports (loop for fn in need-shim
+                                   unless (func-has-real-varargs-p fn)
+                                   collect (format-symbol-name (gethash "name" fn)))))
+
+          (format t "Generating package file: ~A~%" package-file)
+          (generate-package-file package-file metadata :extra-exports shim-exports)
+
+          (format t "Generating bindings file: ~A~%" bindings-file)
+          (generate-bindings-file bindings-file metadata)
+
           (when by-value
             (format t "~%~D function(s) pass structs by value (~D already manually shimmed).~%"
                     (length by-value) (- (length by-value) (length need-shim)))
@@ -137,9 +143,9 @@
                ((or (string= type-name "ImStr")
                     (string= type-name "std::string"))
                 :pointer)
-               ;; Enum types use lowercase kebab-case symbol names
+               ;; Enum types use im- prefixed lowercase kebab-case symbol names
                ((and meta (is-enum-type-p type-name (getf meta :enums)))
-                (intern (string-upcase (format-symbol-name type-name))))
+                (intern (string-upcase (format-enum-name type-name))))
                ;; Structs and typedefs use uppercase type names
                (t
                 (intern (string-upcase (format-type-name type-name)))))))
@@ -261,8 +267,14 @@
   "Convert C identifier to Lisp symbol name.
    ImGui_Begin -> begin
    ImGuiWindowFlags -> window-flags
-   ImGuiTableFlags_ -> table-flags (trailing underscore stripped)"
+   ImGuiTableFlags_ -> window-flags (trailing underscore stripped)"
   (string-right-trim "-" (camel-case-to-kebab (strip-imgui-prefix c-name))))
+
+(defun format-enum-name (c-name)
+  "Convert C enum type name to Lisp symbol name, prefixed with im-.
+   ImGuiCol_         -> im-col
+   ImGuiWindowFlags_ -> im-window-flags"
+  (concatenate 'string "im-" (format-symbol-name c-name)))
 
 (defun format-enum-element-name (enum-name element-name)
   "Convert enum element name, stripping enum prefix.
@@ -392,11 +404,11 @@
                thereis (arg-is-by-value-struct-p arg)))))
 
 (defun collect-by-value-struct-functions (functions)
-  "Return a list of function objects that pass at least one struct by value."
+  "Return a list of function objects that pass at least one struct by value.
+   Includes default-argument helpers, since they also need shims."
   (let ((result '()))
     (when functions
       (loop for func across functions
-            unless (gethash "is_default_argument_helper" func)
             when (func-has-by-value-struct-arg-p func)
             do (push func result)))
     (nreverse result)))
@@ -515,6 +527,18 @@
     ((string= builtin-name "long_double")        "long double")
     (t "int")))
 
+(defun desc-to-cpp-funcptr (fn-desc)
+  "Generate a C++ function pointer type string from a Function kind description.
+   Returns a string like 'float(*)(void*, int)'."
+  (let* ((ret-desc   (gethash "return_type" fn-desc))
+         (ret-cpp    (desc-to-cpp ret-desc))
+         (params     (gethash "parameters" fn-desc))
+         (param-cpps (if (and params (> (length params) 0))
+                         (loop for p across params
+                               collect (desc-to-cpp (gethash "inner_type" p)))
+                         nil)))
+    (format nil "~A(*)(~{~A~^, ~})" ret-cpp (or param-cpps (list "void")))))
+
 (defun desc-to-cpp (desc)
   "Map a JSON type description to a C++ type string."
   (when (null desc) (return-from desc-to-cpp "void"))
@@ -528,17 +552,22 @@
              "void*"
              (let ((ik (gethash "kind" inner)))
                (cond
-                 ;; char* → const char*
-                 ((and (string= ik "Builtin")
-                       (string= (gethash "builtin_type" inner) "char"))
-                  "const char*")
-                 ;; void* → void*
-                 ((and (string= ik "Builtin")
-                       (string= (gethash "builtin_type" inner) "void"))
-                  "void*")
+                 ;; Pointer to builtin: emit T* / const T* based on storage_classes
+                 ((string= ik "Builtin")
+                  (let* ((bt      (gethash "builtin_type" inner))
+                         (scs     (gethash "storage_classes" inner))
+                         (constp  (and scs (find "const" scs :test #'string=))))
+                    (cond
+                      ((string= bt "void") "void*")
+                      ((string= bt "char") (if constp "const char*" "char*"))
+                      (t (if constp
+                             (format nil "const ~A*" (builtin-to-cpp bt))
+                             (format nil "~A*" (builtin-to-cpp bt)))))))
                  ;; Named pointer → ::Type*
                  ((string= ik "User")
                   (format nil "::~A*" (gethash "name" inner)))
+                 ;; Function pointer → keep as void* (cast happens at call site)
+                 ((string= ik "Function") "void*")
                  ;; const-qualified inner
                  ((string= ik "Type")
                   (concatenate 'string (desc-to-cpp (gethash "inner_type" inner)) "*"))
@@ -624,6 +653,15 @@
             *current-metadata*
             (is-enum-type-p type-name (getf *current-metadata* :enums)))
        (format nil "(::~A)~A" type-name name))
+      ;; Function pointer via Type → Pointer → Function: cast void* to proper funcptr type
+      ((and kind (string= kind "Type"))
+       (let* ((inner1 (gethash "inner_type" desc))
+              (ik1    (when inner1 (gethash "kind" inner1)))
+              (inner2 (when inner1 (gethash "inner_type" inner1)))
+              (ik2    (when inner2 (gethash "kind" inner2))))
+         (if (and (string= ik1 "Pointer") (string= ik2 "Function"))
+             (format nil "(~A)~A" (desc-to-cpp-funcptr inner2) name)
+             name)))
       (t name))))
 
 (defun func-has-real-varargs-p (func)
@@ -699,11 +737,14 @@
 
 (defun generate-lisp-shim (func)
   "Generate a Lisp defcfun string for the generated shim of FUNC.
+   The C name is the generated shim (e.g. ImGui_SetNextWindowPosExXY) but the
+   Lisp symbol uses the original function name (set-next-window-pos-ex) so
+   callers don't need to know about the ABI suffix.
    Returns NIL if the function cannot be auto-generated."
   (when (func-has-real-varargs-p func)
     (return-from generate-lisp-shim nil))
   (let* ((shim-name  (compute-shim-function-name func))
-         (lisp-name  (format-symbol-name shim-name))
+         (lisp-name  (format-symbol-name (gethash "name" func)))
          (ret-obj    (gethash "return_type" func))
          (ret-desc   (when ret-obj (gethash "description" ret-obj)))
          (ret-type   (if ret-desc (map-type-description ret-desc) :void))
@@ -718,7 +759,7 @@
       (format s ")~%"))))
 
 (defun write-generated-shims (by-value-funcs cpp-file lisp-file)
-  "Write abi_shim_generated.cpp and shim_generated.lisp for all auto-generatable
+  "Write abi_shim_generated.cpp and shim.lisp for all auto-generatable
    functions in BY-VALUE-FUNCS.
    Returns (values n-generated n-skipped covered-orig-names) where covered-orig-names
    is a hash-set of original_fully_qualified_name strings that were generated."
@@ -756,7 +797,7 @@
                           :direction :output
                           :if-exists :supersede
                           :if-does-not-exist :create)
-      (format lisp ";;;; shim_generated.lisp~%")
+      (format lisp ";;;; shim.lisp~%")
       (format lisp ";;;; Auto-generated CFFI bindings for abi_shim_generated.cpp~%")
       (format lisp ";;;; DO NOT EDIT by hand — regenerate with generator.lisp~%~%")
       (format lisp "(in-package #:cl-dear-imgui)~%~%")
@@ -771,8 +812,10 @@
 ;;; Package File Generation
 ;;; ============================================================================
 
-(defun generate-package-file (filepath metadata)
-  "Generate package.lisp with package definition and exports."
+(defun generate-package-file (filepath metadata &key extra-exports)
+  "Generate package.lisp with package definition and exports.
+   EXTRA-EXPORTS is an optional list of additional symbol name strings to export
+   (e.g. generated shim function names)."
   (with-open-file (stream filepath
                           :direction :output
                           :if-exists :supersede
@@ -787,17 +830,18 @@
 
     ;; Export all public symbols
     (format stream "  (:export~%")
-    (generate-exports stream metadata)
+    (generate-exports stream metadata :extra-exports extra-exports)
     (format stream "   ))~%")))
 
-(defun generate-exports (stream metadata)
-  "Generate export clauses for all public symbols."
-  (let ((exports '()))
+(defun generate-exports (stream metadata &key extra-exports)
+  "Generate export clauses for all public symbols.
+   EXTRA-EXPORTS is an optional list of additional symbol name strings."
+  (let ((exports (copy-list extra-exports)))
 
     ;; Export enum names and elements
     (loop for enum across (getf metadata :enums)
           do (let ((enum-name (gethash "name" enum)))
-               (push (format-symbol-name enum-name) exports)
+               (push (format-enum-name enum-name) exports)
                (loop for element across (gethash "elements" enum)
                      do (push (format-enum-element-name
                               enum-name
@@ -813,9 +857,13 @@
           unless (gethash "forward_declaration" struct)
           do (push (format-type-name (gethash "name" struct)) exports))
 
-    ;; Export function names (skip default argument helpers)
+    ;; Export function names.
+    ;; Skip default-argument helpers that have by-value struct args — those are
+    ;; covered by the auto-generated shims (passed in via extra-exports).
+    ;; Non-by-value default-argument helpers (e.g. ImGui_Button) get a plain defcfun.
     (loop for func across (getf metadata :functions)
-          unless (gethash "is_default_argument_helper" func)
+          unless (and (gethash "is_default_argument_helper" func)
+                      (func-has-by-value-struct-arg-p func))
           do (push (format-symbol-name (gethash "name" func)) exports))
 
     ;; Export constant names from defines (skip preprocessor macros)
@@ -910,7 +958,7 @@
   (when (and enums (> (length enums) 0))
     (loop for enum across enums
           do (let* ((name (gethash "name" enum))
-                    (lisp-name (format-symbol-name name))
+                    (lisp-name (format-enum-name name))
                     (elements (gethash "elements" enum))
                     (is-flags (gethash "is_flags_enum" enum))
                     (comment (get-comment enum)))
@@ -1049,14 +1097,24 @@
           (unless (gethash (getf item :name) visited)
             (visit item))))
 
-      ;; Generate types in sorted order (dependencies first)
-      ;; Note: We reverse because we built the list by pushing (adds to front)
-      (dolist (item (nreverse sorted))
-        (ecase (getf item :kind)
-          (:typedef
-           (generate-single-typedef stream (getf item :data)))
-          (:struct
-           (generate-single-struct stream (getf item :data))))))))
+      ;; Build set of enum lisp-names to skip colliding typedefs
+      (let ((enum-names (make-hash-table :test 'equal)))
+        (when *current-metadata*
+          (loop for enum across (getf *current-metadata* :enums)
+                do (setf (gethash (format-enum-name (gethash "name" enum)) enum-names) t)))
+
+        ;; Generate types in sorted order (dependencies first)
+        ;; Note: We reverse because we built the list by pushing (adds to front)
+        (dolist (item (nreverse sorted))
+          (ecase (getf item :kind)
+            (:typedef
+             ;; Skip typedefs whose name collides with an enum (e.g. ImGuiCol
+             ;; typedef int vs enum ImGuiCol_ — both map to "col").
+             (let ((lisp-name (format-symbol-name (gethash "name" (getf item :data)))))
+               (unless (gethash lisp-name enum-names)
+                 (generate-single-typedef stream (getf item :data)))))
+            (:struct
+             (generate-single-struct stream (getf item :data)))))))))
 
 (defun get-typedef-dependency (typedef)
   "Get the name of the type this typedef depends on (if it's a User type)."
@@ -1135,12 +1193,20 @@
             cffi-type)))
 
 (defun generate-typedefs (stream typedefs)
-  "Generate defctype forms for typedefs."
+  "Generate defctype forms for typedefs.
+   Skips typedefs whose converted name collides with an existing enum
+   (e.g. ImGuiCol typedef int vs enum ImGuiCol_  both map to 'col')."
   (when (and typedefs (> (length typedefs) 0))
-    ;; Sort typedefs by dependency
-    (let ((sorted-typedefs (sort-typedefs-by-dependency typedefs)))
+    ;; Build a set of enum lisp-names so we can detect collisions
+    (let ((enum-names (make-hash-table :test 'equal))
+          (sorted-typedefs (sort-typedefs-by-dependency typedefs)))
+      (when *current-metadata*
+        (loop for enum across (getf *current-metadata* :enums)
+              do (setf (gethash (format-enum-name (gethash "name" enum)) enum-names) t)))
       (loop for typedef in sorted-typedefs
-            do (generate-single-typedef stream typedef)))))
+            do (let ((lisp-name (format-symbol-name (gethash "name" typedef))))
+                 (unless (gethash lisp-name enum-names)
+                   (generate-single-typedef stream typedef)))))))
 
 (defun generate-single-struct (stream struct)
   "Generate a single defcstruct form."
@@ -1252,8 +1318,10 @@
    Functions that pass structs by value are omitted (they require ABI shims)."
   (when (and functions (> (length functions) 0))
     (loop for func across functions
-          ;; Skip default argument helpers
-          unless (gethash "is_default_argument_helper" func)
+          ;; Skip default-argument helpers that have by-value struct args —
+          ;; those are handled by the auto-generated ABI shims instead.
+          unless (and (gethash "is_default_argument_helper" func)
+                      (func-has-by-value-struct-arg-p func))
           ;; Skip functions that pass structs by value (need ABI shims)
           unless (func-has-by-value-struct-arg-p func)
           do (let* ((c-name (gethash "name" func))

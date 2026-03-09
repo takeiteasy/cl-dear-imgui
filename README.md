@@ -34,6 +34,10 @@ Cross-compiler requirements:
 This creates:
 - `package.lisp` - Package definition with all exports
 - `bindings.lisp` - CFFI bindings (constants, enums, types, structs, functions)
+- `abi_shim_generated.cpp` - Auto-generated C++ shims for functions that pass structs by value (ARM64 ABI)
+- `shim.lisp` - CFFI bindings for the generated shims
+
+The generator detects functions that pass `ImVec2`, `ImVec4`, or `ImTextureRef` by value (which CFFI cannot handle correctly on ARM64) and automatically generates C++ shims that expand them to individual scalar arguments. These shims are bound under the original function's Lisp name, so callers see no difference.
 
 ### Usage 
 
@@ -140,7 +144,7 @@ The generator creates idiomatic Lisp names by:
 
 1. **Stripping redundant prefixes**:
    - `ImGui_` → removed (functions)
-   - `ImGui` → removed (types)
+   - `ImGui` → removed (types and structs)
    - `Im` → removed (types like `ImVec2` → `vec2`)
    - `IMGUI_` → removed (constants)
 
@@ -148,11 +152,22 @@ The generator creates idiomatic Lisp names by:
    - `WindowFlags` → `window-flags`
    - `GetIO` → `get-io`
    - `SetNextWindowPos` → `set-next-window-pos`
+   - `TableSortSpecs` → `table-sort-specs`
 
-3. **Simplifying enum elements**:
-   - `ImGuiWindowFlags_None` → `:none`
-   - `ImGuiCol_Text` → `:text`
-   - Enum type prefix is stripped from elements
+3. **Enum type names are prefixed with `im-`** to avoid namespace collisions:
+   - `ImGuiCol_` → `im-col`
+   - `ImGuiWindowFlags_` → `im-window-flags`
+   - `ImGuiTableFlags_` → `im-table-flags`
+
+4. **Simplifying enum elements** — the enum type prefix is stripped:
+   - `ImGuiWindowFlags_None` → `:window-flags-none`
+   - `ImGuiCol_Text` → `:col-text`
+
+5. **ARM64 ABI shims** — functions that pass `ImVec2`/`ImVec4`/`ImTextureRef` by value are excluded from `bindings.lisp` and replaced by auto-generated shims. The shims expand struct arguments to individual floats and are exported under the **original function name**, so call sites are unaffected:
+   ```lisp
+   ;; Calls ImGui_SetNextWindowPosExXY under the hood — transparent to callers
+   (set-next-window-pos-ex 100.0 200.0 0 0.0 0.0)
+   ```
 
 ## cl-dear-imgui/ui
 

@@ -41,14 +41,14 @@
 
 (defmethod compose ((this list-select))
   (with-slots (items label) this
-    (when (imgui::begin-list-box-xy label
-                                    (float (or (width-of this) 0.0) 0.0)
-                                    (float (or (height-of this) 0.0) 0.0))
+    (when (imgui::begin-list-box label
+                                 (float (or (width-of this) 0.0) 0.0)
+                                 (float (or (height-of this) 0.0) 0.0))
       (unwind-protect
            (dolist (item items)
-             (when (imgui::selectable-xy (item-name-of item)
-                                         (item-selected-p item)
-                                         0 0.0 0.0)
+             (when (imgui::selectable (item-name-of item)
+                                      (item-selected-p item)
+                                      0 0.0 0.0)
                ;; Deselect all others
                (dolist (other-item items)
                  (unless (eq item other-item)

@@ -20,7 +20,7 @@ IMGUI_SRCS := $(IMGUI_DIR)/imgui.cpp \
               $(IMGUI_DIR)/imgui_tables.cpp \
               $(IMGUI_DIR)/imgui_widgets.cpp \
               $(IMGUI_DIR)/imgui_demo.cpp
-LOCAL_SRCS := dcimgui.cpp abi_shim.cpp
+LOCAL_SRCS := dcimgui.cpp abi_shim.cpp abi_shim_generated.cpp
 SRCS       := $(IMGUI_SRCS) $(LOCAL_SRCS)
 
 CXXFLAGS   := -std=c++17 -O2 -fPIC -I$(IMGUI_DIR)

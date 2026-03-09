@@ -20,6 +20,6 @@
              (loop for item in values
                    for i from 0
                    do (let ((is-selected (= i selected)))
-                        (when (imgui::selectable-xy item is-selected 0 0.0 0.0)
+                        (when (imgui::selectable item is-selected 0 0.0 0.0)
                           (setf selected i))))
           (imgui::end-combo))))))

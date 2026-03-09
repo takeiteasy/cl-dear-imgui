@@ -12,6 +12,6 @@
 
 (defmethod compose ((this button))
   (with-slots (label click-listener) this
-    (when (imgui::button-xy label 0.0 0.0)
+    (when (imgui::button label)
       (when click-listener
         (funcall click-listener *panel*)))))

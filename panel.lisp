@@ -169,8 +169,8 @@
                first-frame-p bounds-updated-p collapsed-p) win
     ;; Set position/size on first frame or when bounds updated
     (when (or first-frame-p bounds-updated-p)
-      (imgui::set-next-window-pos-xy (float x 0.0) (float y 0.0) 1 0.0 0.0)
-      (imgui::set-next-window-size-xy (float width 0.0) (float height 0.0) 1)
+      (imgui::set-next-window-pos (float x 0.0) (float y 0.0) 1)
+      (imgui::set-next-window-size (float width 0.0) (float height 0.0) 1)
       (setf first-frame-p nil
             bounds-updated-p nil))
     ;; Begin window

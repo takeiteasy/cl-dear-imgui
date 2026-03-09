@@ -60,7 +60,7 @@
 (defparameter +font-atlas-rect-id-invalid+ -1)
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-(defcenum window-flags
+(defcenum im-window-flags
   (:window-flags-none 0)
   (:window-flags-no-title-bar 1)
   (:window-flags-no-resize 2)
@@ -92,7 +92,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-(defcenum child-flags
+(defcenum im-child-flags
   (:child-flags-none 0)
   (:child-flags-borders 1)
   (:child-flags-always-use-window-padding 2)
@@ -106,7 +106,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-(defcenum item-flags
+(defcenum im-item-flags
   (:item-flags-none 0)
   (:item-flags-no-tab-stop 1)
   (:item-flags-no-nav 2)
@@ -117,7 +117,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-(defcenum input-text-flags
+(defcenum im-input-text-flags
   (:input-text-flags-none 0)
   (:input-text-flags-chars-decimal 1)
   (:input-text-flags-chars-hexadecimal 2)
@@ -147,7 +147,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-(defcenum tree-node-flags
+(defcenum im-tree-node-flags
   (:tree-node-flags-none 0)
   (:tree-node-flags-selected 1)
   (:tree-node-flags-framed 2)
@@ -175,7 +175,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-(defcenum popup-flags
+(defcenum im-popup-flags
   (:popup-flags-none 0)
   (:popup-flags-mouse-button-left 0)
   (:popup-flags-mouse-button-right 1)
@@ -191,7 +191,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-(defcenum selectable-flags
+(defcenum im-selectable-flags
   (:selectable-flags-none 0)
   (:selectable-flags-no-auto-close-popups 1)
   (:selectable-flags-span-all-columns 2)
@@ -204,7 +204,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-(defcenum combo-flags
+(defcenum im-combo-flags
   (:combo-flags-none 0)
   (:combo-flags-popup-align-left 1)
   (:combo-flags-height-small 2)
@@ -218,7 +218,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-(defcenum tab-bar-flags
+(defcenum im-tab-bar-flags
   (:tab-bar-flags-none 0)
   (:tab-bar-flags-reorderable 1)
   (:tab-bar-flags-auto-select-new-tabs 2)
@@ -236,7 +236,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-(defcenum tab-item-flags
+(defcenum im-tab-item-flags
   (:tab-item-flags-none 0)
   (:tab-item-flags-unsaved-document 1)
   (:tab-item-flags-set-selected 2)
@@ -250,7 +250,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-(defcenum focused-flags
+(defcenum im-focused-flags
   (:focused-flags-none 0)
   (:focused-flags-child-windows 1)
   (:focused-flags-root-window 2)
@@ -260,7 +260,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-(defcenum hovered-flags
+(defcenum im-hovered-flags
   (:hovered-flags-none 0)
   (:hovered-flags-child-windows 1)
   (:hovered-flags-root-window 2)
@@ -284,7 +284,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-(defcenum drag-drop-flags
+(defcenum im-drag-drop-flags
   (:drag-drop-flags-none 0)
   (:drag-drop-flags-source-no-preview-tooltip 1)
   (:drag-drop-flags-source-no-disable-hover 2)
@@ -302,7 +302,7 @@
   (:drag-drop-flags-source-auto-expire-payload 32)
 )
 
-(defcenum data-type
+(defcenum im-data-type
   (:data-type-s8 0)
   (:data-type-u8 1)
   (:data-type-s16 2)
@@ -317,7 +317,7 @@
   (:data-type-string 11)
 )
 
-(defcenum dir
+(defcenum im-dir
   (:dir-none -1)
   (:dir-left 0)
   (:dir-right 1)
@@ -325,13 +325,13 @@
   (:dir-down 3)
 )
 
-(defcenum sort-direction
+(defcenum im-sort-direction
   (:sort-direction-none 0)
   (:sort-direction-ascending 1)
   (:sort-direction-descending 2)
 )
 
-(defcenum key
+(defcenum im-key
   (:key-none 0)
   (:key-named-key-begin 512)
   (:key-tab 512)
@@ -500,7 +500,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-(defcenum input-flags
+(defcenum im-input-flags
   (:input-flags-none 0)
   (:input-flags-repeat 1)
   (:input-flags-route-active 1024)
@@ -515,7 +515,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-(defcenum config-flags
+(defcenum im-config-flags
   (:config-flags-none 0)
   (:config-flags-nav-enable-keyboard 1)
   (:config-flags-nav-enable-gamepad 2)
@@ -529,7 +529,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-(defcenum backend-flags
+(defcenum im-backend-flags
   (:backend-flags-none 0)
   (:backend-flags-has-gamepad 1)
   (:backend-flags-has-mouse-cursors 2)
@@ -538,7 +538,7 @@
   (:backend-flags-renderer-has-textures 16)
 )
 
-(defcenum col
+(defcenum im-col
   (:col-text 0)
   (:col-text-disabled 1)
   (:col-window-bg 2)
@@ -605,7 +605,7 @@
   (:col-nav-highlight 56)
 )
 
-(defcenum style-var
+(defcenum im-style-var
   (:style-var-alpha 0)
   (:style-var-disabled-alpha 1)
   (:style-var-window-padding 2)
@@ -648,7 +648,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-(defcenum button-flags
+(defcenum im-button-flags
   (:button-flags-none 0)
   (:button-flags-mouse-button-left 1)
   (:button-flags-mouse-button-right 2)
@@ -658,7 +658,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-(defcenum color-edit-flags
+(defcenum im-color-edit-flags
   (:color-edit-flags-none 0)
   (:color-edit-flags-no-alpha 2)
   (:color-edit-flags-no-picker 4)
@@ -695,7 +695,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-(defcenum slider-flags
+(defcenum im-slider-flags
   (:slider-flags-none 0)
   (:slider-flags-logarithmic 32)
   (:slider-flags-no-round-to-format 64)
@@ -709,13 +709,13 @@
   (:slider-flags-invalid-mask- 1879048207)
 )
 
-(defcenum mouse-button
+(defcenum im-mouse-button
   (:mouse-button-left 0)
   (:mouse-button-right 1)
   (:mouse-button-middle 2)
 )
 
-(defcenum mouse-cursor
+(defcenum im-mouse-cursor
   (:mouse-cursor-none -1)
   (:mouse-cursor-arrow 0)
   (:mouse-cursor-text-input 1)
@@ -730,13 +730,13 @@
   (:mouse-cursor-not-allowed 10)
 )
 
-(defcenum mouse-source
+(defcenum im-mouse-source
   (:mouse-source-mouse 0)
   (:mouse-source-touch-screen 1)
   (:mouse-source-pen 2)
 )
 
-(defcenum cond
+(defcenum im-cond
   (:cond-none 0)
   (:cond-always 1)
   (:cond-once 2)
@@ -745,7 +745,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-(defcenum table-flags
+(defcenum im-table-flags
   (:table-flags-none 0)
   (:table-flags-resizable 1)
   (:table-flags-reorderable 2)
@@ -786,7 +786,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-(defcenum table-column-flags
+(defcenum im-table-column-flags
   (:table-column-flags-none 0)
   (:table-column-flags-disabled 1)
   (:table-column-flags-default-hide 2)
@@ -818,12 +818,12 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-(defcenum table-row-flags
+(defcenum im-table-row-flags
   (:table-row-flags-none 0)
   (:table-row-flags-headers 1)
 )
 
-(defcenum table-bg-target
+(defcenum im-table-bg-target
   (:table-bg-target-none 0)
   (:table-bg-target-row-bg0 1)
   (:table-bg-target-row-bg1 2)
@@ -831,13 +831,13 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-(defcenum list-clipper-flags
+(defcenum im-list-clipper-flags
   (:list-clipper-flags-none 0)
   (:list-clipper-flags-no-set-table-row-counters 1)
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-(defcenum multi-select-flags
+(defcenum im-multi-select-flags
   (:multi-select-flags-none 0)
   (:multi-select-flags-single-select 1)
   (:multi-select-flags-no-select-all 2)
@@ -858,14 +858,14 @@
   (:multi-select-flags-no-select-on-right-click 131072)
 )
 
-(defcenum selection-request-type
+(defcenum im-selection-request-type
   (:selection-request-type-none 0)
   (:selection-request-type-set-all 1)
   (:selection-request-type-set-range 2)
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-(defcenum draw-flags
+(defcenum im-draw-flags
   (:draw-flags-none 0)
   (:draw-flags-closed 1)
   (:draw-flags-round-corners-top-left 16)
@@ -883,7 +883,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-(defcenum draw-list-flags
+(defcenum im-draw-list-flags
   (:draw-list-flags-none 0)
   (:draw-list-flags-anti-aliased-lines 1)
   (:draw-list-flags-anti-aliased-lines-use-tex 2)
@@ -891,12 +891,12 @@
   (:draw-list-flags-allow-vtx-offset 8)
 )
 
-(defcenum texture-format
+(defcenum im-texture-format
   (:texture-format-rgba32 0)
   (:texture-format-alpha8 1)
 )
 
-(defcenum texture-status
+(defcenum im-texture-status
   (:texture-status-ok 0)
   (:texture-status-destroyed 1)
   (:texture-status-want-create 2)
@@ -905,7 +905,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-(defcenum font-atlas-flags
+(defcenum im-font-atlas-flags
   (:font-atlas-flags-none 0)
   (:font-atlas-flags-no-power-of-two-height 1)
   (:font-atlas-flags-no-mouse-cursors 2)
@@ -913,7 +913,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-(defcenum font-flags
+(defcenum im-font-flags
   (:font-flags-none 0)
   (:font-flags-no-load-error 2)
   (:font-flags-no-load-glyphs 4)
@@ -921,7 +921,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-(defcenum viewport-flags
+(defcenum im-viewport-flags
   (:viewport-flags-none 0)
   (:viewport-flags-is-platform-window 1)
   (:viewport-flags-is-platform-monitor 2)
@@ -962,10 +962,10 @@
 
 (defcstruct texture-data
   (unique-id :INT)
-  (status TEXTURE-STATUS)
+  (status IM-TEXTURE-STATUS)
   (backend-user-data :POINTER)
   (tex-id TEXTURE-ID)
-  (format TEXTURE-FORMAT)
+  (format IM-TEXTURE-FORMAT)
   (width :INT)
   (height :INT)
   (bytes-per-pixel :INT)
@@ -1118,7 +1118,7 @@
 
 (defcstruct font-atlas
   (flags FONT-ATLAS-FLAGS)
-  (tex-desired-format TEXTURE-FORMAT)
+  (tex-desired-format IM-TEXTURE-FORMAT)
   (tex-glyph-padding :INT)
   (tex-min-width :INT)
   (tex-min-height :INT)
@@ -1380,7 +1380,7 @@
 (defctype selection-user-data S64)
 
 (defcstruct selection-request
-  (type SELECTION-REQUEST-TYPE)
+  (type IM-SELECTION-REQUEST-TYPE)
   (selected :BOOL)
   (range-direction S8)
   (range-first-item SELECTION-USER-DATA)
@@ -1475,7 +1475,7 @@
   (flags INPUT-TEXT-FLAGS)
   (user-data :POINTER)
   (event-char WCHAR)
-  (event-key KEY)
+  (event-key IM-KEY)
   (buf :STRING)
   (buf-text-len :INT)
   (buf-size :INT)
@@ -1576,7 +1576,7 @@
   (mouse-down :BOOL :count 5)
   (mouse-wheel :FLOAT)
   (mouse-wheel-h :FLOAT)
-  (mouse-source MOUSE-SOURCE)
+  (mouse-source IM-MOUSE-SOURCE)
   (key-ctrl :BOOL)
   (key-shift :BOOL)
   (key-alt :BOOL)
@@ -1629,7 +1629,7 @@
   (window-border-hover-padding :FLOAT)
   (window-min-size VEC2)
   (window-title-align VEC2)
-  (window-menu-button-position DIR)
+  (window-menu-button-position IM-DIR)
   (child-rounding :FLOAT)
   (child-border-size :FLOAT)
   (popup-rounding :FLOAT)
@@ -1667,7 +1667,7 @@
   (drag-drop-target-border-size :FLOAT)
   (drag-drop-target-padding :FLOAT)
   (color-marker-size :FLOAT)
-  (color-button-position DIR)
+  (color-button-position IM-DIR)
   (button-text-align VEC2)
   (selectable-text-align VEC2)
   (separator-text-border-size :FLOAT)
@@ -1699,7 +1699,7 @@
   (column-user-id ID)
   (column-index S16)
   (sort-order S16)
-  (sort-direction SORT-DIRECTION)
+  (sort-direction IM-SORT-DIRECTION)
 )
 
 (defcstruct table-sort-specs
@@ -1821,6 +1821,8 @@
 (defcfun ("ImGui_ShowDebugLogWindow" show-debug-log-window) :VOID
   (p-open :POINTER)
 )
+
+(defcfun ("ImGui_ShowIDStackToolWindow" show-idstack-tool-window) :VOID)
 
 (defcfun ("ImGui_ShowIDStackToolWindowEx" show-idstack-tool-window-ex) :VOID
   (p-open :POINTER)
@@ -1970,6 +1972,8 @@
   (col U32)
 )
 
+(defcfun ("ImGui_PopStyleColor" pop-style-color) :VOID)
+
 (defcfun ("ImGui_PopStyleColorEx" pop-style-color-ex) :VOID
   (count :INT)
 )
@@ -1988,6 +1992,8 @@
   (idx STYLE-VAR)
   (val-y :FLOAT)
 )
+
+(defcfun ("ImGui_PopStyleVar" pop-style-var) :VOID)
 
 (defcfun ("ImGui_PopStyleVarEx" pop-style-var-ex) :VOID
   (count :INT)
@@ -2020,9 +2026,17 @@
 
 (defcfun ("ImGui_GetFontTexUvWhitePixel" get-font-tex-uv-white-pixel) VEC2)
 
+(defcfun ("ImGui_GetColorU32" get-color-u32) U32
+  (idx COL)
+)
+
 (defcfun ("ImGui_GetColorU32Ex" get-color-u32ex) U32
   (idx COL)
   (alpha-mul :FLOAT)
+)
+
+(defcfun ("ImGui_GetColorU32ImU32" get-color-u32im-u32) U32
+  (col U32)
 )
 
 (defcfun ("ImGui_GetColorU32ImU32Ex" get-color-u32im-u32ex) U32
@@ -2056,6 +2070,8 @@
 
 (defcfun ("ImGui_Separator" separator) :VOID)
 
+(defcfun ("ImGui_SameLine" same-line) :VOID)
+
 (defcfun ("ImGui_SameLineEx" same-line-ex) :VOID
   (offset-from-start-x :FLOAT)
   (spacing :FLOAT)
@@ -2065,9 +2081,13 @@
 
 (defcfun ("ImGui_Spacing" spacing) :VOID)
 
+(defcfun ("ImGui_Indent" indent) :VOID)
+
 (defcfun ("ImGui_IndentEx" indent-ex) :VOID
   (indent-w :FLOAT)
 )
+
+(defcfun ("ImGui_Unindent" unindent) :VOID)
 
 (defcfun ("ImGui_UnindentEx" unindent-ex) :VOID
   (indent-w :FLOAT)
@@ -2121,6 +2141,10 @@
 
 (defcfun ("ImGui_GetIDInt" get-idint) ID
   (int-id :INT)
+)
+
+(defcfun ("ImGui_TextUnformatted" text-unformatted) :VOID
+  (text :STRING)
 )
 
 (defcfun ("ImGui_TextUnformattedEx" text-unformatted-ex) :VOID
@@ -2184,13 +2208,17 @@
   (label :STRING)
 )
 
+(defcfun ("ImGui_Button" button) :BOOL
+  (label :STRING)
+)
+
 (defcfun ("ImGui_SmallButton" small-button) :BOOL
   (label :STRING)
 )
 
 (defcfun ("ImGui_ArrowButton" arrow-button) :BOOL
   (str-id :STRING)
-  (dir DIR)
+  (dir IM-DIR)
 )
 
 (defcfun ("ImGui_Checkbox" checkbox) :BOOL
@@ -2227,6 +2255,10 @@
   (label :STRING)
 )
 
+(defcfun ("ImGui_TextLinkOpenURL" text-link-open-url) :BOOL
+  (label :STRING)
+)
+
 (defcfun ("ImGui_TextLinkOpenURLEx" text-link-open-urlex) :BOOL
   (label :STRING)
   (url :STRING)
@@ -2240,12 +2272,25 @@
 
 (defcfun ("ImGui_EndCombo" end-combo) :VOID)
 
+(defcfun ("ImGui_ComboChar" combo-char) :BOOL
+  (label :STRING)
+  (current-item :POINTER)
+  (items :pointer)
+  (items-count :INT)
+)
+
 (defcfun ("ImGui_ComboCharEx" combo-char-ex) :BOOL
   (label :STRING)
   (current-item :POINTER)
   (items :pointer)
   (items-count :INT)
   (popup-max-height-in-items :INT)
+)
+
+(defcfun ("ImGui_Combo" combo) :BOOL
+  (label :STRING)
+  (current-item :POINTER)
+  (items-separated-by-zeros :STRING)
 )
 
 (defcfun ("ImGui_ComboEx" combo-ex) :BOOL
@@ -2255,6 +2300,14 @@
   (popup-max-height-in-items :INT)
 )
 
+(defcfun ("ImGui_ComboCallback" combo-callback) :BOOL
+  (label :STRING)
+  (current-item :POINTER)
+  (getter :POINTER)
+  (user-data :POINTER)
+  (items-count :INT)
+)
+
 (defcfun ("ImGui_ComboCallbackEx" combo-callback-ex) :BOOL
   (label :STRING)
   (current-item :POINTER)
@@ -2262,6 +2315,11 @@
   (user-data :POINTER)
   (items-count :INT)
   (popup-max-height-in-items :INT)
+)
+
+(defcfun ("ImGui_DragFloat" drag-float) :BOOL
+  (label :STRING)
+  (v :POINTER)
 )
 
 (defcfun ("ImGui_DragFloatEx" drag-float-ex) :BOOL
@@ -2274,6 +2332,11 @@
   (flags SLIDER-FLAGS)
 )
 
+(defcfun ("ImGui_DragFloat2" drag-float2) :BOOL
+  (label :STRING)
+  (v :pointer)
+)
+
 (defcfun ("ImGui_DragFloat2Ex" drag-float2ex) :BOOL
   (label :STRING)
   (v :pointer)
@@ -2282,6 +2345,11 @@
   (v-max :FLOAT)
   (format :STRING)
   (flags SLIDER-FLAGS)
+)
+
+(defcfun ("ImGui_DragFloat3" drag-float3) :BOOL
+  (label :STRING)
+  (v :pointer)
 )
 
 (defcfun ("ImGui_DragFloat3Ex" drag-float3ex) :BOOL
@@ -2294,6 +2362,11 @@
   (flags SLIDER-FLAGS)
 )
 
+(defcfun ("ImGui_DragFloat4" drag-float4) :BOOL
+  (label :STRING)
+  (v :pointer)
+)
+
 (defcfun ("ImGui_DragFloat4Ex" drag-float4ex) :BOOL
   (label :STRING)
   (v :pointer)
@@ -2302,6 +2375,12 @@
   (v-max :FLOAT)
   (format :STRING)
   (flags SLIDER-FLAGS)
+)
+
+(defcfun ("ImGui_DragFloatRange2" drag-float-range2) :BOOL
+  (label :STRING)
+  (v-current-min :POINTER)
+  (v-current-max :POINTER)
 )
 
 (defcfun ("ImGui_DragFloatRange2Ex" drag-float-range2ex) :BOOL
@@ -2316,6 +2395,11 @@
   (flags SLIDER-FLAGS)
 )
 
+(defcfun ("ImGui_DragInt" drag-int) :BOOL
+  (label :STRING)
+  (v :POINTER)
+)
+
 (defcfun ("ImGui_DragIntEx" drag-int-ex) :BOOL
   (label :STRING)
   (v :POINTER)
@@ -2324,6 +2408,11 @@
   (v-max :INT)
   (format :STRING)
   (flags SLIDER-FLAGS)
+)
+
+(defcfun ("ImGui_DragInt2" drag-int2) :BOOL
+  (label :STRING)
+  (v :pointer)
 )
 
 (defcfun ("ImGui_DragInt2Ex" drag-int2ex) :BOOL
@@ -2336,6 +2425,11 @@
   (flags SLIDER-FLAGS)
 )
 
+(defcfun ("ImGui_DragInt3" drag-int3) :BOOL
+  (label :STRING)
+  (v :pointer)
+)
+
 (defcfun ("ImGui_DragInt3Ex" drag-int3ex) :BOOL
   (label :STRING)
   (v :pointer)
@@ -2346,6 +2440,11 @@
   (flags SLIDER-FLAGS)
 )
 
+(defcfun ("ImGui_DragInt4" drag-int4) :BOOL
+  (label :STRING)
+  (v :pointer)
+)
+
 (defcfun ("ImGui_DragInt4Ex" drag-int4ex) :BOOL
   (label :STRING)
   (v :pointer)
@@ -2354,6 +2453,12 @@
   (v-max :INT)
   (format :STRING)
   (flags SLIDER-FLAGS)
+)
+
+(defcfun ("ImGui_DragIntRange2" drag-int-range2) :BOOL
+  (label :STRING)
+  (v-current-min :POINTER)
+  (v-current-max :POINTER)
 )
 
 (defcfun ("ImGui_DragIntRange2Ex" drag-int-range2ex) :BOOL
@@ -2368,6 +2473,12 @@
   (flags SLIDER-FLAGS)
 )
 
+(defcfun ("ImGui_DragScalar" drag-scalar) :BOOL
+  (label :STRING)
+  (data-type DATA-TYPE)
+  (p-data :POINTER)
+)
+
 (defcfun ("ImGui_DragScalarEx" drag-scalar-ex) :BOOL
   (label :STRING)
   (data-type DATA-TYPE)
@@ -2377,6 +2488,13 @@
   (p-max :POINTER)
   (format :STRING)
   (flags SLIDER-FLAGS)
+)
+
+(defcfun ("ImGui_DragScalarN" drag-scalar-n) :BOOL
+  (label :STRING)
+  (data-type DATA-TYPE)
+  (p-data :POINTER)
+  (components :INT)
 )
 
 (defcfun ("ImGui_DragScalarNEx" drag-scalar-nex) :BOOL
@@ -2391,6 +2509,13 @@
   (flags SLIDER-FLAGS)
 )
 
+(defcfun ("ImGui_SliderFloat" slider-float) :BOOL
+  (label :STRING)
+  (v :POINTER)
+  (v-min :FLOAT)
+  (v-max :FLOAT)
+)
+
 (defcfun ("ImGui_SliderFloatEx" slider-float-ex) :BOOL
   (label :STRING)
   (v :POINTER)
@@ -2398,6 +2523,13 @@
   (v-max :FLOAT)
   (format :STRING)
   (flags SLIDER-FLAGS)
+)
+
+(defcfun ("ImGui_SliderFloat2" slider-float2) :BOOL
+  (label :STRING)
+  (v :pointer)
+  (v-min :FLOAT)
+  (v-max :FLOAT)
 )
 
 (defcfun ("ImGui_SliderFloat2Ex" slider-float2ex) :BOOL
@@ -2409,6 +2541,13 @@
   (flags SLIDER-FLAGS)
 )
 
+(defcfun ("ImGui_SliderFloat3" slider-float3) :BOOL
+  (label :STRING)
+  (v :pointer)
+  (v-min :FLOAT)
+  (v-max :FLOAT)
+)
+
 (defcfun ("ImGui_SliderFloat3Ex" slider-float3ex) :BOOL
   (label :STRING)
   (v :pointer)
@@ -2416,6 +2555,13 @@
   (v-max :FLOAT)
   (format :STRING)
   (flags SLIDER-FLAGS)
+)
+
+(defcfun ("ImGui_SliderFloat4" slider-float4) :BOOL
+  (label :STRING)
+  (v :pointer)
+  (v-min :FLOAT)
+  (v-max :FLOAT)
 )
 
 (defcfun ("ImGui_SliderFloat4Ex" slider-float4ex) :BOOL
@@ -2427,6 +2573,11 @@
   (flags SLIDER-FLAGS)
 )
 
+(defcfun ("ImGui_SliderAngle" slider-angle) :BOOL
+  (label :STRING)
+  (v-rad :POINTER)
+)
+
 (defcfun ("ImGui_SliderAngleEx" slider-angle-ex) :BOOL
   (label :STRING)
   (v-rad :POINTER)
@@ -2434,6 +2585,13 @@
   (v-degrees-max :FLOAT)
   (format :STRING)
   (flags SLIDER-FLAGS)
+)
+
+(defcfun ("ImGui_SliderInt" slider-int) :BOOL
+  (label :STRING)
+  (v :POINTER)
+  (v-min :INT)
+  (v-max :INT)
 )
 
 (defcfun ("ImGui_SliderIntEx" slider-int-ex) :BOOL
@@ -2445,6 +2603,13 @@
   (flags SLIDER-FLAGS)
 )
 
+(defcfun ("ImGui_SliderInt2" slider-int2) :BOOL
+  (label :STRING)
+  (v :pointer)
+  (v-min :INT)
+  (v-max :INT)
+)
+
 (defcfun ("ImGui_SliderInt2Ex" slider-int2ex) :BOOL
   (label :STRING)
   (v :pointer)
@@ -2452,6 +2617,13 @@
   (v-max :INT)
   (format :STRING)
   (flags SLIDER-FLAGS)
+)
+
+(defcfun ("ImGui_SliderInt3" slider-int3) :BOOL
+  (label :STRING)
+  (v :pointer)
+  (v-min :INT)
+  (v-max :INT)
 )
 
 (defcfun ("ImGui_SliderInt3Ex" slider-int3ex) :BOOL
@@ -2463,6 +2635,13 @@
   (flags SLIDER-FLAGS)
 )
 
+(defcfun ("ImGui_SliderInt4" slider-int4) :BOOL
+  (label :STRING)
+  (v :pointer)
+  (v-min :INT)
+  (v-max :INT)
+)
+
 (defcfun ("ImGui_SliderInt4Ex" slider-int4ex) :BOOL
   (label :STRING)
   (v :pointer)
@@ -2470,6 +2649,14 @@
   (v-max :INT)
   (format :STRING)
   (flags SLIDER-FLAGS)
+)
+
+(defcfun ("ImGui_SliderScalar" slider-scalar) :BOOL
+  (label :STRING)
+  (data-type DATA-TYPE)
+  (p-data :POINTER)
+  (p-min :POINTER)
+  (p-max :POINTER)
 )
 
 (defcfun ("ImGui_SliderScalarEx" slider-scalar-ex) :BOOL
@@ -2480,6 +2667,15 @@
   (p-max :POINTER)
   (format :STRING)
   (flags SLIDER-FLAGS)
+)
+
+(defcfun ("ImGui_SliderScalarN" slider-scalar-n) :BOOL
+  (label :STRING)
+  (data-type DATA-TYPE)
+  (p-data :POINTER)
+  (components :INT)
+  (p-min :POINTER)
+  (p-max :POINTER)
 )
 
 (defcfun ("ImGui_SliderScalarNEx" slider-scalar-nex) :BOOL
@@ -2493,6 +2689,13 @@
   (flags SLIDER-FLAGS)
 )
 
+(defcfun ("ImGui_InputText" input-text) :BOOL
+  (label :STRING)
+  (buf :STRING)
+  (buf-size :SIZE)
+  (flags INPUT-TEXT-FLAGS)
+)
+
 (defcfun ("ImGui_InputTextEx" input-text-ex) :BOOL
   (label :STRING)
   (buf :pointer) ; pointer override
@@ -2500,6 +2703,20 @@
   (flags INPUT-TEXT-FLAGS)
   (callback INPUT-TEXT-CALLBACK)
   (user-data :POINTER)
+)
+
+(defcfun ("ImGui_InputTextMultiline" input-text-multiline) :BOOL
+  (label :STRING)
+  (buf :STRING)
+  (buf-size :SIZE)
+)
+
+(defcfun ("ImGui_InputTextWithHint" input-text-with-hint) :BOOL
+  (label :STRING)
+  (hint :STRING)
+  (buf :STRING)
+  (buf-size :SIZE)
+  (flags INPUT-TEXT-FLAGS)
 )
 
 (defcfun ("ImGui_InputTextWithHintEx" input-text-with-hint-ex) :BOOL
@@ -2512,6 +2729,11 @@
   (user-data :POINTER)
 )
 
+(defcfun ("ImGui_InputFloat" input-float) :BOOL
+  (label :STRING)
+  (v :POINTER)
+)
+
 (defcfun ("ImGui_InputFloatEx" input-float-ex) :BOOL
   (label :STRING)
   (v :POINTER)
@@ -2521,11 +2743,21 @@
   (flags INPUT-TEXT-FLAGS)
 )
 
+(defcfun ("ImGui_InputFloat2" input-float2) :BOOL
+  (label :STRING)
+  (v :pointer)
+)
+
 (defcfun ("ImGui_InputFloat2Ex" input-float2ex) :BOOL
   (label :STRING)
   (v :pointer)
   (format :STRING)
   (flags INPUT-TEXT-FLAGS)
+)
+
+(defcfun ("ImGui_InputFloat3" input-float3) :BOOL
+  (label :STRING)
+  (v :pointer)
 )
 
 (defcfun ("ImGui_InputFloat3Ex" input-float3ex) :BOOL
@@ -2535,11 +2767,21 @@
   (flags INPUT-TEXT-FLAGS)
 )
 
+(defcfun ("ImGui_InputFloat4" input-float4) :BOOL
+  (label :STRING)
+  (v :pointer)
+)
+
 (defcfun ("ImGui_InputFloat4Ex" input-float4ex) :BOOL
   (label :STRING)
   (v :pointer)
   (format :STRING)
   (flags INPUT-TEXT-FLAGS)
+)
+
+(defcfun ("ImGui_InputInt" input-int) :BOOL
+  (label :STRING)
+  (v :POINTER)
 )
 
 (defcfun ("ImGui_InputIntEx" input-int-ex) :BOOL
@@ -2568,6 +2810,11 @@
   (flags INPUT-TEXT-FLAGS)
 )
 
+(defcfun ("ImGui_InputDouble" input-double) :BOOL
+  (label :STRING)
+  (v :POINTER)
+)
+
 (defcfun ("ImGui_InputDoubleEx" input-double-ex) :BOOL
   (label :STRING)
   (v :POINTER)
@@ -2575,6 +2822,12 @@
   (step-fast :DOUBLE)
   (format :STRING)
   (flags INPUT-TEXT-FLAGS)
+)
+
+(defcfun ("ImGui_InputScalar" input-scalar) :BOOL
+  (label :STRING)
+  (data-type DATA-TYPE)
+  (p-data :POINTER)
 )
 
 (defcfun ("ImGui_InputScalarEx" input-scalar-ex) :BOOL
@@ -2585,6 +2838,13 @@
   (p-step-fast :POINTER)
   (format :STRING)
   (flags INPUT-TEXT-FLAGS)
+)
+
+(defcfun ("ImGui_InputScalarN" input-scalar-n) :BOOL
+  (label :STRING)
+  (data-type DATA-TYPE)
+  (p-data :POINTER)
+  (components :INT)
 )
 
 (defcfun ("ImGui_InputScalarNEx" input-scalar-nex) :BOOL
@@ -2720,6 +2980,20 @@
   (storage-id ID)
 )
 
+(defcfun ("ImGui_Selectable" selectable) :BOOL
+  (label :STRING)
+)
+
+(defcfun ("ImGui_SelectableBoolPtr" selectable-bool-ptr) :BOOL
+  (label :STRING)
+  (p-selected :POINTER)
+  (flags SELECTABLE-FLAGS)
+)
+
+(defcfun ("ImGui_BeginMultiSelect" begin-multi-select) :POINTER
+  (flags MULTI-SELECT-FLAGS)
+)
+
 (defcfun ("ImGui_BeginMultiSelectEx" begin-multi-select-ex) :POINTER
   (flags MULTI-SELECT-FLAGS)
   (selection-size :INT)
@@ -2744,6 +3018,14 @@
   (height-in-items :INT)
 )
 
+(defcfun ("ImGui_ListBoxCallback" list-box-callback) :BOOL
+  (label :STRING)
+  (current-item :POINTER)
+  (getter :POINTER)
+  (user-data :POINTER)
+  (items-count :INT)
+)
+
 (defcfun ("ImGui_ListBoxCallbackEx" list-box-callback-ex) :BOOL
   (label :STRING)
   (current-item :POINTER)
@@ -2751,6 +3033,32 @@
   (user-data :POINTER)
   (items-count :INT)
   (height-in-items :INT)
+)
+
+(defcfun ("ImGui_PlotLines" plot-lines) :VOID
+  (label :STRING)
+  (values :POINTER)
+  (values-count :INT)
+)
+
+(defcfun ("ImGui_PlotLinesCallback" plot-lines-callback) :VOID
+  (label :STRING)
+  (values-getter :POINTER)
+  (data :POINTER)
+  (values-count :INT)
+)
+
+(defcfun ("ImGui_PlotHistogram" plot-histogram) :VOID
+  (label :STRING)
+  (values :POINTER)
+  (values-count :INT)
+)
+
+(defcfun ("ImGui_PlotHistogramCallback" plot-histogram-callback) :VOID
+  (label :STRING)
+  (values-getter :POINTER)
+  (data :POINTER)
+  (values-count :INT)
 )
 
 (defcfun ("ImGui_BeginMenuBar" begin-menu-bar) :BOOL)
@@ -2761,12 +3069,20 @@
 
 (defcfun ("ImGui_EndMainMenuBar" end-main-menu-bar) :VOID)
 
+(defcfun ("ImGui_BeginMenu" begin-menu) :BOOL
+  (label :STRING)
+)
+
 (defcfun ("ImGui_BeginMenuEx" begin-menu-ex) :BOOL
   (label :STRING)
   (enabled :BOOL)
 )
 
 (defcfun ("ImGui_EndMenu" end-menu) :VOID)
+
+(defcfun ("ImGui_MenuItem" menu-item) :BOOL
+  (label :STRING)
+)
 
 (defcfun ("ImGui_MenuItemEx" menu-item-ex) :BOOL
   (label :STRING)
@@ -2838,15 +3154,21 @@
 
 (defcfun ("ImGui_CloseCurrentPopup" close-current-popup) :VOID)
 
+(defcfun ("ImGui_BeginPopupContextItem" begin-popup-context-item) :BOOL)
+
 (defcfun ("ImGui_BeginPopupContextItemEx" begin-popup-context-item-ex) :BOOL
   (str-id :STRING)
   (popup-flags POPUP-FLAGS)
 )
 
+(defcfun ("ImGui_BeginPopupContextWindow" begin-popup-context-window) :BOOL)
+
 (defcfun ("ImGui_BeginPopupContextWindowEx" begin-popup-context-window-ex) :BOOL
   (str-id :STRING)
   (popup-flags POPUP-FLAGS)
 )
+
+(defcfun ("ImGui_BeginPopupContextVoid" begin-popup-context-void) :BOOL)
 
 (defcfun ("ImGui_BeginPopupContextVoidEx" begin-popup-context-void-ex) :BOOL
   (str-id :STRING)
@@ -2858,7 +3180,15 @@
   (flags POPUP-FLAGS)
 )
 
+(defcfun ("ImGui_BeginTable" begin-table) :BOOL
+  (str-id :STRING)
+  (columns :INT)
+  (flags TABLE-FLAGS)
+)
+
 (defcfun ("ImGui_EndTable" end-table) :VOID)
+
+(defcfun ("ImGui_TableNextRow" table-next-row) :VOID)
 
 (defcfun ("ImGui_TableNextRowEx" table-next-row-ex) :VOID
   (row-flags TABLE-ROW-FLAGS)
@@ -2869,6 +3199,11 @@
 
 (defcfun ("ImGui_TableSetColumnIndex" table-set-column-index) :BOOL
   (column-n :INT)
+)
+
+(defcfun ("ImGui_TableSetupColumn" table-setup-column) :VOID
+  (label :STRING)
+  (flags TABLE-COLUMN-FLAGS)
 )
 
 (defcfun ("ImGui_TableSetupColumnEx" table-setup-column-ex) :VOID
@@ -2919,6 +3254,8 @@
   (color U32)
   (column-n :INT)
 )
+
+(defcfun ("ImGui_Columns" columns) :VOID)
 
 (defcfun ("ImGui_ColumnsEx" columns-ex) :VOID
   (count :INT)
@@ -3035,6 +3372,8 @@
 
 (defcfun ("ImGui_SetItemDefaultFocus" set-item-default-focus) :VOID)
 
+(defcfun ("ImGui_SetKeyboardFocusHere" set-keyboard-focus-here) :VOID)
+
 (defcfun ("ImGui_SetKeyboardFocusHereEx" set-keyboard-focus-here-ex) :VOID
   (offset :INT)
 )
@@ -3052,6 +3391,8 @@
 (defcfun ("ImGui_IsItemActive" is-item-active) :BOOL)
 
 (defcfun ("ImGui_IsItemFocused" is-item-focused) :BOOL)
+
+(defcfun ("ImGui_IsItemClicked" is-item-clicked) :BOOL)
 
 (defcfun ("ImGui_IsItemClickedEx" is-item-clicked-ex) :BOOL
   (mouse-button MOUSE-BUTTON)
@@ -3105,6 +3446,10 @@
 
 (defcfun ("ImGui_GetStateStorage" get-state-storage) :POINTER)
 
+(defcfun ("ImGui_CalcTextSize" calc-text-size) VEC2
+  (text :STRING)
+)
+
 (defcfun ("ImGui_CalcTextSizeEx" calc-text-size-ex) VEC2
   (text :STRING)
   (text-end :STRING)
@@ -3135,16 +3480,20 @@
 )
 
 (defcfun ("ImGui_IsKeyDown" is-key-down) :BOOL
-  (key KEY)
+  (key IM-KEY)
+)
+
+(defcfun ("ImGui_IsKeyPressed" is-key-pressed) :BOOL
+  (key IM-KEY)
 )
 
 (defcfun ("ImGui_IsKeyPressedEx" is-key-pressed-ex) :BOOL
-  (key KEY)
+  (key IM-KEY)
   (repeat :BOOL)
 )
 
 (defcfun ("ImGui_IsKeyReleased" is-key-released) :BOOL
-  (key KEY)
+  (key IM-KEY)
 )
 
 (defcfun ("ImGui_IsKeyChordPressed" is-key-chord-pressed) :BOOL
@@ -3152,13 +3501,13 @@
 )
 
 (defcfun ("ImGui_GetKeyPressedAmount" get-key-pressed-amount) :INT
-  (key KEY)
+  (key IM-KEY)
   (repeat-delay :FLOAT)
   (rate :FLOAT)
 )
 
 (defcfun ("ImGui_GetKeyName" get-key-name) :STRING
-  (key KEY)
+  (key IM-KEY)
 )
 
 (defcfun ("ImGui_SetNextFrameWantCaptureKeyboard" set-next-frame-want-capture-keyboard) :VOID
@@ -3176,10 +3525,14 @@
 )
 
 (defcfun ("ImGui_SetItemKeyOwner" set-item-key-owner) :VOID
-  (key KEY)
+  (key IM-KEY)
 )
 
 (defcfun ("ImGui_IsMouseDown" is-mouse-down) :BOOL
+  (button MOUSE-BUTTON)
+)
+
+(defcfun ("ImGui_IsMouseClicked" is-mouse-clicked) :BOOL
   (button MOUSE-BUTTON)
 )
 
@@ -3224,6 +3577,8 @@
   (button MOUSE-BUTTON)
   (lock-threshold :FLOAT)
 )
+
+(defcfun ("ImGui_ResetMouseDragDelta" reset-mouse-drag-delta) :VOID)
 
 (defcfun ("ImGui_ResetMouseDragDeltaEx" reset-mouse-drag-delta-ex) :VOID
   (button MOUSE-BUTTON)
@@ -3334,13 +3689,13 @@
 
 (defcfun ("ImGuiIO_AddKeyEvent" io-add-key-event) :VOID
   (self :POINTER)
-  (key KEY)
+  (key IM-KEY)
   (down :BOOL)
 )
 
 (defcfun ("ImGuiIO_AddKeyAnalogEvent" io-add-key-analog-event) :VOID
   (self :POINTER)
-  (key KEY)
+  (key IM-KEY)
   (down :BOOL)
   (v :FLOAT)
 )
@@ -3365,7 +3720,7 @@
 
 (defcfun ("ImGuiIO_AddMouseSourceEvent" io-add-mouse-source-event) :VOID
   (self :POINTER)
-  (source MOUSE-SOURCE)
+  (source IM-MOUSE-SOURCE)
 )
 
 (defcfun ("ImGuiIO_AddFocusEvent" io-add-focus-event) :VOID
@@ -3388,9 +3743,16 @@
   (str :STRING)
 )
 
+(defcfun ("ImGuiIO_SetKeyEventNativeData" io-set-key-event-native-data) :VOID
+  (self :POINTER)
+  (key IM-KEY)
+  (native-keycode :INT)
+  (native-scancode :INT)
+)
+
 (defcfun ("ImGuiIO_SetKeyEventNativeDataEx" io-set-key-event-native-data-ex) :VOID
   (self :POINTER)
-  (key KEY)
+  (key IM-KEY)
   (native-keycode :INT)
   (native-scancode :INT)
   (native-legacy-index :INT)
@@ -3804,6 +4166,12 @@
   (thickness :FLOAT)
 )
 
+(defcfun ("ImDrawList_AddCallback" draw-list-add-callback) :VOID
+  (self :POINTER)
+  (callback DRAW-CALLBACK)
+  (userdata :POINTER)
+)
+
 (defcfun ("ImDrawList_AddCallbackEx" draw-list-add-callback-ex) :VOID
   (self :POINTER)
   (callback DRAW-CALLBACK)
@@ -3907,7 +4275,7 @@
 
 (defcfun ("ImTextureData_Create" texture-data-create) :VOID
   (self :POINTER)
-  (format TEXTURE-FORMAT)
+  (format IM-TEXTURE-FORMAT)
   (w :INT)
   (h :INT)
 )
@@ -3949,7 +4317,7 @@
 
 (defcfun ("ImTextureData_SetStatus" texture-data-set-status) :VOID
   (self :POINTER)
-  (status TEXTURE-STATUS)
+  (status IM-TEXTURE-STATUS)
 )
 
 (defcfun ("ImFontGlyphRangesBuilder_Clear" font-glyph-ranges-builder-clear) :VOID
@@ -4199,10 +4567,23 @@
   (self :POINTER)
 )
 
+(defcfun ("ImFont_GetFontBaked" font-get-font-baked) :POINTER
+  (self :POINTER)
+  (font-size :FLOAT)
+)
+
 (defcfun ("ImFont_GetFontBakedEx" font-get-font-baked-ex) :POINTER
   (self :POINTER)
   (font-size :FLOAT)
   (density :FLOAT)
+)
+
+(defcfun ("ImFont_CalcTextSizeA" font-calc-text-size-a) VEC2
+  (self :POINTER)
+  (size :FLOAT)
+  (max-width :FLOAT)
+  (wrap-width :FLOAT)
+  (text-begin :STRING)
 )
 
 (defcfun ("ImFont_CalcTextSizeAEx" font-calc-text-size-aex) VEC2
@@ -4295,6 +4676,14 @@
   (p-open :POINTER)
 )
 
+(defcfun ("ImGui_ComboObsolete" combo-obsolete) :BOOL
+  (label :STRING)
+  (current-item :POINTER)
+  (old-callback :POINTER)
+  (user-data :POINTER)
+  (items-count :INT)
+)
+
 (defcfun ("ImGui_ComboObsoleteEx" combo-obsolete-ex) :BOOL
   (label :STRING)
   (current-item :POINTER)
@@ -4302,6 +4691,14 @@
   (user-data :POINTER)
   (items-count :INT)
   (popup-max-height-in-items :INT)
+)
+
+(defcfun ("ImGui_ListBoxObsolete" list-box-obsolete) :BOOL
+  (label :STRING)
+  (current-item :POINTER)
+  (old-callback :POINTER)
+  (user-data :POINTER)
+  (items-count :INT)
 )
 
 (defcfun ("ImGui_ListBoxObsoleteEx" list-box-obsolete-ex) :BOOL

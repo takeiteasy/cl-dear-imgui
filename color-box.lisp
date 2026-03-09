@@ -20,12 +20,12 @@
 (defmethod compose ((this color-box))
   (with-slots (label (this-color color) popup-id) this
     ;; Color button swatch
-    (when (imgui::color-button-xy label
-                                   (float (v:vx this-color) 0.0)
-                                   (float (v:vy this-color) 0.0)
-                                   (float (v:vz this-color) 0.0)
-                                   (float (v:vw this-color) 0.0)
-                                   0 0.0 0.0)
+    (when (imgui::color-button label
+                               (float (v:vx this-color) 0.0)
+                               (float (v:vy this-color) 0.0)
+                               (float (v:vz this-color) 0.0)
+                               (float (v:vw this-color) 0.0)
+                               0)
       (imgui::open-popup popup-id 0))
     ;; Popup with color picker
     (when (imgui::begin-popup popup-id 0)

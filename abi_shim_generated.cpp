@@ -20,6 +20,11 @@ bool ImGui_BeginChildIDXY(::ImGuiID id, float size_x, float size_y, ::ImGuiChild
     return ::ImGui::BeginChild(id, ::ImVec2(size_x, size_y), child_flags, window_flags);
 }
 
+void ImGui_SetNextWindowPosXY(float pos_x, float pos_y, ::ImGuiCond cond)
+{
+    ::ImGui::SetNextWindowPos(::ImVec2(pos_x, pos_y), cond);
+}
+
 void ImGui_SetNextWindowPosExXY(float pos_x, float pos_y, ::ImGuiCond cond, float pivot_x, float pivot_y)
 {
     ::ImGui::SetNextWindowPos(::ImVec2(pos_x, pos_y), cond, ::ImVec2(pivot_x, pivot_y));
@@ -117,9 +122,19 @@ void ImGui_ProgressBarXY(float fraction, float size_arg_x, float size_arg_y, con
     ::ImGui::ProgressBar(fraction, ::ImVec2(size_arg_x, size_arg_y), overlay);
 }
 
+void ImGui_ImageTRXY(::ImTextureRef* tex_ref, float image_size_x, float image_size_y)
+{
+    ::ImGui::Image(*tex_ref, ::ImVec2(image_size_x, image_size_y));
+}
+
 void ImGui_ImageExTRXY(::ImTextureRef* tex_ref, float image_size_x, float image_size_y, float uv0_x, float uv0_y, float uv1_x, float uv1_y)
 {
     ::ImGui::Image(*tex_ref, ::ImVec2(image_size_x, image_size_y), ::ImVec2(uv0_x, uv0_y), ::ImVec2(uv1_x, uv1_y));
+}
+
+void ImGui_ImageWithBgTRXY(::ImTextureRef* tex_ref, float image_size_x, float image_size_y)
+{
+    ::ImGui::ImageWithBg(*tex_ref, ::ImVec2(image_size_x, image_size_y));
 }
 
 void ImGui_ImageWithBgExTRXYXYZW(::ImTextureRef* tex_ref, float image_size_x, float image_size_y, float uv0_x, float uv0_y, float uv1_x, float uv1_y, float bg_col_x, float bg_col_y, float bg_col_z, float bg_col_w, float tint_col_x, float tint_col_y, float tint_col_z, float tint_col_w)
@@ -127,19 +142,39 @@ void ImGui_ImageWithBgExTRXYXYZW(::ImTextureRef* tex_ref, float image_size_x, fl
     ::ImGui::ImageWithBg(*tex_ref, ::ImVec2(image_size_x, image_size_y), ::ImVec2(uv0_x, uv0_y), ::ImVec2(uv1_x, uv1_y), ::ImVec4(bg_col_x, bg_col_y, bg_col_z, bg_col_w), ::ImVec4(tint_col_x, tint_col_y, tint_col_z, tint_col_w));
 }
 
+bool ImGui_ImageButtonTRXY(const char* str_id, ::ImTextureRef* tex_ref, float image_size_x, float image_size_y)
+{
+    return ::ImGui::ImageButton(str_id, *tex_ref, ::ImVec2(image_size_x, image_size_y));
+}
+
 bool ImGui_ImageButtonExTRXYXYZW(const char* str_id, ::ImTextureRef* tex_ref, float image_size_x, float image_size_y, float uv0_x, float uv0_y, float uv1_x, float uv1_y, float bg_col_x, float bg_col_y, float bg_col_z, float bg_col_w, float tint_col_x, float tint_col_y, float tint_col_z, float tint_col_w)
 {
     return ::ImGui::ImageButton(str_id, *tex_ref, ::ImVec2(image_size_x, image_size_y), ::ImVec2(uv0_x, uv0_y), ::ImVec2(uv1_x, uv1_y), ::ImVec4(bg_col_x, bg_col_y, bg_col_z, bg_col_w), ::ImVec4(tint_col_x, tint_col_y, tint_col_z, tint_col_w));
 }
 
-bool ImGui_VSliderFloatExXY(const char* label, float size_x, float size_y, void* v, float v_min, float v_max, const char* format, ::ImGuiSliderFlags flags)
+bool ImGui_VSliderFloatXY(const char* label, float size_x, float size_y, float* v, float v_min, float v_max)
+{
+    return ::ImGui::VSliderFloat(label, ::ImVec2(size_x, size_y), v, v_min, v_max);
+}
+
+bool ImGui_VSliderFloatExXY(const char* label, float size_x, float size_y, float* v, float v_min, float v_max, const char* format, ::ImGuiSliderFlags flags)
 {
     return ::ImGui::VSliderFloat(label, ::ImVec2(size_x, size_y), v, v_min, v_max, format, flags);
 }
 
-bool ImGui_VSliderIntExXY(const char* label, float size_x, float size_y, void* v, int v_min, int v_max, const char* format, ::ImGuiSliderFlags flags)
+bool ImGui_VSliderIntXY(const char* label, float size_x, float size_y, int* v, int v_min, int v_max)
+{
+    return ::ImGui::VSliderInt(label, ::ImVec2(size_x, size_y), v, v_min, v_max);
+}
+
+bool ImGui_VSliderIntExXY(const char* label, float size_x, float size_y, int* v, int v_min, int v_max, const char* format, ::ImGuiSliderFlags flags)
 {
     return ::ImGui::VSliderInt(label, ::ImVec2(size_x, size_y), v, v_min, v_max, format, flags);
+}
+
+bool ImGui_VSliderScalarXY(const char* label, float size_x, float size_y, ::ImGuiDataType data_type, void* p_data, void* p_min, void* p_max)
+{
+    return ::ImGui::VSliderScalar(label, ::ImVec2(size_x, size_y), data_type, p_data, p_min, p_max);
 }
 
 bool ImGui_VSliderScalarExXY(const char* label, float size_x, float size_y, ::ImGuiDataType data_type, void* p_data, void* p_min, void* p_max, const char* format, ::ImGuiSliderFlags flags)
@@ -147,9 +182,14 @@ bool ImGui_VSliderScalarExXY(const char* label, float size_x, float size_y, ::Im
     return ::ImGui::VSliderScalar(label, ::ImVec2(size_x, size_y), data_type, p_data, p_min, p_max, format, flags);
 }
 
-bool ImGui_InputTextMultilineExXY(const char* label, const char* buf, size_t buf_size, float size_x, float size_y, ::ImGuiInputTextFlags flags, ::ImGuiInputTextCallback callback, void* user_data)
+bool ImGui_InputTextMultilineExXY(const char* label, char* buf, size_t buf_size, float size_x, float size_y, ::ImGuiInputTextFlags flags, ::ImGuiInputTextCallback callback, void* user_data)
 {
     return ::ImGui::InputTextMultiline(label, buf, buf_size, ::ImVec2(size_x, size_y), flags, callback, user_data);
+}
+
+bool ImGui_ColorButtonXYZW(const char* desc_id, float col_x, float col_y, float col_z, float col_w, ::ImGuiColorEditFlags flags)
+{
+    return ::ImGui::ColorButton(desc_id, ::ImVec4(col_x, col_y, col_z, col_w), flags);
 }
 
 bool ImGui_ColorButtonExXYZWXY(const char* desc_id, float col_x, float col_y, float col_z, float col_w, ::ImGuiColorEditFlags flags, float size_x, float size_y)
@@ -162,7 +202,7 @@ bool ImGui_SelectableExXY(const char* label, bool selected, ::ImGuiSelectableFla
     return ::ImGui::Selectable(label, selected, flags, ::ImVec2(size_x, size_y));
 }
 
-bool ImGui_SelectableBoolPtrExXY(const char* label, void* p_selected, ::ImGuiSelectableFlags flags, float size_x, float size_y)
+bool ImGui_SelectableBoolPtrExXY(const char* label, bool* p_selected, ::ImGuiSelectableFlags flags, float size_x, float size_y)
 {
     return ::ImGui::Selectable(label, p_selected, flags, ::ImVec2(size_x, size_y));
 }
@@ -172,24 +212,24 @@ bool ImGui_BeginListBoxXY(const char* label, float size_x, float size_y)
     return ::ImGui::BeginListBox(label, ::ImVec2(size_x, size_y));
 }
 
-void ImGui_PlotLinesExXY(const char* label, void* values, int values_count, int values_offset, const char* overlay_text, float scale_min, float scale_max, float graph_size_x, float graph_size_y, int stride)
+void ImGui_PlotLinesExXY(const char* label, const float* values, int values_count, int values_offset, const char* overlay_text, float scale_min, float scale_max, float graph_size_x, float graph_size_y, int stride)
 {
     ::ImGui::PlotLines(label, values, values_count, values_offset, overlay_text, scale_min, scale_max, ::ImVec2(graph_size_x, graph_size_y), stride);
 }
 
 void ImGui_PlotLinesCallbackExXY(const char* label, void* values_getter, void* data, int values_count, int values_offset, const char* overlay_text, float scale_min, float scale_max, float graph_size_x, float graph_size_y)
 {
-    ::ImGui::PlotLines(label, values_getter, data, values_count, values_offset, overlay_text, scale_min, scale_max, ::ImVec2(graph_size_x, graph_size_y));
+    ::ImGui::PlotLines(label, (float(*)(void*, int))values_getter, data, values_count, values_offset, overlay_text, scale_min, scale_max, ::ImVec2(graph_size_x, graph_size_y));
 }
 
-void ImGui_PlotHistogramExXY(const char* label, void* values, int values_count, int values_offset, const char* overlay_text, float scale_min, float scale_max, float graph_size_x, float graph_size_y, int stride)
+void ImGui_PlotHistogramExXY(const char* label, const float* values, int values_count, int values_offset, const char* overlay_text, float scale_min, float scale_max, float graph_size_x, float graph_size_y, int stride)
 {
     ::ImGui::PlotHistogram(label, values, values_count, values_offset, overlay_text, scale_min, scale_max, ::ImVec2(graph_size_x, graph_size_y), stride);
 }
 
 void ImGui_PlotHistogramCallbackExXY(const char* label, void* values_getter, void* data, int values_count, int values_offset, const char* overlay_text, float scale_min, float scale_max, float graph_size_x, float graph_size_y)
 {
-    ::ImGui::PlotHistogram(label, values_getter, data, values_count, values_offset, overlay_text, scale_min, scale_max, ::ImVec2(graph_size_x, graph_size_y));
+    ::ImGui::PlotHistogram(label, (float(*)(void*, int))values_getter, data, values_count, values_offset, overlay_text, scale_min, scale_max, ::ImVec2(graph_size_x, graph_size_y));
 }
 
 bool ImGui_BeginTableExXY(const char* str_id, int columns, ::ImGuiTableFlags flags, float outer_size_x, float outer_size_y, float inner_width)
@@ -217,6 +257,11 @@ unsigned int ImGui_ColorConvertFloat4ToU32XYZW(float in_x, float in_y, float in_
     return ::ImGui::ColorConvertFloat4ToU32(::ImVec4(in_x, in_y, in_z, in_w));
 }
 
+bool ImGui_IsMouseHoveringRectXY(float r_min_x, float r_min_y, float r_max_x, float r_max_y)
+{
+    return ::ImGui::IsMouseHoveringRect(::ImVec2(r_min_x, r_min_y), ::ImVec2(r_max_x, r_max_y));
+}
+
 bool ImGui_IsMouseHoveringRectExXY(float r_min_x, float r_min_y, float r_max_x, float r_max_y, bool clip)
 {
     return ::ImGui::IsMouseHoveringRect(::ImVec2(r_min_x, r_min_y), ::ImVec2(r_max_x, r_max_y), clip);
@@ -232,14 +277,29 @@ void ImDrawList_PushTextureTR(::ImDrawList* self, ::ImTextureRef* tex_ref)
     self->PushTexture(*tex_ref);
 }
 
+void ImDrawList_AddLineXY(::ImDrawList* self, float p1_x, float p1_y, float p2_x, float p2_y, unsigned int col)
+{
+    self->AddLine(::ImVec2(p1_x, p1_y), ::ImVec2(p2_x, p2_y), col);
+}
+
 void ImDrawList_AddLineExXY(::ImDrawList* self, float p1_x, float p1_y, float p2_x, float p2_y, unsigned int col, float thickness)
 {
     self->AddLine(::ImVec2(p1_x, p1_y), ::ImVec2(p2_x, p2_y), col, thickness);
 }
 
+void ImDrawList_AddRectXY(::ImDrawList* self, float p_min_x, float p_min_y, float p_max_x, float p_max_y, unsigned int col)
+{
+    self->AddRect(::ImVec2(p_min_x, p_min_y), ::ImVec2(p_max_x, p_max_y), col);
+}
+
 void ImDrawList_AddRectExXY(::ImDrawList* self, float p_min_x, float p_min_y, float p_max_x, float p_max_y, unsigned int col, float rounding, ::ImDrawFlags flags, float thickness)
 {
     self->AddRect(::ImVec2(p_min_x, p_min_y), ::ImVec2(p_max_x, p_max_y), col, rounding, flags, thickness);
+}
+
+void ImDrawList_AddRectFilledXY(::ImDrawList* self, float p_min_x, float p_min_y, float p_max_x, float p_max_y, unsigned int col)
+{
+    self->AddRectFilled(::ImVec2(p_min_x, p_min_y), ::ImVec2(p_max_x, p_max_y), col);
 }
 
 void ImDrawList_AddRectFilledExXY(::ImDrawList* self, float p_min_x, float p_min_y, float p_max_x, float p_max_y, unsigned int col, float rounding, ::ImDrawFlags flags)
@@ -252,6 +312,11 @@ void ImDrawList_AddRectFilledMultiColorXY(::ImDrawList* self, float p_min_x, flo
     self->AddRectFilledMultiColor(::ImVec2(p_min_x, p_min_y), ::ImVec2(p_max_x, p_max_y), col_upr_left, col_upr_right, col_bot_right, col_bot_left);
 }
 
+void ImDrawList_AddQuadXY(::ImDrawList* self, float p1_x, float p1_y, float p2_x, float p2_y, float p3_x, float p3_y, float p4_x, float p4_y, unsigned int col)
+{
+    self->AddQuad(::ImVec2(p1_x, p1_y), ::ImVec2(p2_x, p2_y), ::ImVec2(p3_x, p3_y), ::ImVec2(p4_x, p4_y), col);
+}
+
 void ImDrawList_AddQuadExXY(::ImDrawList* self, float p1_x, float p1_y, float p2_x, float p2_y, float p3_x, float p3_y, float p4_x, float p4_y, unsigned int col, float thickness)
 {
     self->AddQuad(::ImVec2(p1_x, p1_y), ::ImVec2(p2_x, p2_y), ::ImVec2(p3_x, p3_y), ::ImVec2(p4_x, p4_y), col, thickness);
@@ -260,6 +325,11 @@ void ImDrawList_AddQuadExXY(::ImDrawList* self, float p1_x, float p1_y, float p2
 void ImDrawList_AddQuadFilledXY(::ImDrawList* self, float p1_x, float p1_y, float p2_x, float p2_y, float p3_x, float p3_y, float p4_x, float p4_y, unsigned int col)
 {
     self->AddQuadFilled(::ImVec2(p1_x, p1_y), ::ImVec2(p2_x, p2_y), ::ImVec2(p3_x, p3_y), ::ImVec2(p4_x, p4_y), col);
+}
+
+void ImDrawList_AddTriangleXY(::ImDrawList* self, float p1_x, float p1_y, float p2_x, float p2_y, float p3_x, float p3_y, unsigned int col)
+{
+    self->AddTriangle(::ImVec2(p1_x, p1_y), ::ImVec2(p2_x, p2_y), ::ImVec2(p3_x, p3_y), col);
 }
 
 void ImDrawList_AddTriangleExXY(::ImDrawList* self, float p1_x, float p1_y, float p2_x, float p2_y, float p3_x, float p3_y, unsigned int col, float thickness)
@@ -272,6 +342,11 @@ void ImDrawList_AddTriangleFilledXY(::ImDrawList* self, float p1_x, float p1_y, 
     self->AddTriangleFilled(::ImVec2(p1_x, p1_y), ::ImVec2(p2_x, p2_y), ::ImVec2(p3_x, p3_y), col);
 }
 
+void ImDrawList_AddCircleXY(::ImDrawList* self, float center_x, float center_y, float radius, unsigned int col)
+{
+    self->AddCircle(::ImVec2(center_x, center_y), radius, col);
+}
+
 void ImDrawList_AddCircleExXY(::ImDrawList* self, float center_x, float center_y, float radius, unsigned int col, int num_segments, float thickness)
 {
     self->AddCircle(::ImVec2(center_x, center_y), radius, col, num_segments, thickness);
@@ -280,6 +355,11 @@ void ImDrawList_AddCircleExXY(::ImDrawList* self, float center_x, float center_y
 void ImDrawList_AddCircleFilledXY(::ImDrawList* self, float center_x, float center_y, float radius, unsigned int col, int num_segments)
 {
     self->AddCircleFilled(::ImVec2(center_x, center_y), radius, col, num_segments);
+}
+
+void ImDrawList_AddNgonXY(::ImDrawList* self, float center_x, float center_y, float radius, unsigned int col, int num_segments)
+{
+    self->AddNgon(::ImVec2(center_x, center_y), radius, col, num_segments);
 }
 
 void ImDrawList_AddNgonExXY(::ImDrawList* self, float center_x, float center_y, float radius, unsigned int col, int num_segments, float thickness)
@@ -292,9 +372,19 @@ void ImDrawList_AddNgonFilledXY(::ImDrawList* self, float center_x, float center
     self->AddNgonFilled(::ImVec2(center_x, center_y), radius, col, num_segments);
 }
 
+void ImDrawList_AddEllipseXY(::ImDrawList* self, float center_x, float center_y, float radius_x, float radius_y, unsigned int col)
+{
+    self->AddEllipse(::ImVec2(center_x, center_y), ::ImVec2(radius_x, radius_y), col);
+}
+
 void ImDrawList_AddEllipseExXY(::ImDrawList* self, float center_x, float center_y, float radius_x, float radius_y, unsigned int col, float rot, int num_segments, float thickness)
 {
     self->AddEllipse(::ImVec2(center_x, center_y), ::ImVec2(radius_x, radius_y), col, rot, num_segments, thickness);
+}
+
+void ImDrawList_AddEllipseFilledXY(::ImDrawList* self, float center_x, float center_y, float radius_x, float radius_y, unsigned int col)
+{
+    self->AddEllipseFilled(::ImVec2(center_x, center_y), ::ImVec2(radius_x, radius_y), col);
 }
 
 void ImDrawList_AddEllipseFilledExXY(::ImDrawList* self, float center_x, float center_y, float radius_x, float radius_y, unsigned int col, float rot, int num_segments)
@@ -302,9 +392,19 @@ void ImDrawList_AddEllipseFilledExXY(::ImDrawList* self, float center_x, float c
     self->AddEllipseFilled(::ImVec2(center_x, center_y), ::ImVec2(radius_x, radius_y), col, rot, num_segments);
 }
 
+void ImDrawList_AddTextXY(::ImDrawList* self, float pos_x, float pos_y, unsigned int col, const char* text_begin)
+{
+    self->AddText(::ImVec2(pos_x, pos_y), col, text_begin);
+}
+
 void ImDrawList_AddTextExXY(::ImDrawList* self, float pos_x, float pos_y, unsigned int col, const char* text_begin, const char* text_end)
 {
     self->AddText(::ImVec2(pos_x, pos_y), col, text_begin, text_end);
+}
+
+void ImDrawList_AddTextImFontPtrXY(::ImDrawList* self, ::ImFont* font, float font_size, float pos_x, float pos_y, unsigned int col, const char* text_begin)
+{
+    self->AddText(font, font_size, ::ImVec2(pos_x, pos_y), col, text_begin);
 }
 
 void ImDrawList_AddTextImFontPtrExXY(::ImDrawList* self, ::ImFont* font, float font_size, float pos_x, float pos_y, unsigned int col, const char* text_begin, const char* text_end, float wrap_width, ::ImVec4* cpu_fine_clip_rect)
@@ -322,9 +422,19 @@ void ImDrawList_AddBezierQuadraticXY(::ImDrawList* self, float p1_x, float p1_y,
     self->AddBezierQuadratic(::ImVec2(p1_x, p1_y), ::ImVec2(p2_x, p2_y), ::ImVec2(p3_x, p3_y), col, thickness, num_segments);
 }
 
+void ImDrawList_AddImageTRXY(::ImDrawList* self, ::ImTextureRef* tex_ref, float p_min_x, float p_min_y, float p_max_x, float p_max_y)
+{
+    self->AddImage(*tex_ref, ::ImVec2(p_min_x, p_min_y), ::ImVec2(p_max_x, p_max_y));
+}
+
 void ImDrawList_AddImageExTRXY(::ImDrawList* self, ::ImTextureRef* tex_ref, float p_min_x, float p_min_y, float p_max_x, float p_max_y, float uv_min_x, float uv_min_y, float uv_max_x, float uv_max_y, unsigned int col)
 {
     self->AddImage(*tex_ref, ::ImVec2(p_min_x, p_min_y), ::ImVec2(p_max_x, p_max_y), ::ImVec2(uv_min_x, uv_min_y), ::ImVec2(uv_max_x, uv_max_y), col);
+}
+
+void ImDrawList_AddImageQuadTRXY(::ImDrawList* self, ::ImTextureRef* tex_ref, float p1_x, float p1_y, float p2_x, float p2_y, float p3_x, float p3_y, float p4_x, float p4_y)
+{
+    self->AddImageQuad(*tex_ref, ::ImVec2(p1_x, p1_y), ::ImVec2(p2_x, p2_y), ::ImVec2(p3_x, p3_y), ::ImVec2(p4_x, p4_y));
 }
 
 void ImDrawList_AddImageQuadExTRXY(::ImDrawList* self, ::ImTextureRef* tex_ref, float p1_x, float p1_y, float p2_x, float p2_y, float p3_x, float p3_y, float p4_x, float p4_y, float uv1_x, float uv1_y, float uv2_x, float uv2_y, float uv3_x, float uv3_y, float uv4_x, float uv4_y, unsigned int col)
@@ -355,6 +465,11 @@ void ImDrawList_PathArcToXY(::ImDrawList* self, float center_x, float center_y, 
 void ImDrawList_PathArcToFastXY(::ImDrawList* self, float center_x, float center_y, float radius, int a_min_of_12, int a_max_of_12)
 {
     self->PathArcToFast(::ImVec2(center_x, center_y), radius, a_min_of_12, a_max_of_12);
+}
+
+void ImDrawList_PathEllipticalArcToXY(::ImDrawList* self, float center_x, float center_y, float radius_x, float radius_y, float rot, float a_min, float a_max)
+{
+    self->PathEllipticalArcTo(::ImVec2(center_x, center_y), ::ImVec2(radius_x, radius_y), rot, a_min, a_max);
 }
 
 void ImDrawList_PathEllipticalArcToExXY(::ImDrawList* self, float center_x, float center_y, float radius_x, float radius_y, float rot, float a_min, float a_max, int num_segments)
@@ -442,6 +557,11 @@ void ImFontAtlas_SetTexIDImTextureRefTR(::ImFontAtlas* self, ::ImTextureRef* id)
     return self->AddCustomRectFontGlyphForSize(font, font_size, codepoint, w, h, advance_x, ::ImVec2(offset_x, offset_y));
 }
 
+void ImFont_RenderCharXY(::ImFont* self, ::ImDrawList* draw_list, float size, float pos_x, float pos_y, unsigned int col, unsigned short c)
+{
+    self->RenderChar(draw_list, size, ::ImVec2(pos_x, pos_y), col, c);
+}
+
 void ImFont_RenderCharExXY(::ImFont* self, ::ImDrawList* draw_list, float size, float pos_x, float pos_y, unsigned int col, unsigned short c, ::ImVec4* cpu_fine_clip)
 {
     self->RenderChar(draw_list, size, ::ImVec2(pos_x, pos_y), col, c, cpu_fine_clip);
@@ -455,6 +575,11 @@ void ImFont_RenderTextXYXYZW(::ImFont* self, ::ImDrawList* draw_list, float size
 void ImGui_ImageImVec4TRXYXYZW(::ImTextureRef* tex_ref, float image_size_x, float image_size_y, float uv0_x, float uv0_y, float uv1_x, float uv1_y, float tint_col_x, float tint_col_y, float tint_col_z, float tint_col_w, float border_col_x, float border_col_y, float border_col_z, float border_col_w)
 {
     ::ImGui::Image(*tex_ref, ::ImVec2(image_size_x, image_size_y), ::ImVec2(uv0_x, uv0_y), ::ImVec2(uv1_x, uv1_y), ::ImVec4(tint_col_x, tint_col_y, tint_col_z, tint_col_w), ::ImVec4(border_col_x, border_col_y, border_col_z, border_col_w));
+}
+
+bool ImGui_BeginChildFrameXY(::ImGuiID id, float size_x, float size_y)
+{
+    return ::ImGui::BeginChildFrame(id, ::ImVec2(size_x, size_y));
 }
 
 bool ImGui_BeginChildFrameExXY(::ImGuiID id, float size_x, float size_y, ::ImGuiWindowFlags window_flags)

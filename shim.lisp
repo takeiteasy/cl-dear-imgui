@@ -1,10 +1,10 @@
-;;;; shim_generated.lisp
+;;;; shim.lisp
 ;;;; Auto-generated CFFI bindings for abi_shim_generated.cpp
 ;;;; DO NOT EDIT by hand — regenerate with generator.lisp
 
 (in-package #:cl-dear-imgui)
 
-(defcfun ("ImGui_BeginChildXY" begin-child-xy) :BOOL
+(defcfun ("ImGui_BeginChildXY" begin-child) :BOOL
   (str-id :STRING)
   (size-x :FLOAT)
   (size-y :FLOAT)
@@ -12,7 +12,7 @@
   (window-flags WINDOW-FLAGS)
 )
 
-(defcfun ("ImGui_BeginChildIDXY" begin-child-idxy) :BOOL
+(defcfun ("ImGui_BeginChildIDXY" begin-child-id) :BOOL
   (id ID)
   (size-x :FLOAT)
   (size-y :FLOAT)
@@ -20,7 +20,13 @@
   (window-flags WINDOW-FLAGS)
 )
 
-(defcfun ("ImGui_SetNextWindowPosExXY" set-next-window-pos-ex-xy) :VOID
+(defcfun ("ImGui_SetNextWindowPosXY" set-next-window-pos) :VOID
+  (pos-x :FLOAT)
+  (pos-y :FLOAT)
+  (cond COND)
+)
+
+(defcfun ("ImGui_SetNextWindowPosExXY" set-next-window-pos-ex) :VOID
   (pos-x :FLOAT)
   (pos-y :FLOAT)
   (cond COND)
@@ -28,13 +34,13 @@
   (pivot-y :FLOAT)
 )
 
-(defcfun ("ImGui_SetNextWindowSizeXY" set-next-window-size-xy) :VOID
+(defcfun ("ImGui_SetNextWindowSizeXY" set-next-window-size) :VOID
   (size-x :FLOAT)
   (size-y :FLOAT)
   (cond COND)
 )
 
-(defcfun ("ImGui_SetNextWindowSizeConstraintsXY" set-next-window-size-constraints-xy) :VOID
+(defcfun ("ImGui_SetNextWindowSizeConstraintsXY" set-next-window-size-constraints) :VOID
   (size-min-x :FLOAT)
   (size-min-y :FLOAT)
   (size-max-x :FLOAT)
@@ -43,43 +49,43 @@
   (custom-callback-data :POINTER)
 )
 
-(defcfun ("ImGui_SetNextWindowContentSizeXY" set-next-window-content-size-xy) :VOID
+(defcfun ("ImGui_SetNextWindowContentSizeXY" set-next-window-content-size) :VOID
   (size-x :FLOAT)
   (size-y :FLOAT)
 )
 
-(defcfun ("ImGui_SetNextWindowScrollXY" set-next-window-scroll-xy) :VOID
+(defcfun ("ImGui_SetNextWindowScrollXY" set-next-window-scroll) :VOID
   (scroll-x :FLOAT)
   (scroll-y :FLOAT)
 )
 
-(defcfun ("ImGui_SetWindowPosXY" set-window-pos-xy) :VOID
+(defcfun ("ImGui_SetWindowPosXY" set-window-pos) :VOID
   (pos-x :FLOAT)
   (pos-y :FLOAT)
   (cond COND)
 )
 
-(defcfun ("ImGui_SetWindowSizeXY" set-window-size-xy) :VOID
+(defcfun ("ImGui_SetWindowSizeXY" set-window-size) :VOID
   (size-x :FLOAT)
   (size-y :FLOAT)
   (cond COND)
 )
 
-(defcfun ("ImGui_SetWindowPosStrXY" set-window-pos-str-xy) :VOID
+(defcfun ("ImGui_SetWindowPosStrXY" set-window-pos-str) :VOID
   (name :STRING)
   (pos-x :FLOAT)
   (pos-y :FLOAT)
   (cond COND)
 )
 
-(defcfun ("ImGui_SetWindowSizeStrXY" set-window-size-str-xy) :VOID
+(defcfun ("ImGui_SetWindowSizeStrXY" set-window-size-str) :VOID
   (name :STRING)
   (size-x :FLOAT)
   (size-y :FLOAT)
   (cond COND)
 )
 
-(defcfun ("ImGui_PushStyleColorImVec4XYZW" push-style-color-im-vec4xyzw) :VOID
+(defcfun ("ImGui_PushStyleColorImVec4XYZW" push-style-color-im-vec4) :VOID
   (idx COL)
   (col-x :FLOAT)
   (col-y :FLOAT)
@@ -87,37 +93,37 @@
   (col-w :FLOAT)
 )
 
-(defcfun ("ImGui_PushStyleVarImVec2XY" push-style-var-im-vec2xy) :VOID
+(defcfun ("ImGui_PushStyleVarImVec2XY" push-style-var-im-vec2) :VOID
   (idx STYLE-VAR)
   (val-x :FLOAT)
   (val-y :FLOAT)
 )
 
-(defcfun ("ImGui_GetColorU32ImVec4XYZW" get-color-u32im-vec4xyzw) U32
+(defcfun ("ImGui_GetColorU32ImVec4XYZW" get-color-u32im-vec4) U32
   (col-x :FLOAT)
   (col-y :FLOAT)
   (col-z :FLOAT)
   (col-w :FLOAT)
 )
 
-(defcfun ("ImGui_SetCursorScreenPosXY" set-cursor-screen-pos-xy) :VOID
+(defcfun ("ImGui_SetCursorScreenPosXY" set-cursor-screen-pos) :VOID
   (pos-x :FLOAT)
   (pos-y :FLOAT)
 )
 
-(defcfun ("ImGui_SetCursorPosXY" set-cursor-pos-xy) :VOID
+(defcfun ("ImGui_SetCursorPosXY" set-cursor-pos) :VOID
   (local-pos-x :FLOAT)
   (local-pos-y :FLOAT)
 )
 
-(defcfun ("ImGui_DummyXY" dummy-xy) :VOID
+(defcfun ("ImGui_DummyXY" dummy) :VOID
   (size-x :FLOAT)
   (size-y :FLOAT)
 )
 
 ;; SKIPPED (varargs): ImGui_TextColored
 
-(defcfun ("ImGui_TextColoredVXYZW" text-colored-vxyzw) :VOID
+(defcfun ("ImGui_TextColoredVXYZW" text-colored-v) :VOID
   (col-x :FLOAT)
   (col-y :FLOAT)
   (col-z :FLOAT)
@@ -126,27 +132,33 @@
   (args :POINTER)
 )
 
-(defcfun ("ImGui_ButtonExXY" button-ex-xy) :BOOL
+(defcfun ("ImGui_ButtonExXY" button-ex) :BOOL
   (label :STRING)
   (size-x :FLOAT)
   (size-y :FLOAT)
 )
 
-(defcfun ("ImGui_InvisibleButtonXY" invisible-button-xy) :BOOL
+(defcfun ("ImGui_InvisibleButtonXY" invisible-button) :BOOL
   (str-id :STRING)
   (size-x :FLOAT)
   (size-y :FLOAT)
   (flags BUTTON-FLAGS)
 )
 
-(defcfun ("ImGui_ProgressBarXY" progress-bar-xy) :VOID
+(defcfun ("ImGui_ProgressBarXY" progress-bar) :VOID
   (fraction :FLOAT)
   (size-arg-x :FLOAT)
   (size-arg-y :FLOAT)
   (overlay :STRING)
 )
 
-(defcfun ("ImGui_ImageExTRXY" image-ex-trxy) :VOID
+(defcfun ("ImGui_ImageTRXY" image) :VOID
+  (tex-ref :POINTER)
+  (image-size-x :FLOAT)
+  (image-size-y :FLOAT)
+)
+
+(defcfun ("ImGui_ImageExTRXY" image-ex) :VOID
   (tex-ref :POINTER)
   (image-size-x :FLOAT)
   (image-size-y :FLOAT)
@@ -156,7 +168,13 @@
   (uv1-y :FLOAT)
 )
 
-(defcfun ("ImGui_ImageWithBgExTRXYXYZW" image-with-bg-ex-trxyxyzw) :VOID
+(defcfun ("ImGui_ImageWithBgTRXY" image-with-bg) :VOID
+  (tex-ref :POINTER)
+  (image-size-x :FLOAT)
+  (image-size-y :FLOAT)
+)
+
+(defcfun ("ImGui_ImageWithBgExTRXYXYZW" image-with-bg-ex) :VOID
   (tex-ref :POINTER)
   (image-size-x :FLOAT)
   (image-size-y :FLOAT)
@@ -174,7 +192,14 @@
   (tint-col-w :FLOAT)
 )
 
-(defcfun ("ImGui_ImageButtonExTRXYXYZW" image-button-ex-trxyxyzw) :BOOL
+(defcfun ("ImGui_ImageButtonTRXY" image-button) :BOOL
+  (str-id :STRING)
+  (tex-ref :POINTER)
+  (image-size-x :FLOAT)
+  (image-size-y :FLOAT)
+)
+
+(defcfun ("ImGui_ImageButtonExTRXYXYZW" image-button-ex) :BOOL
   (str-id :STRING)
   (tex-ref :POINTER)
   (image-size-x :FLOAT)
@@ -193,7 +218,16 @@
   (tint-col-w :FLOAT)
 )
 
-(defcfun ("ImGui_VSliderFloatExXY" vslider-float-ex-xy) :BOOL
+(defcfun ("ImGui_VSliderFloatXY" vslider-float) :BOOL
+  (label :STRING)
+  (size-x :FLOAT)
+  (size-y :FLOAT)
+  (v :POINTER)
+  (v-min :FLOAT)
+  (v-max :FLOAT)
+)
+
+(defcfun ("ImGui_VSliderFloatExXY" vslider-float-ex) :BOOL
   (label :STRING)
   (size-x :FLOAT)
   (size-y :FLOAT)
@@ -204,7 +238,16 @@
   (flags SLIDER-FLAGS)
 )
 
-(defcfun ("ImGui_VSliderIntExXY" vslider-int-ex-xy) :BOOL
+(defcfun ("ImGui_VSliderIntXY" vslider-int) :BOOL
+  (label :STRING)
+  (size-x :FLOAT)
+  (size-y :FLOAT)
+  (v :POINTER)
+  (v-min :INT)
+  (v-max :INT)
+)
+
+(defcfun ("ImGui_VSliderIntExXY" vslider-int-ex) :BOOL
   (label :STRING)
   (size-x :FLOAT)
   (size-y :FLOAT)
@@ -215,7 +258,17 @@
   (flags SLIDER-FLAGS)
 )
 
-(defcfun ("ImGui_VSliderScalarExXY" vslider-scalar-ex-xy) :BOOL
+(defcfun ("ImGui_VSliderScalarXY" vslider-scalar) :BOOL
+  (label :STRING)
+  (size-x :FLOAT)
+  (size-y :FLOAT)
+  (data-type DATA-TYPE)
+  (p-data :POINTER)
+  (p-min :POINTER)
+  (p-max :POINTER)
+)
+
+(defcfun ("ImGui_VSliderScalarExXY" vslider-scalar-ex) :BOOL
   (label :STRING)
   (size-x :FLOAT)
   (size-y :FLOAT)
@@ -227,7 +280,7 @@
   (flags SLIDER-FLAGS)
 )
 
-(defcfun ("ImGui_InputTextMultilineExXY" input-text-multiline-ex-xy) :BOOL
+(defcfun ("ImGui_InputTextMultilineExXY" input-text-multiline-ex) :BOOL
   (label :STRING)
   (buf :STRING)
   (buf-size :SIZE)
@@ -238,7 +291,16 @@
   (user-data :POINTER)
 )
 
-(defcfun ("ImGui_ColorButtonExXYZWXY" color-button-ex-xyzwxy) :BOOL
+(defcfun ("ImGui_ColorButtonXYZW" color-button) :BOOL
+  (desc-id :STRING)
+  (col-x :FLOAT)
+  (col-y :FLOAT)
+  (col-z :FLOAT)
+  (col-w :FLOAT)
+  (flags COLOR-EDIT-FLAGS)
+)
+
+(defcfun ("ImGui_ColorButtonExXYZWXY" color-button-ex) :BOOL
   (desc-id :STRING)
   (col-x :FLOAT)
   (col-y :FLOAT)
@@ -249,7 +311,7 @@
   (size-y :FLOAT)
 )
 
-(defcfun ("ImGui_SelectableExXY" selectable-ex-xy) :BOOL
+(defcfun ("ImGui_SelectableExXY" selectable-ex) :BOOL
   (label :STRING)
   (selected :BOOL)
   (flags SELECTABLE-FLAGS)
@@ -257,7 +319,7 @@
   (size-y :FLOAT)
 )
 
-(defcfun ("ImGui_SelectableBoolPtrExXY" selectable-bool-ptr-ex-xy) :BOOL
+(defcfun ("ImGui_SelectableBoolPtrExXY" selectable-bool-ptr-ex) :BOOL
   (label :STRING)
   (p-selected :POINTER)
   (flags SELECTABLE-FLAGS)
@@ -265,13 +327,13 @@
   (size-y :FLOAT)
 )
 
-(defcfun ("ImGui_BeginListBoxXY" begin-list-box-xy) :BOOL
+(defcfun ("ImGui_BeginListBoxXY" begin-list-box) :BOOL
   (label :STRING)
   (size-x :FLOAT)
   (size-y :FLOAT)
 )
 
-(defcfun ("ImGui_PlotLinesExXY" plot-lines-ex-xy) :VOID
+(defcfun ("ImGui_PlotLinesExXY" plot-lines-ex) :VOID
   (label :STRING)
   (values :POINTER)
   (values-count :INT)
@@ -284,7 +346,7 @@
   (stride :INT)
 )
 
-(defcfun ("ImGui_PlotLinesCallbackExXY" plot-lines-callback-ex-xy) :VOID
+(defcfun ("ImGui_PlotLinesCallbackExXY" plot-lines-callback-ex) :VOID
   (label :STRING)
   (values-getter :POINTER)
   (data :POINTER)
@@ -297,7 +359,7 @@
   (graph-size-y :FLOAT)
 )
 
-(defcfun ("ImGui_PlotHistogramExXY" plot-histogram-ex-xy) :VOID
+(defcfun ("ImGui_PlotHistogramExXY" plot-histogram-ex) :VOID
   (label :STRING)
   (values :POINTER)
   (values-count :INT)
@@ -310,7 +372,7 @@
   (stride :INT)
 )
 
-(defcfun ("ImGui_PlotHistogramCallbackExXY" plot-histogram-callback-ex-xy) :VOID
+(defcfun ("ImGui_PlotHistogramCallbackExXY" plot-histogram-callback-ex) :VOID
   (label :STRING)
   (values-getter :POINTER)
   (data :POINTER)
@@ -323,7 +385,7 @@
   (graph-size-y :FLOAT)
 )
 
-(defcfun ("ImGui_BeginTableExXY" begin-table-ex-xy) :BOOL
+(defcfun ("ImGui_BeginTableExXY" begin-table-ex) :BOOL
   (str-id :STRING)
   (columns :INT)
   (flags TABLE-FLAGS)
@@ -332,7 +394,7 @@
   (inner-width :FLOAT)
 )
 
-(defcfun ("ImGui_PushClipRectXY" push-clip-rect-xy) :VOID
+(defcfun ("ImGui_PushClipRectXY" push-clip-rect) :VOID
   (clip-rect-min-x :FLOAT)
   (clip-rect-min-y :FLOAT)
   (clip-rect-max-x :FLOAT)
@@ -340,26 +402,33 @@
   (intersect-with-current-clip-rect :BOOL)
 )
 
-(defcfun ("ImGui_IsRectVisibleBySizeXY" is-rect-visible-by-size-xy) :BOOL
+(defcfun ("ImGui_IsRectVisibleBySizeXY" is-rect-visible-by-size) :BOOL
   (size-x :FLOAT)
   (size-y :FLOAT)
 )
 
-(defcfun ("ImGui_IsRectVisibleXY" is-rect-visible-xy) :BOOL
+(defcfun ("ImGui_IsRectVisibleXY" is-rect-visible) :BOOL
   (rect-min-x :FLOAT)
   (rect-min-y :FLOAT)
   (rect-max-x :FLOAT)
   (rect-max-y :FLOAT)
 )
 
-(defcfun ("ImGui_ColorConvertFloat4ToU32XYZW" color-convert-float4to-u32xyzw) U32
+(defcfun ("ImGui_ColorConvertFloat4ToU32XYZW" color-convert-float4to-u32) U32
   (in-x :FLOAT)
   (in-y :FLOAT)
   (in-z :FLOAT)
   (in-w :FLOAT)
 )
 
-(defcfun ("ImGui_IsMouseHoveringRectExXY" is-mouse-hovering-rect-ex-xy) :BOOL
+(defcfun ("ImGui_IsMouseHoveringRectXY" is-mouse-hovering-rect) :BOOL
+  (r-min-x :FLOAT)
+  (r-min-y :FLOAT)
+  (r-max-x :FLOAT)
+  (r-max-y :FLOAT)
+)
+
+(defcfun ("ImGui_IsMouseHoveringRectExXY" is-mouse-hovering-rect-ex) :BOOL
   (r-min-x :FLOAT)
   (r-min-y :FLOAT)
   (r-max-x :FLOAT)
@@ -367,7 +436,7 @@
   (clip :BOOL)
 )
 
-(defcfun ("ImDrawList_PushClipRectXY" draw-list-push-clip-rect-xy) :VOID
+(defcfun ("ImDrawList_PushClipRectXY" draw-list-push-clip-rect) :VOID
   (self :POINTER)
   (clip-rect-min-x :FLOAT)
   (clip-rect-min-y :FLOAT)
@@ -376,12 +445,21 @@
   (intersect-with-current-clip-rect :BOOL)
 )
 
-(defcfun ("ImDrawList_PushTextureTR" draw-list-push-texture-tr) :VOID
+(defcfun ("ImDrawList_PushTextureTR" draw-list-push-texture) :VOID
   (self :POINTER)
   (tex-ref :POINTER)
 )
 
-(defcfun ("ImDrawList_AddLineExXY" draw-list-add-line-ex-xy) :VOID
+(defcfun ("ImDrawList_AddLineXY" draw-list-add-line) :VOID
+  (self :POINTER)
+  (p1-x :FLOAT)
+  (p1-y :FLOAT)
+  (p2-x :FLOAT)
+  (p2-y :FLOAT)
+  (col U32)
+)
+
+(defcfun ("ImDrawList_AddLineExXY" draw-list-add-line-ex) :VOID
   (self :POINTER)
   (p1-x :FLOAT)
   (p1-y :FLOAT)
@@ -391,7 +469,16 @@
   (thickness :FLOAT)
 )
 
-(defcfun ("ImDrawList_AddRectExXY" draw-list-add-rect-ex-xy) :VOID
+(defcfun ("ImDrawList_AddRectXY" draw-list-add-rect) :VOID
+  (self :POINTER)
+  (p-min-x :FLOAT)
+  (p-min-y :FLOAT)
+  (p-max-x :FLOAT)
+  (p-max-y :FLOAT)
+  (col U32)
+)
+
+(defcfun ("ImDrawList_AddRectExXY" draw-list-add-rect-ex) :VOID
   (self :POINTER)
   (p-min-x :FLOAT)
   (p-min-y :FLOAT)
@@ -403,7 +490,16 @@
   (thickness :FLOAT)
 )
 
-(defcfun ("ImDrawList_AddRectFilledExXY" draw-list-add-rect-filled-ex-xy) :VOID
+(defcfun ("ImDrawList_AddRectFilledXY" draw-list-add-rect-filled) :VOID
+  (self :POINTER)
+  (p-min-x :FLOAT)
+  (p-min-y :FLOAT)
+  (p-max-x :FLOAT)
+  (p-max-y :FLOAT)
+  (col U32)
+)
+
+(defcfun ("ImDrawList_AddRectFilledExXY" draw-list-add-rect-filled-ex) :VOID
   (self :POINTER)
   (p-min-x :FLOAT)
   (p-min-y :FLOAT)
@@ -414,7 +510,7 @@
   (flags DRAW-FLAGS)
 )
 
-(defcfun ("ImDrawList_AddRectFilledMultiColorXY" draw-list-add-rect-filled-multi-color-xy) :VOID
+(defcfun ("ImDrawList_AddRectFilledMultiColorXY" draw-list-add-rect-filled-multi-color) :VOID
   (self :POINTER)
   (p-min-x :FLOAT)
   (p-min-y :FLOAT)
@@ -426,7 +522,20 @@
   (col-bot-left U32)
 )
 
-(defcfun ("ImDrawList_AddQuadExXY" draw-list-add-quad-ex-xy) :VOID
+(defcfun ("ImDrawList_AddQuadXY" draw-list-add-quad) :VOID
+  (self :POINTER)
+  (p1-x :FLOAT)
+  (p1-y :FLOAT)
+  (p2-x :FLOAT)
+  (p2-y :FLOAT)
+  (p3-x :FLOAT)
+  (p3-y :FLOAT)
+  (p4-x :FLOAT)
+  (p4-y :FLOAT)
+  (col U32)
+)
+
+(defcfun ("ImDrawList_AddQuadExXY" draw-list-add-quad-ex) :VOID
   (self :POINTER)
   (p1-x :FLOAT)
   (p1-y :FLOAT)
@@ -440,7 +549,7 @@
   (thickness :FLOAT)
 )
 
-(defcfun ("ImDrawList_AddQuadFilledXY" draw-list-add-quad-filled-xy) :VOID
+(defcfun ("ImDrawList_AddQuadFilledXY" draw-list-add-quad-filled) :VOID
   (self :POINTER)
   (p1-x :FLOAT)
   (p1-y :FLOAT)
@@ -453,7 +562,18 @@
   (col U32)
 )
 
-(defcfun ("ImDrawList_AddTriangleExXY" draw-list-add-triangle-ex-xy) :VOID
+(defcfun ("ImDrawList_AddTriangleXY" draw-list-add-triangle) :VOID
+  (self :POINTER)
+  (p1-x :FLOAT)
+  (p1-y :FLOAT)
+  (p2-x :FLOAT)
+  (p2-y :FLOAT)
+  (p3-x :FLOAT)
+  (p3-y :FLOAT)
+  (col U32)
+)
+
+(defcfun ("ImDrawList_AddTriangleExXY" draw-list-add-triangle-ex) :VOID
   (self :POINTER)
   (p1-x :FLOAT)
   (p1-y :FLOAT)
@@ -465,7 +585,7 @@
   (thickness :FLOAT)
 )
 
-(defcfun ("ImDrawList_AddTriangleFilledXY" draw-list-add-triangle-filled-xy) :VOID
+(defcfun ("ImDrawList_AddTriangleFilledXY" draw-list-add-triangle-filled) :VOID
   (self :POINTER)
   (p1-x :FLOAT)
   (p1-y :FLOAT)
@@ -476,7 +596,15 @@
   (col U32)
 )
 
-(defcfun ("ImDrawList_AddCircleExXY" draw-list-add-circle-ex-xy) :VOID
+(defcfun ("ImDrawList_AddCircleXY" draw-list-add-circle) :VOID
+  (self :POINTER)
+  (center-x :FLOAT)
+  (center-y :FLOAT)
+  (radius :FLOAT)
+  (col U32)
+)
+
+(defcfun ("ImDrawList_AddCircleExXY" draw-list-add-circle-ex) :VOID
   (self :POINTER)
   (center-x :FLOAT)
   (center-y :FLOAT)
@@ -486,7 +614,7 @@
   (thickness :FLOAT)
 )
 
-(defcfun ("ImDrawList_AddCircleFilledXY" draw-list-add-circle-filled-xy) :VOID
+(defcfun ("ImDrawList_AddCircleFilledXY" draw-list-add-circle-filled) :VOID
   (self :POINTER)
   (center-x :FLOAT)
   (center-y :FLOAT)
@@ -495,7 +623,16 @@
   (num-segments :INT)
 )
 
-(defcfun ("ImDrawList_AddNgonExXY" draw-list-add-ngon-ex-xy) :VOID
+(defcfun ("ImDrawList_AddNgonXY" draw-list-add-ngon) :VOID
+  (self :POINTER)
+  (center-x :FLOAT)
+  (center-y :FLOAT)
+  (radius :FLOAT)
+  (col U32)
+  (num-segments :INT)
+)
+
+(defcfun ("ImDrawList_AddNgonExXY" draw-list-add-ngon-ex) :VOID
   (self :POINTER)
   (center-x :FLOAT)
   (center-y :FLOAT)
@@ -505,7 +642,7 @@
   (thickness :FLOAT)
 )
 
-(defcfun ("ImDrawList_AddNgonFilledXY" draw-list-add-ngon-filled-xy) :VOID
+(defcfun ("ImDrawList_AddNgonFilledXY" draw-list-add-ngon-filled) :VOID
   (self :POINTER)
   (center-x :FLOAT)
   (center-y :FLOAT)
@@ -514,7 +651,16 @@
   (num-segments :INT)
 )
 
-(defcfun ("ImDrawList_AddEllipseExXY" draw-list-add-ellipse-ex-xy) :VOID
+(defcfun ("ImDrawList_AddEllipseXY" draw-list-add-ellipse) :VOID
+  (self :POINTER)
+  (center-x :FLOAT)
+  (center-y :FLOAT)
+  (radius-x :FLOAT)
+  (radius-y :FLOAT)
+  (col U32)
+)
+
+(defcfun ("ImDrawList_AddEllipseExXY" draw-list-add-ellipse-ex) :VOID
   (self :POINTER)
   (center-x :FLOAT)
   (center-y :FLOAT)
@@ -526,7 +672,16 @@
   (thickness :FLOAT)
 )
 
-(defcfun ("ImDrawList_AddEllipseFilledExXY" draw-list-add-ellipse-filled-ex-xy) :VOID
+(defcfun ("ImDrawList_AddEllipseFilledXY" draw-list-add-ellipse-filled) :VOID
+  (self :POINTER)
+  (center-x :FLOAT)
+  (center-y :FLOAT)
+  (radius-x :FLOAT)
+  (radius-y :FLOAT)
+  (col U32)
+)
+
+(defcfun ("ImDrawList_AddEllipseFilledExXY" draw-list-add-ellipse-filled-ex) :VOID
   (self :POINTER)
   (center-x :FLOAT)
   (center-y :FLOAT)
@@ -537,7 +692,15 @@
   (num-segments :INT)
 )
 
-(defcfun ("ImDrawList_AddTextExXY" draw-list-add-text-ex-xy) :VOID
+(defcfun ("ImDrawList_AddTextXY" draw-list-add-text) :VOID
+  (self :POINTER)
+  (pos-x :FLOAT)
+  (pos-y :FLOAT)
+  (col U32)
+  (text-begin :STRING)
+)
+
+(defcfun ("ImDrawList_AddTextExXY" draw-list-add-text-ex) :VOID
   (self :POINTER)
   (pos-x :FLOAT)
   (pos-y :FLOAT)
@@ -546,7 +709,17 @@
   (text-end :STRING)
 )
 
-(defcfun ("ImDrawList_AddTextImFontPtrExXY" draw-list-add-text-im-font-ptr-ex-xy) :VOID
+(defcfun ("ImDrawList_AddTextImFontPtrXY" draw-list-add-text-im-font-ptr) :VOID
+  (self :POINTER)
+  (font :POINTER)
+  (font-size :FLOAT)
+  (pos-x :FLOAT)
+  (pos-y :FLOAT)
+  (col U32)
+  (text-begin :STRING)
+)
+
+(defcfun ("ImDrawList_AddTextImFontPtrExXY" draw-list-add-text-im-font-ptr-ex) :VOID
   (self :POINTER)
   (font :POINTER)
   (font-size :FLOAT)
@@ -559,7 +732,7 @@
   (cpu-fine-clip-rect :POINTER)
 )
 
-(defcfun ("ImDrawList_AddBezierCubicXY" draw-list-add-bezier-cubic-xy) :VOID
+(defcfun ("ImDrawList_AddBezierCubicXY" draw-list-add-bezier-cubic) :VOID
   (self :POINTER)
   (p1-x :FLOAT)
   (p1-y :FLOAT)
@@ -574,7 +747,7 @@
   (num-segments :INT)
 )
 
-(defcfun ("ImDrawList_AddBezierQuadraticXY" draw-list-add-bezier-quadratic-xy) :VOID
+(defcfun ("ImDrawList_AddBezierQuadraticXY" draw-list-add-bezier-quadratic) :VOID
   (self :POINTER)
   (p1-x :FLOAT)
   (p1-y :FLOAT)
@@ -587,7 +760,16 @@
   (num-segments :INT)
 )
 
-(defcfun ("ImDrawList_AddImageExTRXY" draw-list-add-image-ex-trxy) :VOID
+(defcfun ("ImDrawList_AddImageTRXY" draw-list-add-image) :VOID
+  (self :POINTER)
+  (tex-ref :POINTER)
+  (p-min-x :FLOAT)
+  (p-min-y :FLOAT)
+  (p-max-x :FLOAT)
+  (p-max-y :FLOAT)
+)
+
+(defcfun ("ImDrawList_AddImageExTRXY" draw-list-add-image-ex) :VOID
   (self :POINTER)
   (tex-ref :POINTER)
   (p-min-x :FLOAT)
@@ -601,7 +783,20 @@
   (col U32)
 )
 
-(defcfun ("ImDrawList_AddImageQuadExTRXY" draw-list-add-image-quad-ex-trxy) :VOID
+(defcfun ("ImDrawList_AddImageQuadTRXY" draw-list-add-image-quad) :VOID
+  (self :POINTER)
+  (tex-ref :POINTER)
+  (p1-x :FLOAT)
+  (p1-y :FLOAT)
+  (p2-x :FLOAT)
+  (p2-y :FLOAT)
+  (p3-x :FLOAT)
+  (p3-y :FLOAT)
+  (p4-x :FLOAT)
+  (p4-y :FLOAT)
+)
+
+(defcfun ("ImDrawList_AddImageQuadExTRXY" draw-list-add-image-quad-ex) :VOID
   (self :POINTER)
   (tex-ref :POINTER)
   (p1-x :FLOAT)
@@ -623,7 +818,7 @@
   (col U32)
 )
 
-(defcfun ("ImDrawList_AddImageRoundedTRXY" draw-list-add-image-rounded-trxy) :VOID
+(defcfun ("ImDrawList_AddImageRoundedTRXY" draw-list-add-image-rounded) :VOID
   (self :POINTER)
   (tex-ref :POINTER)
   (p-min-x :FLOAT)
@@ -639,19 +834,19 @@
   (flags DRAW-FLAGS)
 )
 
-(defcfun ("ImDrawList_PathLineToXY" draw-list-path-line-to-xy) :VOID
+(defcfun ("ImDrawList_PathLineToXY" draw-list-path-line-to) :VOID
   (self :POINTER)
   (pos-x :FLOAT)
   (pos-y :FLOAT)
 )
 
-(defcfun ("ImDrawList_PathLineToMergeDuplicateXY" draw-list-path-line-to-merge-duplicate-xy) :VOID
+(defcfun ("ImDrawList_PathLineToMergeDuplicateXY" draw-list-path-line-to-merge-duplicate) :VOID
   (self :POINTER)
   (pos-x :FLOAT)
   (pos-y :FLOAT)
 )
 
-(defcfun ("ImDrawList_PathArcToXY" draw-list-path-arc-to-xy) :VOID
+(defcfun ("ImDrawList_PathArcToXY" draw-list-path-arc-to) :VOID
   (self :POINTER)
   (center-x :FLOAT)
   (center-y :FLOAT)
@@ -661,7 +856,7 @@
   (num-segments :INT)
 )
 
-(defcfun ("ImDrawList_PathArcToFastXY" draw-list-path-arc-to-fast-xy) :VOID
+(defcfun ("ImDrawList_PathArcToFastXY" draw-list-path-arc-to-fast) :VOID
   (self :POINTER)
   (center-x :FLOAT)
   (center-y :FLOAT)
@@ -670,7 +865,18 @@
   (a-max-of-12 :INT)
 )
 
-(defcfun ("ImDrawList_PathEllipticalArcToExXY" draw-list-path-elliptical-arc-to-ex-xy) :VOID
+(defcfun ("ImDrawList_PathEllipticalArcToXY" draw-list-path-elliptical-arc-to) :VOID
+  (self :POINTER)
+  (center-x :FLOAT)
+  (center-y :FLOAT)
+  (radius-x :FLOAT)
+  (radius-y :FLOAT)
+  (rot :FLOAT)
+  (a-min :FLOAT)
+  (a-max :FLOAT)
+)
+
+(defcfun ("ImDrawList_PathEllipticalArcToExXY" draw-list-path-elliptical-arc-to-ex) :VOID
   (self :POINTER)
   (center-x :FLOAT)
   (center-y :FLOAT)
@@ -682,7 +888,7 @@
   (num-segments :INT)
 )
 
-(defcfun ("ImDrawList_PathBezierCubicCurveToXY" draw-list-path-bezier-cubic-curve-to-xy) :VOID
+(defcfun ("ImDrawList_PathBezierCubicCurveToXY" draw-list-path-bezier-cubic-curve-to) :VOID
   (self :POINTER)
   (p2-x :FLOAT)
   (p2-y :FLOAT)
@@ -693,7 +899,7 @@
   (num-segments :INT)
 )
 
-(defcfun ("ImDrawList_PathBezierQuadraticCurveToXY" draw-list-path-bezier-quadratic-curve-to-xy) :VOID
+(defcfun ("ImDrawList_PathBezierQuadraticCurveToXY" draw-list-path-bezier-quadratic-curve-to) :VOID
   (self :POINTER)
   (p2-x :FLOAT)
   (p2-y :FLOAT)
@@ -702,7 +908,7 @@
   (num-segments :INT)
 )
 
-(defcfun ("ImDrawList_PathRectXY" draw-list-path-rect-xy) :VOID
+(defcfun ("ImDrawList_PathRectXY" draw-list-path-rect) :VOID
   (self :POINTER)
   (rect-min-x :FLOAT)
   (rect-min-y :FLOAT)
@@ -712,7 +918,7 @@
   (flags DRAW-FLAGS)
 )
 
-(defcfun ("ImDrawList_PrimRectXY" draw-list-prim-rect-xy) :VOID
+(defcfun ("ImDrawList_PrimRectXY" draw-list-prim-rect) :VOID
   (self :POINTER)
   (a-x :FLOAT)
   (a-y :FLOAT)
@@ -721,7 +927,7 @@
   (col U32)
 )
 
-(defcfun ("ImDrawList_PrimRectUVXY" draw-list-prim-rect-uvxy) :VOID
+(defcfun ("ImDrawList_PrimRectUVXY" draw-list-prim-rect-uv) :VOID
   (self :POINTER)
   (a-x :FLOAT)
   (a-y :FLOAT)
@@ -734,7 +940,7 @@
   (col U32)
 )
 
-(defcfun ("ImDrawList_PrimQuadUVXY" draw-list-prim-quad-uvxy) :VOID
+(defcfun ("ImDrawList_PrimQuadUVXY" draw-list-prim-quad-uv) :VOID
   (self :POINTER)
   (a-x :FLOAT)
   (a-y :FLOAT)
@@ -755,7 +961,7 @@
   (col U32)
 )
 
-(defcfun ("ImDrawList_PrimWriteVtxXY" draw-list-prim-write-vtx-xy) :VOID
+(defcfun ("ImDrawList_PrimWriteVtxXY" draw-list-prim-write-vtx) :VOID
   (self :POINTER)
   (pos-x :FLOAT)
   (pos-y :FLOAT)
@@ -764,7 +970,7 @@
   (col U32)
 )
 
-(defcfun ("ImDrawList_PrimVtxXY" draw-list-prim-vtx-xy) :VOID
+(defcfun ("ImDrawList_PrimVtxXY" draw-list-prim-vtx) :VOID
   (self :POINTER)
   (pos-x :FLOAT)
   (pos-y :FLOAT)
@@ -773,17 +979,17 @@
   (col U32)
 )
 
-(defcfun ("ImDrawList_PushTextureIDTR" draw-list-push-texture-idtr) :VOID
+(defcfun ("ImDrawList_PushTextureIDTR" draw-list-push-texture-id) :VOID
   (self :POINTER)
   (tex-ref :POINTER)
 )
 
-(defcfun ("ImDrawList__SetTextureTR" draw-list--set-texture-tr) :VOID
+(defcfun ("ImDrawList__SetTextureTR" draw-list--set-texture) :VOID
   (self :POINTER)
   (tex-ref :POINTER)
 )
 
-(defcfun ("ImDrawList__PathArcToFastExXY" draw-list--path-arc-to-fast-ex-xy) :VOID
+(defcfun ("ImDrawList__PathArcToFastExXY" draw-list--path-arc-to-fast-ex) :VOID
   (self :POINTER)
   (center-x :FLOAT)
   (center-y :FLOAT)
@@ -793,7 +999,7 @@
   (a-step :INT)
 )
 
-(defcfun ("ImDrawList__PathArcToNXY" draw-list--path-arc-to-nxy) :VOID
+(defcfun ("ImDrawList__PathArcToNXY" draw-list--path-arc-to-n) :VOID
   (self :POINTER)
   (center-x :FLOAT)
   (center-y :FLOAT)
@@ -803,18 +1009,18 @@
   (num-segments :INT)
 )
 
-(defcfun ("ImDrawData_ScaleClipRectsXY" draw-data-scale-clip-rects-xy) :VOID
+(defcfun ("ImDrawData_ScaleClipRectsXY" draw-data-scale-clip-rects) :VOID
   (self :POINTER)
   (fb-scale-x :FLOAT)
   (fb-scale-y :FLOAT)
 )
 
-(defcfun ("ImFontAtlas_SetTexIDImTextureRefTR" font-atlas-set-tex-idim-texture-ref-tr) :VOID
+(defcfun ("ImFontAtlas_SetTexIDImTextureRefTR" font-atlas-set-tex-idim-texture-ref) :VOID
   (self :POINTER)
   (id :POINTER)
 )
 
-(defcfun ("ImFontAtlas_AddCustomRectFontGlyphXY" font-atlas-add-custom-rect-font-glyph-xy) FONT-ATLAS-RECT-ID
+(defcfun ("ImFontAtlas_AddCustomRectFontGlyphXY" font-atlas-add-custom-rect-font-glyph) FONT-ATLAS-RECT-ID
   (self :POINTER)
   (font :POINTER)
   (codepoint WCHAR)
@@ -825,7 +1031,7 @@
   (offset-y :FLOAT)
 )
 
-(defcfun ("ImFontAtlas_AddCustomRectFontGlyphForSizeXY" font-atlas-add-custom-rect-font-glyph-for-size-xy) FONT-ATLAS-RECT-ID
+(defcfun ("ImFontAtlas_AddCustomRectFontGlyphForSizeXY" font-atlas-add-custom-rect-font-glyph-for-size) FONT-ATLAS-RECT-ID
   (self :POINTER)
   (font :POINTER)
   (font-size :FLOAT)
@@ -837,7 +1043,17 @@
   (offset-y :FLOAT)
 )
 
-(defcfun ("ImFont_RenderCharExXY" font-render-char-ex-xy) :VOID
+(defcfun ("ImFont_RenderCharXY" font-render-char) :VOID
+  (self :POINTER)
+  (draw-list :POINTER)
+  (size :FLOAT)
+  (pos-x :FLOAT)
+  (pos-y :FLOAT)
+  (col U32)
+  (c WCHAR)
+)
+
+(defcfun ("ImFont_RenderCharExXY" font-render-char-ex) :VOID
   (self :POINTER)
   (draw-list :POINTER)
   (size :FLOAT)
@@ -848,7 +1064,7 @@
   (cpu-fine-clip :POINTER)
 )
 
-(defcfun ("ImFont_RenderTextXYXYZW" font-render-text-xyxyzw) :VOID
+(defcfun ("ImFont_RenderTextXYXYZW" font-render-text) :VOID
   (self :POINTER)
   (draw-list :POINTER)
   (size :FLOAT)
@@ -865,7 +1081,7 @@
   (flags DRAW-TEXT-FLAGS)
 )
 
-(defcfun ("ImGui_ImageImVec4TRXYXYZW" image-im-vec4trxyxyzw) :VOID
+(defcfun ("ImGui_ImageImVec4TRXYXYZW" image-im-vec4) :VOID
   (tex-ref :POINTER)
   (image-size-x :FLOAT)
   (image-size-y :FLOAT)
@@ -883,7 +1099,13 @@
   (border-col-w :FLOAT)
 )
 
-(defcfun ("ImGui_BeginChildFrameExXY" begin-child-frame-ex-xy) :BOOL
+(defcfun ("ImGui_BeginChildFrameXY" begin-child-frame) :BOOL
+  (id ID)
+  (size-x :FLOAT)
+  (size-y :FLOAT)
+)
+
+(defcfun ("ImGui_BeginChildFrameExXY" begin-child-frame-ex) :BOOL
   (id ID)
   (size-x :FLOAT)
   (size-y :FLOAT)

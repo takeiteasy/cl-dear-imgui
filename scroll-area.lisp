@@ -50,10 +50,10 @@
 
 (defmethod compose ((this scroll-area))
   (with-slots (layout scroll-y) this
-    (when (imgui::begin-child-xy (%pane-id-of this)
-                                 (float (or (width-of this) 0.0) 0.0)
-                                 (float (or (height-of this) 0.0) 0.0)
-                                 0 0)
+    (when (imgui::begin-child (%pane-id-of this)
+                              (float (or (width-of this) 0.0) 0.0)
+                              (float (or (height-of this) 0.0) 0.0)
+                              0 0)
       (unwind-protect
            (progn
              (compose layout)
