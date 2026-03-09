@@ -10,20 +10,56 @@
 (defvar *current-metadata* nil
   "Current metadata being processed (for type lookups during generation).")
 
-(defun generate-bindings (json-file package-file bindings-file)
-  "Read JSON-FILE and generate PACKAGE-FILE and BINDINGS-FILE."
+(defvar *struct-names* nil
+  "Hash-table of struct names (for detecting by-value struct arguments).")
+
+(defun generate-bindings (json-file package-file bindings-file &key shim-file)
+  "Read JSON-FILE and generate PACKAGE-FILE and BINDINGS-FILE.
+   SHIM-FILE is the path to abi_shim.cpp; if not provided, looks for abi_shim.cpp
+   next to JSON-FILE.  Functions that pass structs by value are omitted from the
+   generated bindings and checked against the shim for coverage."
   (handler-case
       (let* ((json-data (parse-json-file json-file))
-             (metadata (extract-metadata json-data)))
+             (metadata (extract-metadata json-data))
+             (effective-shim (or shim-file
+                                 (make-pathname :name "abi_shim" :type "cpp"
+                                                :defaults json-file))))
 
-        ;; Set global metadata for type lookups
+        ;; Set global metadata / struct-name set for type lookups
         (setf *current-metadata* metadata)
+        (setf *struct-names* (build-struct-names-set (getf metadata :structs)))
 
         (format t "Generating package file: ~A~%" package-file)
         (generate-package-file package-file metadata)
 
         (format t "Generating bindings file: ~A~%" bindings-file)
         (generate-bindings-file bindings-file metadata)
+
+        ;; Collect by-value-struct functions, generate shims, then check coverage
+        (let* ((by-value      (collect-by-value-struct-functions (getf metadata :functions)))
+               (manual-cov   (parse-shim-covered-names effective-shim))
+               ;; Only generate shims for functions NOT already covered manually
+               (need-shim    (remove-if
+                              (lambda (fn)
+                                (let ((orig (gethash "original_fully_qualified_name" fn)))
+                                  (and orig (gethash orig manual-cov))))
+                              by-value))
+               (gen-cpp      (make-pathname :name "abi_shim_generated" :type "cpp"
+                                            :defaults effective-shim))
+               (gen-lisp     (make-pathname :name "shim_generated" :type "lisp"
+                                            :defaults effective-shim)))
+          (when by-value
+            (format t "~%~D function(s) pass structs by value (~D already manually shimmed).~%"
+                    (length by-value) (- (length by-value) (length need-shim)))
+            (format t "Generating shims for ~D remaining function(s)...~%"
+                    (length need-shim))
+            (multiple-value-bind (n-gen n-skip covered-orig)
+                (write-generated-shims need-shim gen-cpp gen-lisp)
+              (format t "  Generated: ~D  Skipped (varargs): ~D~%" n-gen n-skip)
+              (format t "  - ~A~%" gen-cpp)
+              (format t "  - ~A~%" gen-lisp)
+              (format t "~%Checking shim coverage...~%")
+              (check-shim-coverage by-value effective-shim covered-orig))))
 
         (format t "~%Successfully generated bindings!~%")
         (format t "  - ~A~%" package-file)
@@ -106,7 +142,7 @@
                 (intern (string-upcase (format-symbol-name type-name))))
                ;; Structs and typedefs use uppercase type names
                (t
-                (intern (format-type-name type-name))))))
+                (intern (string-upcase (format-type-name type-name)))))))
 
           ((string= kind "Type")
            (map-type-description (gethash "inner_type" desc) meta))
@@ -224,8 +260,9 @@
 (defun format-symbol-name (c-name)
   "Convert C identifier to Lisp symbol name.
    ImGui_Begin -> begin
-   ImGuiWindowFlags -> window-flags"
-  (camel-case-to-kebab (strip-imgui-prefix c-name)))
+   ImGuiWindowFlags -> window-flags
+   ImGuiTableFlags_ -> table-flags (trailing underscore stripped)"
+  (string-right-trim "-" (camel-case-to-kebab (strip-imgui-prefix c-name))))
 
 (defun format-enum-element-name (enum-name element-name)
   "Convert enum element name, stripping enum prefix.
@@ -244,8 +281,9 @@
     (camel-case-to-kebab without-enum-prefix)))
 
 (defun format-type-name (c-name)
-  "Convert C type name to Lisp type name."
-  (string-upcase (substitute #\- #\_ (strip-imgui-prefix c-name))))
+  "Convert C type name to Lisp type name.
+   ImGuiTableSortSpecs -> table-sort-specs"
+  (string-right-trim "-" (camel-case-to-kebab (strip-imgui-prefix c-name))))
 
 (defun parse-constant-value (content)
   "Parse constant value from string to appropriate Lisp representation."
@@ -324,6 +362,410 @@
    ;; Skip common non-value macros
    (member name '("IMGUI_DISABLE" "IMGUI_IMPL_API" "IMGUI_CHECKVERSION")
            :test #'string=)))
+
+;;; ============================================================================
+;;; By-value struct detection and shim coverage checking
+;;; ============================================================================
+
+(defun build-struct-names-set (structs)
+  "Return a hash-table whose keys are struct names, for fast membership tests."
+  (let ((ht (make-hash-table :test 'equal)))
+    (when structs
+      (loop for s across structs
+            do (setf (gethash (gethash "name" s) ht) t)))
+    ht))
+
+(defun arg-is-by-value-struct-p (arg)
+  "Return T if ARG is a struct passed by value (kind=User, name is a known struct)."
+  (let* ((type-obj (gethash "type" arg))
+         (desc (when type-obj (gethash "description" type-obj)))
+         (kind (when desc (gethash "kind" desc))))
+    (and (string= kind "User")
+         *struct-names*
+         (gethash (gethash "name" desc) *struct-names*))))
+
+(defun func-has-by-value-struct-arg-p (func)
+  "Return T if any argument of FUNC is a struct passed by value."
+  (let ((args (gethash "arguments" func)))
+    (and args
+         (loop for arg across args
+               thereis (arg-is-by-value-struct-p arg)))))
+
+(defun collect-by-value-struct-functions (functions)
+  "Return a list of function objects that pass at least one struct by value."
+  (let ((result '()))
+    (when functions
+      (loop for func across functions
+            unless (gethash "is_default_argument_helper" func)
+            when (func-has-by-value-struct-arg-p func)
+            do (push func result)))
+    (nreverse result)))
+
+(defun parse-shim-covered-names (shim-file)
+  "Parse SHIM-FILE and return a hash-set of fully-qualified C++ names called in it.
+   Looks for patterns like ::ImGui::SetNextWindowPos and records 'ImGui::SetNextWindowPos'."
+  (let ((covered (make-hash-table :test 'equal)))
+    (handler-case
+        (with-open-file (stream shim-file :direction :input)
+          (loop for line = (read-line stream nil nil)
+                while line
+                do (let ((start 0))
+                     (loop
+                       (let ((pos (search "::" line :start2 start)))
+                         (unless pos (return))
+                         ;; Extract the identifier after the leading ::
+                         (let* ((name-start (+ pos 2))
+                                (name-end (or (position-if
+                                               (lambda (c)
+                                                 (not (or (alphanumericp c)
+                                                          (char= c #\_)
+                                                          (char= c #\:))))
+                                               line :start name-start)
+                                              (length line)))
+                                (name (subseq line name-start name-end)))
+                           ;; Only keep names that contain :: (i.e. qualified)
+                           (when (find #\: name)
+                             (setf (gethash name covered) t))
+                           (setf start (1+ pos))))))))
+      (file-error ()
+        (format t "~%;; WARNING: Could not open shim file: ~A~%" shim-file)))
+    covered))
+
+(defun check-shim-coverage (by-value-funcs manual-shim-file &optional generated-orig-names)
+  "For each function in BY-VALUE-FUNCS, warn if its original C++ name is not
+   covered either in MANUAL-SHIM-FILE (by ::Ns::Fn pattern) or in
+   GENERATED-ORIG-NAMES (a hash-set returned by write-generated-shims)."
+  (let ((manual-covered (parse-shim-covered-names manual-shim-file))
+        (missing '()))
+    (loop for func in by-value-funcs
+          do (let* ((orig   (gethash "original_fully_qualified_name" func))
+                    (c-name (gethash "name" func)))
+               (unless (or (and orig (gethash orig manual-covered))
+                           (and orig generated-orig-names
+                                (gethash orig generated-orig-names)))
+                 (push c-name missing))))
+    (if missing
+        (progn
+          (format t "~%;; WARNING: The following functions pass structs by value~%")
+          (format t ";;          but have no shim (manual or generated):~%")
+          (loop for name in (sort missing #'string<)
+                do (format t ";;   shim implementation needed for: ~A~%" name)))
+        (format t "All by-value-struct functions are covered by shims.~%"))))
+
+;;; ============================================================================
+;;; Shim generation (C++ and Lisp defcfun)
+;;; ============================================================================
+
+(defparameter *shim-expansions*
+  '(;; Float-expanded: replace struct with individual float components
+    ("ImVec2"       :float-expand ("x" :float) ("y" :float))
+    ("ImVec4"       :float-expand ("x" :float) ("y" :float) ("z" :float) ("w" :float))
+    ;; Pointer-wrapped: replace by-value with pointer-to-struct (caller allocates)
+    ("ImTextureRef" :pointer-wrap "::ImTextureRef"))
+  "Expansion rules for by-value struct arguments in generated shims.")
+
+(defun shim-expansion-for (struct-name)
+  "Return the expansion entry for STRUCT-NAME from *shim-expansions*, or NIL."
+  (assoc struct-name *shim-expansions* :test #'string=))
+
+(defun shim-suffix-code (struct-name)
+  "Return the suffix code appended to a shim function name for STRUCT-NAME."
+  (cond ((string= struct-name "ImVec2")       "XY")
+        ((string= struct-name "ImVec4")       "XYZW")
+        ((string= struct-name "ImTextureRef") "TR")
+        (t (string-upcase (strip-imgui-prefix struct-name)))))
+
+(defun compute-shim-function-name (func)
+  "Compute the generated C shim name for FUNC.
+   Appends suffix codes for each unique by-value struct type, in first-appearance order."
+  (let ((base (gethash "name" func))
+        (args (gethash "arguments" func))
+        (seen-codes '())
+        (suffix ""))
+    (when args
+      (loop for arg across args
+            do (let* ((type-obj (gethash "type" arg))
+                      (desc     (when type-obj (gethash "description" type-obj)))
+                      (kind     (when desc (gethash "kind" desc)))
+                      (name     (when desc (gethash "name" desc))))
+                 (when (and kind (string= kind "User") *struct-names* (gethash name *struct-names*))
+                   (let ((code (shim-suffix-code name)))
+                     (unless (member code seen-codes :test #'string=)
+                       (push code seen-codes)
+                       (setf suffix (concatenate 'string suffix code))))))))
+    (concatenate 'string base suffix)))
+
+(defun builtin-to-cpp (builtin-name)
+  "Map a JSON builtin_type string to a C++ type string."
+  (cond
+    ((string= builtin-name "void")               "void")
+    ((string= builtin-name "bool")               "bool")
+    ((string= builtin-name "char")               "char")
+    ((string= builtin-name "unsigned_char")      "unsigned char")
+    ((string= builtin-name "short")              "short")
+    ((string= builtin-name "unsigned_short")     "unsigned short")
+    ((string= builtin-name "int")                "int")
+    ((string= builtin-name "unsigned_int")       "unsigned int")
+    ((string= builtin-name "long")               "long")
+    ((string= builtin-name "unsigned_long")      "unsigned long")
+    ((string= builtin-name "long_long")          "long long")
+    ((string= builtin-name "unsigned_long_long") "unsigned long long")
+    ((string= builtin-name "float")              "float")
+    ((string= builtin-name "double")             "double")
+    ((string= builtin-name "long_double")        "long double")
+    (t "int")))
+
+(defun desc-to-cpp (desc)
+  "Map a JSON type description to a C++ type string."
+  (when (null desc) (return-from desc-to-cpp "void"))
+  (let ((kind (gethash "kind" desc)))
+    (cond
+      ((string= kind "Builtin")
+       (builtin-to-cpp (gethash "builtin_type" desc)))
+      ((string= kind "Pointer")
+       (let ((inner (gethash "inner_type" desc)))
+         (if (null inner)
+             "void*"
+             (let ((ik (gethash "kind" inner)))
+               (cond
+                 ;; char* → const char*
+                 ((and (string= ik "Builtin")
+                       (string= (gethash "builtin_type" inner) "char"))
+                  "const char*")
+                 ;; void* → void*
+                 ((and (string= ik "Builtin")
+                       (string= (gethash "builtin_type" inner) "void"))
+                  "void*")
+                 ;; Named pointer → ::Type*
+                 ((string= ik "User")
+                  (format nil "::~A*" (gethash "name" inner)))
+                 ;; const-qualified inner
+                 ((string= ik "Type")
+                  (concatenate 'string (desc-to-cpp (gethash "inner_type" inner)) "*"))
+                 (t "void*"))))))
+      ((string= kind "User")
+       (let ((name (gethash "name" desc)))
+         (cond
+           ((string= name "size_t")  "size_t")
+           ((string= name "va_list") "va_list")
+           ((string= name "ImU32")   "unsigned int")
+           ((string= name "ImU64")   "uint64_t")
+           ((string= name "ImTextureID") "uint64_t")
+           ((string= name "ImWchar")   "unsigned short")
+           ((string= name "ImWchar16") "unsigned short")
+           ((string= name "ImWchar32") "unsigned int")
+           ((string= name "ImDrawIdx") "unsigned short")
+           ;; Enum types → int (cast in call site)
+           ((and *current-metadata*
+                 (is-enum-type-p name (getf *current-metadata* :enums)))
+            "int")
+           ;; Everything else → ::TypeName
+           (t (format nil "::~A" name)))))
+      ((string= kind "Function") "void*")
+      ((string= kind "Array")    "void*")
+      ((string= kind "Type")
+       (desc-to-cpp (gethash "inner_type" desc)))
+      (t "void*"))))
+
+(defun arg-cpp-params (arg)
+  "Return a list of (cpp-type cpp-name) pairs for ARG's position in a shim param list.
+   By-value structs are expanded; varargs become ('...' '')."
+  (let* ((is-varargs (gethash "is_varargs" arg))
+         (is-array   (gethash "is_array" arg))
+         (name       (gethash "name" arg))
+         (type-obj   (gethash "type" arg))
+         (desc       (when type-obj (gethash "description" type-obj)))
+         (kind       (when desc (gethash "kind" desc)))
+         (type-name  (when (and kind (string= kind "User")) (gethash "name" desc)))
+         (expansion  (when type-name (shim-expansion-for type-name))))
+    (cond
+      (is-varargs  '(("..." "")))
+      (expansion
+       (destructuring-bind (sname ekind &rest edata) expansion
+         (declare (ignore sname))
+         (ecase ekind
+           (:float-expand
+            (loop for (fsuffix _) in edata
+                  collect (list "float" (format nil "~A_~A" name fsuffix))))
+           (:pointer-wrap
+            (list (list (concatenate 'string (first edata) "*") name))))))
+      (is-array   (list (list "void*" name)))
+      (t          (list (list (desc-to-cpp desc) name))))))
+
+(defun arg-cpp-call-expr (arg)
+  "Return the C++ expression to pass for ARG when calling the original function.
+   Returns NIL for 'self' (method receiver), empty string for varargs."
+  (let* ((is-varargs (gethash "is_varargs" arg))
+         (name       (gethash "name" arg))
+         (type-obj   (gethash "type" arg))
+         (desc       (when type-obj (gethash "description" type-obj)))
+         (kind       (when desc (gethash "kind" desc)))
+         (type-name  (when (and kind (string= kind "User")) (gethash "name" desc)))
+         (expansion  (when type-name (shim-expansion-for type-name))))
+    (cond
+      ;; Self is the method receiver — not passed as an argument
+      ((string= name "self") nil)
+      (is-varargs "")
+      (expansion
+       (destructuring-bind (sname ekind &rest edata) expansion
+         (declare (ignore sname))
+         (ecase ekind
+           (:float-expand
+            (let* ((prefix (format nil "::~A" type-name))
+                   (fields (mapcar (lambda (fs)
+                                     (format nil "~A_~A" name (first fs)))
+                                   edata)))
+              (format nil "~A(~{~A~^, ~})" prefix fields)))
+           (:pointer-wrap
+            (format nil "*~A" name)))))
+      ;; Enum type: cast to the concrete C++ enum type
+      ((and kind (string= kind "User")
+            type-name
+            *current-metadata*
+            (is-enum-type-p type-name (getf *current-metadata* :enums)))
+       (format nil "(::~A)~A" type-name name))
+      (t name))))
+
+(defun func-has-real-varargs-p (func)
+  "Return T if FUNC has a real ... varargs argument."
+  (let ((args (gethash "arguments" func)))
+    (and args
+         (loop for arg across args
+               thereis (gethash "is_varargs" arg)))))
+
+(defun generate-cpp-shim (func)
+  "Generate a C++ shim function string for FUNC.
+   Returns NIL if the function cannot be auto-generated (e.g. real varargs)."
+  (when (func-has-real-varargs-p func)
+    (return-from generate-cpp-shim nil))
+  (let* ((shim-name    (compute-shim-function-name func))
+         (ret-obj      (gethash "return_type" func))
+         (ret-cpp      (desc-to-cpp (when ret-obj (gethash "description" ret-obj))))
+         (void-ret-p   (string= ret-cpp "void"))
+         (args         (gethash "arguments" func))
+         (orig-name    (gethash "original_fully_qualified_name" func))
+         ;; Method call when orig-name has no :: (it's just the method name)
+         (is-method    (and orig-name (not (find #\: orig-name)))))
+    (let (params call-args)
+      (when args
+        (loop for arg across args
+              do (let ((cpp-ps   (arg-cpp-params arg))
+                       (call-ex  (arg-cpp-call-expr arg)))
+                   ;; Collect C++ parameter declarations
+                   (loop for (ctype cname) in cpp-ps
+                         do (if (string= ctype "...")
+                                (push "..." params)
+                                (push (format nil "~A ~A" ctype cname) params)))
+                   ;; Collect call expressions (nil = skip, "" = skip)
+                   (when (and call-ex (> (length call-ex) 0))
+                     (push call-ex call-args)))))
+      (setf params    (nreverse params))
+      (setf call-args (nreverse call-args))
+      (let* ((params-str    (format nil "~{~A~^, ~}" params))
+             (call-args-str (format nil "~{~A~^, ~}" call-args))
+             (call-str      (if is-method
+                                (format nil "self->~A(~A)" orig-name call-args-str)
+                                (format nil "::~A(~A)" orig-name call-args-str))))
+        (format nil "~A ~A(~A)~%{~%    ~A~A;~%}~%"
+                ret-cpp shim-name params-str
+                (if void-ret-p "" "return ")
+                call-str)))))
+
+(defun arg-lisp-params (arg)
+  "Return a list of (lisp-name cffi-type) pairs for ARG in a Lisp defcfun.
+   By-value structs are expanded; varargs → nil (handled via &rest)."
+  (let* ((is-varargs (gethash "is_varargs" arg))
+         (is-array   (gethash "is_array" arg))
+         (name       (gethash "name" arg))
+         (lisp-name  (format-symbol-name name))
+         (type-obj   (gethash "type" arg))
+         (desc       (when type-obj (gethash "description" type-obj)))
+         (kind       (when desc (gethash "kind" desc)))
+         (type-name  (when (and desc (string= kind "User")) (gethash "name" desc)))
+         (expansion  (when type-name (shim-expansion-for type-name))))
+    (cond
+      (is-varargs nil)  ; caller adds &rest separately
+      (expansion
+       (destructuring-bind (sname ekind &rest edata) expansion
+         (declare (ignore sname))
+         (ecase ekind
+           (:float-expand
+            (loop for (fsuffix cffi-type) in edata
+                  collect (list (format nil "~A-~A" lisp-name fsuffix) cffi-type)))
+           (:pointer-wrap
+            (list (list lisp-name :pointer))))))
+      (is-array (list (list lisp-name :pointer)))
+      (t (list (list lisp-name (if desc (map-type-description desc) :pointer)))))))
+
+(defun generate-lisp-shim (func)
+  "Generate a Lisp defcfun string for the generated shim of FUNC.
+   Returns NIL if the function cannot be auto-generated."
+  (when (func-has-real-varargs-p func)
+    (return-from generate-lisp-shim nil))
+  (let* ((shim-name  (compute-shim-function-name func))
+         (lisp-name  (format-symbol-name shim-name))
+         (ret-obj    (gethash "return_type" func))
+         (ret-desc   (when ret-obj (gethash "description" ret-obj)))
+         (ret-type   (if ret-desc (map-type-description ret-desc) :void))
+         (args       (gethash "arguments" func)))
+    (with-output-to-string (s)
+      (format s "(defcfun (~S ~A) ~S~%" shim-name lisp-name ret-type)
+      (when args
+        (loop for arg across args
+              do (let ((lps (arg-lisp-params arg)))
+                   (loop for (lname ltype) in lps
+                         do (format s "  (~A ~S)~%" lname ltype)))))
+      (format s ")~%"))))
+
+(defun write-generated-shims (by-value-funcs cpp-file lisp-file)
+  "Write abi_shim_generated.cpp and shim_generated.lisp for all auto-generatable
+   functions in BY-VALUE-FUNCS.
+   Returns (values n-generated n-skipped covered-orig-names) where covered-orig-names
+   is a hash-set of original_fully_qualified_name strings that were generated."
+  (let ((generated 0) (skipped 0)
+        (covered-orig (make-hash-table :test 'equal)))
+    ;; Write C++ file
+    (with-open-file (cpp cpp-file
+                         :direction :output
+                         :if-exists :supersede
+                         :if-does-not-exist :create)
+      (format cpp "// abi_shim_generated.cpp~%")
+      (format cpp "// Auto-generated ABI shims — DO NOT EDIT by hand.~%")
+      (format cpp "// Regenerate by running cl-dear-imgui/generator.lisp.~%")
+      (format cpp "// Expands by-value ImVec2/ImVec4 args to floats; ImTextureRef to pointer.~%~%")
+      (format cpp "#include \"imgui.h\"~%")
+      (format cpp "#include \"imgui_internal.h\"~%")
+      (format cpp "#include <stdint.h>~%")
+      (format cpp "#include <stdarg.h>~%~%")
+      (format cpp "extern \"C\" {~%~%")
+      (loop for func in by-value-funcs
+            do (let ((cpp-shim (generate-cpp-shim func)))
+                 (if cpp-shim
+                     (progn
+                       (format cpp "~A~%" cpp-shim)
+                       (incf generated)
+                       ;; Track the original name so the coverage check can exclude it
+                       (let ((orig (gethash "original_fully_qualified_name" func)))
+                         (when orig (setf (gethash orig covered-orig) t))))
+                     (progn
+                       (format cpp "// SKIPPED (varargs): ~A~%~%" (gethash "name" func))
+                       (incf skipped)))))
+      (format cpp "} // extern \"C\"~%"))
+    ;; Write Lisp file
+    (with-open-file (lisp lisp-file
+                          :direction :output
+                          :if-exists :supersede
+                          :if-does-not-exist :create)
+      (format lisp ";;;; shim_generated.lisp~%")
+      (format lisp ";;;; Auto-generated CFFI bindings for abi_shim_generated.cpp~%")
+      (format lisp ";;;; DO NOT EDIT by hand — regenerate with generator.lisp~%~%")
+      (format lisp "(in-package #:cl-dear-imgui)~%~%")
+      (loop for func in by-value-funcs
+            do (let ((lisp-shim (generate-lisp-shim func)))
+                 (if lisp-shim
+                     (format lisp "~A~%" lisp-shim)
+                     (format lisp ";; SKIPPED (varargs): ~A~%~%" (gethash "name" func))))))
+    (values generated skipped covered-orig)))
 
 ;;; ============================================================================
 ;;; Package File Generation
@@ -418,6 +860,10 @@
 
 (defun generate-library-definition (stream)
   "Generate define-foreign-library form for dcimgui."
+  (format stream "(eval-when (:compile-toplevel :load-toplevel :execute)~%")
+  (format stream "  (pushnew (asdf:system-relative-pathname :cl-dear-imgui \"./\")~%")
+  (format stream "           cffi:*foreign-library-directories*~%")
+  (format stream "           :test #'equal))~%~%")
   (format stream "(define-foreign-library dcimgui~%")
   (format stream "  (:darwin \"libdcimgui.dylib\")~%")
   (format stream "  (:unix \"libdcimgui.so\")~%")
@@ -802,11 +1248,14 @@
                   cffi-type)))))
 
 (defun generate-functions (stream functions)
-  "Generate defcfun forms for all functions."
+  "Generate defcfun forms for all functions.
+   Functions that pass structs by value are omitted (they require ABI shims)."
   (when (and functions (> (length functions) 0))
     (loop for func across functions
           ;; Skip default argument helpers
           unless (gethash "is_default_argument_helper" func)
+          ;; Skip functions that pass structs by value (need ABI shims)
+          unless (func-has-by-value-struct-arg-p func)
           do (let* ((c-name (gethash "name" func))
                     (lisp-name (format-symbol-name c-name))
                     (return-type-obj (gethash "return_type" func))

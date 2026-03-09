@@ -60,7 +60,7 @@
 (defparameter +font-atlas-rect-id-invalid+ -1)
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-(defcenum window-flags-
+(defcenum window-flags
   (:window-flags-none 0)
   (:window-flags-no-title-bar 1)
   (:window-flags-no-resize 2)
@@ -92,7 +92,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-(defcenum child-flags-
+(defcenum child-flags
   (:child-flags-none 0)
   (:child-flags-borders 1)
   (:child-flags-always-use-window-padding 2)
@@ -106,7 +106,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-(defcenum item-flags-
+(defcenum item-flags
   (:item-flags-none 0)
   (:item-flags-no-tab-stop 1)
   (:item-flags-no-nav 2)
@@ -117,7 +117,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-(defcenum input-text-flags-
+(defcenum input-text-flags
   (:input-text-flags-none 0)
   (:input-text-flags-chars-decimal 1)
   (:input-text-flags-chars-hexadecimal 2)
@@ -147,7 +147,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-(defcenum tree-node-flags-
+(defcenum tree-node-flags
   (:tree-node-flags-none 0)
   (:tree-node-flags-selected 1)
   (:tree-node-flags-framed 2)
@@ -175,7 +175,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-(defcenum popup-flags-
+(defcenum popup-flags
   (:popup-flags-none 0)
   (:popup-flags-mouse-button-left 0)
   (:popup-flags-mouse-button-right 1)
@@ -191,7 +191,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-(defcenum selectable-flags-
+(defcenum selectable-flags
   (:selectable-flags-none 0)
   (:selectable-flags-no-auto-close-popups 1)
   (:selectable-flags-span-all-columns 2)
@@ -204,7 +204,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-(defcenum combo-flags-
+(defcenum combo-flags
   (:combo-flags-none 0)
   (:combo-flags-popup-align-left 1)
   (:combo-flags-height-small 2)
@@ -218,7 +218,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-(defcenum tab-bar-flags-
+(defcenum tab-bar-flags
   (:tab-bar-flags-none 0)
   (:tab-bar-flags-reorderable 1)
   (:tab-bar-flags-auto-select-new-tabs 2)
@@ -236,7 +236,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-(defcenum tab-item-flags-
+(defcenum tab-item-flags
   (:tab-item-flags-none 0)
   (:tab-item-flags-unsaved-document 1)
   (:tab-item-flags-set-selected 2)
@@ -250,7 +250,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-(defcenum focused-flags-
+(defcenum focused-flags
   (:focused-flags-none 0)
   (:focused-flags-child-windows 1)
   (:focused-flags-root-window 2)
@@ -260,7 +260,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-(defcenum hovered-flags-
+(defcenum hovered-flags
   (:hovered-flags-none 0)
   (:hovered-flags-child-windows 1)
   (:hovered-flags-root-window 2)
@@ -284,7 +284,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-(defcenum drag-drop-flags-
+(defcenum drag-drop-flags
   (:drag-drop-flags-none 0)
   (:drag-drop-flags-source-no-preview-tooltip 1)
   (:drag-drop-flags-source-no-disable-hover 2)
@@ -302,7 +302,7 @@
   (:drag-drop-flags-source-auto-expire-payload 32)
 )
 
-(defcenum data-type-
+(defcenum data-type
   (:data-type-s8 0)
   (:data-type-u8 1)
   (:data-type-s16 2)
@@ -500,7 +500,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-(defcenum input-flags-
+(defcenum input-flags
   (:input-flags-none 0)
   (:input-flags-repeat 1)
   (:input-flags-route-active 1024)
@@ -515,7 +515,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-(defcenum config-flags-
+(defcenum config-flags
   (:config-flags-none 0)
   (:config-flags-nav-enable-keyboard 1)
   (:config-flags-nav-enable-gamepad 2)
@@ -529,7 +529,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-(defcenum backend-flags-
+(defcenum backend-flags
   (:backend-flags-none 0)
   (:backend-flags-has-gamepad 1)
   (:backend-flags-has-mouse-cursors 2)
@@ -538,7 +538,7 @@
   (:backend-flags-renderer-has-textures 16)
 )
 
-(defcenum col-
+(defcenum col
   (:col-text 0)
   (:col-text-disabled 1)
   (:col-window-bg 2)
@@ -605,7 +605,7 @@
   (:col-nav-highlight 56)
 )
 
-(defcenum style-var-
+(defcenum style-var
   (:style-var-alpha 0)
   (:style-var-disabled-alpha 1)
   (:style-var-window-padding 2)
@@ -648,7 +648,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-(defcenum button-flags-
+(defcenum button-flags
   (:button-flags-none 0)
   (:button-flags-mouse-button-left 1)
   (:button-flags-mouse-button-right 2)
@@ -658,7 +658,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-(defcenum color-edit-flags-
+(defcenum color-edit-flags
   (:color-edit-flags-none 0)
   (:color-edit-flags-no-alpha 2)
   (:color-edit-flags-no-picker 4)
@@ -695,7 +695,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-(defcenum slider-flags-
+(defcenum slider-flags
   (:slider-flags-none 0)
   (:slider-flags-logarithmic 32)
   (:slider-flags-no-round-to-format 64)
@@ -709,13 +709,13 @@
   (:slider-flags-invalid-mask- 1879048207)
 )
 
-(defcenum mouse-button-
+(defcenum mouse-button
   (:mouse-button-left 0)
   (:mouse-button-right 1)
   (:mouse-button-middle 2)
 )
 
-(defcenum mouse-cursor-
+(defcenum mouse-cursor
   (:mouse-cursor-none -1)
   (:mouse-cursor-arrow 0)
   (:mouse-cursor-text-input 1)
@@ -736,7 +736,7 @@
   (:mouse-source-pen 2)
 )
 
-(defcenum cond-
+(defcenum cond
   (:cond-none 0)
   (:cond-always 1)
   (:cond-once 2)
@@ -745,7 +745,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-(defcenum table-flags-
+(defcenum table-flags
   (:table-flags-none 0)
   (:table-flags-resizable 1)
   (:table-flags-reorderable 2)
@@ -786,7 +786,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-(defcenum table-column-flags-
+(defcenum table-column-flags
   (:table-column-flags-none 0)
   (:table-column-flags-disabled 1)
   (:table-column-flags-default-hide 2)
@@ -818,12 +818,12 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-(defcenum table-row-flags-
+(defcenum table-row-flags
   (:table-row-flags-none 0)
   (:table-row-flags-headers 1)
 )
 
-(defcenum table-bg-target-
+(defcenum table-bg-target
   (:table-bg-target-none 0)
   (:table-bg-target-row-bg0 1)
   (:table-bg-target-row-bg1 2)
@@ -831,13 +831,13 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-(defcenum list-clipper-flags-
+(defcenum list-clipper-flags
   (:list-clipper-flags-none 0)
   (:list-clipper-flags-no-set-table-row-counters 1)
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-(defcenum multi-select-flags-
+(defcenum multi-select-flags
   (:multi-select-flags-none 0)
   (:multi-select-flags-single-select 1)
   (:multi-select-flags-no-select-all 2)
@@ -865,7 +865,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-(defcenum draw-flags-
+(defcenum draw-flags
   (:draw-flags-none 0)
   (:draw-flags-closed 1)
   (:draw-flags-round-corners-top-left 16)
@@ -883,7 +883,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-(defcenum draw-list-flags-
+(defcenum draw-list-flags
   (:draw-list-flags-none 0)
   (:draw-list-flags-anti-aliased-lines 1)
   (:draw-list-flags-anti-aliased-lines-use-tex 2)
@@ -905,7 +905,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-(defcenum font-atlas-flags-
+(defcenum font-atlas-flags
   (:font-atlas-flags-none 0)
   (:font-atlas-flags-no-power-of-two-height 1)
   (:font-atlas-flags-no-mouse-cursors 2)
@@ -913,7 +913,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-(defcenum font-flags-
+(defcenum font-flags
   (:font-flags-none 0)
   (:font-flags-no-load-error 2)
   (:font-flags-no-load-glyphs 4)
@@ -921,21 +921,21 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-(defcenum viewport-flags-
+(defcenum viewport-flags
   (:viewport-flags-none 0)
   (:viewport-flags-is-platform-window 1)
   (:viewport-flags-is-platform-monitor 2)
   (:viewport-flags-owned-by-app 4)
 )
 
-(defctype ID :UNSIGNED-INT)
+(defctype id :UNSIGNED-INT)
 
-(defcstruct VEC2
+(defcstruct vec2
   (x :FLOAT)
   (y :FLOAT)
 )
 
-(defcstruct PLATFORMIMEDATA
+(defcstruct platform-ime-data
   (want-visible :BOOL)
   (want-text-input :BOOL)
   (input-pos VEC2)
@@ -943,53 +943,53 @@
   (viewport-id ID)
 )
 
-(defcstruct TEXTURERECT
+(defcstruct texture-rect
   (x :UNSIGNED-SHORT)
   (y :UNSIGNED-SHORT)
   (w :UNSIGNED-SHORT)
   (h :UNSIGNED-SHORT)
 )
 
-(defcstruct VECTOR-IMTEXTURERECT
+(defcstruct vector-im-texture-rect
   (size :INT)
   (capacity :INT)
   (data :POINTER)
 )
 
-(defctype U64 :UNSIGNED-LONG-LONG)
+(defctype u64 :UNSIGNED-LONG-LONG)
 
-(defctype TEXTUREID U64)
+(defctype texture-id U64)
 
-(defcstruct TEXTUREDATA
+(defcstruct texture-data
   (unique-id :INT)
   (status TEXTURE-STATUS)
   (backend-user-data :POINTER)
-  (tex-id TEXTUREID)
+  (tex-id TEXTURE-ID)
   (format TEXTURE-FORMAT)
   (width :INT)
   (height :INT)
   (bytes-per-pixel :INT)
   (pixels :POINTER)
-  (used-rect TEXTURERECT)
-  (update-rect TEXTURERECT)
-  (updates VECTOR-IMTEXTURERECT)
+  (used-rect TEXTURE-RECT)
+  (update-rect TEXTURE-RECT)
+  (updates VECTOR-IM-TEXTURE-RECT)
   (unused-frames :INT)
   (ref-count :UNSIGNED-SHORT)
   (use-colors :BOOL)
   (want-destroy-next-frame :BOOL)
 )
 
-(defcstruct VECTOR-IMTEXTUREDATAPTR
+(defcstruct vector-im-texture-data-ptr
   (size :INT)
   (capacity :INT)
   (data :POINTER)
 )
 
-(defctype WCHAR16 :UNSIGNED-SHORT)
+(defctype wchar16 :UNSIGNED-SHORT)
 
-(defctype WCHAR WCHAR16)
+(defctype wchar WCHAR16)
 
-(defcstruct PLATFORMIO
+(defcstruct platform-io
   (platform-get-clipboard-text-fn :POINTER)
   (platform-set-clipboard-text-fn :POINTER)
   (platform-clipboard-user-data :POINTER)
@@ -1001,14 +1001,14 @@
   (renderer-texture-max-width :INT)
   (renderer-texture-max-height :INT)
   (renderer-render-state :POINTER)
-  (textures VECTOR-IMTEXTUREDATAPTR)
+  (textures VECTOR-IM-TEXTURE-DATA-PTR)
 )
 
-(defctype VIEWPORTFLAGS :INT)
+(defctype viewport-flags :INT)
 
-(defcstruct VIEWPORT
+(defcstruct viewport
   (id ID)
-  (flags VIEWPORTFLAGS)
+  (flags VIEWPORT-FLAGS)
   (pos VEC2)
   (size VEC2)
   (framebuffer-scale VEC2)
@@ -1018,30 +1018,30 @@
   (platform-handle-raw :POINTER)
 )
 
-(defcstruct STORAGEPAIR
+(defcstruct storage-pair
   (key ID)
   (--anonymous-type0 :POINTER)
 )
 
-(defcstruct VECTOR-IMGUISTORAGEPAIR
+(defcstruct vector-im-gui-storage-pair
   (size :INT)
   (capacity :INT)
   (data :POINTER)
 )
 
-(defcstruct STORAGE
-  (data VECTOR-IMGUISTORAGEPAIR)
+(defcstruct storage
+  (data VECTOR-IM-GUI-STORAGE-PAIR)
 )
 
-(defctype U8 :UNSIGNED-CHAR)
+(defctype u8 :UNSIGNED-CHAR)
 
-(defctype FONTFLAGS :INT)
+(defctype font-flags :INT)
 
-(defctype U32 :UNSIGNED-INT)
+(defctype u32 :UNSIGNED-INT)
 
-(defctype S8 :CHAR)
+(defctype s8 :CHAR)
 
-(defcstruct FONTCONFIG
+(defcstruct font-config
   (name :CHAR :count 40)
   (font-data :POINTER)
   (font-data-size :INT)
@@ -1063,19 +1063,19 @@
   (font-loader-flags :UNSIGNED-INT)
   (rasterizer-multiply :FLOAT)
   (rasterizer-density :FLOAT)
-  (flags FONTFLAGS)
+  (flags FONT-FLAGS)
   (dst-font :POINTER)
   (font-loader :POINTER)
   (font-loader-data :POINTER)
 )
 
-(defcstruct VECTOR-IMFONTCONFIGPTR
+(defcstruct vector-im-font-config-ptr
   (size :INT)
   (capacity :INT)
   (data :POINTER)
 )
 
-(defcstruct FONTATLASRECT
+(defcstruct font-atlas-rect
   (x :UNSIGNED-SHORT)
   (y :UNSIGNED-SHORT)
   (w :UNSIGNED-SHORT)
@@ -1084,40 +1084,40 @@
   (uv1 VEC2)
 )
 
-(defcstruct VECTOR-IMDRAWLISTSHAREDDATAPTR
+(defcstruct vector-im-draw-list-shared-data-ptr
   (size :INT)
   (capacity :INT)
   (data :POINTER)
 )
 
-(defcstruct VEC4
+(defcstruct vec4
   (x :FLOAT)
   (y :FLOAT)
   (z :FLOAT)
   (w :FLOAT)
 )
 
-(defcstruct VECTOR-IMFONTCONFIG
+(defcstruct vector-im-font-config
   (size :INT)
   (capacity :INT)
   (data :POINTER)
 )
 
-(defcstruct VECTOR-IMFONTPTR
+(defcstruct vector-im-font-ptr
   (size :INT)
   (capacity :INT)
   (data :POINTER)
 )
 
-(defcstruct TEXTUREREF
+(defcstruct texture-ref
   (-tex-data :POINTER)
-  (-tex-id TEXTUREID)
+  (-tex-id TEXTURE-ID)
 )
 
-(defctype FONTATLASFLAGS :INT)
+(defctype font-atlas-flags :INT)
 
-(defcstruct FONTATLAS
-  (flags FONTATLASFLAGS)
+(defcstruct font-atlas
+  (flags FONT-ATLAS-FLAGS)
   (tex-desired-format TEXTURE-FORMAT)
   (tex-glyph-padding :INT)
   (tex-min-width :INT)
@@ -1125,22 +1125,22 @@
   (tex-max-width :INT)
   (tex-max-height :INT)
   (user-data :POINTER)
-  (tex-ref TEXTUREREF)
+  (tex-ref TEXTURE-REF)
   (--anonymous-type1 :POINTER)
   (tex-data :POINTER)
-  (tex-list VECTOR-IMTEXTUREDATAPTR)
+  (tex-list VECTOR-IM-TEXTURE-DATA-PTR)
   (locked :BOOL)
   (renderer-has-textures :BOOL)
   (tex-is-built :BOOL)
   (tex-pixels-use-colors :BOOL)
   (tex-uv-scale VEC2)
   (tex-uv-white-pixel VEC2)
-  (fonts VECTOR-IMFONTPTR)
-  (sources VECTOR-IMFONTCONFIG)
+  (fonts VECTOR-IM-FONT-PTR)
+  (sources VECTOR-IM-FONT-CONFIG)
   (tex-uv-lines :pointer) ; Array with complex bounds: IM_DRAWLIST_TEX_LINES_WIDTH_MAX+1
   (tex-next-unique-id :INT)
   (font-next-unique-id :INT)
-  (draw-list-shared-datas VECTOR-IMDRAWLISTSHAREDDATAPTR)
+  (draw-list-shared-datas VECTOR-IM-DRAW-LIST-SHARED-DATA-PTR)
   (builder :POINTER)
   (font-loader :POINTER)
   (font-loader-name :STRING)
@@ -1148,10 +1148,10 @@
   (font-loader-flags :UNSIGNED-INT)
   (ref-count :INT)
   (owner-context :POINTER)
-  (temp-rect FONTATLASRECT)
+  (temp-rect FONT-ATLAS-RECT)
 )
 
-(defcstruct FONTGLYPH
+(defcstruct font-glyph
   (colored :UNSIGNED-INT)
   (visible :UNSIGNED-INT)
   (source-idx :UNSIGNED-INT)
@@ -1168,33 +1168,33 @@
   (pack-id :INT)
 )
 
-(defcstruct VECTOR-IMFONTGLYPH
+(defcstruct vector-im-font-glyph
   (size :INT)
   (capacity :INT)
   (data :POINTER)
 )
 
-(defctype U16 :UNSIGNED-SHORT)
+(defctype u16 :UNSIGNED-SHORT)
 
-(defcstruct VECTOR-IMU16
+(defcstruct vector-im-u16
   (size :INT)
   (capacity :INT)
   (data :POINTER)
 )
 
-(defcstruct VECTOR-FLOAT
+(defcstruct vector-float
   (size :INT)
   (capacity :INT)
   (data :POINTER)
 )
 
-(defcstruct FONTBAKED
+(defcstruct font-baked
   (index-advance-x VECTOR-FLOAT)
   (fallback-advance-x :FLOAT)
   (size :FLOAT)
   (rasterizer-density :FLOAT)
-  (index-lookup VECTOR-IMU16)
-  (glyphs VECTOR-IMFONTGLYPH)
+  (index-lookup VECTOR-IM-U16)
+  (glyphs VECTOR-IM-FONT-GLYPH)
   (fallback-glyph-index :INT)
   (ascent :FLOAT)
   (descent :FLOAT)
@@ -1208,14 +1208,14 @@
   (font-loader-datas :POINTER)
 )
 
-(defcstruct FONT
+(defcstruct font
   (last-baked :POINTER)
   (owner-atlas :POINTER)
-  (flags FONTFLAGS)
+  (flags FONT-FLAGS)
   (current-rasterizer-density :FLOAT)
   (font-id ID)
   (legacy-size :FLOAT)
-  (sources VECTOR-IMFONTCONFIGPTR)
+  (sources VECTOR-IM-FONT-CONFIG-PTR)
   (ellipsis-char WCHAR)
   (fallback-char WCHAR)
   (used8k-pages-map :pointer) ; Array with complex bounds: (IM_UNICODE_CODEPOINT_MAX +1)/8192/8
@@ -1224,136 +1224,136 @@
   (scale :FLOAT)
 )
 
-(defcstruct VECTOR-IMU32
+(defcstruct vector-im-u32
   (size :INT)
   (capacity :INT)
   (data :POINTER)
 )
 
-(defcstruct FONTGLYPHRANGESBUILDER
-  (used-chars VECTOR-IMU32)
+(defcstruct font-glyph-ranges-builder
+  (used-chars VECTOR-IM-U32)
 )
 
-(defcstruct VECTOR-IMU8
+(defcstruct vector-im-u8
   (size :INT)
   (capacity :INT)
   (data :POINTER)
 )
 
-(defcstruct VECTOR-IMTEXTUREREF
+(defcstruct vector-im-texture-ref
   (size :INT)
   (capacity :INT)
   (data :POINTER)
 )
 
-(defcstruct VECTOR-IMVEC4
+(defcstruct vector-im-vec4
   (size :INT)
   (capacity :INT)
   (data :POINTER)
 )
 
-(defctype DRAWIDX :UNSIGNED-SHORT)
+(defctype draw-idx :UNSIGNED-SHORT)
 
-(defcstruct VECTOR-IMDRAWIDX
+(defcstruct vector-im-draw-idx
   (size :INT)
   (capacity :INT)
   (data :POINTER)
 )
 
-(defctype DRAWCALLBACK :POINTER)
+(defctype draw-callback :POINTER)
 
-(defcstruct DRAWCMD
+(defcstruct draw-cmd
   (clip-rect VEC4)
-  (tex-ref TEXTUREREF)
+  (tex-ref TEXTURE-REF)
   (vtx-offset :UNSIGNED-INT)
   (idx-offset :UNSIGNED-INT)
   (elem-count :UNSIGNED-INT)
-  (user-callback DRAWCALLBACK)
+  (user-callback DRAW-CALLBACK)
   (user-callback-data :POINTER)
   (user-callback-data-size :INT)
   (user-callback-data-offset :INT)
 )
 
-(defcstruct VECTOR-IMDRAWCMD
+(defcstruct vector-im-draw-cmd
   (size :INT)
   (capacity :INT)
   (data :POINTER)
 )
 
-(defcstruct DRAWCHANNEL
-  (-cmd-buffer VECTOR-IMDRAWCMD)
-  (-idx-buffer VECTOR-IMDRAWIDX)
+(defcstruct draw-channel
+  (-cmd-buffer VECTOR-IM-DRAW-CMD)
+  (-idx-buffer VECTOR-IM-DRAW-IDX)
 )
 
-(defcstruct VECTOR-IMDRAWCHANNEL
+(defcstruct vector-im-draw-channel
   (size :INT)
   (capacity :INT)
   (data :POINTER)
 )
 
-(defcstruct DRAWLISTSPLITTER
+(defcstruct draw-list-splitter
   (-current :INT)
   (-count :INT)
-  (-channels VECTOR-IMDRAWCHANNEL)
+  (-channels VECTOR-IM-DRAW-CHANNEL)
 )
 
-(defcstruct DRAWCMDHEADER
+(defcstruct draw-cmd-header
   (clip-rect VEC4)
-  (tex-ref TEXTUREREF)
+  (tex-ref TEXTURE-REF)
   (vtx-offset :UNSIGNED-INT)
 )
 
-(defcstruct VECTOR-IMVEC2
+(defcstruct vector-im-vec2
   (size :INT)
   (capacity :INT)
   (data :POINTER)
 )
 
-(defcstruct DRAWVERT
+(defcstruct draw-vert
   (pos VEC2)
   (uv VEC2)
   (col U32)
 )
 
-(defctype DRAWLISTFLAGS :INT)
+(defctype draw-list-flags :INT)
 
-(defcstruct VECTOR-IMDRAWVERT
+(defcstruct vector-im-draw-vert
   (size :INT)
   (capacity :INT)
   (data :POINTER)
 )
 
-(defcstruct DRAWLIST
-  (cmd-buffer VECTOR-IMDRAWCMD)
-  (idx-buffer VECTOR-IMDRAWIDX)
-  (vtx-buffer VECTOR-IMDRAWVERT)
-  (flags DRAWLISTFLAGS)
+(defcstruct draw-list
+  (cmd-buffer VECTOR-IM-DRAW-CMD)
+  (idx-buffer VECTOR-IM-DRAW-IDX)
+  (vtx-buffer VECTOR-IM-DRAW-VERT)
+  (flags DRAW-LIST-FLAGS)
   (-vtx-current-idx :UNSIGNED-INT)
   (-data :POINTER)
   (-vtx-write-ptr :POINTER)
   (-idx-write-ptr :POINTER)
-  (-path VECTOR-IMVEC2)
-  (-cmd-header DRAWCMDHEADER)
-  (-splitter DRAWLISTSPLITTER)
-  (-clip-rect-stack VECTOR-IMVEC4)
-  (-texture-stack VECTOR-IMTEXTUREREF)
-  (-callbacks-data-buf VECTOR-IMU8)
+  (-path VECTOR-IM-VEC2)
+  (-cmd-header DRAW-CMD-HEADER)
+  (-splitter DRAW-LIST-SPLITTER)
+  (-clip-rect-stack VECTOR-IM-VEC4)
+  (-texture-stack VECTOR-IM-TEXTURE-REF)
+  (-callbacks-data-buf VECTOR-IM-U8)
   (-fringe-scale :FLOAT)
   (-owner-name :STRING)
 )
 
-(defcstruct VECTOR-IMDRAWLISTPTR
+(defcstruct vector-im-draw-list-ptr
   (size :INT)
   (capacity :INT)
   (data :POINTER)
 )
 
-(defcstruct DRAWDATA
+(defcstruct draw-data
   (valid :BOOL)
   (cmd-lists-count :INT)
   (total-idx-count :INT)
   (total-vtx-count :INT)
-  (cmd-lists VECTOR-IMDRAWLISTPTR)
+  (cmd-lists VECTOR-IM-DRAW-LIST-PTR)
   (display-pos VEC2)
   (display-size VEC2)
   (framebuffer-scale VEC2)
@@ -1361,12 +1361,12 @@
   (textures :POINTER)
 )
 
-(defcstruct SELECTIONEXTERNALSTORAGE
+(defcstruct selection-external-storage
   (user-data :POINTER)
   (adapter-set-item-selected :POINTER)
 )
 
-(defcstruct SELECTIONBASICSTORAGE
+(defcstruct selection-basic-storage
   (size :INT)
   (preserve-order :BOOL)
   (user-data :POINTER)
@@ -1375,40 +1375,40 @@
   (-storage STORAGE)
 )
 
-(defctype S64 :LONG-LONG)
+(defctype s64 :LONG-LONG)
 
-(defctype SELECTIONUSERDATA S64)
+(defctype selection-user-data S64)
 
-(defcstruct SELECTIONREQUEST
+(defcstruct selection-request
   (type SELECTION-REQUEST-TYPE)
   (selected :BOOL)
   (range-direction S8)
-  (range-first-item SELECTIONUSERDATA)
-  (range-last-item SELECTIONUSERDATA)
+  (range-first-item SELECTION-USER-DATA)
+  (range-last-item SELECTION-USER-DATA)
 )
 
-(defcstruct VECTOR-IMGUISELECTIONREQUEST
+(defcstruct vector-im-gui-selection-request
   (size :INT)
   (capacity :INT)
   (data :POINTER)
 )
 
-(defcstruct MULTISELECTIO
-  (requests VECTOR-IMGUISELECTIONREQUEST)
-  (range-src-item SELECTIONUSERDATA)
-  (nav-id-item SELECTIONUSERDATA)
+(defcstruct multi-select-io
+  (requests VECTOR-IM-GUI-SELECTION-REQUEST)
+  (range-src-item SELECTION-USER-DATA)
+  (nav-id-item SELECTION-USER-DATA)
   (nav-id-selected :BOOL)
   (range-src-reset :BOOL)
   (items-count :INT)
 )
 
-(defcstruct COLOR
+(defcstruct color
   (value VEC4)
 )
 
-(defctype LISTCLIPPERFLAGS :INT)
+(defctype list-clipper-flags :INT)
 
-(defcstruct LISTCLIPPER
+(defcstruct list-clipper
   (ctx :POINTER)
   (display-start :INT)
   (display-end :INT)
@@ -1417,37 +1417,37 @@
   (start-pos-y :DOUBLE)
   (start-seek-offset-y :DOUBLE)
   (temp-data :POINTER)
-  (flags LISTCLIPPERFLAGS)
+  (flags LIST-CLIPPER-FLAGS)
 )
 
-(defcstruct VECTOR-CHAR
+(defcstruct vector-char
   (size :INT)
   (capacity :INT)
   (data :STRING)
 )
 
-(defcstruct TEXTBUFFER
+(defcstruct text-buffer
   (buf VECTOR-CHAR)
 )
 
-(defcstruct TEXTFILTER-IMGUITEXTRANGE
+(defcstruct text-filter-im-gui-text-range
   (b :STRING)
   (e :STRING)
 )
 
-(defcstruct VECTOR-IMGUITEXTRANGE
+(defcstruct vector-im-gui-text-range
   (size :INT)
   (capacity :INT)
   (data :POINTER)
 )
 
-(defcstruct TEXTFILTER
+(defcstruct text-filter
   (input-buf :CHAR :count 256)
-  (filters VECTOR-IMGUITEXTRANGE)
+  (filters VECTOR-IM-GUI-TEXT-RANGE)
   (count-grep :INT)
 )
 
-(defcstruct PAYLOAD
+(defcstruct payload
   (data :POINTER)
   (data-size :INT)
   (source-id ID)
@@ -1458,21 +1458,21 @@
   (delivery :BOOL)
 )
 
-(defcstruct SIZECALLBACKDATA
+(defcstruct size-callback-data
   (user-data :POINTER)
   (pos VEC2)
   (current-size VEC2)
   (desired-size VEC2)
 )
 
-(defctype KEY :INT)
+(defctype key :INT)
 
-(defctype INPUTTEXTFLAGS :INT)
+(defctype input-text-flags :INT)
 
-(defcstruct INPUTTEXTCALLBACKDATA
+(defcstruct input-text-callback-data
   (ctx :POINTER)
-  (event-flag INPUTTEXTFLAGS)
-  (flags INPUTTEXTFLAGS)
+  (event-flag INPUT-TEXT-FLAGS)
+  (flags INPUT-TEXT-FLAGS)
   (user-data :POINTER)
   (event-char WCHAR)
   (event-key KEY)
@@ -1485,30 +1485,30 @@
   (selection-end :INT)
 )
 
-(defcstruct VECTOR-IMWCHAR
+(defcstruct vector-im-wchar
   (size :INT)
   (capacity :INT)
   (data :POINTER)
 )
 
-(defcstruct KEYDATA
+(defcstruct key-data
   (down :BOOL)
   (down-duration :FLOAT)
   (down-duration-prev :FLOAT)
   (analog-value :FLOAT)
 )
 
-(defctype KEYCHORD :INT)
+(defctype key-chord :INT)
 
-(defctype MOUSESOURCE :INT)
+(defctype mouse-source :INT)
 
-(defctype BACKENDFLAGS :INT)
+(defctype backend-flags :INT)
 
-(defctype CONFIGFLAGS :INT)
+(defctype config-flags :INT)
 
-(defcstruct IO
-  (config-flags CONFIGFLAGS)
-  (backend-flags BACKENDFLAGS)
+(defcstruct io
+  (config-flags CONFIG-FLAGS)
+  (backend-flags BACKEND-FLAGS)
   (display-size VEC2)
   (display-framebuffer-scale VEC2)
   (delta-time :FLOAT)
@@ -1581,7 +1581,7 @@
   (key-shift :BOOL)
   (key-alt :BOOL)
   (key-super :BOOL)
-  (key-mods KEYCHORD)
+  (key-mods KEY-CHORD)
   (keys-data :pointer) ; Array with complex bounds: ImGuiKey_NamedKey_COUNT
   (want-capture-mouse-unless-popup-close :BOOL)
   (mouse-pos-prev VEC2)
@@ -1604,20 +1604,20 @@
   (app-focus-lost :BOOL)
   (app-accepting-events :BOOL)
   (input-queue-surrogate WCHAR16)
-  (input-queue-characters VECTOR-IMWCHAR)
+  (input-queue-characters VECTOR-IM-WCHAR)
   (font-global-scale :FLOAT)
   (get-clipboard-text-fn :POINTER)
   (set-clipboard-text-fn :POINTER)
   (clipboard-user-data :POINTER)
 )
 
-(defctype HOVEREDFLAGS :INT)
+(defctype hovered-flags :INT)
 
-(defctype TREENODEFLAGS :INT)
+(defctype tree-node-flags :INT)
 
-(defctype DIR :INT)
+(defctype dir :INT)
 
-(defcstruct STYLE
+(defcstruct style
   (font-size-base :FLOAT)
   (font-scale-main :FLOAT)
   (font-scale-dpi :FLOAT)
@@ -1660,7 +1660,7 @@
   (tab-bar-overline-size :FLOAT)
   (table-angled-headers-angle :FLOAT)
   (table-angled-headers-text-align VEC2)
-  (tree-lines-flags TREENODEFLAGS)
+  (tree-lines-flags TREE-NODE-FLAGS)
   (tree-lines-size :FLOAT)
   (tree-lines-rounding :FLOAT)
   (drag-drop-target-rounding :FLOAT)
@@ -1685,100 +1685,100 @@
   (hover-stationary-delay :FLOAT)
   (hover-delay-short :FLOAT)
   (hover-delay-normal :FLOAT)
-  (hover-flags-for-tooltip-mouse HOVEREDFLAGS)
-  (hover-flags-for-tooltip-nav HOVEREDFLAGS)
+  (hover-flags-for-tooltip-mouse HOVERED-FLAGS)
+  (hover-flags-for-tooltip-nav HOVERED-FLAGS)
   (-main-scale :FLOAT)
   (-next-frame-font-size-base :FLOAT)
 )
 
-(defctype SORTDIRECTION U8)
+(defctype sort-direction U8)
 
-(defctype S16 :SHORT)
+(defctype s16 :SHORT)
 
-(defcstruct TABLECOLUMNSORTSPECS
+(defcstruct table-column-sort-specs
   (column-user-id ID)
   (column-index S16)
   (sort-order S16)
   (sort-direction SORT-DIRECTION)
 )
 
-(defcstruct TABLESORTSPECS
+(defcstruct table-sort-specs
   (specs :POINTER)
   (specs-count :INT)
   (specs-dirty :BOOL)
 )
 
-(defctype FONTATLASCUSTOMRECT FONTATLASRECT)
+(defctype font-atlas-custom-rect FONT-ATLAS-RECT)
 
-(defctype FONTATLASRECTID :INT)
+(defctype font-atlas-rect-id :INT)
 
-(defctype MEMFREEFUNC :POINTER)
+(defctype mem-free-func :POINTER)
 
-(defctype MEMALLOCFUNC :POINTER)
+(defctype mem-alloc-func :POINTER)
 
-(defctype SIZECALLBACK :POINTER)
+(defctype size-callback :POINTER)
 
-(defctype INPUTTEXTCALLBACK :POINTER)
+(defctype input-text-callback :POINTER)
 
-(defctype WCHAR32 :UNSIGNED-INT)
+(defctype wchar32 :UNSIGNED-INT)
 
-(defctype WINDOWFLAGS :INT)
+(defctype window-flags :INT)
 
-(defctype TABLEROWFLAGS :INT)
+(defctype table-row-flags :INT)
 
-(defctype TABLECOLUMNFLAGS :INT)
+(defctype table-column-flags :INT)
 
-(defctype TABLEFLAGS :INT)
+(defctype table-flags :INT)
 
-(defctype TABITEMFLAGS :INT)
+(defctype tab-item-flags :INT)
 
-(defctype TABBARFLAGS :INT)
+(defctype tab-bar-flags :INT)
 
-(defctype SLIDERFLAGS :INT)
+(defctype slider-flags :INT)
 
-(defctype SELECTABLEFLAGS :INT)
+(defctype selectable-flags :INT)
 
-(defctype MULTISELECTFLAGS :INT)
+(defctype multi-select-flags :INT)
 
-(defctype POPUPFLAGS :INT)
+(defctype popup-flags :INT)
 
-(defctype ITEMFLAGS :INT)
+(defctype item-flags :INT)
 
-(defctype INPUTFLAGS :INT)
+(defctype input-flags :INT)
 
-(defctype FOCUSEDFLAGS :INT)
+(defctype focused-flags :INT)
 
-(defctype DRAGDROPFLAGS :INT)
+(defctype drag-drop-flags :INT)
 
-(defctype COMBOFLAGS :INT)
+(defctype combo-flags :INT)
 
-(defctype COLOREDITFLAGS :INT)
+(defctype color-edit-flags :INT)
 
-(defctype CHILDFLAGS :INT)
+(defctype child-flags :INT)
 
-(defctype BUTTONFLAGS :INT)
+(defctype button-flags :INT)
 
-(defctype DRAWTEXTFLAGS :INT)
+(defctype draw-text-flags :INT)
 
-(defctype DRAWFLAGS :INT)
+(defctype draw-flags :INT)
 
-(defctype TABLEBGTARGET :INT)
+(defctype table-bg-target :INT)
 
-(defctype STYLEVAR :INT)
+(defctype style-var :INT)
 
-(defctype MOUSECURSOR :INT)
+(defctype mouse-cursor :INT)
 
-(defctype MOUSEBUTTON :INT)
+(defctype mouse-button :INT)
 
-(defctype DATATYPE :INT)
+(defctype data-type :INT)
 
-(defctype COND :INT)
+(defctype cond :INT)
 
-(defctype COL :INT)
+(defctype col :INT)
 
-(defctype S32 :INT)
+(defctype s32 :INT)
 
-(defcfun ("ImTextureRef_GetTexID" texture-ref-get-tex-id) TEXTUREID
+(defcfun ("ImTextureRef_GetTexID" texture-ref-get-tex-id) TEXTURE-ID
   (self :POINTER)
 )
 
@@ -1861,24 +1861,10 @@
 (defcfun ("ImGui_Begin" begin) :BOOL
   (name :STRING)
   (p-open :POINTER)
-  (flags WINDOWFLAGS)
+  (flags WINDOW-FLAGS)
 )
 
 (defcfun ("ImGui_End" end) :VOID)
-
-(defcfun ("ImGui_BeginChild" begin-child) :BOOL
-  (str-id :STRING)
-  (size VEC2)
-  (child-flags CHILDFLAGS)
-  (window-flags WINDOWFLAGS)
-)
-
-(defcfun ("ImGui_BeginChildID" begin-child-id) :BOOL
-  (id ID)
-  (size VEC2)
-  (child-flags CHILDFLAGS)
-  (window-flags WINDOWFLAGS)
-)
 
 (defcfun ("ImGui_EndChild" end-child) :VOID)
 
@@ -1887,11 +1873,11 @@
 (defcfun ("ImGui_IsWindowCollapsed" is-window-collapsed) :BOOL)
 
 (defcfun ("ImGui_IsWindowFocused" is-window-focused) :BOOL
-  (flags FOCUSEDFLAGS)
+  (flags FOCUSED-FLAGS)
 )
 
 (defcfun ("ImGui_IsWindowHovered" is-window-hovered) :BOOL
-  (flags HOVEREDFLAGS)
+  (flags HOVERED-FLAGS)
 )
 
 (defcfun ("ImGui_GetWindowDrawList" get-window-draw-list) :POINTER)
@@ -1904,28 +1890,6 @@
 
 (defcfun ("ImGui_GetWindowHeight" get-window-height) :FLOAT)
 
-(defcfun ("ImGui_SetNextWindowPosEx" set-next-window-pos-ex) :VOID
-  (pos VEC2)
-  (cond COND)
-  (pivot VEC2)
-)
-
-(defcfun ("ImGui_SetNextWindowSize" set-next-window-size) :VOID
-  (size VEC2)
-  (cond COND)
-)
-
-(defcfun ("ImGui_SetNextWindowSizeConstraints" set-next-window-size-constraints) :VOID
-  (size-min VEC2)
-  (size-max VEC2)
-  (custom-callback SIZECALLBACK)
-  (custom-callback-data :POINTER)
-)
-
-(defcfun ("ImGui_SetNextWindowContentSize" set-next-window-content-size) :VOID
-  (size VEC2)
-)
-
 (defcfun ("ImGui_SetNextWindowCollapsed" set-next-window-collapsed) :VOID
   (collapsed :BOOL)
   (cond COND)
@@ -1933,22 +1897,8 @@
 
 (defcfun ("ImGui_SetNextWindowFocus" set-next-window-focus) :VOID)
 
-(defcfun ("ImGui_SetNextWindowScroll" set-next-window-scroll) :VOID
-  (scroll VEC2)
-)
-
 (defcfun ("ImGui_SetNextWindowBgAlpha" set-next-window-bg-alpha) :VOID
   (alpha :FLOAT)
-)
-
-(defcfun ("ImGui_SetWindowPos" set-window-pos) :VOID
-  (pos VEC2)
-  (cond COND)
-)
-
-(defcfun ("ImGui_SetWindowSize" set-window-size) :VOID
-  (size VEC2)
-  (cond COND)
 )
 
 (defcfun ("ImGui_SetWindowCollapsed" set-window-collapsed) :VOID
@@ -1957,18 +1907,6 @@
 )
 
 (defcfun ("ImGui_SetWindowFocus" set-window-focus) :VOID)
-
-(defcfun ("ImGui_SetWindowPosStr" set-window-pos-str) :VOID
-  (name :STRING)
-  (pos VEC2)
-  (cond COND)
-)
-
-(defcfun ("ImGui_SetWindowSizeStr" set-window-size-str) :VOID
-  (name :STRING)
-  (size VEC2)
-  (cond COND)
-)
 
 (defcfun ("ImGui_SetWindowCollapsedStr" set-window-collapsed-str) :VOID
   (name :STRING)
@@ -2032,32 +1970,22 @@
   (col U32)
 )
 
-(defcfun ("ImGui_PushStyleColorImVec4" push-style-color-im-vec4) :VOID
-  (idx COL)
-  (col VEC4)
-)
-
 (defcfun ("ImGui_PopStyleColorEx" pop-style-color-ex) :VOID
   (count :INT)
 )
 
 (defcfun ("ImGui_PushStyleVar" push-style-var) :VOID
-  (idx STYLEVAR)
+  (idx STYLE-VAR)
   (val :FLOAT)
 )
 
-(defcfun ("ImGui_PushStyleVarImVec2" push-style-var-im-vec2) :VOID
-  (idx STYLEVAR)
-  (val VEC2)
-)
-
 (defcfun ("ImGui_PushStyleVarX" push-style-var-x) :VOID
-  (idx STYLEVAR)
+  (idx STYLE-VAR)
   (val-x :FLOAT)
 )
 
 (defcfun ("ImGui_PushStyleVarY" push-style-var-y) :VOID
-  (idx STYLEVAR)
+  (idx STYLE-VAR)
   (val-y :FLOAT)
 )
 
@@ -2066,7 +1994,7 @@
 )
 
 (defcfun ("ImGui_PushItemFlag" push-item-flag) :VOID
-  (option ITEMFLAGS)
+  (option ITEM-FLAGS)
   (enabled :BOOL)
 )
 
@@ -2097,10 +2025,6 @@
   (alpha-mul :FLOAT)
 )
 
-(defcfun ("ImGui_GetColorU32ImVec4" get-color-u32im-vec4) U32
-  (col VEC4)
-)
-
 (defcfun ("ImGui_GetColorU32ImU32Ex" get-color-u32im-u32ex) U32
   (col U32)
   (alpha-mul :FLOAT)
@@ -2112,10 +2036,6 @@
 
 (defcfun ("ImGui_GetCursorScreenPos" get-cursor-screen-pos) VEC2)
 
-(defcfun ("ImGui_SetCursorScreenPos" set-cursor-screen-pos) :VOID
-  (pos VEC2)
-)
-
 (defcfun ("ImGui_GetContentRegionAvail" get-content-region-avail) VEC2)
 
 (defcfun ("ImGui_GetCursorPos" get-cursor-pos) VEC2)
@@ -2123,10 +2043,6 @@
 (defcfun ("ImGui_GetCursorPosX" get-cursor-pos-x) :FLOAT)
 
 (defcfun ("ImGui_GetCursorPosY" get-cursor-pos-y) :FLOAT)
-
-(defcfun ("ImGui_SetCursorPos" set-cursor-pos) :VOID
-  (local-pos VEC2)
-)
 
 (defcfun ("ImGui_SetCursorPosX" set-cursor-pos-x) :VOID
   (local-x :FLOAT)
@@ -2148,10 +2064,6 @@
 (defcfun ("ImGui_NewLine" new-line) :VOID)
 
 (defcfun ("ImGui_Spacing" spacing) :VOID)
-
-(defcfun ("ImGui_Dummy" dummy) :VOID
-  (size VEC2)
-)
 
 (defcfun ("ImGui_IndentEx" indent-ex) :VOID
   (indent-w :FLOAT)
@@ -2213,7 +2125,7 @@
 
 (defcfun ("ImGui_TextUnformattedEx" text-unformatted-ex) :VOID
   (text :STRING)
-  (text-end :POINTER)
+  (text-end :pointer) ; pointer override
 )
 
 (defcfun ("ImGui_Text" text) :VOID
@@ -2222,18 +2134,6 @@
 )
 
 (defcfun ("ImGui_TextV" text-v) :VOID
-  (fmt :STRING)
-  (args :POINTER)
-)
-
-(defcfun ("ImGui_TextColored" text-colored) :VOID
-  (col VEC4)
-  (fmt :STRING)
-  &rest
-)
-
-(defcfun ("ImGui_TextColoredV" text-colored-v) :VOID
-  (col VEC4)
   (fmt :STRING)
   (args :POINTER)
 )
@@ -2284,19 +2184,8 @@
   (label :STRING)
 )
 
-(defcfun ("ImGui_ButtonEx" button-ex) :BOOL
-  (label :STRING)
-  (size VEC2)
-)
-
 (defcfun ("ImGui_SmallButton" small-button) :BOOL
   (label :STRING)
-)
-
-(defcfun ("ImGui_InvisibleButton" invisible-button) :BOOL
-  (str-id :STRING)
-  (size VEC2)
-  (flags BUTTONFLAGS)
 )
 
 (defcfun ("ImGui_ArrowButton" arrow-button) :BOOL
@@ -2332,12 +2221,6 @@
   (v-button :INT)
 )
 
-(defcfun ("ImGui_ProgressBar" progress-bar) :VOID
-  (fraction :FLOAT)
-  (size-arg VEC2)
-  (overlay :STRING)
-)
-
 (defcfun ("ImGui_Bullet" bullet) :VOID)
 
 (defcfun ("ImGui_TextLink" text-link) :BOOL
@@ -2349,36 +2232,10 @@
   (url :STRING)
 )
 
-(defcfun ("ImGui_ImageEx" image-ex) :VOID
-  (tex-ref TEXTUREREF)
-  (image-size VEC2)
-  (uv0 VEC2)
-  (uv1 VEC2)
-)
-
-(defcfun ("ImGui_ImageWithBgEx" image-with-bg-ex) :VOID
-  (tex-ref TEXTUREREF)
-  (image-size VEC2)
-  (uv0 VEC2)
-  (uv1 VEC2)
-  (bg-col VEC4)
-  (tint-col VEC4)
-)
-
-(defcfun ("ImGui_ImageButtonEx" image-button-ex) :BOOL
-  (str-id :STRING)
-  (tex-ref TEXTUREREF)
-  (image-size VEC2)
-  (uv0 VEC2)
-  (uv1 VEC2)
-  (bg-col VEC4)
-  (tint-col VEC4)
-)
-
 (defcfun ("ImGui_BeginCombo" begin-combo) :BOOL
   (label :STRING)
   (preview-value :STRING)
-  (flags COMBOFLAGS)
+  (flags COMBO-FLAGS)
 )
 
 (defcfun ("ImGui_EndCombo" end-combo) :VOID)
@@ -2414,7 +2271,7 @@
   (v-min :FLOAT)
   (v-max :FLOAT)
   (format :STRING)
-  (flags SLIDERFLAGS)
+  (flags SLIDER-FLAGS)
 )
 
 (defcfun ("ImGui_DragFloat2Ex" drag-float2ex) :BOOL
@@ -2424,7 +2281,7 @@
   (v-min :FLOAT)
   (v-max :FLOAT)
   (format :STRING)
-  (flags SLIDERFLAGS)
+  (flags SLIDER-FLAGS)
 )
 
 (defcfun ("ImGui_DragFloat3Ex" drag-float3ex) :BOOL
@@ -2434,7 +2291,7 @@
   (v-min :FLOAT)
   (v-max :FLOAT)
   (format :STRING)
-  (flags SLIDERFLAGS)
+  (flags SLIDER-FLAGS)
 )
 
 (defcfun ("ImGui_DragFloat4Ex" drag-float4ex) :BOOL
@@ -2444,7 +2301,7 @@
   (v-min :FLOAT)
   (v-max :FLOAT)
   (format :STRING)
-  (flags SLIDERFLAGS)
+  (flags SLIDER-FLAGS)
 )
 
 (defcfun ("ImGui_DragFloatRange2Ex" drag-float-range2ex) :BOOL
@@ -2456,7 +2313,7 @@
   (v-max :FLOAT)
   (format :STRING)
   (format-max :STRING)
-  (flags SLIDERFLAGS)
+  (flags SLIDER-FLAGS)
 )
 
 (defcfun ("ImGui_DragIntEx" drag-int-ex) :BOOL
@@ -2466,7 +2323,7 @@
   (v-min :INT)
   (v-max :INT)
   (format :STRING)
-  (flags SLIDERFLAGS)
+  (flags SLIDER-FLAGS)
 )
 
 (defcfun ("ImGui_DragInt2Ex" drag-int2ex) :BOOL
@@ -2476,7 +2333,7 @@
   (v-min :INT)
   (v-max :INT)
   (format :STRING)
-  (flags SLIDERFLAGS)
+  (flags SLIDER-FLAGS)
 )
 
 (defcfun ("ImGui_DragInt3Ex" drag-int3ex) :BOOL
@@ -2486,7 +2343,7 @@
   (v-min :INT)
   (v-max :INT)
   (format :STRING)
-  (flags SLIDERFLAGS)
+  (flags SLIDER-FLAGS)
 )
 
 (defcfun ("ImGui_DragInt4Ex" drag-int4ex) :BOOL
@@ -2496,7 +2353,7 @@
   (v-min :INT)
   (v-max :INT)
   (format :STRING)
-  (flags SLIDERFLAGS)
+  (flags SLIDER-FLAGS)
 )
 
 (defcfun ("ImGui_DragIntRange2Ex" drag-int-range2ex) :BOOL
@@ -2508,30 +2365,30 @@
   (v-max :INT)
   (format :STRING)
   (format-max :STRING)
-  (flags SLIDERFLAGS)
+  (flags SLIDER-FLAGS)
 )
 
 (defcfun ("ImGui_DragScalarEx" drag-scalar-ex) :BOOL
   (label :STRING)
-  (data-type DATATYPE)
+  (data-type DATA-TYPE)
   (p-data :POINTER)
   (v-speed :FLOAT)
   (p-min :POINTER)
   (p-max :POINTER)
   (format :STRING)
-  (flags SLIDERFLAGS)
+  (flags SLIDER-FLAGS)
 )
 
 (defcfun ("ImGui_DragScalarNEx" drag-scalar-nex) :BOOL
   (label :STRING)
-  (data-type DATATYPE)
+  (data-type DATA-TYPE)
   (p-data :POINTER)
   (components :INT)
   (v-speed :FLOAT)
   (p-min :POINTER)
   (p-max :POINTER)
   (format :STRING)
-  (flags SLIDERFLAGS)
+  (flags SLIDER-FLAGS)
 )
 
 (defcfun ("ImGui_SliderFloatEx" slider-float-ex) :BOOL
@@ -2540,7 +2397,7 @@
   (v-min :FLOAT)
   (v-max :FLOAT)
   (format :STRING)
-  (flags SLIDERFLAGS)
+  (flags SLIDER-FLAGS)
 )
 
 (defcfun ("ImGui_SliderFloat2Ex" slider-float2ex) :BOOL
@@ -2549,7 +2406,7 @@
   (v-min :FLOAT)
   (v-max :FLOAT)
   (format :STRING)
-  (flags SLIDERFLAGS)
+  (flags SLIDER-FLAGS)
 )
 
 (defcfun ("ImGui_SliderFloat3Ex" slider-float3ex) :BOOL
@@ -2558,7 +2415,7 @@
   (v-min :FLOAT)
   (v-max :FLOAT)
   (format :STRING)
-  (flags SLIDERFLAGS)
+  (flags SLIDER-FLAGS)
 )
 
 (defcfun ("ImGui_SliderFloat4Ex" slider-float4ex) :BOOL
@@ -2567,7 +2424,7 @@
   (v-min :FLOAT)
   (v-max :FLOAT)
   (format :STRING)
-  (flags SLIDERFLAGS)
+  (flags SLIDER-FLAGS)
 )
 
 (defcfun ("ImGui_SliderAngleEx" slider-angle-ex) :BOOL
@@ -2576,7 +2433,7 @@
   (v-degrees-min :FLOAT)
   (v-degrees-max :FLOAT)
   (format :STRING)
-  (flags SLIDERFLAGS)
+  (flags SLIDER-FLAGS)
 )
 
 (defcfun ("ImGui_SliderIntEx" slider-int-ex) :BOOL
@@ -2585,7 +2442,7 @@
   (v-min :INT)
   (v-max :INT)
   (format :STRING)
-  (flags SLIDERFLAGS)
+  (flags SLIDER-FLAGS)
 )
 
 (defcfun ("ImGui_SliderInt2Ex" slider-int2ex) :BOOL
@@ -2594,7 +2451,7 @@
   (v-min :INT)
   (v-max :INT)
   (format :STRING)
-  (flags SLIDERFLAGS)
+  (flags SLIDER-FLAGS)
 )
 
 (defcfun ("ImGui_SliderInt3Ex" slider-int3ex) :BOOL
@@ -2603,7 +2460,7 @@
   (v-min :INT)
   (v-max :INT)
   (format :STRING)
-  (flags SLIDERFLAGS)
+  (flags SLIDER-FLAGS)
 )
 
 (defcfun ("ImGui_SliderInt4Ex" slider-int4ex) :BOOL
@@ -2612,77 +2469,36 @@
   (v-min :INT)
   (v-max :INT)
   (format :STRING)
-  (flags SLIDERFLAGS)
+  (flags SLIDER-FLAGS)
 )
 
 (defcfun ("ImGui_SliderScalarEx" slider-scalar-ex) :BOOL
   (label :STRING)
-  (data-type DATATYPE)
+  (data-type DATA-TYPE)
   (p-data :POINTER)
   (p-min :POINTER)
   (p-max :POINTER)
   (format :STRING)
-  (flags SLIDERFLAGS)
+  (flags SLIDER-FLAGS)
 )
 
 (defcfun ("ImGui_SliderScalarNEx" slider-scalar-nex) :BOOL
   (label :STRING)
-  (data-type DATATYPE)
+  (data-type DATA-TYPE)
   (p-data :POINTER)
   (components :INT)
   (p-min :POINTER)
   (p-max :POINTER)
   (format :STRING)
-  (flags SLIDERFLAGS)
-)
-
-(defcfun ("ImGui_VSliderFloatEx" vslider-float-ex) :BOOL
-  (label :STRING)
-  (size VEC2)
-  (v :POINTER)
-  (v-min :FLOAT)
-  (v-max :FLOAT)
-  (format :STRING)
-  (flags SLIDERFLAGS)
-)
-
-(defcfun ("ImGui_VSliderIntEx" vslider-int-ex) :BOOL
-  (label :STRING)
-  (size VEC2)
-  (v :POINTER)
-  (v-min :INT)
-  (v-max :INT)
-  (format :STRING)
-  (flags SLIDERFLAGS)
-)
-
-(defcfun ("ImGui_VSliderScalarEx" vslider-scalar-ex) :BOOL
-  (label :STRING)
-  (size VEC2)
-  (data-type DATATYPE)
-  (p-data :POINTER)
-  (p-min :POINTER)
-  (p-max :POINTER)
-  (format :STRING)
-  (flags SLIDERFLAGS)
+  (flags SLIDER-FLAGS)
 )
 
 (defcfun ("ImGui_InputTextEx" input-text-ex) :BOOL
   (label :STRING)
-  (buf :POINTER)
+  (buf :pointer) ; pointer override
   (buf-size :SIZE)
-  (flags INPUTTEXTFLAGS)
-  (callback INPUTTEXTCALLBACK)
-  (user-data :POINTER)
-)
-
-(defcfun ("ImGui_InputTextMultilineEx" input-text-multiline-ex) :BOOL
-  (label :STRING)
-  (buf :STRING)
-  (buf-size :SIZE)
-  (size VEC2)
-  (flags INPUTTEXTFLAGS)
-  (callback INPUTTEXTCALLBACK)
+  (flags INPUT-TEXT-FLAGS)
+  (callback INPUT-TEXT-CALLBACK)
   (user-data :POINTER)
 )
 
@@ -2691,8 +2507,8 @@
   (hint :STRING)
   (buf :STRING)
   (buf-size :SIZE)
-  (flags INPUTTEXTFLAGS)
-  (callback INPUTTEXTCALLBACK)
+  (flags INPUT-TEXT-FLAGS)
+  (callback INPUT-TEXT-CALLBACK)
   (user-data :POINTER)
 )
 
@@ -2702,28 +2518,28 @@
   (step :FLOAT)
   (step-fast :FLOAT)
   (format :STRING)
-  (flags INPUTTEXTFLAGS)
+  (flags INPUT-TEXT-FLAGS)
 )
 
 (defcfun ("ImGui_InputFloat2Ex" input-float2ex) :BOOL
   (label :STRING)
   (v :pointer)
   (format :STRING)
-  (flags INPUTTEXTFLAGS)
+  (flags INPUT-TEXT-FLAGS)
 )
 
 (defcfun ("ImGui_InputFloat3Ex" input-float3ex) :BOOL
   (label :STRING)
   (v :pointer)
   (format :STRING)
-  (flags INPUTTEXTFLAGS)
+  (flags INPUT-TEXT-FLAGS)
 )
 
 (defcfun ("ImGui_InputFloat4Ex" input-float4ex) :BOOL
   (label :STRING)
   (v :pointer)
   (format :STRING)
-  (flags INPUTTEXTFLAGS)
+  (flags INPUT-TEXT-FLAGS)
 )
 
 (defcfun ("ImGui_InputIntEx" input-int-ex) :BOOL
@@ -2731,25 +2547,25 @@
   (v :POINTER)
   (step :INT)
   (step-fast :INT)
-  (flags INPUTTEXTFLAGS)
+  (flags INPUT-TEXT-FLAGS)
 )
 
 (defcfun ("ImGui_InputInt2" input-int2) :BOOL
   (label :STRING)
   (v :pointer)
-  (flags INPUTTEXTFLAGS)
+  (flags INPUT-TEXT-FLAGS)
 )
 
 (defcfun ("ImGui_InputInt3" input-int3) :BOOL
   (label :STRING)
   (v :pointer)
-  (flags INPUTTEXTFLAGS)
+  (flags INPUT-TEXT-FLAGS)
 )
 
 (defcfun ("ImGui_InputInt4" input-int4) :BOOL
   (label :STRING)
   (v :pointer)
-  (flags INPUTTEXTFLAGS)
+  (flags INPUT-TEXT-FLAGS)
 )
 
 (defcfun ("ImGui_InputDoubleEx" input-double-ex) :BOOL
@@ -2758,64 +2574,57 @@
   (step :DOUBLE)
   (step-fast :DOUBLE)
   (format :STRING)
-  (flags INPUTTEXTFLAGS)
+  (flags INPUT-TEXT-FLAGS)
 )
 
 (defcfun ("ImGui_InputScalarEx" input-scalar-ex) :BOOL
   (label :STRING)
-  (data-type DATATYPE)
+  (data-type DATA-TYPE)
   (p-data :POINTER)
   (p-step :POINTER)
   (p-step-fast :POINTER)
   (format :STRING)
-  (flags INPUTTEXTFLAGS)
+  (flags INPUT-TEXT-FLAGS)
 )
 
 (defcfun ("ImGui_InputScalarNEx" input-scalar-nex) :BOOL
   (label :STRING)
-  (data-type DATATYPE)
+  (data-type DATA-TYPE)
   (p-data :POINTER)
   (components :INT)
   (p-step :POINTER)
   (p-step-fast :POINTER)
   (format :STRING)
-  (flags INPUTTEXTFLAGS)
+  (flags INPUT-TEXT-FLAGS)
 )
 
 (defcfun ("ImGui_ColorEdit3" color-edit3) :BOOL
   (label :STRING)
   (col :pointer)
-  (flags COLOREDITFLAGS)
+  (flags COLOR-EDIT-FLAGS)
 )
 
 (defcfun ("ImGui_ColorEdit4" color-edit4) :BOOL
   (label :STRING)
   (col :pointer)
-  (flags COLOREDITFLAGS)
+  (flags COLOR-EDIT-FLAGS)
 )
 
 (defcfun ("ImGui_ColorPicker3" color-picker3) :BOOL
   (label :STRING)
   (col :pointer)
-  (flags COLOREDITFLAGS)
+  (flags COLOR-EDIT-FLAGS)
 )
 
 (defcfun ("ImGui_ColorPicker4" color-picker4) :BOOL
   (label :STRING)
   (col :pointer)
-  (flags COLOREDITFLAGS)
+  (flags COLOR-EDIT-FLAGS)
   (ref-col :POINTER)
 )
 
-(defcfun ("ImGui_ColorButtonEx" color-button-ex) :BOOL
-  (desc-id :STRING)
-  (col VEC4)
-  (flags COLOREDITFLAGS)
-  (size VEC2)
-)
-
 (defcfun ("ImGui_SetColorEditOptions" set-color-edit-options) :VOID
-  (flags COLOREDITFLAGS)
+  (flags COLOR-EDIT-FLAGS)
 )
 
 (defcfun ("ImGui_TreeNode" tree-node) :BOOL
@@ -2848,33 +2657,33 @@
 
 (defcfun ("ImGui_TreeNodeEx" tree-node-ex) :BOOL
   (label :STRING)
-  (flags TREENODEFLAGS)
+  (flags TREE-NODE-FLAGS)
 )
 
 (defcfun ("ImGui_TreeNodeExStr" tree-node-ex-str) :BOOL
   (str-id :STRING)
-  (flags TREENODEFLAGS)
+  (flags TREE-NODE-FLAGS)
   (fmt :STRING)
   &rest
 )
 
 (defcfun ("ImGui_TreeNodeExPtr" tree-node-ex-ptr) :BOOL
   (ptr-id :POINTER)
-  (flags TREENODEFLAGS)
+  (flags TREE-NODE-FLAGS)
   (fmt :STRING)
   &rest
 )
 
 (defcfun ("ImGui_TreeNodeExV" tree-node-ex-v) :BOOL
   (str-id :STRING)
-  (flags TREENODEFLAGS)
+  (flags TREE-NODE-FLAGS)
   (fmt :STRING)
   (args :POINTER)
 )
 
 (defcfun ("ImGui_TreeNodeExVPtr" tree-node-ex-vptr) :BOOL
   (ptr-id :POINTER)
-  (flags TREENODEFLAGS)
+  (flags TREE-NODE-FLAGS)
   (fmt :STRING)
   (args :POINTER)
 )
@@ -2893,13 +2702,13 @@
 
 (defcfun ("ImGui_CollapsingHeader" collapsing-header) :BOOL
   (label :STRING)
-  (flags TREENODEFLAGS)
+  (flags TREE-NODE-FLAGS)
 )
 
 (defcfun ("ImGui_CollapsingHeaderBoolPtr" collapsing-header-bool-ptr) :BOOL
   (label :STRING)
   (p-visible :POINTER)
-  (flags TREENODEFLAGS)
+  (flags TREE-NODE-FLAGS)
 )
 
 (defcfun ("ImGui_SetNextItemOpen" set-next-item-open) :VOID
@@ -2911,22 +2720,8 @@
   (storage-id ID)
 )
 
-(defcfun ("ImGui_SelectableEx" selectable-ex) :BOOL
-  (label :STRING)
-  (selected :BOOL)
-  (flags SELECTABLEFLAGS)
-  (size VEC2)
-)
-
-(defcfun ("ImGui_SelectableBoolPtrEx" selectable-bool-ptr-ex) :BOOL
-  (label :STRING)
-  (p-selected :POINTER)
-  (flags SELECTABLEFLAGS)
-  (size VEC2)
-)
-
 (defcfun ("ImGui_BeginMultiSelectEx" begin-multi-select-ex) :POINTER
-  (flags MULTISELECTFLAGS)
+  (flags MULTI-SELECT-FLAGS)
   (selection-size :INT)
   (items-count :INT)
 )
@@ -2934,15 +2729,10 @@
 (defcfun ("ImGui_EndMultiSelect" end-multi-select) :POINTER)
 
 (defcfun ("ImGui_SetNextItemSelectionUserData" set-next-item-selection-user-data) :VOID
-  (selection-user-data SELECTIONUSERDATA)
+  (selection-user-data SELECTION-USER-DATA)
 )
 
 (defcfun ("ImGui_IsItemToggledSelection" is-item-toggled-selection) :BOOL)
-
-(defcfun ("ImGui_BeginListBox" begin-list-box) :BOOL
-  (label :STRING)
-  (size VEC2)
-)
 
 (defcfun ("ImGui_EndListBox" end-list-box) :VOID)
 
@@ -2961,54 +2751,6 @@
   (user-data :POINTER)
   (items-count :INT)
   (height-in-items :INT)
-)
-
-(defcfun ("ImGui_PlotLinesEx" plot-lines-ex) :VOID
-  (label :STRING)
-  (values :POINTER)
-  (values-count :INT)
-  (values-offset :INT)
-  (overlay-text :STRING)
-  (scale-min :FLOAT)
-  (scale-max :FLOAT)
-  (graph-size VEC2)
-  (stride :INT)
-)
-
-(defcfun ("ImGui_PlotLinesCallbackEx" plot-lines-callback-ex) :VOID
-  (label :STRING)
-  (values-getter :POINTER)
-  (data :POINTER)
-  (values-count :INT)
-  (values-offset :INT)
-  (overlay-text :STRING)
-  (scale-min :FLOAT)
-  (scale-max :FLOAT)
-  (graph-size VEC2)
-)
-
-(defcfun ("ImGui_PlotHistogramEx" plot-histogram-ex) :VOID
-  (label :STRING)
-  (values :POINTER)
-  (values-count :INT)
-  (values-offset :INT)
-  (overlay-text :STRING)
-  (scale-min :FLOAT)
-  (scale-max :FLOAT)
-  (graph-size VEC2)
-  (stride :INT)
-)
-
-(defcfun ("ImGui_PlotHistogramCallbackEx" plot-histogram-callback-ex) :VOID
-  (label :STRING)
-  (values-getter :POINTER)
-  (data :POINTER)
-  (values-count :INT)
-  (values-offset :INT)
-  (overlay-text :STRING)
-  (scale-min :FLOAT)
-  (scale-max :FLOAT)
-  (graph-size VEC2)
 )
 
 (defcfun ("ImGui_BeginMenuBar" begin-menu-bar) :BOOL)
@@ -3068,66 +2810,58 @@
 
 (defcfun ("ImGui_BeginPopup" begin-popup) :BOOL
   (str-id :STRING)
-  (flags WINDOWFLAGS)
+  (flags WINDOW-FLAGS)
 )
 
 (defcfun ("ImGui_BeginPopupModal" begin-popup-modal) :BOOL
   (name :STRING)
   (p-open :POINTER)
-  (flags WINDOWFLAGS)
+  (flags WINDOW-FLAGS)
 )
 
 (defcfun ("ImGui_EndPopup" end-popup) :VOID)
 
 (defcfun ("ImGui_OpenPopup" open-popup) :VOID
   (str-id :STRING)
-  (popup-flags POPUPFLAGS)
+  (popup-flags POPUP-FLAGS)
 )
 
 (defcfun ("ImGui_OpenPopupID" open-popup-id) :VOID
   (id ID)
-  (popup-flags POPUPFLAGS)
+  (popup-flags POPUP-FLAGS)
 )
 
 (defcfun ("ImGui_OpenPopupOnItemClick" open-popup-on-item-click) :VOID
   (str-id :STRING)
-  (popup-flags POPUPFLAGS)
+  (popup-flags POPUP-FLAGS)
 )
 
 (defcfun ("ImGui_CloseCurrentPopup" close-current-popup) :VOID)
 
 (defcfun ("ImGui_BeginPopupContextItemEx" begin-popup-context-item-ex) :BOOL
   (str-id :STRING)
-  (popup-flags POPUPFLAGS)
+  (popup-flags POPUP-FLAGS)
 )
 
 (defcfun ("ImGui_BeginPopupContextWindowEx" begin-popup-context-window-ex) :BOOL
   (str-id :STRING)
-  (popup-flags POPUPFLAGS)
+  (popup-flags POPUP-FLAGS)
 )
 
 (defcfun ("ImGui_BeginPopupContextVoidEx" begin-popup-context-void-ex) :BOOL
   (str-id :STRING)
-  (popup-flags POPUPFLAGS)
+  (popup-flags POPUP-FLAGS)
 )
 
 (defcfun ("ImGui_IsPopupOpen" is-popup-open) :BOOL
   (str-id :STRING)
-  (flags POPUPFLAGS)
-)
-
-(defcfun ("ImGui_BeginTableEx" begin-table-ex) :BOOL
-  (str-id :STRING)
-  (columns :INT)
-  (flags TABLEFLAGS)
-  (outer-size VEC2)
-  (inner-width :FLOAT)
+  (flags POPUP-FLAGS)
 )
 
 (defcfun ("ImGui_EndTable" end-table) :VOID)
 
 (defcfun ("ImGui_TableNextRowEx" table-next-row-ex) :VOID
-  (row-flags TABLEROWFLAGS)
+  (row-flags TABLE-ROW-FLAGS)
   (min-row-height :FLOAT)
 )
 
@@ -3139,7 +2873,7 @@
 
 (defcfun ("ImGui_TableSetupColumnEx" table-setup-column-ex) :VOID
   (label :STRING)
-  (flags TABLECOLUMNFLAGS)
+  (flags TABLE-COLUMN-FLAGS)
   (init-width-or-weight :FLOAT)
   (user-id ID)
 )
@@ -3169,7 +2903,7 @@
   (column-n :INT)
 )
 
-(defcfun ("ImGui_TableGetColumnFlags" table-get-column-flags) TABLECOLUMNFLAGS
+(defcfun ("ImGui_TableGetColumnFlags" table-get-column-flags) TABLE-COLUMN-FLAGS
   (column-n :INT)
 )
 
@@ -3181,7 +2915,7 @@
 (defcfun ("ImGui_TableGetHoveredColumn" table-get-hovered-column) :INT)
 
 (defcfun ("ImGui_TableSetBgColor" table-set-bg-color) :VOID
-  (target TABLEBGTARGET)
+  (target TABLE-BG-TARGET)
   (color U32)
   (column-n :INT)
 )
@@ -3218,7 +2952,7 @@
 
 (defcfun ("ImGui_BeginTabBar" begin-tab-bar) :BOOL
   (str-id :STRING)
-  (flags TABBARFLAGS)
+  (flags TAB-BAR-FLAGS)
 )
 
 (defcfun ("ImGui_EndTabBar" end-tab-bar) :VOID)
@@ -3226,14 +2960,14 @@
 (defcfun ("ImGui_BeginTabItem" begin-tab-item) :BOOL
   (label :STRING)
   (p-open :POINTER)
-  (flags TABITEMFLAGS)
+  (flags TAB-ITEM-FLAGS)
 )
 
 (defcfun ("ImGui_EndTabItem" end-tab-item) :VOID)
 
 (defcfun ("ImGui_TabItemButton" tab-item-button) :BOOL
   (label :STRING)
-  (flags TABITEMFLAGS)
+  (flags TAB-ITEM-FLAGS)
 )
 
 (defcfun ("ImGui_SetTabItemClosed" set-tab-item-closed) :VOID
@@ -3268,7 +3002,7 @@
 )
 
 (defcfun ("ImGui_BeginDragDropSource" begin-drag-drop-source) :BOOL
-  (flags DRAGDROPFLAGS)
+  (flags DRAG-DROP-FLAGS)
 )
 
 (defcfun ("ImGui_SetDragDropPayload" set-drag-drop-payload) :BOOL
@@ -3284,7 +3018,7 @@
 
 (defcfun ("ImGui_AcceptDragDropPayload" accept-drag-drop-payload) :POINTER
   (type :STRING)
-  (flags DRAGDROPFLAGS)
+  (flags DRAG-DROP-FLAGS)
 )
 
 (defcfun ("ImGui_EndDragDropTarget" end-drag-drop-target) :VOID)
@@ -3296,12 +3030,6 @@
 )
 
 (defcfun ("ImGui_EndDisabled" end-disabled) :VOID)
-
-(defcfun ("ImGui_PushClipRect" push-clip-rect) :VOID
-  (clip-rect-min VEC2)
-  (clip-rect-max VEC2)
-  (intersect-with-current-clip-rect :BOOL)
-)
 
 (defcfun ("ImGui_PopClipRect" pop-clip-rect) :VOID)
 
@@ -3318,7 +3046,7 @@
 (defcfun ("ImGui_SetNextItemAllowOverlap" set-next-item-allow-overlap) :VOID)
 
 (defcfun ("ImGui_IsItemHovered" is-item-hovered) :BOOL
-  (flags HOVEREDFLAGS)
+  (flags HOVERED-FLAGS)
 )
 
 (defcfun ("ImGui_IsItemActive" is-item-active) :BOOL)
@@ -3326,7 +3054,7 @@
 (defcfun ("ImGui_IsItemFocused" is-item-focused) :BOOL)
 
 (defcfun ("ImGui_IsItemClickedEx" is-item-clicked-ex) :BOOL
-  (mouse-button MOUSEBUTTON)
+  (mouse-button MOUSE-BUTTON)
 )
 
 (defcfun ("ImGui_IsItemVisible" is-item-visible) :BOOL)
@@ -3361,15 +3089,6 @@
 
 (defcfun ("ImGui_GetForegroundDrawList" get-foreground-draw-list) :POINTER)
 
-(defcfun ("ImGui_IsRectVisibleBySize" is-rect-visible-by-size) :BOOL
-  (size VEC2)
-)
-
-(defcfun ("ImGui_IsRectVisible" is-rect-visible) :BOOL
-  (rect-min VEC2)
-  (rect-max VEC2)
-)
-
 (defcfun ("ImGui_GetTime" get-time) :DOUBLE)
 
 (defcfun ("ImGui_GetFrameCount" get-frame-count) :INT)
@@ -3395,10 +3114,6 @@
 
 (defcfun ("ImGui_ColorConvertU32ToFloat4" color-convert-u32to-float4) VEC4
   (in U32)
-)
-
-(defcfun ("ImGui_ColorConvertFloat4ToU32" color-convert-float4to-u32) U32
-  (in VEC4)
 )
 
 (defcfun ("ImGui_ColorConvertRGBtoHSV" color-convert-rgbto-hsv) :VOID
@@ -3433,7 +3148,7 @@
 )
 
 (defcfun ("ImGui_IsKeyChordPressed" is-key-chord-pressed) :BOOL
-  (key-chord KEYCHORD)
+  (key-chord KEY-CHORD)
 )
 
 (defcfun ("ImGui_GetKeyPressedAmount" get-key-pressed-amount) :INT
@@ -3451,13 +3166,13 @@
 )
 
 (defcfun ("ImGui_Shortcut" shortcut) :BOOL
-  (key-chord KEYCHORD)
-  (flags INPUTFLAGS)
+  (key-chord KEY-CHORD)
+  (flags INPUT-FLAGS)
 )
 
 (defcfun ("ImGui_SetNextItemShortcut" set-next-item-shortcut) :VOID
-  (key-chord KEYCHORD)
-  (flags INPUTFLAGS)
+  (key-chord KEY-CHORD)
+  (flags INPUT-FLAGS)
 )
 
 (defcfun ("ImGui_SetItemKeyOwner" set-item-key-owner) :VOID
@@ -3465,35 +3180,29 @@
 )
 
 (defcfun ("ImGui_IsMouseDown" is-mouse-down) :BOOL
-  (button MOUSEBUTTON)
+  (button MOUSE-BUTTON)
 )
 
 (defcfun ("ImGui_IsMouseClickedEx" is-mouse-clicked-ex) :BOOL
-  (button MOUSEBUTTON)
+  (button MOUSE-BUTTON)
   (repeat :BOOL)
 )
 
 (defcfun ("ImGui_IsMouseReleased" is-mouse-released) :BOOL
-  (button MOUSEBUTTON)
+  (button MOUSE-BUTTON)
 )
 
 (defcfun ("ImGui_IsMouseDoubleClicked" is-mouse-double-clicked) :BOOL
-  (button MOUSEBUTTON)
+  (button MOUSE-BUTTON)
 )
 
 (defcfun ("ImGui_IsMouseReleasedWithDelay" is-mouse-released-with-delay) :BOOL
-  (button MOUSEBUTTON)
+  (button MOUSE-BUTTON)
   (delay :FLOAT)
 )
 
 (defcfun ("ImGui_GetMouseClickedCount" get-mouse-clicked-count) :INT
-  (button MOUSEBUTTON)
-)
-
-(defcfun ("ImGui_IsMouseHoveringRectEx" is-mouse-hovering-rect-ex) :BOOL
-  (r-min VEC2)
-  (r-max VEC2)
-  (clip :BOOL)
+  (button MOUSE-BUTTON)
 )
 
 (defcfun ("ImGui_IsMousePosValid" is-mouse-pos-valid) :BOOL
@@ -3507,23 +3216,23 @@
 (defcfun ("ImGui_GetMousePosOnOpeningCurrentPopup" get-mouse-pos-on-opening-current-popup) VEC2)
 
 (defcfun ("ImGui_IsMouseDragging" is-mouse-dragging) :BOOL
-  (button MOUSEBUTTON)
+  (button MOUSE-BUTTON)
   (lock-threshold :FLOAT)
 )
 
 (defcfun ("ImGui_GetMouseDragDelta" get-mouse-drag-delta) VEC2
-  (button MOUSEBUTTON)
+  (button MOUSE-BUTTON)
   (lock-threshold :FLOAT)
 )
 
 (defcfun ("ImGui_ResetMouseDragDeltaEx" reset-mouse-drag-delta-ex) :VOID
-  (button MOUSEBUTTON)
+  (button MOUSE-BUTTON)
 )
 
-(defcfun ("ImGui_GetMouseCursor" get-mouse-cursor) MOUSECURSOR)
+(defcfun ("ImGui_GetMouseCursor" get-mouse-cursor) MOUSE-CURSOR)
 
 (defcfun ("ImGui_SetMouseCursor" set-mouse-cursor) :VOID
-  (cursor-type MOUSECURSOR)
+  (cursor-type MOUSE-CURSOR)
 )
 
 (defcfun ("ImGui_SetNextFrameWantCaptureMouse" set-next-frame-want-capture-mouse) :VOID
@@ -3584,8 +3293,8 @@
 )
 
 (defcfun ("ImGui_SetAllocatorFunctions" set-allocator-functions) :VOID
-  (alloc-func MEMALLOCFUNC)
-  (free-func MEMFREEFUNC)
+  (alloc-func MEM-ALLOC-FUNC)
+  (free-func MEM-FREE-FUNC)
   (user-data :POINTER)
 )
 
@@ -4002,7 +3711,7 @@
   (ms-io :POINTER)
 )
 
-(defcfun ("ImDrawCmd_GetTexID" draw-cmd-get-tex-id) TEXTUREID
+(defcfun ("ImDrawCmd_GetTexID" draw-cmd-get-tex-id) TEXTURE-ID
   (self :POINTER)
 )
 
@@ -4031,24 +3740,12 @@
   (channel-idx :INT)
 )
 
-(defcfun ("ImDrawList_PushClipRect" draw-list-push-clip-rect) :VOID
-  (self :POINTER)
-  (clip-rect-min VEC2)
-  (clip-rect-max VEC2)
-  (intersect-with-current-clip-rect :BOOL)
-)
-
 (defcfun ("ImDrawList_PushClipRectFullScreen" draw-list-push-clip-rect-full-screen) :VOID
   (self :POINTER)
 )
 
 (defcfun ("ImDrawList_PopClipRect" draw-list-pop-clip-rect) :VOID
   (self :POINTER)
-)
-
-(defcfun ("ImDrawList_PushTexture" draw-list-push-texture) :VOID
-  (self :POINTER)
-  (tex-ref TEXTUREREF)
 )
 
 (defcfun ("ImDrawList_PopTexture" draw-list-pop-texture) :VOID
@@ -4063,179 +3760,12 @@
   (self :POINTER)
 )
 
-(defcfun ("ImDrawList_AddLineEx" draw-list-add-line-ex) :VOID
-  (self :POINTER)
-  (p1 VEC2)
-  (p2 VEC2)
-  (col U32)
-  (thickness :FLOAT)
-)
-
-(defcfun ("ImDrawList_AddRectEx" draw-list-add-rect-ex) :VOID
-  (self :POINTER)
-  (p-min VEC2)
-  (p-max VEC2)
-  (col U32)
-  (rounding :FLOAT)
-  (flags DRAWFLAGS)
-  (thickness :FLOAT)
-)
-
-(defcfun ("ImDrawList_AddRectFilledEx" draw-list-add-rect-filled-ex) :VOID
-  (self :POINTER)
-  (p-min VEC2)
-  (p-max VEC2)
-  (col U32)
-  (rounding :FLOAT)
-  (flags DRAWFLAGS)
-)
-
-(defcfun ("ImDrawList_AddRectFilledMultiColor" draw-list-add-rect-filled-multi-color) :VOID
-  (self :POINTER)
-  (p-min VEC2)
-  (p-max VEC2)
-  (col-upr-left U32)
-  (col-upr-right U32)
-  (col-bot-right U32)
-  (col-bot-left U32)
-)
-
-(defcfun ("ImDrawList_AddQuadEx" draw-list-add-quad-ex) :VOID
-  (self :POINTER)
-  (p1 VEC2)
-  (p2 VEC2)
-  (p3 VEC2)
-  (p4 VEC2)
-  (col U32)
-  (thickness :FLOAT)
-)
-
-(defcfun ("ImDrawList_AddQuadFilled" draw-list-add-quad-filled) :VOID
-  (self :POINTER)
-  (p1 VEC2)
-  (p2 VEC2)
-  (p3 VEC2)
-  (p4 VEC2)
-  (col U32)
-)
-
-(defcfun ("ImDrawList_AddTriangleEx" draw-list-add-triangle-ex) :VOID
-  (self :POINTER)
-  (p1 VEC2)
-  (p2 VEC2)
-  (p3 VEC2)
-  (col U32)
-  (thickness :FLOAT)
-)
-
-(defcfun ("ImDrawList_AddTriangleFilled" draw-list-add-triangle-filled) :VOID
-  (self :POINTER)
-  (p1 VEC2)
-  (p2 VEC2)
-  (p3 VEC2)
-  (col U32)
-)
-
-(defcfun ("ImDrawList_AddCircleEx" draw-list-add-circle-ex) :VOID
-  (self :POINTER)
-  (center VEC2)
-  (radius :FLOAT)
-  (col U32)
-  (num-segments :INT)
-  (thickness :FLOAT)
-)
-
-(defcfun ("ImDrawList_AddCircleFilled" draw-list-add-circle-filled) :VOID
-  (self :POINTER)
-  (center VEC2)
-  (radius :FLOAT)
-  (col U32)
-  (num-segments :INT)
-)
-
-(defcfun ("ImDrawList_AddNgonEx" draw-list-add-ngon-ex) :VOID
-  (self :POINTER)
-  (center VEC2)
-  (radius :FLOAT)
-  (col U32)
-  (num-segments :INT)
-  (thickness :FLOAT)
-)
-
-(defcfun ("ImDrawList_AddNgonFilled" draw-list-add-ngon-filled) :VOID
-  (self :POINTER)
-  (center VEC2)
-  (radius :FLOAT)
-  (col U32)
-  (num-segments :INT)
-)
-
-(defcfun ("ImDrawList_AddEllipseEx" draw-list-add-ellipse-ex) :VOID
-  (self :POINTER)
-  (center VEC2)
-  (radius VEC2)
-  (col U32)
-  (rot :FLOAT)
-  (num-segments :INT)
-  (thickness :FLOAT)
-)
-
-(defcfun ("ImDrawList_AddEllipseFilledEx" draw-list-add-ellipse-filled-ex) :VOID
-  (self :POINTER)
-  (center VEC2)
-  (radius VEC2)
-  (col U32)
-  (rot :FLOAT)
-  (num-segments :INT)
-)
-
-(defcfun ("ImDrawList_AddTextEx" draw-list-add-text-ex) :VOID
-  (self :POINTER)
-  (pos VEC2)
-  (col U32)
-  (text-begin :STRING)
-  (text-end :STRING)
-)
-
-(defcfun ("ImDrawList_AddTextImFontPtrEx" draw-list-add-text-im-font-ptr-ex) :VOID
-  (self :POINTER)
-  (font :POINTER)
-  (font-size :FLOAT)
-  (pos VEC2)
-  (col U32)
-  (text-begin :STRING)
-  (text-end :STRING)
-  (wrap-width :FLOAT)
-  (cpu-fine-clip-rect :POINTER)
-)
-
-(defcfun ("ImDrawList_AddBezierCubic" draw-list-add-bezier-cubic) :VOID
-  (self :POINTER)
-  (p1 VEC2)
-  (p2 VEC2)
-  (p3 VEC2)
-  (p4 VEC2)
-  (col U32)
-  (thickness :FLOAT)
-  (num-segments :INT)
-)
-
-(defcfun ("ImDrawList_AddBezierQuadratic" draw-list-add-bezier-quadratic) :VOID
-  (self :POINTER)
-  (p1 VEC2)
-  (p2 VEC2)
-  (p3 VEC2)
-  (col U32)
-  (thickness :FLOAT)
-  (num-segments :INT)
-)
-
 (defcfun ("ImDrawList_AddPolyline" draw-list-add-polyline) :VOID
   (self :POINTER)
   (points :POINTER)
   (num-points :INT)
   (col U32)
-  (flags DRAWFLAGS)
+  (flags DRAW-FLAGS)
   (thickness :FLOAT)
 )
 
@@ -4253,54 +3783,8 @@
   (col U32)
 )
 
-(defcfun ("ImDrawList_AddImageEx" draw-list-add-image-ex) :VOID
-  (self :POINTER)
-  (tex-ref TEXTUREREF)
-  (p-min VEC2)
-  (p-max VEC2)
-  (uv-min VEC2)
-  (uv-max VEC2)
-  (col U32)
-)
-
-(defcfun ("ImDrawList_AddImageQuadEx" draw-list-add-image-quad-ex) :VOID
-  (self :POINTER)
-  (tex-ref TEXTUREREF)
-  (p1 VEC2)
-  (p2 VEC2)
-  (p3 VEC2)
-  (p4 VEC2)
-  (uv1 VEC2)
-  (uv2 VEC2)
-  (uv3 VEC2)
-  (uv4 VEC2)
-  (col U32)
-)
-
-(defcfun ("ImDrawList_AddImageRounded" draw-list-add-image-rounded) :VOID
-  (self :POINTER)
-  (tex-ref TEXTUREREF)
-  (p-min VEC2)
-  (p-max VEC2)
-  (uv-min VEC2)
-  (uv-max VEC2)
-  (col U32)
-  (rounding :FLOAT)
-  (flags DRAWFLAGS)
-)
-
 (defcfun ("ImDrawList_PathClear" draw-list-path-clear) :VOID
   (self :POINTER)
-)
-
-(defcfun ("ImDrawList_PathLineTo" draw-list-path-line-to) :VOID
-  (self :POINTER)
-  (pos VEC2)
-)
-
-(defcfun ("ImDrawList_PathLineToMergeDuplicate" draw-list-path-line-to-merge-duplicate) :VOID
-  (self :POINTER)
-  (pos VEC2)
 )
 
 (defcfun ("ImDrawList_PathFillConvex" draw-list-path-fill-convex) :VOID
@@ -4316,63 +3800,13 @@
 (defcfun ("ImDrawList_PathStroke" draw-list-path-stroke) :VOID
   (self :POINTER)
   (col U32)
-  (flags DRAWFLAGS)
+  (flags DRAW-FLAGS)
   (thickness :FLOAT)
-)
-
-(defcfun ("ImDrawList_PathArcTo" draw-list-path-arc-to) :VOID
-  (self :POINTER)
-  (center VEC2)
-  (radius :FLOAT)
-  (a-min :FLOAT)
-  (a-max :FLOAT)
-  (num-segments :INT)
-)
-
-(defcfun ("ImDrawList_PathArcToFast" draw-list-path-arc-to-fast) :VOID
-  (self :POINTER)
-  (center VEC2)
-  (radius :FLOAT)
-  (a-min-of-12 :INT)
-  (a-max-of-12 :INT)
-)
-
-(defcfun ("ImDrawList_PathEllipticalArcToEx" draw-list-path-elliptical-arc-to-ex) :VOID
-  (self :POINTER)
-  (center VEC2)
-  (radius VEC2)
-  (rot :FLOAT)
-  (a-min :FLOAT)
-  (a-max :FLOAT)
-  (num-segments :INT)
-)
-
-(defcfun ("ImDrawList_PathBezierCubicCurveTo" draw-list-path-bezier-cubic-curve-to) :VOID
-  (self :POINTER)
-  (p2 VEC2)
-  (p3 VEC2)
-  (p4 VEC2)
-  (num-segments :INT)
-)
-
-(defcfun ("ImDrawList_PathBezierQuadraticCurveTo" draw-list-path-bezier-quadratic-curve-to) :VOID
-  (self :POINTER)
-  (p2 VEC2)
-  (p3 VEC2)
-  (num-segments :INT)
-)
-
-(defcfun ("ImDrawList_PathRect" draw-list-path-rect) :VOID
-  (self :POINTER)
-  (rect-min VEC2)
-  (rect-max VEC2)
-  (rounding :FLOAT)
-  (flags DRAWFLAGS)
 )
 
 (defcfun ("ImDrawList_AddCallbackEx" draw-list-add-callback-ex) :VOID
   (self :POINTER)
-  (callback DRAWCALLBACK)
+  (callback DRAW-CALLBACK)
   (userdata :POINTER)
   (userdata-size :SIZE)
 )
@@ -4411,57 +3845,9 @@
   (vtx-count :INT)
 )
 
-(defcfun ("ImDrawList_PrimRect" draw-list-prim-rect) :VOID
-  (self :POINTER)
-  (a VEC2)
-  (b VEC2)
-  (col U32)
-)
-
-(defcfun ("ImDrawList_PrimRectUV" draw-list-prim-rect-uv) :VOID
-  (self :POINTER)
-  (a VEC2)
-  (b VEC2)
-  (uv-a VEC2)
-  (uv-b VEC2)
-  (col U32)
-)
-
-(defcfun ("ImDrawList_PrimQuadUV" draw-list-prim-quad-uv) :VOID
-  (self :POINTER)
-  (a VEC2)
-  (b VEC2)
-  (c VEC2)
-  (d VEC2)
-  (uv-a VEC2)
-  (uv-b VEC2)
-  (uv-c VEC2)
-  (uv-d VEC2)
-  (col U32)
-)
-
-(defcfun ("ImDrawList_PrimWriteVtx" draw-list-prim-write-vtx) :VOID
-  (self :POINTER)
-  (pos VEC2)
-  (uv VEC2)
-  (col U32)
-)
-
 (defcfun ("ImDrawList_PrimWriteIdx" draw-list-prim-write-idx) :VOID
   (self :POINTER)
-  (idx DRAWIDX)
-)
-
-(defcfun ("ImDrawList_PrimVtx" draw-list-prim-vtx) :VOID
-  (self :POINTER)
-  (pos VEC2)
-  (uv VEC2)
-  (col U32)
-)
-
-(defcfun ("ImDrawList_PushTextureID" draw-list-push-texture-id) :VOID
-  (self :POINTER)
-  (tex-ref TEXTUREREF)
+  (idx DRAW-IDX)
 )
 
 (defcfun ("ImDrawList_PopTextureID" draw-list-pop-texture-id) :VOID
@@ -4501,32 +3887,9 @@
   (self :POINTER)
 )
 
-(defcfun ("ImDrawList__SetTexture" draw-list--set-texture) :VOID
-  (self :POINTER)
-  (tex-ref TEXTUREREF)
-)
-
 (defcfun ("ImDrawList__CalcCircleAutoSegmentCount" draw-list--calc-circle-auto-segment-count) :INT
   (self :POINTER)
   (radius :FLOAT)
-)
-
-(defcfun ("ImDrawList__PathArcToFastEx" draw-list--path-arc-to-fast-ex) :VOID
-  (self :POINTER)
-  (center VEC2)
-  (radius :FLOAT)
-  (a-min-sample :INT)
-  (a-max-sample :INT)
-  (a-step :INT)
-)
-
-(defcfun ("ImDrawList__PathArcToN" draw-list--path-arc-to-n) :VOID
-  (self :POINTER)
-  (center VEC2)
-  (radius :FLOAT)
-  (a-min :FLOAT)
-  (a-max :FLOAT)
-  (num-segments :INT)
 )
 
 (defcfun ("ImDrawData_Clear" draw-data-clear) :VOID
@@ -4540,11 +3903,6 @@
 
 (defcfun ("ImDrawData_DeIndexAllBuffers" draw-data-de-index-all-buffers) :VOID
   (self :POINTER)
-)
-
-(defcfun ("ImDrawData_ScaleClipRects" draw-data-scale-clip-rects) :VOID
-  (self :POINTER)
-  (fb-scale VEC2)
 )
 
 (defcfun ("ImTextureData_Create" texture-data-create) :VOID
@@ -4576,17 +3934,17 @@
   (self :POINTER)
 )
 
-(defcfun ("ImTextureData_GetTexRef" texture-data-get-tex-ref) TEXTUREREF
+(defcfun ("ImTextureData_GetTexRef" texture-data-get-tex-ref) TEXTURE-REF
   (self :POINTER)
 )
 
-(defcfun ("ImTextureData_GetTexID" texture-data-get-tex-id) TEXTUREID
+(defcfun ("ImTextureData_GetTexID" texture-data-get-tex-id) TEXTURE-ID
   (self :POINTER)
 )
 
 (defcfun ("ImTextureData_SetTexID" texture-data-set-tex-id) :VOID
   (self :POINTER)
-  (tex-id TEXTUREID)
+  (tex-id TEXTURE-ID)
 )
 
 (defcfun ("ImTextureData_SetStatus" texture-data-set-status) :VOID
@@ -4725,12 +4083,7 @@
 
 (defcfun ("ImFontAtlas_SetTexID" font-atlas-set-tex-id) :VOID
   (self :POINTER)
-  (id TEXTUREID)
-)
-
-(defcfun ("ImFontAtlas_SetTexIDImTextureRef" font-atlas-set-tex-idim-texture-ref) :VOID
-  (self :POINTER)
-  (id TEXTUREREF)
+  (id TEXTURE-ID)
 )
 
 (defcfun ("ImFontAtlas_IsBuilt" font-atlas-is-built) :BOOL
@@ -4773,7 +4126,7 @@
   (self :POINTER)
 )
 
-(defcfun ("ImFontAtlas_AddCustomRect" font-atlas-add-custom-rect) FONTATLASRECTID
+(defcfun ("ImFontAtlas_AddCustomRect" font-atlas-add-custom-rect) FONT-ATLAS-RECT-ID
   (self :POINTER)
   (width :INT)
   (height :INT)
@@ -4782,16 +4135,16 @@
 
 (defcfun ("ImFontAtlas_RemoveCustomRect" font-atlas-remove-custom-rect) :VOID
   (self :POINTER)
-  (id FONTATLASRECTID)
+  (id FONT-ATLAS-RECT-ID)
 )
 
 (defcfun ("ImFontAtlas_GetCustomRect" font-atlas-get-custom-rect) :BOOL
   (self :POINTER)
-  (id FONTATLASRECTID)
+  (id FONT-ATLAS-RECT-ID)
   (out-r :POINTER)
 )
 
-(defcfun ("ImFontAtlas_AddCustomRectRegular" font-atlas-add-custom-rect-regular) FONTATLASRECTID
+(defcfun ("ImFontAtlas_AddCustomRectRegular" font-atlas-add-custom-rect-regular) FONT-ATLAS-RECT-ID
   (self :POINTER)
   (w :INT)
   (h :INT)
@@ -4799,7 +4152,7 @@
 
 (defcfun ("ImFontAtlas_GetCustomRectByIndex" font-atlas-get-custom-rect-by-index) :POINTER
   (self :POINTER)
-  (id FONTATLASRECTID)
+  (id FONT-ATLAS-RECT-ID)
 )
 
 (defcfun ("ImFontAtlas_CalcCustomRectUV" font-atlas-calc-custom-rect-uv) :VOID
@@ -4807,27 +4160,6 @@
   (r :POINTER)
   (out-uv-min :POINTER)
   (out-uv-max :POINTER)
-)
-
-(defcfun ("ImFontAtlas_AddCustomRectFontGlyph" font-atlas-add-custom-rect-font-glyph) FONTATLASRECTID
-  (self :POINTER)
-  (font :POINTER)
-  (codepoint WCHAR)
-  (w :INT)
-  (h :INT)
-  (advance-x :FLOAT)
-  (offset VEC2)
-)
-
-(defcfun ("ImFontAtlas_AddCustomRectFontGlyphForSize" font-atlas-add-custom-rect-font-glyph-for-size) FONTATLASRECTID
-  (self :POINTER)
-  (font :POINTER)
-  (font-size :FLOAT)
-  (codepoint WCHAR)
-  (w :INT)
-  (h :INT)
-  (advance-x :FLOAT)
-  (offset VEC2)
 )
 
 (defcfun ("ImFontBaked_ClearOutputData" font-baked-clear-output-data) :VOID
@@ -4891,29 +4223,6 @@
   (wrap-width :FLOAT)
 )
 
-(defcfun ("ImFont_RenderCharEx" font-render-char-ex) :VOID
-  (self :POINTER)
-  (draw-list :POINTER)
-  (size :FLOAT)
-  (pos VEC2)
-  (col U32)
-  (c WCHAR)
-  (cpu-fine-clip :POINTER)
-)
-
-(defcfun ("ImFont_RenderText" font-render-text) :VOID
-  (self :POINTER)
-  (draw-list :POINTER)
-  (size :FLOAT)
-  (pos VEC2)
-  (col U32)
-  (clip-rect VEC4)
-  (text-begin :STRING)
-  (text-end :STRING)
-  (wrap-width :FLOAT)
-  (flags DRAWTEXTFLAGS)
-)
-
 (defcfun ("ImFont_CalcWordWrapPositionA" font-calc-word-wrap-position-a) :STRING
   (self :POINTER)
   (scale :FLOAT)
@@ -4962,15 +4271,6 @@
   (scale :FLOAT)
 )
 
-(defcfun ("ImGui_ImageImVec4" image-im-vec4) :VOID
-  (tex-ref TEXTUREREF)
-  (image-size VEC2)
-  (uv0 VEC2)
-  (uv1 VEC2)
-  (tint-col VEC4)
-  (border-col VEC4)
-)
-
 (defcfun ("ImGui_PushButtonRepeat" push-button-repeat) :VOID
   (repeat :BOOL)
 )
@@ -4988,12 +4288,6 @@
 (defcfun ("ImGui_GetWindowContentRegionMin" get-window-content-region-min) VEC2)
 
 (defcfun ("ImGui_GetWindowContentRegionMax" get-window-content-region-max) VEC2)
-
-(defcfun ("ImGui_BeginChildFrameEx" begin-child-frame-ex) :BOOL
-  (id ID)
-  (size VEC2)
-  (window-flags WINDOWFLAGS)
-)
 
 (defcfun ("ImGui_EndChildFrame" end-child-frame) :VOID)
 
@@ -5018,3 +4312,4 @@
   (items-count :INT)
   (height-in-items :INT)
 )
+

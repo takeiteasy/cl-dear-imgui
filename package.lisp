@@ -18,141 +18,12 @@
    #:+payload-type-color-4f+
    #:+version+
    #:+version-num+
-   #:--ANONYMOUS-TYPE0
-   #:--ANONYMOUS-TYPE1
-   #:BACKENDFLAGS
-   #:BUTTONFLAGS
-   #:CHILDFLAGS
-   #:COL
-   #:COLOR
-   #:COLOREDITFLAGS
-   #:COMBOFLAGS
-   #:COND
-   #:CONFIGFLAGS
-   #:DATATYPE
-   #:DIR
-   #:DRAGDROPFLAGS
-   #:DRAWCALLBACK
-   #:DRAWCHANNEL
-   #:DRAWCMD
-   #:DRAWCMDHEADER
-   #:DRAWDATA
-   #:DRAWFLAGS
-   #:DRAWIDX
-   #:DRAWLIST
-   #:DRAWLISTFLAGS
-   #:DRAWLISTSPLITTER
-   #:DRAWTEXTFLAGS
-   #:DRAWVERT
-   #:FOCUSEDFLAGS
-   #:FONT
-   #:FONTATLAS
-   #:FONTATLASCUSTOMRECT
-   #:FONTATLASFLAGS
-   #:FONTATLASRECT
-   #:FONTATLASRECTID
-   #:FONTBAKED
-   #:FONTCONFIG
-   #:FONTFLAGS
-   #:FONTGLYPH
-   #:FONTGLYPHRANGESBUILDER
-   #:HOVEREDFLAGS
-   #:ID
-   #:INPUTFLAGS
-   #:INPUTTEXTCALLBACK
-   #:INPUTTEXTCALLBACKDATA
-   #:INPUTTEXTFLAGS
-   #:IO
-   #:ITEMFLAGS
-   #:KEY
-   #:KEYCHORD
-   #:KEYDATA
-   #:LISTCLIPPER
-   #:LISTCLIPPERFLAGS
-   #:MEMALLOCFUNC
-   #:MEMFREEFUNC
-   #:MOUSEBUTTON
-   #:MOUSECURSOR
-   #:MOUSESOURCE
-   #:MULTISELECTFLAGS
-   #:MULTISELECTIO
-   #:PAYLOAD
-   #:PLATFORMIMEDATA
-   #:PLATFORMIO
-   #:POPUPFLAGS
-   #:S16
-   #:S32
-   #:S64
-   #:S8
-   #:SELECTABLEFLAGS
-   #:SELECTIONBASICSTORAGE
-   #:SELECTIONEXTERNALSTORAGE
-   #:SELECTIONREQUEST
-   #:SELECTIONUSERDATA
-   #:SIZECALLBACK
-   #:SIZECALLBACKDATA
-   #:SLIDERFLAGS
-   #:SORTDIRECTION
-   #:STORAGE
-   #:STORAGEPAIR
-   #:STYLE
-   #:STYLEVAR
-   #:TABBARFLAGS
-   #:TABITEMFLAGS
-   #:TABLEBGTARGET
-   #:TABLECOLUMNFLAGS
-   #:TABLECOLUMNSORTSPECS
-   #:TABLEFLAGS
-   #:TABLEROWFLAGS
-   #:TABLESORTSPECS
-   #:TEXTBUFFER
-   #:TEXTFILTER
-   #:TEXTFILTER-IMGUITEXTRANGE
-   #:TEXTUREDATA
-   #:TEXTUREID
-   #:TEXTURERECT
-   #:TEXTUREREF
-   #:TREENODEFLAGS
-   #:U16
-   #:U32
-   #:U64
-   #:U8
-   #:VEC2
-   #:VEC4
-   #:VECTOR-CHAR
-   #:VECTOR-FLOAT
-   #:VECTOR-IMDRAWCHANNEL
-   #:VECTOR-IMDRAWCMD
-   #:VECTOR-IMDRAWIDX
-   #:VECTOR-IMDRAWLISTPTR
-   #:VECTOR-IMDRAWLISTSHAREDDATAPTR
-   #:VECTOR-IMDRAWVERT
-   #:VECTOR-IMFONTCONFIG
-   #:VECTOR-IMFONTCONFIGPTR
-   #:VECTOR-IMFONTGLYPH
-   #:VECTOR-IMFONTPTR
-   #:VECTOR-IMGUISELECTIONREQUEST
-   #:VECTOR-IMGUISTORAGEPAIR
-   #:VECTOR-IMGUITEXTRANGE
-   #:VECTOR-IMTEXTUREDATAPTR
-   #:VECTOR-IMTEXTURERECT
-   #:VECTOR-IMTEXTUREREF
-   #:VECTOR-IMU16
-   #:VECTOR-IMU32
-   #:VECTOR-IMU8
-   #:VECTOR-IMVEC2
-   #:VECTOR-IMVEC4
-   #:VECTOR-IMWCHAR
-   #:VIEWPORT
-   #:VIEWPORTFLAGS
-   #:WCHAR
-   #:WCHAR16
-   #:WCHAR32
-   #:WINDOWFLAGS
+   #:--anonymous-type0
+   #:--anonymous-type1
    #:accept-drag-drop-payload
    #:align-text-to-frame-padding
    #:arrow-button
-   #:backend-flags-
+   #:backend-flags
    #:backend-flags-has-gamepad
    #:backend-flags-has-mouse-cursors
    #:backend-flags-has-set-mouse-pos
@@ -187,7 +58,7 @@
    #:bullet-text
    #:bullet-text-v
    #:button-ex
-   #:button-flags-
+   #:button-flags
    #:button-flags-enable-nav
    #:button-flags-mouse-button-left
    #:button-flags-mouse-button-mask-
@@ -199,7 +70,7 @@
    #:checkbox
    #:checkbox-flags-int-ptr
    #:checkbox-flags-uint-ptr
-   #:child-flags-
+   #:child-flags
    #:child-flags-always-auto-resize
    #:child-flags-always-use-window-padding
    #:child-flags-auto-resize-x
@@ -211,7 +82,7 @@
    #:child-flags-resize-x
    #:child-flags-resize-y
    #:close-current-popup
-   #:col-
+   #:col
    #:col-border
    #:col-border-shadow
    #:col-button
@@ -279,12 +150,13 @@
    #:col-window-bg
    #:collapsing-header
    #:collapsing-header-bool-ptr
+   #:color
    #:color-button-ex
    #:color-convert-float4to-u32
    #:color-convert-hsvto-rgb
    #:color-convert-rgbto-hsv
    #:color-convert-u32to-float4
-   #:color-edit-flags-
+   #:color-edit-flags
    #:color-edit-flags-alpha-bar
    #:color-edit-flags-alpha-mask-
    #:color-edit-flags-alpha-no-bg
@@ -328,7 +200,7 @@
    #:combo-callback-ex
    #:combo-char-ex
    #:combo-ex
-   #:combo-flags-
+   #:combo-flags
    #:combo-flags-height-large
    #:combo-flags-height-largest
    #:combo-flags-height-mask-
@@ -340,13 +212,13 @@
    #:combo-flags-popup-align-left
    #:combo-flags-width-fit-preview
    #:combo-obsolete-ex
-   #:cond-
+   #:cond
    #:cond-always
    #:cond-appearing
    #:cond-first-use-ever
    #:cond-none
    #:cond-once
-   #:config-flags-
+   #:config-flags
    #:config-flags-is-srgb
    #:config-flags-is-touch-screen
    #:config-flags-nav-enable-gamepad
@@ -358,7 +230,7 @@
    #:config-flags-no-mouse-cursor-change
    #:config-flags-none
    #:create-context
-   #:data-type-
+   #:data-type
    #:data-type-bool
    #:data-type-count
    #:data-type-double
@@ -386,7 +258,7 @@
    #:dir-none
    #:dir-right
    #:dir-up
-   #:drag-drop-flags-
+   #:drag-drop-flags
    #:drag-drop-flags-accept-before-delivery
    #:drag-drop-flags-accept-draw-as-hovered
    #:drag-drop-flags-accept-no-draw-default-rect
@@ -414,12 +286,17 @@
    #:drag-int4ex
    #:drag-scalar-ex
    #:drag-scalar-nex
+   #:draw-callback
+   #:draw-channel
+   #:draw-cmd
    #:draw-cmd-get-tex-id
+   #:draw-cmd-header
+   #:draw-data
    #:draw-data-add-draw-list
    #:draw-data-clear
    #:draw-data-de-index-all-buffers
    #:draw-data-scale-clip-rects
-   #:draw-flags-
+   #:draw-flags
    #:draw-flags-closed
    #:draw-flags-none
    #:draw-flags-round-corners-all
@@ -434,6 +311,8 @@
    #:draw-flags-round-corners-top
    #:draw-flags-round-corners-top-left
    #:draw-flags-round-corners-top-right
+   #:draw-idx
+   #:draw-list
    #:draw-list--calc-circle-auto-segment-count
    #:draw-list--clear-free-memory
    #:draw-list--on-changed-clip-rect
@@ -476,7 +355,7 @@
    #:draw-list-channels-set-current
    #:draw-list-channels-split
    #:draw-list-clone-output
-   #:draw-list-flags-
+   #:draw-list-flags
    #:draw-list-flags-allow-vtx-offset
    #:draw-list-flags-anti-aliased-fill
    #:draw-list-flags-anti-aliased-lines
@@ -511,11 +390,14 @@
    #:draw-list-push-clip-rect-full-screen
    #:draw-list-push-texture
    #:draw-list-push-texture-id
+   #:draw-list-splitter
    #:draw-list-splitter-clear
    #:draw-list-splitter-clear-free-memory
    #:draw-list-splitter-merge
    #:draw-list-splitter-set-current-channel
    #:draw-list-splitter-split
+   #:draw-text-flags
+   #:draw-vert
    #:dummy
    #:end
    #:end-child
@@ -536,14 +418,16 @@
    #:end-tab-item
    #:end-table
    #:end-tooltip
-   #:focused-flags-
+   #:focused-flags
    #:focused-flags-any-window
    #:focused-flags-child-windows
    #:focused-flags-no-popup-hierarchy
    #:focused-flags-none
    #:focused-flags-root-and-child-windows
    #:focused-flags-root-window
+   #:font
    #:font-add-remap-char
+   #:font-atlas
    #:font-atlas-add-custom-rect
    #:font-atlas-add-custom-rect-font-glyph
    #:font-atlas-add-custom-rect-font-glyph-for-size
@@ -561,7 +445,8 @@
    #:font-atlas-clear-input-data
    #:font-atlas-clear-tex-data
    #:font-atlas-compact-cache
-   #:font-atlas-flags-
+   #:font-atlas-custom-rect
+   #:font-atlas-flags
    #:font-atlas-flags-no-baked-lines
    #:font-atlas-flags-no-mouse-cursors
    #:font-atlas-flags-no-power-of-two-height
@@ -580,11 +465,14 @@
    #:font-atlas-get-tex-data-as-alpha8
    #:font-atlas-get-tex-data-as-rgba32
    #:font-atlas-is-built
+   #:font-atlas-rect
+   #:font-atlas-rect-id
    #:font-atlas-remove-custom-rect
    #:font-atlas-remove-font
    #:font-atlas-set-font-loader
    #:font-atlas-set-tex-id
    #:font-atlas-set-tex-idim-texture-ref
+   #:font-baked
    #:font-baked-clear-output-data
    #:font-baked-find-glyph
    #:font-baked-find-glyph-no-fallback
@@ -594,13 +482,16 @@
    #:font-calc-word-wrap-position
    #:font-calc-word-wrap-position-a
    #:font-clear-output-data
-   #:font-flags-
+   #:font-config
+   #:font-flags
    #:font-flags-lock-baked-sizes
    #:font-flags-no-load-error
    #:font-flags-no-load-glyphs
    #:font-flags-none
    #:font-get-debug-name
    #:font-get-font-baked-ex
+   #:font-glyph
+   #:font-glyph-ranges-builder
    #:font-glyph-ranges-builder-add-char
    #:font-glyph-ranges-builder-add-ranges
    #:font-glyph-ranges-builder-add-text
@@ -680,7 +571,7 @@
    #:get-window-pos
    #:get-window-size
    #:get-window-width
-   #:hovered-flags-
+   #:hovered-flags
    #:hovered-flags-allow-when-blocked-by-active-item
    #:hovered-flags-allow-when-blocked-by-popup
    #:hovered-flags-allow-when-disabled
@@ -701,13 +592,14 @@
    #:hovered-flags-root-and-child-windows
    #:hovered-flags-root-window
    #:hovered-flags-stationary
+   #:id
    #:image-button-ex
    #:image-ex
    #:image-im-vec4
    #:image-with-bg-ex
    #:indent-ex
    #:input-double-ex
-   #:input-flags-
+   #:input-flags
    #:input-flags-none
    #:input-flags-repeat
    #:input-flags-route-active
@@ -729,13 +621,15 @@
    #:input-int4
    #:input-scalar-ex
    #:input-scalar-nex
+   #:input-text-callback
+   #:input-text-callback-data
    #:input-text-callback-data-clear-selection
    #:input-text-callback-data-delete-chars
    #:input-text-callback-data-has-selection
    #:input-text-callback-data-insert-chars
    #:input-text-callback-data-select-all
    #:input-text-ex
-   #:input-text-flags-
+   #:input-text-flags
    #:input-text-flags-allow-tab-input
    #:input-text-flags-always-overwrite
    #:input-text-flags-auto-select-all
@@ -765,6 +659,7 @@
    #:input-text-multiline-ex
    #:input-text-with-hint-ex
    #:invisible-button
+   #:io
    #:io-add-focus-event
    #:io-add-input-character
    #:io-add-input-character-utf16
@@ -814,7 +709,7 @@
    #:is-window-collapsed
    #:is-window-focused
    #:is-window-hovered
-   #:item-flags-
+   #:item-flags
    #:item-flags-allow-duplicate-id
    #:item-flags-auto-close-popups
    #:item-flags-button-repeat
@@ -842,9 +737,11 @@
    #:key-backspace
    #:key-c
    #:key-caps-lock
+   #:key-chord
    #:key-comma
    #:key-count
    #:key-d
+   #:key-data
    #:key-delete
    #:key-down-arrow
    #:key-e
@@ -988,9 +885,10 @@
    #:list-box
    #:list-box-callback-ex
    #:list-box-obsolete-ex
+   #:list-clipper
    #:list-clipper-begin
    #:list-clipper-end
-   #:list-clipper-flags-
+   #:list-clipper-flags
    #:list-clipper-flags-no-set-table-row-counters
    #:list-clipper-flags-none
    #:list-clipper-include-item-by-index
@@ -1007,7 +905,9 @@
    #:log-to-file
    #:log-to-tty
    #:mem-alloc
+   #:mem-alloc-func
    #:mem-free
+   #:mem-free-func
    #:menu-item-bool-ptr
    #:menu-item-ex
    #:mod-alt
@@ -1017,12 +917,12 @@
    #:mod-shift
    #:mod-shortcut
    #:mod-super
-   #:mouse-button-
+   #:mouse-button
    #:mouse-button-count
    #:mouse-button-left
    #:mouse-button-middle
    #:mouse-button-right
-   #:mouse-cursor-
+   #:mouse-cursor
    #:mouse-cursor-arrow
    #:mouse-cursor-count
    #:mouse-cursor-hand
@@ -1041,7 +941,7 @@
    #:mouse-source-mouse
    #:mouse-source-pen
    #:mouse-source-touch-screen
-   #:multi-select-flags-
+   #:multi-select-flags
    #:multi-select-flags-box-select-no-scroll
    #:multi-select-flags-box-select1d
    #:multi-select-flags-box-select2d
@@ -1060,16 +960,20 @@
    #:multi-select-flags-select-on-click
    #:multi-select-flags-select-on-click-release
    #:multi-select-flags-single-select
+   #:multi-select-io
    #:new-frame
    #:new-line
    #:next-column
    #:open-popup
    #:open-popup-id
    #:open-popup-on-item-click
+   #:payload
    #:payload-clear
    #:payload-is-data-type
    #:payload-is-delivery
    #:payload-is-preview
+   #:platform-ime-data
+   #:platform-io
    #:platform-io-clear-platform-handlers
    #:platform-io-clear-renderer-handlers
    #:plot-histogram-callback-ex
@@ -1086,7 +990,7 @@
    #:pop-style-var-ex
    #:pop-tab-stop
    #:pop-text-wrap-pos
-   #:popup-flags-
+   #:popup-flags
    #:popup-flags-any-popup
    #:popup-flags-any-popup-id
    #:popup-flags-any-popup-level
@@ -1122,12 +1026,16 @@
    #:radio-button-int-ptr
    #:render
    #:reset-mouse-drag-delta-ex
+   #:s16
+   #:s32
+   #:s64
+   #:s8
    #:same-line-ex
    #:save-ini-settings-to-disk
    #:save-ini-settings-to-memory
    #:selectable-bool-ptr-ex
    #:selectable-ex
-   #:selectable-flags-
+   #:selectable-flags
    #:selectable-flags-allow-double-click
    #:selectable-flags-allow-overlap
    #:selectable-flags-disabled
@@ -1137,6 +1045,7 @@
    #:selectable-flags-none
    #:selectable-flags-select-on-nav
    #:selectable-flags-span-all-columns
+   #:selection-basic-storage
    #:selection-basic-storage-apply-requests
    #:selection-basic-storage-clear
    #:selection-basic-storage-contains
@@ -1144,11 +1053,14 @@
    #:selection-basic-storage-get-storage-id-from-index
    #:selection-basic-storage-set-item-selected
    #:selection-basic-storage-swap
+   #:selection-external-storage
    #:selection-external-storage-apply-requests
+   #:selection-request
    #:selection-request-type
    #:selection-request-type-none
    #:selection-request-type-set-all
    #:selection-request-type-set-range
+   #:selection-user-data
    #:separator
    #:separator-text
    #:set-allocator-functions
@@ -1215,8 +1127,10 @@
    #:show-style-editor
    #:show-style-selector
    #:show-user-guide
+   #:size-callback
+   #:size-callback-data
    #:slider-angle-ex
-   #:slider-flags-
+   #:slider-flags
    #:slider-flags-always-clamp
    #:slider-flags-clamp-on-input
    #:slider-flags-clamp-zero-range
@@ -1244,6 +1158,7 @@
    #:sort-direction-descending
    #:sort-direction-none
    #:spacing
+   #:storage
    #:storage-build-sort-by-key
    #:storage-clear
    #:storage-get-bool
@@ -1254,17 +1169,19 @@
    #:storage-get-int-ref
    #:storage-get-void-ptr
    #:storage-get-void-ptr-ref
+   #:storage-pair
    #:storage-set-all-int
    #:storage-set-bool
    #:storage-set-float
    #:storage-set-int
    #:storage-set-void-ptr
    #:str-from-char-str
+   #:style
    #:style-colors-classic
    #:style-colors-dark
    #:style-colors-light
    #:style-scale-all-sizes
-   #:style-var-
+   #:style-var
    #:style-var-alpha
    #:style-var-button-text-align
    #:style-var-cell-padding
@@ -1305,7 +1222,7 @@
    #:style-var-window-padding
    #:style-var-window-rounding
    #:style-var-window-title-align
-   #:tab-bar-flags-
+   #:tab-bar-flags
    #:tab-bar-flags-auto-select-new-tabs
    #:tab-bar-flags-draw-selected-overline
    #:tab-bar-flags-fitting-policy-default-
@@ -1321,7 +1238,7 @@
    #:tab-bar-flags-reorderable
    #:tab-bar-flags-tab-list-popup-button
    #:tab-item-button
-   #:tab-item-flags-
+   #:tab-item-flags
    #:tab-item-flags-leading
    #:tab-item-flags-no-assumed-closure
    #:tab-item-flags-no-close-with-middle-mouse-button
@@ -1333,12 +1250,12 @@
    #:tab-item-flags-trailing
    #:tab-item-flags-unsaved-document
    #:table-angled-headers-row
-   #:table-bg-target-
+   #:table-bg-target
    #:table-bg-target-cell-bg
    #:table-bg-target-none
    #:table-bg-target-row-bg0
    #:table-bg-target-row-bg1
-   #:table-column-flags-
+   #:table-column-flags
    #:table-column-flags-angled-header
    #:table-column-flags-default-hide
    #:table-column-flags-default-sort
@@ -1367,7 +1284,8 @@
    #:table-column-flags-width-fixed
    #:table-column-flags-width-mask-
    #:table-column-flags-width-stretch
-   #:table-flags-
+   #:table-column-sort-specs
+   #:table-flags
    #:table-flags-borders
    #:table-flags-borders-h
    #:table-flags-borders-inner
@@ -1416,7 +1334,7 @@
    #:table-headers-row
    #:table-next-column
    #:table-next-row-ex
-   #:table-row-flags-
+   #:table-row-flags
    #:table-row-flags-headers
    #:table-row-flags-none
    #:table-set-bg-color
@@ -1424,7 +1342,9 @@
    #:table-set-column-index
    #:table-setup-column-ex
    #:table-setup-scroll-freeze
+   #:table-sort-specs
    #:text
+   #:text-buffer
    #:text-buffer-append
    #:text-buffer-appendf
    #:text-buffer-appendfv
@@ -1440,9 +1360,11 @@
    #:text-colored-v
    #:text-disabled
    #:text-disabled-v
+   #:text-filter
    #:text-filter-build
    #:text-filter-clear
    #:text-filter-draw
+   #:text-filter-im-gui-text-range
    #:text-filter-im-gui-text-range-empty
    #:text-filter-im-gui-text-range-split
    #:text-filter-is-active
@@ -1453,6 +1375,7 @@
    #:text-v
    #:text-wrapped
    #:text-wrapped-v
+   #:texture-data
    #:texture-data-create
    #:texture-data-destroy-pixels
    #:texture-data-get-pitch
@@ -1466,6 +1389,9 @@
    #:texture-format
    #:texture-format-alpha8
    #:texture-format-rgba32
+   #:texture-id
+   #:texture-rect
+   #:texture-ref
    #:texture-ref-get-tex-id
    #:texture-status
    #:texture-status-destroyed
@@ -1479,7 +1405,7 @@
    #:tree-node-ex-str
    #:tree-node-ex-v
    #:tree-node-ex-vptr
-   #:tree-node-flags-
+   #:tree-node-flags
    #:tree-node-flags-allow-overlap
    #:tree-node-flags-bullet
    #:tree-node-flags-collapsing-header
@@ -1511,10 +1437,41 @@
    #:tree-pop
    #:tree-push
    #:tree-push-ptr
+   #:u16
+   #:u32
+   #:u64
+   #:u8
    #:unindent-ex
+   #:vec2
+   #:vec4
+   #:vector-char
    #:vector-construct
    #:vector-destruct
-   #:viewport-flags-
+   #:vector-float
+   #:vector-im-draw-channel
+   #:vector-im-draw-cmd
+   #:vector-im-draw-idx
+   #:vector-im-draw-list-ptr
+   #:vector-im-draw-list-shared-data-ptr
+   #:vector-im-draw-vert
+   #:vector-im-font-config
+   #:vector-im-font-config-ptr
+   #:vector-im-font-glyph
+   #:vector-im-font-ptr
+   #:vector-im-gui-selection-request
+   #:vector-im-gui-storage-pair
+   #:vector-im-gui-text-range
+   #:vector-im-texture-data-ptr
+   #:vector-im-texture-rect
+   #:vector-im-texture-ref
+   #:vector-im-u16
+   #:vector-im-u32
+   #:vector-im-u8
+   #:vector-im-vec2
+   #:vector-im-vec4
+   #:vector-im-wchar
+   #:viewport
+   #:viewport-flags
    #:viewport-flags-is-platform-monitor
    #:viewport-flags-is-platform-window
    #:viewport-flags-none
@@ -1524,7 +1481,10 @@
    #:vslider-float-ex
    #:vslider-int-ex
    #:vslider-scalar-ex
-   #:window-flags-
+   #:wchar
+   #:wchar16
+   #:wchar32
+   #:window-flags
    #:window-flags-always-auto-resize
    #:window-flags-always-horizontal-scrollbar
    #:window-flags-always-vertical-scrollbar

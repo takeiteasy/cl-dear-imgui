@@ -154,6 +154,10 @@ The generator creates idiomatic Lisp names by:
    - `ImGuiCol_Text` → `:text`
    - Enum type prefix is stripped from elements
 
+## cl-dear-imgui/ui
+
+High-level immediate mode interface forked from [borodust/bodge-ui](https://github.com/borodust/bodge-ui) for use with imgui.
+
 ## License
 
 MIT License (same as Dear ImGui)

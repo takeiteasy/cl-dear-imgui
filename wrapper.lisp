@@ -152,13 +152,10 @@
 
 (defmacro with-child ((str-id &key (size-x 0.0) (size-y 0.0) (child-flags 0) (window-flags 0)) &body body)
   "Execute body within a child window. Automatically calls EndChild."
-  `(cffi:with-foreign-object (size '(:struct vec2))
-     (setf (cffi:foreign-slot-value size '(:struct vec2) 'x) (float ,size-x))
-     (setf (cffi:foreign-slot-value size '(:struct vec2) 'y) (float ,size-y))
-     (when (begin-child ,str-id size ,child-flags ,window-flags)
-       (unwind-protect
-            (progn ,@body)
-         (end-child)))))
+  `(when (begin-child-xy ,str-id (float ,size-x) (float ,size-y) ,child-flags ,window-flags)
+     (unwind-protect
+          (progn ,@body)
+       (end-child))))
 
 (defmacro with-group (&body body)
   "Execute body within a group. Groups widgets together."
@@ -180,7 +177,7 @@
   "Execute body with a temporary style color."
   (let ((c (gensym "COLOR")))
     `(let ((,c ,color))
-       (push-style-color-xyzw ,idx (vec4-x ,c) (vec4-y ,c) (vec4-z ,c) (vec4-w ,c))
+       (push-style-color-im-vec4xyzw ,idx (vec4-x ,c) (vec4-y ,c) (vec4-z ,c) (vec4-w ,c))
        (unwind-protect
             (progn ,@body)
          (pop-style-color-ex 1)))))
@@ -194,7 +191,7 @@
                    (destructuring-bind (idx color) spec
                      (let ((c (gensym "COLOR")))
                        `(let ((,c ,color))
-                          (push-style-color-xyzw ,idx (vec4-x ,c) (vec4-y ,c) (vec4-z ,c) (vec4-w ,c))))))
+                          (push-style-color-im-vec4xyzw ,idx (vec4-x ,c) (vec4-y ,c) (vec4-z ,c) (vec4-w ,c))))))
                  color-specs)
        (unwind-protect
             (progn ,@body)
@@ -218,13 +215,13 @@
 
 (defun text-colored (color text)
   "Display colored text."
-  (with-vec4 (col color)
-    (text-colored-v col text)))
+  (text-colored-vxyzw (vec4-x color) (vec4-y color) (vec4-z color) (vec4-w color)
+                      text (cffi:null-pointer)))
 
 (defun button-colored (label color &key (size-x 0.0) (size-y 0.0))
   "Create a button with custom color."
   (with-style-color (:button color)
-    (button-xy label (float size-x) (float size-y))))
+    (button-ex-xy label (float size-x) (float size-y))))
 
 (defun input-float-simple (label value &key (step 0.0) (step-fast 0.0) (format "%.3f") (flags 0))
   "Simplified input-float that returns the new value."
@@ -303,7 +300,7 @@
 
 (defmacro with-menu ((label &key (enabled t)) &body body)
   "Execute body within a menu."
-  `(when (begin-menu ,label ,enabled)
+  `(when (begin-menu-ex ,label ,enabled)
      (unwind-protect
           (progn ,@body)
        (end-menu))))
@@ -330,7 +327,7 @@
 
 (defmacro with-table ((str-id columns &key (flags 0) (outer-size-x 0.0) (outer-size-y 0.0) (inner-width 0.0)) &body body)
   "Execute body within a table."
-  `(when (begin-table ,str-id ,columns ,flags ,outer-size-x ,outer-size-y ,inner-width)
+  `(when (begin-table-ex-xy ,str-id ,columns ,flags (float ,outer-size-x) (float ,outer-size-y) (float ,inner-width))
      (unwind-protect
           (progn ,@body)
        (end-table))))

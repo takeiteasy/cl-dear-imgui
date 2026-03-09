@@ -12,50 +12,6 @@ namespace cimgui
 }
 
 extern "C" {
-void ImGui_SetNextWindowPosXY(float x, float y, int cond, float px, float py)
-{
-    ::ImGui::SetNextWindowPos(::ImVec2(x, y), (::ImGuiCond)cond, ::ImVec2(px, py));
-}
-
-void ImGui_SetNextWindowSizeXY(float w, float h, int cond)
-{
-    ::ImGui::SetNextWindowSize(::ImVec2(w, h), (::ImGuiCond)cond);
-}
-
-bool ImGui_BeginChildXY(const char* str_id, float w, float h, int child_flags, int window_flags)
-{
-    return ::ImGui::BeginChild(str_id, ::ImVec2(w, h), (::ImGuiChildFlags)child_flags, (::ImGuiWindowFlags)window_flags);
-}
-
-bool ImGui_ButtonXY(const char* label, float w, float h)
-{
-    return ::ImGui::Button(label, ::ImVec2(w, h));
-}
-
-bool ImGui_BeginListBoxXY(const char* label, float w, float h)
-{
-    return ::ImGui::BeginListBox(label, ::ImVec2(w, h));
-}
-
-bool ImGui_SelectableXY(const char* label, bool selected, int flags, float w, float h)
-{
-    return ::ImGui::Selectable(label, selected, (::ImGuiSelectableFlags)flags, ::ImVec2(w, h));
-}
-
-bool ImGui_ColorButtonXY(const char* desc_id, float r, float g, float b, float a, int flags, float w, float h)
-{
-    return ::ImGui::ColorButton(desc_id, ::ImVec4(r, g, b, a), (::ImGuiColorEditFlags)flags, ::ImVec2(w, h));
-}
-
-void ImGui_PushStyleVarXY(int idx, float x, float y)
-{
-    ::ImGui::PushStyleVar((::ImGuiStyleVar)idx, ::ImVec2(x, y));
-}
-
-void ImGui_PushStyleColorXYZW(int idx, float r, float g, float b, float a)
-{
-    ::ImGui::PushStyleColor(idx, ::ImVec4(r, g, b, a));
-}
 
 void ImGui_RendererInit(float display_w, float display_h, float scale)
 {
