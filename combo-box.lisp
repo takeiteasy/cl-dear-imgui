@@ -1,4 +1,4 @@
-(in-package :cl-dear-imgui/ui)
+(in-package :cl-dear-imgui)
 
 ;;;
 ;;; COMBO BOX — Pure Lisp strings, no foreign array needed
@@ -15,11 +15,11 @@
 (defmethod compose ((this combo-box))
   (with-slots (selected values label) this
     (let ((preview (or (nth selected values) "")))
-      (when (imgui::begin-combo label preview 0)
+      (when (begin-combo label preview 0)
         (unwind-protect
              (loop for item in values
                    for i from 0
                    do (let ((is-selected (= i selected)))
-                        (when (imgui::selectable item is-selected 0 0.0 0.0)
+                        (when (selectable item is-selected 0 0.0 0.0)
                           (setf selected i))))
-          (imgui::end-combo))))))
+          (end-combo))))))

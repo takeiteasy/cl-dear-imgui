@@ -1,4 +1,4 @@
-(in-package :cl-dear-imgui/ui)
+(in-package :cl-dear-imgui)
 
 ;;;
 ;;; LABEL
@@ -14,4 +14,4 @@
     (let ((str (if (functionp text)
                    (format nil "~A" (funcall text))
                    (or text ""))))
-      (imgui::text-unformatted-ex str (cffi:null-pointer)))))
+      (text-unformatted-ex str (cffi:null-pointer)))))

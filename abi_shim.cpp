@@ -110,5 +110,47 @@ int ImDrawList_GetCmd(void* draw_list, int cmd_idx,
     *elem_count = cmd.ElemCount;
     return (cmd.UserCallback == nullptr) ? 1 : 0;
 }
-    
+
+// Get the scroll-Y of a named child window by matching "parent_name/label" prefix.
+// InputTextMultiline creates a child window named "parent/label_HEXID", so we
+// can't use GetID+FindWindowByID (that gives the widget ID, not the window ID).
+float ImGui_GetChildScrollY(const char* label) {
+    ImGuiContext& g = *GImGui;
+    ImGuiWindow* parent = ::ImGui::GetCurrentWindow();
+    if (!parent) return 0.0f;
+
+    // Build prefix: "parent_name/label"
+    char prefix[256];
+    snprintf(prefix, sizeof(prefix), "%s/%s", parent->Name, label);
+    size_t prefix_len = strlen(prefix);
+
+    for (ImGuiWindow* w : g.Windows) {
+        if (strncmp(w->Name, prefix, prefix_len) == 0) {
+            return w->Scroll.y;
+        }
+    }
+    return 0.0f;
+}
+
+// VEC2-returning getters decomposed into float outputs
+void ImGui_GetCursorScreenPosOut(float* x, float* y) {
+    ImVec2 p = ::ImGui::GetCursorScreenPos();
+    *x = p.x; *y = p.y;
+}
+void ImGui_GetMousePosOut(float* x, float* y) {
+    ImVec2 p = ::ImGui::GetMousePos();
+    *x = p.x; *y = p.y;
+}
+void ImGui_CalcTextSizeWOut(const char* text, float* w) {
+    *w = ::ImGui::CalcTextSize(text).x;
+}
+void ImGui_GetContentRegionAvailOut(float* w, float* h) {
+    ImVec2 p = ::ImGui::GetContentRegionAvail();
+    *w = p.x; *h = p.y;
+}
+// InputTextCallbackData cursor accessor
+int ImGuiInputTextCallbackData_GetCursorPos(ImGuiInputTextCallbackData* data) {
+    return data->CursorPos;
+}
+
 } // extern "C"

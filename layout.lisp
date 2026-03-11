@@ -1,4 +1,4 @@
-(in-package :cl-dear-imgui/ui)
+(in-package :cl-dear-imgui)
 
 ;;;
 ;;; VERTICAL LAYOUT
@@ -9,11 +9,11 @@
   (make-instance 'vertical-layout :name name))
 
 (defmethod compose ((this vertical-layout))
-  (imgui::begin-group)
+  (begin-group)
   (unwind-protect
        (dochildren (child this)
          (compose child))
-    (imgui::end-group)))
+    (end-group)))
 
 ;;;
 ;;; HORIZONTAL LAYOUT
@@ -24,12 +24,12 @@
   (make-instance 'horizontal-layout :name name))
 
 (defmethod compose ((this horizontal-layout))
-  (imgui::begin-group)
+  (begin-group)
   (unwind-protect
        (let ((first t))
          (dochildren (child this)
            (if first
                (setf first nil)
-               (imgui:same-line))
+               (same-line))
            (compose child)))
-    (imgui::end-group)))
+    (end-group)))

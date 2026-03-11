@@ -8,27 +8,10 @@
   :serial t
   :depends-on (#:cffi)
   :components ((:file "package")
+               (:file "types")
                (:file "bindings")
-               (:file "wrapper")
-               (:file "shim")))
-
-(asdf:defsystem #:cl-dear-imgui/generator
-  :description "Generator for cl-dear-imgui bindings from dcimgui.json"
-  :author "George Watson <gigolo@hotmail.co.uk>"
-  :license "MIT"
-  :version "0.1.0"
-  :depends-on (#:com.inuoe.jzon)
-  :components ((:file "generator")))
-
-(asdf:defsystem #:cl-dear-imgui/ui
-  :description "High-level immediate mode user interface library for imgui forked from bodge-ui"
-  :author "George Watson <gigolo@hotmail.co.uk>"
-  :license "MIT"
-  :version "0.1.0"
-  :depends-on (#:cl-dear-imgui
-               #:3d-vectors)
-  :serial t
-  :components ((:file "ui")
+               (:file "shim")
+               (:file "ui")
                (:file "style")
                (:file "elements")
                (:file "layout")
@@ -48,3 +31,11 @@
                (:file "scroll-area")
                (:file "spacing")
                (:file "text-edit")))
+
+(asdf:defsystem #:cl-dear-imgui/generator
+  :description "Generator for cl-dear-imgui bindings from dcimgui.json"
+  :author "George Watson <gigolo@hotmail.co.uk>"
+  :license "MIT"
+  :version "0.1.0"
+  :depends-on (#:com.inuoe.jzon)
+  :components ((:file "generator")))

@@ -1,4 +1,4 @@
-(in-package :cl-dear-imgui/ui)
+(in-package :cl-dear-imgui)
 
 (defclass styled-group (behavior-element)
   ((style :initform nil))

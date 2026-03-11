@@ -1,4 +1,4 @@
-(in-package :cl-dear-imgui/ui)
+(in-package :cl-dear-imgui)
 
 ;;;
 ;;; SPACING
@@ -12,6 +12,6 @@
 (defmethod compose ((this spacing))
   (with-slots (columns) this
     (if (= columns 1)
-        (imgui:separator)
+        (separator)
         (dotimes (i (floor columns))
-          (imgui:spacing)))))
+          (spacing)))))

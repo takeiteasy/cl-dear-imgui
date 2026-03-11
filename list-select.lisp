@@ -1,4 +1,4 @@
-(in-package :cl-dear-imgui/ui)
+(in-package :cl-dear-imgui)
 
 ;;;
 ;;; LIST SELECT
@@ -41,12 +41,12 @@
 
 (defmethod compose ((this list-select))
   (with-slots (items label) this
-    (when (imgui::begin-list-box label
+    (when (begin-list-box label
                                  (float (or (width-of this) 0.0) 0.0)
                                  (float (or (height-of this) 0.0) 0.0))
       (unwind-protect
            (dolist (item items)
-             (when (imgui::selectable (item-name-of item)
+             (when (selectable (item-name-of item)
                                       (item-selected-p item)
                                       0 0.0 0.0)
                ;; Deselect all others
@@ -54,4 +54,4 @@
                  (unless (eq item other-item)
                    (select-item other-item nil)))
                (select-item item t)))
-        (imgui::end-list-box)))))
+        (end-list-box)))))

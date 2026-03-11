@@ -1,4 +1,4 @@
-(in-package :cl-dear-imgui/ui)
+(in-package :cl-dear-imgui)
 
 ;;;
 ;;; RADIO GROUP
@@ -56,7 +56,7 @@
 (defmethod compose ((this radio))
   (with-slots (activated-p click-listener label) this
     (register-radio this)
-    (when (imgui::radio-button label activated-p)
+    (when (radio-button label activated-p)
       (setf activated-p t)
       (activate-radio this)
       (when click-listener

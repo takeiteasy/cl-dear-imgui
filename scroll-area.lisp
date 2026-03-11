@@ -1,4 +1,4 @@
-(in-package :cl-dear-imgui/ui)
+(in-package :cl-dear-imgui)
 
 ;;;
 ;;; SCROLL AREA
@@ -42,20 +42,20 @@
      (declare (ignorable ,x ,y))
      ,@body))
 
-(defun area-scroll-position (pane &optional (result (v:vec2)))
+(defun area-scroll-position (pane &optional (result (make-vec2)))
   (multiple-value-bind (x y) (%area-scroll-position pane)
-    (setf (v:vx result) (float x 0.0)
-          (v:vy result) (float y 0.0))
+    (setf (vec2-x result) (float x 0.0)
+          (vec2-y result) (float y 0.0))
     result))
 
 (defmethod compose ((this scroll-area))
   (with-slots (layout scroll-y) this
-    (when (imgui::begin-child (%pane-id-of this)
+    (when (begin-child (%pane-id-of this)
                               (float (or (width-of this) 0.0) 0.0)
                               (float (or (height-of this) 0.0) 0.0)
                               0 0)
       (unwind-protect
            (progn
              (compose layout)
-             (setf scroll-y (imgui::get-scroll-y)))
-        (imgui::end-child)))))
+             (setf scroll-y (get-scroll-y)))
+        (end-child)))))

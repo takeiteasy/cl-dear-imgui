@@ -1,4 +1,4 @@
-(in-package :cl-dear-imgui/ui)
+(in-package :cl-dear-imgui)
 
 ;;;
 ;;; CHECK BOX
@@ -14,7 +14,7 @@
 
 (defmethod compose ((this check-box))
   (with-slots ((this-checked-p checked-p) click-listener label) this
-    (let ((new-checked (imgui:checkbox-simple label this-checked-p)))
+    (let ((new-checked (checkbox-simple label this-checked-p)))
       (unless (eq this-checked-p new-checked)
         (setf this-checked-p new-checked)
         (when click-listener

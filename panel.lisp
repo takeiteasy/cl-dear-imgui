@@ -1,4 +1,4 @@
-(in-package :cl-dear-imgui/ui)
+(in-package :cl-dear-imgui)
 
 ;;;
 ;;; Window flag constants
@@ -64,10 +64,10 @@
      (declare (ignorable ,x ,y))
      ,@body))
 
-(defun panel-position (panel &optional (result-vec2 (v:vec2)))
+(defun panel-position (panel &optional (result-vec2 (make-vec2)))
   (with-panel-position (x y) panel
-    (setf (v:vx result-vec2) (float x 0.0)
-          (v:vy result-vec2) (float y 0.0))
+    (setf (vec2-x result-vec2) (float x 0.0)
+          (vec2-y result-vec2) (float y 0.0))
     result-vec2))
 
 (defun %panel-dimensions (panel)
@@ -79,10 +79,10 @@
      (declare (ignorable ,width ,height))
      ,@body))
 
-(defun panel-size (panel &optional (result-vec2 (v:vec2)))
+(defun panel-size (panel &optional (result-vec2 (make-vec2)))
   (with-panel-dimensions (width height) panel
-    (setf (v:vx result-vec2) (float width 0.0)
-          (v:vy result-vec2) (float height 0.0))
+    (setf (vec2-x result-vec2) (float width 0.0)
+          (vec2-y result-vec2) (float height 0.0))
     result-vec2))
 
 (defun hide-panel (panel)
@@ -97,17 +97,17 @@
 
 (defun minimize-panel (panel)
   (with-ui-access (*context*)
-    (imgui::set-next-window-collapsed t 0)))
+    (set-next-window-collapsed t 0)))
 
 (defun restore-panel (panel)
   (declare (ignore panel))
   (with-ui-access (*context*)
-    (imgui::set-next-window-collapsed nil 0)))
+    (set-next-window-collapsed nil 0)))
 
 (defun setup-panel (panel &key
                             (width 400)
                             (height 300)
-                            (origin (v:vec2 0 0))
+                            (origin (make-vec2))
                             (title "") (background-color nil)
                             (hidden nil)
                             style
@@ -128,8 +128,8 @@
                                           :row-height 26)
                                     (when background-color
                                       (list :panel-background background-color))))
-          this-x (v:vx origin)
-          this-y (v:vy origin)
+          this-x (vec2-x origin)
+          this-y (vec2-y origin)
           this-title title
           first-frame-p t
           bounds-updated-p t)
@@ -169,8 +169,8 @@
                first-frame-p bounds-updated-p collapsed-p) win
     ;; Set position/size on first frame or when bounds updated
     (when (or first-frame-p bounds-updated-p)
-      (imgui::set-next-window-pos (float x 0.0) (float y 0.0) 1)
-      (imgui::set-next-window-size (float width 0.0) (float height 0.0) 1)
+      (set-next-window-pos (float x 0.0) (float y 0.0) 1)
+      (set-next-window-size (float width 0.0) (float height 0.0) 1)
       (setf first-frame-p nil
             bounds-updated-p nil))
     ;; Begin window
@@ -178,7 +178,7 @@
            (p-open (if closable-p
                        (cffi:foreign-alloc :bool :initial-element t)
                        (cffi:null-pointer)))
-           (visible (imgui::begin window-id p-open window-flags)))
+           (visible (begin window-id p-open window-flags)))
       (unwind-protect
            (progn
              ;; Compose children if visible
@@ -186,7 +186,7 @@
                (dolist (child (children-of win))
                  (compose child)))
              ;; Check collapsed state
-             (let ((now-collapsed (imgui::is-window-collapsed)))
+             (let ((now-collapsed (is-window-collapsed)))
                (unless (eq now-collapsed collapsed-p)
                  (setf collapsed-p now-collapsed)
                  (if collapsed-p
@@ -198,7 +198,7 @@
                  (setf hidden-p t))
                (on-close win)))
         ;; Always call End
-        (imgui::end)
+        (end)
         ;; Free p-open if allocated
         (unless (cffi:null-pointer-p p-open)
           (cffi:foreign-free p-open))))))
@@ -267,13 +267,13 @@
                  unless (member key special-keywords)
                    append (case key
                             (:origin (list key
-                                           `(v:vec2 ,(or (first value) 0)
-                                                    ,(or (second value) 0))))
+                                           `(make-vec2 ,(or (first value) 0)
+                                                             ,(or (second value) 0))))
                             (:background-color
-                             (list key `(v:vec4 ,(or (first value) 0)
-                                                ,(or (second value) 0)
-                                                ,(or (third value) 0)
-                                                ,(or (fourth value) 1))))
+                             (list key `(make-vec4 ,(or (first value) 0)
+                                                         ,(or (second value) 0)
+                                                         ,(or (third value) 0)
+                                                         ,(or (fourth value) 1))))
                             (:style (list key `(list ,@value)))
                             (t (list key (first value)))))))
     (destructuring-bind (name &rest opts) (alexandria:ensure-list name-and-opts)

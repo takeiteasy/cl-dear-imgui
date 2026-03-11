@@ -1,4 +1,4 @@
-(in-package :cl-dear-imgui/ui)
+(in-package :cl-dear-imgui)
 
 ;;;
 ;;; FLOAT PROPERTY — Slider
@@ -15,6 +15,6 @@
 
 (defmethod compose ((this float-property))
   (with-slots (value min max label) this
-    (setf value (imgui:slider-float-simple
+    (setf value (slider-float-simple
                  label (float value 0.0)
                  (float min 0.0) (float max 0.0)))))

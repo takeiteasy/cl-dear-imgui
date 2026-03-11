@@ -1,4 +1,4 @@
-(in-package :cl-dear-imgui/ui)
+(in-package :cl-dear-imgui)
 
 ;;;
 ;;; NOTEBOOK — Tab bar with ImGui tabs
@@ -44,11 +44,11 @@
 
 (defmethod compose ((this notebook))
   (with-slots (tabs tab-bar-id) this
-    (when (imgui::begin-tab-bar tab-bar-id 0)
+    (when (begin-tab-bar tab-bar-id 0)
       (unwind-protect
            (loop for tab across tabs
-                 do (when (imgui::begin-tab-item (or (label-of tab) "") (cffi:null-pointer) 0)
+                 do (when (begin-tab-item (or (label-of tab) "") (cffi:null-pointer) 0)
                       (unwind-protect
                            (compose tab)
-                        (imgui::end-tab-item))))
-        (imgui::end-tab-bar)))))
+                        (end-tab-item))))
+        (end-tab-bar)))))

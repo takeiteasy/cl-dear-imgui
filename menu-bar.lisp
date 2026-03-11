@@ -1,4 +1,4 @@
-(in-package :cl-dear-imgui/ui)
+(in-package :cl-dear-imgui)
 
 ;;;
 ;;; MENU BAR — Parent panel must have :menu-bar option
@@ -9,7 +9,7 @@
   (make-instance 'menu-bar))
 
 (defmethod compose ((this menu-bar))
-  (when (imgui::begin-menu-bar)
+  (when (begin-menu-bar)
     (unwind-protect
          (call-next-method)
-      (imgui::end-menu-bar))))
+      (end-menu-bar))))

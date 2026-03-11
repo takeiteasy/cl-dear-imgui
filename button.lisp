@@ -1,4 +1,4 @@
-(in-package :cl-dear-imgui/ui)
+(in-package :cl-dear-imgui)
 
 ;;;
 ;;; BUTTON
@@ -12,6 +12,6 @@
 
 (defmethod compose ((this button))
   (with-slots (label click-listener) this
-    (when (imgui::button label)
+    (when (button label)
       (when click-listener
         (funcall click-listener *panel*)))))

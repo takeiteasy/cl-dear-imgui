@@ -1,4 +1,4 @@
-(in-package :cl-dear-imgui/ui)
+(in-package :cl-dear-imgui)
 
 ;;;
 ;;; TEXT EDIT
@@ -40,5 +40,5 @@
 
 (defmethod compose ((this text-edit))
   (with-slots (buffer buffer-size label-str) this
-    (imgui::input-text-ex label-str buffer buffer-size 0
+    (input-text-ex label-str buffer buffer-size 0
                           (cffi:null-pointer) (cffi:null-pointer))))

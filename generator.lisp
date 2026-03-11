@@ -13,8 +13,8 @@
 (defvar *struct-names* nil
   "Hash-table of struct names (for detecting by-value struct arguments).")
 
-(defun generate-bindings (json-file package-file bindings-file &key shim-file)
-  "Read JSON-FILE and generate PACKAGE-FILE and BINDINGS-FILE.
+(defun generate-bindings (json-file bindings-file &key shim-file)
+  "Read JSON-FILE and generate BINDINGS-FILE (with exports appended at the end).
    SHIM-FILE is the path to abi_shim.cpp; if not provided, looks for abi_shim.cpp
    next to JSON-FILE.  Functions that pass structs by value are omitted from the
    generated bindings and checked against the shim for coverage."
@@ -30,7 +30,7 @@
         (setf *struct-names* (build-struct-names-set (getf metadata :structs)))
 
         ;; Collect by-value functions and compute shim names FIRST so they
-        ;; can be included in the package exports.
+        ;; can be included in the exports.
         (let* ((by-value      (collect-by-value-struct-functions (getf metadata :functions)))
                (manual-cov   (parse-shim-covered-names effective-shim))
                (need-shim    (remove-if
@@ -48,11 +48,8 @@
                                    unless (func-has-real-varargs-p fn)
                                    collect (format-symbol-name (gethash "name" fn)))))
 
-          (format t "Generating package file: ~A~%" package-file)
-          (generate-package-file package-file metadata :extra-exports shim-exports)
-
           (format t "Generating bindings file: ~A~%" bindings-file)
-          (generate-bindings-file bindings-file metadata)
+          (generate-bindings-file bindings-file metadata :extra-exports shim-exports)
 
           (when by-value
             (format t "~%~D function(s) pass structs by value (~D already manually shimmed).~%"
@@ -68,7 +65,6 @@
               (check-shim-coverage by-value effective-shim covered-orig))))
 
         (format t "~%Successfully generated bindings!~%")
-        (format t "  - ~A~%" package-file)
         (format t "  - ~A~%" bindings-file)
         t)
     (error (e)
@@ -809,33 +805,13 @@
     (values generated skipped covered-orig)))
 
 ;;; ============================================================================
-;;; Package File Generation
+;;; Export Section Generation
 ;;; ============================================================================
 
-(defun generate-package-file (filepath metadata &key extra-exports)
-  "Generate package.lisp with package definition and exports.
+(defun generate-export-section (stream metadata &key extra-exports)
+  "Write an (export '(...)) form at the end of the bindings stream.
    EXTRA-EXPORTS is an optional list of additional symbol name strings to export
    (e.g. generated shim function names)."
-  (with-open-file (stream filepath
-                          :direction :output
-                          :if-exists :supersede
-                          :if-does-not-exist :create)
-    (format stream ";;;; package.lisp~%")
-    (format stream ";;;; Auto-generated CFFI bindings for Dear ImGui~%")
-    (format stream ";;;; Generated from dcimgui.json~%~%")
-
-    ;; Package definition
-    (format stream "(defpackage #:cl-dear-imgui~%")
-    (format stream "  (:use #:cl #:cffi)~%")
-
-    ;; Export all public symbols
-    (format stream "  (:export~%")
-    (generate-exports stream metadata :extra-exports extra-exports)
-    (format stream "   ))~%")))
-
-(defun generate-exports (stream metadata &key extra-exports)
-  "Generate export clauses for all public symbols.
-   EXTRA-EXPORTS is an optional list of additional symbol name strings."
   (let ((exports (copy-list extra-exports)))
 
     ;; Export enum names and elements
@@ -873,12 +849,18 @@
                (unless (should-skip-define-p name content)
                  (push (format nil "+~A+" (format-symbol-name name)) exports))))
 
-    ;; Sort and output (remove duplicates)
-    (loop for export in (sort (remove-duplicates exports :test #'string=) #'string<)
-          do (format stream "   #:~A~%" export))))
+    ;; Sort and deduplicate
+    (let ((sorted (sort (remove-duplicates exports :test #'string=) #'string<)))
+      (format stream "~%;;; ============================================================================~%")
+      (format stream ";;; Exports~%")
+      (format stream ";;; ============================================================================~%~%")
+      (format stream "(export '(~%")
+      (loop for sym in sorted
+            do (format stream "  ~A~%" sym))
+      (format stream "))~%"))))
 
-(defun generate-bindings-file (filepath metadata)
-  "Generate bindings.lisp with all CFFI definitions."
+(defun generate-bindings-file (filepath metadata &key extra-exports)
+  "Generate bindings.lisp with all CFFI definitions and exports appended at the end."
   (with-open-file (stream filepath
                           :direction :output
                           :if-exists :supersede
@@ -904,7 +886,10 @@
                              (getf metadata :structs))
 
     ;; Functions
-    (generate-functions stream (getf metadata :functions))))
+    (generate-functions stream (getf metadata :functions))
+
+    ;; Exports at the end (so package.lisp stays hand-written and is never overwritten)
+    (generate-export-section stream metadata :extra-exports extra-exports)))
 
 (defun generate-library-definition (stream)
   "Generate define-foreign-library form for dcimgui."
