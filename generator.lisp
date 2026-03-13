@@ -13,8 +13,8 @@
 (defvar *struct-names* nil
   "Hash-table of struct names (for detecting by-value struct arguments).")
 
-(defun generate-bindings (json-file bindings-file &key shim-file)
-  "Read JSON-FILE and generate BINDINGS-FILE (with exports appended at the end).
+(defun generate-bindings (json-file package-file bindings-file &key shim-file)
+  "Read JSON-FILE and generate PACKAGE-FILE and BINDINGS-FILE.
    SHIM-FILE is the path to abi_shim.cpp; if not provided, looks for abi_shim.cpp
    next to JSON-FILE.  Functions that pass structs by value are omitted from the
    generated bindings and checked against the shim for coverage."
@@ -805,13 +805,33 @@
     (values generated skipped covered-orig)))
 
 ;;; ============================================================================
-;;; Export Section Generation
+;;; Package File Generation
 ;;; ============================================================================
 
-(defun generate-export-section (stream metadata &key extra-exports)
-  "Write an (export '(...)) form at the end of the bindings stream.
+(defun generate-package-file (filepath metadata &key extra-exports)
+  "Generate package.lisp with package definition and exports.
    EXTRA-EXPORTS is an optional list of additional symbol name strings to export
    (e.g. generated shim function names)."
+  (with-open-file (stream filepath
+                          :direction :output
+                          :if-exists :supersede
+                          :if-does-not-exist :create)
+    (format stream ";;;; package.lisp~%")
+    (format stream ";;;; Auto-generated CFFI bindings for Dear ImGui~%")
+    (format stream ";;;; Generated from dcimgui.json~%~%")
+
+    ;; Package definition
+    (format stream "(defpackage #:cl-dear-imgui~%")
+    (format stream "  (:use #:cl #:cffi)~%")
+
+    ;; Export all public symbols
+    (format stream "  (:export~%")
+    (generate-exports stream metadata :extra-exports extra-exports)
+    (format stream "   ))~%")))
+
+(defun generate-exports (stream metadata &key extra-exports)
+  "Generate export clauses for all public symbols.
+   EXTRA-EXPORTS is an optional list of additional symbol name strings."
   (let ((exports (copy-list extra-exports)))
 
     ;; Export enum names and elements
@@ -849,15 +869,9 @@
                (unless (should-skip-define-p name content)
                  (push (format nil "+~A+" (format-symbol-name name)) exports))))
 
-    ;; Sort and deduplicate
-    (let ((sorted (sort (remove-duplicates exports :test #'string=) #'string<)))
-      (format stream "~%;;; ============================================================================~%")
-      (format stream ";;; Exports~%")
-      (format stream ";;; ============================================================================~%~%")
-      (format stream "(export '(~%")
-      (loop for sym in sorted
-            do (format stream "  ~A~%" sym))
-      (format stream "))~%"))))
+    ;; Sort and output (remove duplicates)
+    (loop for export in (sort (remove-duplicates exports :test #'string=) #'string<)
+          do (format stream "   #:~A~%" export))))
 
 (defun generate-bindings-file (filepath metadata &key extra-exports)
   "Generate bindings.lisp with all CFFI definitions and exports appended at the end."
@@ -886,10 +900,7 @@
                              (getf metadata :structs))
 
     ;; Functions
-    (generate-functions stream (getf metadata :functions))
-
-    ;; Exports at the end (so package.lisp stays hand-written and is never overwritten)
-    (generate-export-section stream metadata :extra-exports extra-exports)))
+    (generate-functions stream (getf metadata :functions))))
 
 (defun generate-library-definition (stream)
   "Generate define-foreign-library form for dcimgui."

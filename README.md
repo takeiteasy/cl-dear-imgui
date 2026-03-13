@@ -1,6 +1,6 @@
 # cl-dear-imgui
 
-Common Lisp CFFI bindings for [Dear ImGui](https://github.com/ocornut/imgui) using [dear_bindings](https://github.com/dearimgui/dear_bindings). This project provides automatically generated CFFI bindings for Dear ImGui. The bindings are generated from the `dcimgui.json` metadata file produced by the dear_bindings Python tool. Also provided is a high-level immediate mode interface forked from [borodust/bodge-ui](https://github.com/borodust/bodge-ui) for use with imgui instead of nuklear.
+Common Lisp CFFI bindings for [Dear ImGui](https://github.com/ocornut/imgui) using [dear_bindings](https://github.com/dearimgui/dear_bindings). This project provides automatically generated CFFI bindings for Dear ImGui. The bindings are generated from the `dcimgui.json` metadata file produced by the dear_bindings Python tool. 
 
 ## Build 
 
