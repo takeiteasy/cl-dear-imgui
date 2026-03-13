@@ -1,6 +1,6 @@
 # cl-dear-imgui
 
-Common Lisp CFFI bindings for [Dear ImGui](https://github.com/ocornut/imgui) using [dear_bindings](https://github.com/dearimgui/dear_bindings). This project provides automatically generated CFFI bindings for Dear ImGui. The bindings are generated from the `dcimgui.json` metadata file produced by the dear_bindings Python tool. 
+Common Lisp CFFI + ECL bindings for [Dear ImGui](https://github.com/ocornut/imgui) using [dear_bindings](https://github.com/dearimgui/dear_bindings). This project provides automatically generated bindings for Dear ImGui. The bindings are generated from the `dcimgui.json` metadata file produced by the dear_bindings Python tool. 
 
 ## Build 
 
@@ -33,9 +33,9 @@ Cross-compiler requirements:
 
 This creates:
 - `package.lisp` - Package definition with all exports
-- `bindings.lisp` - CFFI bindings (constants, enums, types, structs, functions)
+- `bindings.lisp` - FFI bindings (constants, enums, types, structs, functions)
 - `abi_shim_generated.cpp` - Auto-generated C++ shims for functions that pass structs by value (ARM64 ABI)
-- `shim.lisp` - CFFI bindings for the generated shims
+- `shim.lisp` - FFI bindings for the generated shims
 
 The generator detects functions that pass `ImVec2`, `ImVec4`, or `ImTextureRef` by value (which CFFI cannot handle correctly on ARM64) and automatically generates C++ shims that expand them to individual scalar arguments. These shims are bound under the original function's Lisp name, so callers see no difference.
 
