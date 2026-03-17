@@ -4,26 +4,26 @@
 
 (in-package #:cl-dear-imgui)
 
-#-(ecl)
+#-ecl
 (eval-when (:compile-toplevel :load-toplevel :execute)
   (pushnew (asdf:system-relative-pathname :cl-dear-imgui "./")
            cffi:*foreign-library-directories*
            :test #'equal))
 
-#-(ecl)
+#-ecl
 (define-foreign-library dcimgui
   (:darwin "libdcimgui.dylib")
   (:unix "libdcimgui.so")
   (:windows "dcimgui.dll")
   (t (:default "libdcimgui")))
 
-#-(ecl)
+#-ecl
 (use-foreign-library dcimgui)
 
-#+(ecl)
+#+ecl
 (ffi:clines "#include \"dcimgui.h\"")
 
-#+(ecl)
+#+ecl
 (progn
   #+darwin (ffi:load-foreign-object "libdcimgui.dylib")
   #+(and unix (not darwin)) (ffi:load-foreign-object "libdcimgui.so")
@@ -72,7 +72,7 @@
 (defparameter +font-atlas-rect-id-invalid+ -1)
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-#-(ecl)
+#-ecl
 (defcenum im-window-flags
   (:window-flags-none 0)
   (:window-flags-no-title-bar 1)
@@ -104,7 +104,7 @@
   (:window-flags-child-menu 268435456)
 )
 
-#+(ecl)
+#+ecl
 (progn
   (defconstant +im-window-flags-window-flags-none+ 0)
   (defconstant +im-window-flags-window-flags-no-title-bar+ 1)
@@ -137,7 +137,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-#-(ecl)
+#-ecl
 (defcenum im-child-flags
   (:child-flags-none 0)
   (:child-flags-borders 1)
@@ -151,7 +151,7 @@
   (:child-flags-nav-flattened 256)
 )
 
-#+(ecl)
+#+ecl
 (progn
   (defconstant +im-child-flags-child-flags-none+ 0)
   (defconstant +im-child-flags-child-flags-borders+ 1)
@@ -166,7 +166,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-#-(ecl)
+#-ecl
 (defcenum im-item-flags
   (:item-flags-none 0)
   (:item-flags-no-tab-stop 1)
@@ -177,7 +177,7 @@
   (:item-flags-allow-duplicate-id 32)
 )
 
-#+(ecl)
+#+ecl
 (progn
   (defconstant +im-item-flags-item-flags-none+ 0)
   (defconstant +im-item-flags-item-flags-no-tab-stop+ 1)
@@ -189,7 +189,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-#-(ecl)
+#-ecl
 (defcenum im-input-text-flags
   (:input-text-flags-none 0)
   (:input-text-flags-chars-decimal 1)
@@ -219,7 +219,7 @@
   (:input-text-flags-word-wrap 16777216)
 )
 
-#+(ecl)
+#+ecl
 (progn
   (defconstant +im-input-text-flags-input-text-flags-none+ 0)
   (defconstant +im-input-text-flags-input-text-flags-chars-decimal+ 1)
@@ -250,7 +250,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-#-(ecl)
+#-ecl
 (defcenum im-tree-node-flags
   (:tree-node-flags-none 0)
   (:tree-node-flags-selected 1)
@@ -278,7 +278,7 @@
   (:tree-node-flags-span-text-width 8192)
 )
 
-#+(ecl)
+#+ecl
 (progn
   (defconstant +im-tree-node-flags-tree-node-flags-none+ 0)
   (defconstant +im-tree-node-flags-tree-node-flags-selected+ 1)
@@ -307,7 +307,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-#-(ecl)
+#-ecl
 (defcenum im-popup-flags
   (:popup-flags-none 0)
   (:popup-flags-mouse-button-left 0)
@@ -323,7 +323,7 @@
   (:popup-flags-any-popup 3072)
 )
 
-#+(ecl)
+#+ecl
 (progn
   (defconstant +im-popup-flags-popup-flags-none+ 0)
   (defconstant +im-popup-flags-popup-flags-mouse-button-left+ 0)
@@ -340,7 +340,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-#-(ecl)
+#-ecl
 (defcenum im-selectable-flags
   (:selectable-flags-none 0)
   (:selectable-flags-no-auto-close-popups 1)
@@ -353,7 +353,7 @@
   (:selectable-flags-dont-close-popups 1)
 )
 
-#+(ecl)
+#+ecl
 (progn
   (defconstant +im-selectable-flags-selectable-flags-none+ 0)
   (defconstant +im-selectable-flags-selectable-flags-no-auto-close-popups+ 1)
@@ -367,7 +367,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-#-(ecl)
+#-ecl
 (defcenum im-combo-flags
   (:combo-flags-none 0)
   (:combo-flags-popup-align-left 1)
@@ -381,7 +381,7 @@
   (:combo-flags-height-mask- 30)
 )
 
-#+(ecl)
+#+ecl
 (progn
   (defconstant +im-combo-flags-combo-flags-none+ 0)
   (defconstant +im-combo-flags-combo-flags-popup-align-left+ 1)
@@ -396,7 +396,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-#-(ecl)
+#-ecl
 (defcenum im-tab-bar-flags
   (:tab-bar-flags-none 0)
   (:tab-bar-flags-reorderable 1)
@@ -414,7 +414,7 @@
   (:tab-bar-flags-fitting-policy-resize-down 256)
 )
 
-#+(ecl)
+#+ecl
 (progn
   (defconstant +im-tab-bar-flags-tab-bar-flags-none+ 0)
   (defconstant +im-tab-bar-flags-tab-bar-flags-reorderable+ 1)
@@ -433,7 +433,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-#-(ecl)
+#-ecl
 (defcenum im-tab-item-flags
   (:tab-item-flags-none 0)
   (:tab-item-flags-unsaved-document 1)
@@ -447,7 +447,7 @@
   (:tab-item-flags-no-assumed-closure 256)
 )
 
-#+(ecl)
+#+ecl
 (progn
   (defconstant +im-tab-item-flags-tab-item-flags-none+ 0)
   (defconstant +im-tab-item-flags-tab-item-flags-unsaved-document+ 1)
@@ -462,7 +462,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-#-(ecl)
+#-ecl
 (defcenum im-focused-flags
   (:focused-flags-none 0)
   (:focused-flags-child-windows 1)
@@ -472,7 +472,7 @@
   (:focused-flags-root-and-child-windows 3)
 )
 
-#+(ecl)
+#+ecl
 (progn
   (defconstant +im-focused-flags-focused-flags-none+ 0)
   (defconstant +im-focused-flags-focused-flags-child-windows+ 1)
@@ -483,7 +483,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-#-(ecl)
+#-ecl
 (defcenum im-hovered-flags
   (:hovered-flags-none 0)
   (:hovered-flags-child-windows 1)
@@ -507,7 +507,7 @@
   (:hovered-flags-no-shared-delay 131072)
 )
 
-#+(ecl)
+#+ecl
 (progn
   (defconstant +im-hovered-flags-hovered-flags-none+ 0)
   (defconstant +im-hovered-flags-hovered-flags-child-windows+ 1)
@@ -532,7 +532,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-#-(ecl)
+#-ecl
 (defcenum im-drag-drop-flags
   (:drag-drop-flags-none 0)
   (:drag-drop-flags-source-no-preview-tooltip 1)
@@ -551,7 +551,7 @@
   (:drag-drop-flags-source-auto-expire-payload 32)
 )
 
-#+(ecl)
+#+ecl
 (progn
   (defconstant +im-drag-drop-flags-drag-drop-flags-none+ 0)
   (defconstant +im-drag-drop-flags-drag-drop-flags-source-no-preview-tooltip+ 1)
@@ -570,7 +570,7 @@
   (defconstant +im-drag-drop-flags-drag-drop-flags-source-auto-expire-payload+ 32)
 )
 
-#-(ecl)
+#-ecl
 (defcenum im-data-type
   (:data-type-s8 0)
   (:data-type-u8 1)
@@ -586,7 +586,7 @@
   (:data-type-string 11)
 )
 
-#+(ecl)
+#+ecl
 (progn
   (defconstant +im-data-type-data-type-s8+ 0)
   (defconstant +im-data-type-data-type-u8+ 1)
@@ -602,7 +602,7 @@
   (defconstant +im-data-type-data-type-string+ 11)
 )
 
-#-(ecl)
+#-ecl
 (defcenum im-dir
   (:dir-none -1)
   (:dir-left 0)
@@ -611,7 +611,7 @@
   (:dir-down 3)
 )
 
-#+(ecl)
+#+ecl
 (progn
   (defconstant +im-dir-dir-none+ -1)
   (defconstant +im-dir-dir-left+ 0)
@@ -620,21 +620,21 @@
   (defconstant +im-dir-dir-down+ 3)
 )
 
-#-(ecl)
+#-ecl
 (defcenum im-sort-direction
   (:sort-direction-none 0)
   (:sort-direction-ascending 1)
   (:sort-direction-descending 2)
 )
 
-#+(ecl)
+#+ecl
 (progn
   (defconstant +im-sort-direction-sort-direction-none+ 0)
   (defconstant +im-sort-direction-sort-direction-ascending+ 1)
   (defconstant +im-sort-direction-sort-direction-descending+ 2)
 )
 
-#-(ecl)
+#-ecl
 (defcenum im-key
   (:key-none 0)
   (:key-named-key-begin 512)
@@ -803,7 +803,7 @@
   (:mod-shortcut 4096)
 )
 
-#+(ecl)
+#+ecl
 (progn
   (defconstant +im-key-key-none+ 0)
   (defconstant +im-key-key-named-key-begin+ 512)
@@ -973,7 +973,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-#-(ecl)
+#-ecl
 (defcenum im-input-flags
   (:input-flags-none 0)
   (:input-flags-repeat 1)
@@ -988,7 +988,7 @@
   (:input-flags-tooltip 262144)
 )
 
-#+(ecl)
+#+ecl
 (progn
   (defconstant +im-input-flags-input-flags-none+ 0)
   (defconstant +im-input-flags-input-flags-repeat+ 1)
@@ -1004,7 +1004,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-#-(ecl)
+#-ecl
 (defcenum im-config-flags
   (:config-flags-none 0)
   (:config-flags-nav-enable-keyboard 1)
@@ -1018,7 +1018,7 @@
   (:config-flags-nav-no-capture-keyboard 8)
 )
 
-#+(ecl)
+#+ecl
 (progn
   (defconstant +im-config-flags-config-flags-none+ 0)
   (defconstant +im-config-flags-config-flags-nav-enable-keyboard+ 1)
@@ -1033,7 +1033,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-#-(ecl)
+#-ecl
 (defcenum im-backend-flags
   (:backend-flags-none 0)
   (:backend-flags-has-gamepad 1)
@@ -1043,7 +1043,7 @@
   (:backend-flags-renderer-has-textures 16)
 )
 
-#+(ecl)
+#+ecl
 (progn
   (defconstant +im-backend-flags-backend-flags-none+ 0)
   (defconstant +im-backend-flags-backend-flags-has-gamepad+ 1)
@@ -1053,7 +1053,7 @@
   (defconstant +im-backend-flags-backend-flags-renderer-has-textures+ 16)
 )
 
-#-(ecl)
+#-ecl
 (defcenum im-col
   (:col-text 0)
   (:col-text-disabled 1)
@@ -1121,7 +1121,7 @@
   (:col-nav-highlight 56)
 )
 
-#+(ecl)
+#+ecl
 (progn
   (defconstant +im-col-col-text+ 0)
   (defconstant +im-col-col-text-disabled+ 1)
@@ -1189,7 +1189,7 @@
   (defconstant +im-col-col-nav-highlight+ 56)
 )
 
-#-(ecl)
+#-ecl
 (defcenum im-style-var
   (:style-var-alpha 0)
   (:style-var-disabled-alpha 1)
@@ -1232,7 +1232,7 @@
   (:style-var-separator-text-padding 38)
 )
 
-#+(ecl)
+#+ecl
 (progn
   (defconstant +im-style-var-style-var-alpha+ 0)
   (defconstant +im-style-var-style-var-disabled-alpha+ 1)
@@ -1276,7 +1276,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-#-(ecl)
+#-ecl
 (defcenum im-button-flags
   (:button-flags-none 0)
   (:button-flags-mouse-button-left 1)
@@ -1286,7 +1286,7 @@
   (:button-flags-enable-nav 8)
 )
 
-#+(ecl)
+#+ecl
 (progn
   (defconstant +im-button-flags-button-flags-none+ 0)
   (defconstant +im-button-flags-button-flags-mouse-button-left+ 1)
@@ -1297,7 +1297,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-#-(ecl)
+#-ecl
 (defcenum im-color-edit-flags
   (:color-edit-flags-none 0)
   (:color-edit-flags-no-alpha 2)
@@ -1334,7 +1334,7 @@
   (:color-edit-flags-alpha-preview 0)
 )
 
-#+(ecl)
+#+ecl
 (progn
   (defconstant +im-color-edit-flags-color-edit-flags-none+ 0)
   (defconstant +im-color-edit-flags-color-edit-flags-no-alpha+ 2)
@@ -1372,7 +1372,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-#-(ecl)
+#-ecl
 (defcenum im-slider-flags
   (:slider-flags-none 0)
   (:slider-flags-logarithmic 32)
@@ -1387,7 +1387,7 @@
   (:slider-flags-invalid-mask- 1879048207)
 )
 
-#+(ecl)
+#+ecl
 (progn
   (defconstant +im-slider-flags-slider-flags-none+ 0)
   (defconstant +im-slider-flags-slider-flags-logarithmic+ 32)
@@ -1402,21 +1402,21 @@
   (defconstant +im-slider-flags-slider-flags-invalid-mask-+ 1879048207)
 )
 
-#-(ecl)
+#-ecl
 (defcenum im-mouse-button
   (:mouse-button-left 0)
   (:mouse-button-right 1)
   (:mouse-button-middle 2)
 )
 
-#+(ecl)
+#+ecl
 (progn
   (defconstant +im-mouse-button-mouse-button-left+ 0)
   (defconstant +im-mouse-button-mouse-button-right+ 1)
   (defconstant +im-mouse-button-mouse-button-middle+ 2)
 )
 
-#-(ecl)
+#-ecl
 (defcenum im-mouse-cursor
   (:mouse-cursor-none -1)
   (:mouse-cursor-arrow 0)
@@ -1432,7 +1432,7 @@
   (:mouse-cursor-not-allowed 10)
 )
 
-#+(ecl)
+#+ecl
 (progn
   (defconstant +im-mouse-cursor-mouse-cursor-none+ -1)
   (defconstant +im-mouse-cursor-mouse-cursor-arrow+ 0)
@@ -1448,21 +1448,21 @@
   (defconstant +im-mouse-cursor-mouse-cursor-not-allowed+ 10)
 )
 
-#-(ecl)
+#-ecl
 (defcenum im-mouse-source
   (:mouse-source-mouse 0)
   (:mouse-source-touch-screen 1)
   (:mouse-source-pen 2)
 )
 
-#+(ecl)
+#+ecl
 (progn
   (defconstant +im-mouse-source-mouse-source-mouse+ 0)
   (defconstant +im-mouse-source-mouse-source-touch-screen+ 1)
   (defconstant +im-mouse-source-mouse-source-pen+ 2)
 )
 
-#-(ecl)
+#-ecl
 (defcenum im-cond
   (:cond-none 0)
   (:cond-always 1)
@@ -1471,7 +1471,7 @@
   (:cond-appearing 8)
 )
 
-#+(ecl)
+#+ecl
 (progn
   (defconstant +im-cond-cond-none+ 0)
   (defconstant +im-cond-cond-always+ 1)
@@ -1481,7 +1481,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-#-(ecl)
+#-ecl
 (defcenum im-table-flags
   (:table-flags-none 0)
   (:table-flags-resizable 1)
@@ -1522,7 +1522,7 @@
   (:table-flags-sizing-mask- 57344)
 )
 
-#+(ecl)
+#+ecl
 (progn
   (defconstant +im-table-flags-table-flags-none+ 0)
   (defconstant +im-table-flags-table-flags-resizable+ 1)
@@ -1564,7 +1564,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-#-(ecl)
+#-ecl
 (defcenum im-table-column-flags
   (:table-column-flags-none 0)
   (:table-column-flags-disabled 1)
@@ -1596,7 +1596,7 @@
   (:table-column-flags-no-direct-resize- 1073741824)
 )
 
-#+(ecl)
+#+ecl
 (progn
   (defconstant +im-table-column-flags-table-column-flags-none+ 0)
   (defconstant +im-table-column-flags-table-column-flags-disabled+ 1)
@@ -1629,19 +1629,19 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-#-(ecl)
+#-ecl
 (defcenum im-table-row-flags
   (:table-row-flags-none 0)
   (:table-row-flags-headers 1)
 )
 
-#+(ecl)
+#+ecl
 (progn
   (defconstant +im-table-row-flags-table-row-flags-none+ 0)
   (defconstant +im-table-row-flags-table-row-flags-headers+ 1)
 )
 
-#-(ecl)
+#-ecl
 (defcenum im-table-bg-target
   (:table-bg-target-none 0)
   (:table-bg-target-row-bg0 1)
@@ -1649,7 +1649,7 @@
   (:table-bg-target-cell-bg 3)
 )
 
-#+(ecl)
+#+ecl
 (progn
   (defconstant +im-table-bg-target-table-bg-target-none+ 0)
   (defconstant +im-table-bg-target-table-bg-target-row-bg0+ 1)
@@ -1658,20 +1658,20 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-#-(ecl)
+#-ecl
 (defcenum im-list-clipper-flags
   (:list-clipper-flags-none 0)
   (:list-clipper-flags-no-set-table-row-counters 1)
 )
 
-#+(ecl)
+#+ecl
 (progn
   (defconstant +im-list-clipper-flags-list-clipper-flags-none+ 0)
   (defconstant +im-list-clipper-flags-list-clipper-flags-no-set-table-row-counters+ 1)
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-#-(ecl)
+#-ecl
 (defcenum im-multi-select-flags
   (:multi-select-flags-none 0)
   (:multi-select-flags-single-select 1)
@@ -1693,7 +1693,7 @@
   (:multi-select-flags-no-select-on-right-click 131072)
 )
 
-#+(ecl)
+#+ecl
 (progn
   (defconstant +im-multi-select-flags-multi-select-flags-none+ 0)
   (defconstant +im-multi-select-flags-multi-select-flags-single-select+ 1)
@@ -1715,14 +1715,14 @@
   (defconstant +im-multi-select-flags-multi-select-flags-no-select-on-right-click+ 131072)
 )
 
-#-(ecl)
+#-ecl
 (defcenum im-selection-request-type
   (:selection-request-type-none 0)
   (:selection-request-type-set-all 1)
   (:selection-request-type-set-range 2)
 )
 
-#+(ecl)
+#+ecl
 (progn
   (defconstant +im-selection-request-type-selection-request-type-none+ 0)
   (defconstant +im-selection-request-type-selection-request-type-set-all+ 1)
@@ -1730,7 +1730,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-#-(ecl)
+#-ecl
 (defcenum im-draw-flags
   (:draw-flags-none 0)
   (:draw-flags-closed 1)
@@ -1748,7 +1748,7 @@
   (:draw-flags-round-corners-mask- 496)
 )
 
-#+(ecl)
+#+ecl
 (progn
   (defconstant +im-draw-flags-draw-flags-none+ 0)
   (defconstant +im-draw-flags-draw-flags-closed+ 1)
@@ -1767,7 +1767,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-#-(ecl)
+#-ecl
 (defcenum im-draw-list-flags
   (:draw-list-flags-none 0)
   (:draw-list-flags-anti-aliased-lines 1)
@@ -1776,7 +1776,7 @@
   (:draw-list-flags-allow-vtx-offset 8)
 )
 
-#+(ecl)
+#+ecl
 (progn
   (defconstant +im-draw-list-flags-draw-list-flags-none+ 0)
   (defconstant +im-draw-list-flags-draw-list-flags-anti-aliased-lines+ 1)
@@ -1785,19 +1785,19 @@
   (defconstant +im-draw-list-flags-draw-list-flags-allow-vtx-offset+ 8)
 )
 
-#-(ecl)
+#-ecl
 (defcenum im-texture-format
   (:texture-format-rgba32 0)
   (:texture-format-alpha8 1)
 )
 
-#+(ecl)
+#+ecl
 (progn
   (defconstant +im-texture-format-texture-format-rgba32+ 0)
   (defconstant +im-texture-format-texture-format-alpha8+ 1)
 )
 
-#-(ecl)
+#-ecl
 (defcenum im-texture-status
   (:texture-status-ok 0)
   (:texture-status-destroyed 1)
@@ -1806,7 +1806,7 @@
   (:texture-status-want-destroy 4)
 )
 
-#+(ecl)
+#+ecl
 (progn
   (defconstant +im-texture-status-texture-status-ok+ 0)
   (defconstant +im-texture-status-texture-status-destroyed+ 1)
@@ -1816,7 +1816,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-#-(ecl)
+#-ecl
 (defcenum im-font-atlas-flags
   (:font-atlas-flags-none 0)
   (:font-atlas-flags-no-power-of-two-height 1)
@@ -1824,7 +1824,7 @@
   (:font-atlas-flags-no-baked-lines 4)
 )
 
-#+(ecl)
+#+ecl
 (progn
   (defconstant +im-font-atlas-flags-font-atlas-flags-none+ 0)
   (defconstant +im-font-atlas-flags-font-atlas-flags-no-power-of-two-height+ 1)
@@ -1833,7 +1833,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-#-(ecl)
+#-ecl
 (defcenum im-font-flags
   (:font-flags-none 0)
   (:font-flags-no-load-error 2)
@@ -1841,7 +1841,7 @@
   (:font-flags-lock-baked-sizes 8)
 )
 
-#+(ecl)
+#+ecl
 (progn
   (defconstant +im-font-flags-font-flags-none+ 0)
   (defconstant +im-font-flags-font-flags-no-load-error+ 2)
@@ -1850,7 +1850,7 @@
 )
 
 ;; Flags enum (bitfield) - combine with LOGIOR
-#-(ecl)
+#-ecl
 (defcenum im-viewport-flags
   (:viewport-flags-none 0)
   (:viewport-flags-is-platform-window 1)
@@ -1858,7 +1858,7 @@
   (:viewport-flags-owned-by-app 4)
 )
 
-#+(ecl)
+#+ecl
 (progn
   (defconstant +im-viewport-flags-viewport-flags-none+ 0)
   (defconstant +im-viewport-flags-viewport-flags-is-platform-window+ 1)
@@ -1866,16 +1866,16 @@
   (defconstant +im-viewport-flags-viewport-flags-owned-by-app+ 4)
 )
 
-#-(ecl)
+#-ecl
 (defctype id :UNSIGNED-INT)
 
-#-(ecl)
+#-ecl
 (defcstruct vec2
   (x :FLOAT)
   (y :FLOAT)
 )
 
-#-(ecl)
+#-ecl
 (defcstruct platform-ime-data
   (want-visible :BOOL)
   (want-text-input :BOOL)
@@ -1884,7 +1884,7 @@
   (viewport-id ID)
 )
 
-#-(ecl)
+#-ecl
 (defcstruct texture-rect
   (x :UNSIGNED-SHORT)
   (y :UNSIGNED-SHORT)
@@ -1892,20 +1892,20 @@
   (h :UNSIGNED-SHORT)
 )
 
-#-(ecl)
+#-ecl
 (defcstruct vector-im-texture-rect
   (size :INT)
   (capacity :INT)
   (data :POINTER)
 )
 
-#-(ecl)
+#-ecl
 (defctype u64 :UNSIGNED-LONG-LONG)
 
-#-(ecl)
+#-ecl
 (defctype texture-id U64)
 
-#-(ecl)
+#-ecl
 (defcstruct texture-data
   (unique-id :INT)
   (status IM-TEXTURE-STATUS)
@@ -1925,20 +1925,20 @@
   (want-destroy-next-frame :BOOL)
 )
 
-#-(ecl)
+#-ecl
 (defcstruct vector-im-texture-data-ptr
   (size :INT)
   (capacity :INT)
   (data :POINTER)
 )
 
-#-(ecl)
+#-ecl
 (defctype wchar16 :UNSIGNED-SHORT)
 
-#-(ecl)
+#-ecl
 (defctype wchar WCHAR16)
 
-#-(ecl)
+#-ecl
 (defcstruct platform-io
   (platform-get-clipboard-text-fn :POINTER)
   (platform-set-clipboard-text-fn :POINTER)
@@ -1954,10 +1954,10 @@
   (textures VECTOR-IM-TEXTURE-DATA-PTR)
 )
 
-#-(ecl)
+#-ecl
 (defctype viewport-flags :INT)
 
-#-(ecl)
+#-ecl
 (defcstruct viewport
   (id ID)
   (flags VIEWPORT-FLAGS)
@@ -1970,37 +1970,37 @@
   (platform-handle-raw :POINTER)
 )
 
-#-(ecl)
+#-ecl
 (defcstruct storage-pair
   (key ID)
   (--anonymous-type0 :POINTER)
 )
 
-#-(ecl)
+#-ecl
 (defcstruct vector-im-gui-storage-pair
   (size :INT)
   (capacity :INT)
   (data :POINTER)
 )
 
-#-(ecl)
+#-ecl
 (defcstruct storage
   (data VECTOR-IM-GUI-STORAGE-PAIR)
 )
 
-#-(ecl)
+#-ecl
 (defctype u8 :UNSIGNED-CHAR)
 
-#-(ecl)
+#-ecl
 (defctype font-flags :INT)
 
-#-(ecl)
+#-ecl
 (defctype u32 :UNSIGNED-INT)
 
-#-(ecl)
+#-ecl
 (defctype s8 :CHAR)
 
-#-(ecl)
+#-ecl
 (defcstruct font-config
   (name :CHAR :count 40)
   (font-data :POINTER)
@@ -2029,14 +2029,14 @@
   (font-loader-data :POINTER)
 )
 
-#-(ecl)
+#-ecl
 (defcstruct vector-im-font-config-ptr
   (size :INT)
   (capacity :INT)
   (data :POINTER)
 )
 
-#-(ecl)
+#-ecl
 (defcstruct font-atlas-rect
   (x :UNSIGNED-SHORT)
   (y :UNSIGNED-SHORT)
@@ -2046,14 +2046,14 @@
   (uv1 VEC2)
 )
 
-#-(ecl)
+#-ecl
 (defcstruct vector-im-draw-list-shared-data-ptr
   (size :INT)
   (capacity :INT)
   (data :POINTER)
 )
 
-#-(ecl)
+#-ecl
 (defcstruct vec4
   (x :FLOAT)
   (y :FLOAT)
@@ -2061,30 +2061,30 @@
   (w :FLOAT)
 )
 
-#-(ecl)
+#-ecl
 (defcstruct vector-im-font-config
   (size :INT)
   (capacity :INT)
   (data :POINTER)
 )
 
-#-(ecl)
+#-ecl
 (defcstruct vector-im-font-ptr
   (size :INT)
   (capacity :INT)
   (data :POINTER)
 )
 
-#-(ecl)
+#-ecl
 (defcstruct texture-ref
   (-tex-data :POINTER)
   (-tex-id TEXTURE-ID)
 )
 
-#-(ecl)
+#-ecl
 (defctype font-atlas-flags :INT)
 
-#-(ecl)
+#-ecl
 (defcstruct font-atlas
   (flags FONT-ATLAS-FLAGS)
   (tex-desired-format IM-TEXTURE-FORMAT)
@@ -2120,7 +2120,7 @@
   (temp-rect FONT-ATLAS-RECT)
 )
 
-#-(ecl)
+#-ecl
 (defcstruct font-glyph
   (colored :UNSIGNED-INT)
   (visible :UNSIGNED-INT)
@@ -2138,31 +2138,31 @@
   (pack-id :INT)
 )
 
-#-(ecl)
+#-ecl
 (defcstruct vector-im-font-glyph
   (size :INT)
   (capacity :INT)
   (data :POINTER)
 )
 
-#-(ecl)
+#-ecl
 (defctype u16 :UNSIGNED-SHORT)
 
-#-(ecl)
+#-ecl
 (defcstruct vector-im-u16
   (size :INT)
   (capacity :INT)
   (data :POINTER)
 )
 
-#-(ecl)
+#-ecl
 (defcstruct vector-float
   (size :INT)
   (capacity :INT)
   (data :POINTER)
 )
 
-#-(ecl)
+#-ecl
 (defcstruct font-baked
   (index-advance-x VECTOR-FLOAT)
   (fallback-advance-x :FLOAT)
@@ -2183,7 +2183,7 @@
   (font-loader-datas :POINTER)
 )
 
-#-(ecl)
+#-ecl
 (defcstruct font
   (last-baked :POINTER)
   (owner-atlas :POINTER)
@@ -2200,53 +2200,53 @@
   (scale :FLOAT)
 )
 
-#-(ecl)
+#-ecl
 (defcstruct vector-im-u32
   (size :INT)
   (capacity :INT)
   (data :POINTER)
 )
 
-#-(ecl)
+#-ecl
 (defcstruct font-glyph-ranges-builder
   (used-chars VECTOR-IM-U32)
 )
 
-#-(ecl)
+#-ecl
 (defcstruct vector-im-u8
   (size :INT)
   (capacity :INT)
   (data :POINTER)
 )
 
-#-(ecl)
+#-ecl
 (defcstruct vector-im-texture-ref
   (size :INT)
   (capacity :INT)
   (data :POINTER)
 )
 
-#-(ecl)
+#-ecl
 (defcstruct vector-im-vec4
   (size :INT)
   (capacity :INT)
   (data :POINTER)
 )
 
-#-(ecl)
+#-ecl
 (defctype draw-idx :UNSIGNED-SHORT)
 
-#-(ecl)
+#-ecl
 (defcstruct vector-im-draw-idx
   (size :INT)
   (capacity :INT)
   (data :POINTER)
 )
 
-#-(ecl)
+#-ecl
 (defctype draw-callback :POINTER)
 
-#-(ecl)
+#-ecl
 (defcstruct draw-cmd
   (clip-rect VEC4)
   (tex-ref TEXTURE-REF)
@@ -2259,65 +2259,65 @@
   (user-callback-data-offset :INT)
 )
 
-#-(ecl)
+#-ecl
 (defcstruct vector-im-draw-cmd
   (size :INT)
   (capacity :INT)
   (data :POINTER)
 )
 
-#-(ecl)
+#-ecl
 (defcstruct draw-channel
   (-cmd-buffer VECTOR-IM-DRAW-CMD)
   (-idx-buffer VECTOR-IM-DRAW-IDX)
 )
 
-#-(ecl)
+#-ecl
 (defcstruct vector-im-draw-channel
   (size :INT)
   (capacity :INT)
   (data :POINTER)
 )
 
-#-(ecl)
+#-ecl
 (defcstruct draw-list-splitter
   (-current :INT)
   (-count :INT)
   (-channels VECTOR-IM-DRAW-CHANNEL)
 )
 
-#-(ecl)
+#-ecl
 (defcstruct draw-cmd-header
   (clip-rect VEC4)
   (tex-ref TEXTURE-REF)
   (vtx-offset :UNSIGNED-INT)
 )
 
-#-(ecl)
+#-ecl
 (defcstruct vector-im-vec2
   (size :INT)
   (capacity :INT)
   (data :POINTER)
 )
 
-#-(ecl)
+#-ecl
 (defcstruct draw-vert
   (pos VEC2)
   (uv VEC2)
   (col U32)
 )
 
-#-(ecl)
+#-ecl
 (defctype draw-list-flags :INT)
 
-#-(ecl)
+#-ecl
 (defcstruct vector-im-draw-vert
   (size :INT)
   (capacity :INT)
   (data :POINTER)
 )
 
-#-(ecl)
+#-ecl
 (defcstruct draw-list
   (cmd-buffer VECTOR-IM-DRAW-CMD)
   (idx-buffer VECTOR-IM-DRAW-IDX)
@@ -2337,14 +2337,14 @@
   (-owner-name :STRING)
 )
 
-#-(ecl)
+#-ecl
 (defcstruct vector-im-draw-list-ptr
   (size :INT)
   (capacity :INT)
   (data :POINTER)
 )
 
-#-(ecl)
+#-ecl
 (defcstruct draw-data
   (valid :BOOL)
   (cmd-lists-count :INT)
@@ -2358,13 +2358,13 @@
   (textures :POINTER)
 )
 
-#-(ecl)
+#-ecl
 (defcstruct selection-external-storage
   (user-data :POINTER)
   (adapter-set-item-selected :POINTER)
 )
 
-#-(ecl)
+#-ecl
 (defcstruct selection-basic-storage
   (size :INT)
   (preserve-order :BOOL)
@@ -2374,13 +2374,13 @@
   (-storage STORAGE)
 )
 
-#-(ecl)
+#-ecl
 (defctype s64 :LONG-LONG)
 
-#-(ecl)
+#-ecl
 (defctype selection-user-data S64)
 
-#-(ecl)
+#-ecl
 (defcstruct selection-request
   (type IM-SELECTION-REQUEST-TYPE)
   (selected :BOOL)
@@ -2389,14 +2389,14 @@
   (range-last-item SELECTION-USER-DATA)
 )
 
-#-(ecl)
+#-ecl
 (defcstruct vector-im-gui-selection-request
   (size :INT)
   (capacity :INT)
   (data :POINTER)
 )
 
-#-(ecl)
+#-ecl
 (defcstruct multi-select-io
   (requests VECTOR-IM-GUI-SELECTION-REQUEST)
   (range-src-item SELECTION-USER-DATA)
@@ -2406,15 +2406,15 @@
   (items-count :INT)
 )
 
-#-(ecl)
+#-ecl
 (defcstruct color
   (value VEC4)
 )
 
-#-(ecl)
+#-ecl
 (defctype list-clipper-flags :INT)
 
-#-(ecl)
+#-ecl
 (defcstruct list-clipper
   (ctx :POINTER)
   (display-start :INT)
@@ -2427,39 +2427,39 @@
   (flags LIST-CLIPPER-FLAGS)
 )
 
-#-(ecl)
+#-ecl
 (defcstruct vector-char
   (size :INT)
   (capacity :INT)
   (data :STRING)
 )
 
-#-(ecl)
+#-ecl
 (defcstruct text-buffer
   (buf VECTOR-CHAR)
 )
 
-#-(ecl)
+#-ecl
 (defcstruct text-filter-im-gui-text-range
   (b :STRING)
   (e :STRING)
 )
 
-#-(ecl)
+#-ecl
 (defcstruct vector-im-gui-text-range
   (size :INT)
   (capacity :INT)
   (data :POINTER)
 )
 
-#-(ecl)
+#-ecl
 (defcstruct text-filter
   (input-buf :CHAR :count 256)
   (filters VECTOR-IM-GUI-TEXT-RANGE)
   (count-grep :INT)
 )
 
-#-(ecl)
+#-ecl
 (defcstruct payload
   (data :POINTER)
   (data-size :INT)
@@ -2471,7 +2471,7 @@
   (delivery :BOOL)
 )
 
-#-(ecl)
+#-ecl
 (defcstruct size-callback-data
   (user-data :POINTER)
   (pos VEC2)
@@ -2479,13 +2479,13 @@
   (desired-size VEC2)
 )
 
-#-(ecl)
+#-ecl
 (defctype key :INT)
 
-#-(ecl)
+#-ecl
 (defctype input-text-flags :INT)
 
-#-(ecl)
+#-ecl
 (defcstruct input-text-callback-data
   (ctx :POINTER)
   (event-flag INPUT-TEXT-FLAGS)
@@ -2502,14 +2502,14 @@
   (selection-end :INT)
 )
 
-#-(ecl)
+#-ecl
 (defcstruct vector-im-wchar
   (size :INT)
   (capacity :INT)
   (data :POINTER)
 )
 
-#-(ecl)
+#-ecl
 (defcstruct key-data
   (down :BOOL)
   (down-duration :FLOAT)
@@ -2517,19 +2517,19 @@
   (analog-value :FLOAT)
 )
 
-#-(ecl)
+#-ecl
 (defctype key-chord :INT)
 
-#-(ecl)
+#-ecl
 (defctype mouse-source :INT)
 
-#-(ecl)
+#-ecl
 (defctype backend-flags :INT)
 
-#-(ecl)
+#-ecl
 (defctype config-flags :INT)
 
-#-(ecl)
+#-ecl
 (defcstruct io
   (config-flags CONFIG-FLAGS)
   (backend-flags BACKEND-FLAGS)
@@ -2635,16 +2635,16 @@
   (clipboard-user-data :POINTER)
 )
 
-#-(ecl)
+#-ecl
 (defctype hovered-flags :INT)
 
-#-(ecl)
+#-ecl
 (defctype tree-node-flags :INT)
 
-#-(ecl)
+#-ecl
 (defctype dir :INT)
 
-#-(ecl)
+#-ecl
 (defcstruct style
   (font-size-base :FLOAT)
   (font-scale-main :FLOAT)
@@ -2719,13 +2719,13 @@
   (-next-frame-font-size-base :FLOAT)
 )
 
-#-(ecl)
+#-ecl
 (defctype sort-direction U8)
 
-#-(ecl)
+#-ecl
 (defctype s16 :SHORT)
 
-#-(ecl)
+#-ecl
 (defcstruct table-column-sort-specs
   (column-user-id ID)
   (column-index S16)
@@ -2733,1577 +2733,1577 @@
   (sort-direction IM-SORT-DIRECTION)
 )
 
-#-(ecl)
+#-ecl
 (defcstruct table-sort-specs
   (specs :POINTER)
   (specs-count :INT)
   (specs-dirty :BOOL)
 )
 
-#-(ecl)
+#-ecl
 (defctype font-atlas-custom-rect FONT-ATLAS-RECT)
 
-#-(ecl)
+#-ecl
 (defctype font-atlas-rect-id :INT)
 
-#-(ecl)
+#-ecl
 (defctype mem-free-func :POINTER)
 
-#-(ecl)
+#-ecl
 (defctype mem-alloc-func :POINTER)
 
-#-(ecl)
+#-ecl
 (defctype size-callback :POINTER)
 
-#-(ecl)
+#-ecl
 (defctype input-text-callback :POINTER)
 
-#-(ecl)
+#-ecl
 (defctype wchar32 :UNSIGNED-INT)
 
-#-(ecl)
+#-ecl
 (defctype window-flags :INT)
 
-#-(ecl)
+#-ecl
 (defctype table-row-flags :INT)
 
-#-(ecl)
+#-ecl
 (defctype table-column-flags :INT)
 
-#-(ecl)
+#-ecl
 (defctype table-flags :INT)
 
-#-(ecl)
+#-ecl
 (defctype tab-item-flags :INT)
 
-#-(ecl)
+#-ecl
 (defctype tab-bar-flags :INT)
 
-#-(ecl)
+#-ecl
 (defctype slider-flags :INT)
 
-#-(ecl)
+#-ecl
 (defctype selectable-flags :INT)
 
-#-(ecl)
+#-ecl
 (defctype multi-select-flags :INT)
 
-#-(ecl)
+#-ecl
 (defctype popup-flags :INT)
 
-#-(ecl)
+#-ecl
 (defctype item-flags :INT)
 
-#-(ecl)
+#-ecl
 (defctype input-flags :INT)
 
-#-(ecl)
+#-ecl
 (defctype focused-flags :INT)
 
-#-(ecl)
+#-ecl
 (defctype drag-drop-flags :INT)
 
-#-(ecl)
+#-ecl
 (defctype combo-flags :INT)
 
-#-(ecl)
+#-ecl
 (defctype color-edit-flags :INT)
 
-#-(ecl)
+#-ecl
 (defctype child-flags :INT)
 
-#-(ecl)
+#-ecl
 (defctype button-flags :INT)
 
-#-(ecl)
+#-ecl
 (defctype draw-text-flags :INT)
 
-#-(ecl)
+#-ecl
 (defctype draw-flags :INT)
 
-#-(ecl)
+#-ecl
 (defctype table-bg-target :INT)
 
-#-(ecl)
+#-ecl
 (defctype style-var :INT)
 
-#-(ecl)
+#-ecl
 (defctype mouse-cursor :INT)
 
-#-(ecl)
+#-ecl
 (defctype mouse-button :INT)
 
-#-(ecl)
+#-ecl
 (defctype data-type :INT)
 
-#-(ecl)
+#-ecl
 (defctype cond :INT)
 
-#-(ecl)
+#-ecl
 (defctype col :INT)
 
-#-(ecl)
+#-ecl
 (defctype s32 :INT)
 
-#-(ecl)
+#-ecl
 (defcfun ("ImTextureRef_GetTexID" texture-ref-get-tex-id) TEXTURE-ID
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun texture-ref-get-tex-id (self)
   (ffi:c-inline (self) (:POINTER-VOID) :INT
     "ImTextureRef_GetTexID(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_CreateContext" create-context) :POINTER
   (shared-font-atlas :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun create-context (shared-font-atlas)
   (ffi:c-inline (shared-font-atlas) (:POINTER-VOID) :POINTER-VOID
     "ImGui_CreateContext(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_DestroyContext" destroy-context) :VOID
   (ctx :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun destroy-context (ctx)
   (ffi:c-inline (ctx) (:POINTER-VOID) :VOID
     "ImGui_DestroyContext(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetCurrentContext" get-current-context) :POINTER)
 
-#+(ecl)
+#+ecl
 (defun get-current-context ()
   (ffi:c-inline () () :POINTER-VOID
     "ImGui_GetCurrentContext()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SetCurrentContext" set-current-context) :VOID
   (ctx :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun set-current-context (ctx)
   (ffi:c-inline (ctx) (:POINTER-VOID) :VOID
     "ImGui_SetCurrentContext(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetIO" get-io) :POINTER)
 
-#+(ecl)
+#+ecl
 (defun get-io ()
   (ffi:c-inline () () :POINTER-VOID
     "ImGui_GetIO()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetPlatformIO" get-platform-io) :POINTER)
 
-#+(ecl)
+#+ecl
 (defun get-platform-io ()
   (ffi:c-inline () () :POINTER-VOID
     "ImGui_GetPlatformIO()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetStyle" get-style) :POINTER)
 
-#+(ecl)
+#+ecl
 (defun get-style ()
   (ffi:c-inline () () :POINTER-VOID
     "ImGui_GetStyle()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_NewFrame" new-frame) :VOID)
 
-#+(ecl)
+#+ecl
 (defun new-frame ()
   (ffi:c-inline () () :VOID
     "ImGui_NewFrame()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_EndFrame" end-frame) :VOID)
 
-#+(ecl)
+#+ecl
 (defun end-frame ()
   (ffi:c-inline () () :VOID
     "ImGui_EndFrame()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_Render" render) :VOID)
 
-#+(ecl)
+#+ecl
 (defun render ()
   (ffi:c-inline () () :VOID
     "ImGui_Render()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetDrawData" get-draw-data) :POINTER)
 
-#+(ecl)
+#+ecl
 (defun get-draw-data ()
   (ffi:c-inline () () :POINTER-VOID
     "ImGui_GetDrawData()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_ShowDemoWindow" show-demo-window) :VOID
   (p-open :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun show-demo-window (p-open)
   (ffi:c-inline (p-open) (:POINTER-VOID) :VOID
     "ImGui_ShowDemoWindow(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_ShowMetricsWindow" show-metrics-window) :VOID
   (p-open :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun show-metrics-window (p-open)
   (ffi:c-inline (p-open) (:POINTER-VOID) :VOID
     "ImGui_ShowMetricsWindow(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_ShowDebugLogWindow" show-debug-log-window) :VOID
   (p-open :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun show-debug-log-window (p-open)
   (ffi:c-inline (p-open) (:POINTER-VOID) :VOID
     "ImGui_ShowDebugLogWindow(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_ShowIDStackToolWindow" show-idstack-tool-window) :VOID)
 
-#+(ecl)
+#+ecl
 (defun show-idstack-tool-window ()
   (ffi:c-inline () () :VOID
     "ImGui_ShowIDStackToolWindow()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_ShowIDStackToolWindowEx" show-idstack-tool-window-ex) :VOID
   (p-open :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun show-idstack-tool-window-ex (p-open)
   (ffi:c-inline (p-open) (:POINTER-VOID) :VOID
     "ImGui_ShowIDStackToolWindowEx(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_ShowAboutWindow" show-about-window) :VOID
   (p-open :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun show-about-window (p-open)
   (ffi:c-inline (p-open) (:POINTER-VOID) :VOID
     "ImGui_ShowAboutWindow(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_ShowStyleEditor" show-style-editor) :VOID
   (ref :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun show-style-editor (ref)
   (ffi:c-inline (ref) (:POINTER-VOID) :VOID
     "ImGui_ShowStyleEditor(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_ShowStyleSelector" show-style-selector) :BOOL
   (label :STRING)
 )
 
-#+(ecl)
+#+ecl
 (defun show-style-selector (label)
   (ffi:c-inline (label) (:CSTRING) :BOOL
     "ImGui_ShowStyleSelector(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_ShowFontSelector" show-font-selector) :VOID
   (label :STRING)
 )
 
-#+(ecl)
+#+ecl
 (defun show-font-selector (label)
   (ffi:c-inline (label) (:CSTRING) :VOID
     "ImGui_ShowFontSelector(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_ShowUserGuide" show-user-guide) :VOID)
 
-#+(ecl)
+#+ecl
 (defun show-user-guide ()
   (ffi:c-inline () () :VOID
     "ImGui_ShowUserGuide()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetVersion" get-version) :STRING)
 
-#+(ecl)
+#+ecl
 (defun get-version ()
   (ffi:c-inline () () :CSTRING
     "ImGui_GetVersion()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_StyleColorsDark" style-colors-dark) :VOID
   (dst :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun style-colors-dark (dst)
   (ffi:c-inline (dst) (:POINTER-VOID) :VOID
     "ImGui_StyleColorsDark(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_StyleColorsLight" style-colors-light) :VOID
   (dst :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun style-colors-light (dst)
   (ffi:c-inline (dst) (:POINTER-VOID) :VOID
     "ImGui_StyleColorsLight(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_StyleColorsClassic" style-colors-classic) :VOID
   (dst :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun style-colors-classic (dst)
   (ffi:c-inline (dst) (:POINTER-VOID) :VOID
     "ImGui_StyleColorsClassic(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_Begin" begin) :BOOL
   (name :STRING)
   (p-open :POINTER)
   (flags WINDOW-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun begin (name p-open flags)
   (ffi:c-inline (name p-open flags) (:CSTRING :POINTER-VOID :INT) :BOOL
     "ImGui_Begin(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_End" end) :VOID)
 
-#+(ecl)
+#+ecl
 (defun end ()
   (ffi:c-inline () () :VOID
     "ImGui_End()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_EndChild" end-child) :VOID)
 
-#+(ecl)
+#+ecl
 (defun end-child ()
   (ffi:c-inline () () :VOID
     "ImGui_EndChild()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_IsWindowAppearing" is-window-appearing) :BOOL)
 
-#+(ecl)
+#+ecl
 (defun is-window-appearing ()
   (ffi:c-inline () () :BOOL
     "ImGui_IsWindowAppearing()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_IsWindowCollapsed" is-window-collapsed) :BOOL)
 
-#+(ecl)
+#+ecl
 (defun is-window-collapsed ()
   (ffi:c-inline () () :BOOL
     "ImGui_IsWindowCollapsed()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_IsWindowFocused" is-window-focused) :BOOL
   (flags FOCUSED-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun is-window-focused (flags)
   (ffi:c-inline (flags) (:INT) :BOOL
     "ImGui_IsWindowFocused(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_IsWindowHovered" is-window-hovered) :BOOL
   (flags HOVERED-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun is-window-hovered (flags)
   (ffi:c-inline (flags) (:INT) :BOOL
     "ImGui_IsWindowHovered(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetWindowDrawList" get-window-draw-list) :POINTER)
 
-#+(ecl)
+#+ecl
 (defun get-window-draw-list ()
   (ffi:c-inline () () :POINTER-VOID
     "ImGui_GetWindowDrawList()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetWindowPos" get-window-pos) VEC2)
 
-#+(ecl)
+#+ecl
 (defun get-window-pos ()
   (ffi:c-inline () () :INT
     "ImGui_GetWindowPos()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetWindowSize" get-window-size) VEC2)
 
-#+(ecl)
+#+ecl
 (defun get-window-size ()
   (ffi:c-inline () () :INT
     "ImGui_GetWindowSize()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetWindowWidth" get-window-width) :FLOAT)
 
-#+(ecl)
+#+ecl
 (defun get-window-width ()
   (ffi:c-inline () () :FLOAT
     "ImGui_GetWindowWidth()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetWindowHeight" get-window-height) :FLOAT)
 
-#+(ecl)
+#+ecl
 (defun get-window-height ()
   (ffi:c-inline () () :FLOAT
     "ImGui_GetWindowHeight()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SetNextWindowCollapsed" set-next-window-collapsed) :VOID
   (collapsed :BOOL)
   (cond COND)
 )
 
-#+(ecl)
+#+ecl
 (defun set-next-window-collapsed (collapsed cond)
   (ffi:c-inline (collapsed cond) (:BOOL :INT) :VOID
     "ImGui_SetNextWindowCollapsed(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SetNextWindowFocus" set-next-window-focus) :VOID)
 
-#+(ecl)
+#+ecl
 (defun set-next-window-focus ()
   (ffi:c-inline () () :VOID
     "ImGui_SetNextWindowFocus()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SetNextWindowBgAlpha" set-next-window-bg-alpha) :VOID
   (alpha :FLOAT)
 )
 
-#+(ecl)
+#+ecl
 (defun set-next-window-bg-alpha (alpha)
   (ffi:c-inline (alpha) (:FLOAT) :VOID
     "ImGui_SetNextWindowBgAlpha(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SetWindowCollapsed" set-window-collapsed) :VOID
   (collapsed :BOOL)
   (cond COND)
 )
 
-#+(ecl)
+#+ecl
 (defun set-window-collapsed (collapsed cond)
   (ffi:c-inline (collapsed cond) (:BOOL :INT) :VOID
     "ImGui_SetWindowCollapsed(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SetWindowFocus" set-window-focus) :VOID)
 
-#+(ecl)
+#+ecl
 (defun set-window-focus ()
   (ffi:c-inline () () :VOID
     "ImGui_SetWindowFocus()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SetWindowCollapsedStr" set-window-collapsed-str) :VOID
   (name :STRING)
   (collapsed :BOOL)
   (cond COND)
 )
 
-#+(ecl)
+#+ecl
 (defun set-window-collapsed-str (name collapsed cond)
   (ffi:c-inline (name collapsed cond) (:CSTRING :BOOL :INT) :VOID
     "ImGui_SetWindowCollapsedStr(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SetWindowFocusStr" set-window-focus-str) :VOID
   (name :STRING)
 )
 
-#+(ecl)
+#+ecl
 (defun set-window-focus-str (name)
   (ffi:c-inline (name) (:CSTRING) :VOID
     "ImGui_SetWindowFocusStr(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetScrollX" get-scroll-x) :FLOAT)
 
-#+(ecl)
+#+ecl
 (defun get-scroll-x ()
   (ffi:c-inline () () :FLOAT
     "ImGui_GetScrollX()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetScrollY" get-scroll-y) :FLOAT)
 
-#+(ecl)
+#+ecl
 (defun get-scroll-y ()
   (ffi:c-inline () () :FLOAT
     "ImGui_GetScrollY()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SetScrollX" set-scroll-x) :VOID
   (scroll-x :FLOAT)
 )
 
-#+(ecl)
+#+ecl
 (defun set-scroll-x (scroll-x)
   (ffi:c-inline (scroll-x) (:FLOAT) :VOID
     "ImGui_SetScrollX(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SetScrollY" set-scroll-y) :VOID
   (scroll-y :FLOAT)
 )
 
-#+(ecl)
+#+ecl
 (defun set-scroll-y (scroll-y)
   (ffi:c-inline (scroll-y) (:FLOAT) :VOID
     "ImGui_SetScrollY(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetScrollMaxX" get-scroll-max-x) :FLOAT)
 
-#+(ecl)
+#+ecl
 (defun get-scroll-max-x ()
   (ffi:c-inline () () :FLOAT
     "ImGui_GetScrollMaxX()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetScrollMaxY" get-scroll-max-y) :FLOAT)
 
-#+(ecl)
+#+ecl
 (defun get-scroll-max-y ()
   (ffi:c-inline () () :FLOAT
     "ImGui_GetScrollMaxY()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SetScrollHereX" set-scroll-here-x) :VOID
   (center-x-ratio :FLOAT)
 )
 
-#+(ecl)
+#+ecl
 (defun set-scroll-here-x (center-x-ratio)
   (ffi:c-inline (center-x-ratio) (:FLOAT) :VOID
     "ImGui_SetScrollHereX(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SetScrollHereY" set-scroll-here-y) :VOID
   (center-y-ratio :FLOAT)
 )
 
-#+(ecl)
+#+ecl
 (defun set-scroll-here-y (center-y-ratio)
   (ffi:c-inline (center-y-ratio) (:FLOAT) :VOID
     "ImGui_SetScrollHereY(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SetScrollFromPosX" set-scroll-from-pos-x) :VOID
   (local-x :FLOAT)
   (center-x-ratio :FLOAT)
 )
 
-#+(ecl)
+#+ecl
 (defun set-scroll-from-pos-x (local-x center-x-ratio)
   (ffi:c-inline (local-x center-x-ratio) (:FLOAT :FLOAT) :VOID
     "ImGui_SetScrollFromPosX(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SetScrollFromPosY" set-scroll-from-pos-y) :VOID
   (local-y :FLOAT)
   (center-y-ratio :FLOAT)
 )
 
-#+(ecl)
+#+ecl
 (defun set-scroll-from-pos-y (local-y center-y-ratio)
   (ffi:c-inline (local-y center-y-ratio) (:FLOAT :FLOAT) :VOID
     "ImGui_SetScrollFromPosY(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_PushFontFloat" push-font-float) :VOID
   (font :POINTER)
   (font-size-base-unscaled :FLOAT)
 )
 
-#+(ecl)
+#+ecl
 (defun push-font-float (font font-size-base-unscaled)
   (ffi:c-inline (font font-size-base-unscaled) (:POINTER-VOID :FLOAT) :VOID
     "ImGui_PushFontFloat(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_PopFont" pop-font) :VOID)
 
-#+(ecl)
+#+ecl
 (defun pop-font ()
   (ffi:c-inline () () :VOID
     "ImGui_PopFont()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetFont" get-font) :POINTER)
 
-#+(ecl)
+#+ecl
 (defun get-font ()
   (ffi:c-inline () () :POINTER-VOID
     "ImGui_GetFont()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetFontSize" get-font-size) :FLOAT)
 
-#+(ecl)
+#+ecl
 (defun get-font-size ()
   (ffi:c-inline () () :FLOAT
     "ImGui_GetFontSize()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetFontBaked" get-font-baked) :POINTER)
 
-#+(ecl)
+#+ecl
 (defun get-font-baked ()
   (ffi:c-inline () () :POINTER-VOID
     "ImGui_GetFontBaked()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_PushStyleColor" push-style-color) :VOID
   (idx COL)
   (col U32)
 )
 
-#+(ecl)
+#+ecl
 (defun push-style-color (idx col)
   (ffi:c-inline (idx col) (:INT :INT) :VOID
     "ImGui_PushStyleColor(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_PopStyleColor" pop-style-color) :VOID)
 
-#+(ecl)
+#+ecl
 (defun pop-style-color ()
   (ffi:c-inline () () :VOID
     "ImGui_PopStyleColor()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_PopStyleColorEx" pop-style-color-ex) :VOID
   (count :INT)
 )
 
-#+(ecl)
+#+ecl
 (defun pop-style-color-ex (count)
   (ffi:c-inline (count) (:INT) :VOID
     "ImGui_PopStyleColorEx(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_PushStyleVar" push-style-var) :VOID
   (idx STYLE-VAR)
   (val :FLOAT)
 )
 
-#+(ecl)
+#+ecl
 (defun push-style-var (idx val)
   (ffi:c-inline (idx val) (:INT :FLOAT) :VOID
     "ImGui_PushStyleVar(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_PushStyleVarX" push-style-var-x) :VOID
   (idx STYLE-VAR)
   (val-x :FLOAT)
 )
 
-#+(ecl)
+#+ecl
 (defun push-style-var-x (idx val-x)
   (ffi:c-inline (idx val-x) (:INT :FLOAT) :VOID
     "ImGui_PushStyleVarX(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_PushStyleVarY" push-style-var-y) :VOID
   (idx STYLE-VAR)
   (val-y :FLOAT)
 )
 
-#+(ecl)
+#+ecl
 (defun push-style-var-y (idx val-y)
   (ffi:c-inline (idx val-y) (:INT :FLOAT) :VOID
     "ImGui_PushStyleVarY(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_PopStyleVar" pop-style-var) :VOID)
 
-#+(ecl)
+#+ecl
 (defun pop-style-var ()
   (ffi:c-inline () () :VOID
     "ImGui_PopStyleVar()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_PopStyleVarEx" pop-style-var-ex) :VOID
   (count :INT)
 )
 
-#+(ecl)
+#+ecl
 (defun pop-style-var-ex (count)
   (ffi:c-inline (count) (:INT) :VOID
     "ImGui_PopStyleVarEx(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_PushItemFlag" push-item-flag) :VOID
   (option ITEM-FLAGS)
   (enabled :BOOL)
 )
 
-#+(ecl)
+#+ecl
 (defun push-item-flag (option enabled)
   (ffi:c-inline (option enabled) (:INT :BOOL) :VOID
     "ImGui_PushItemFlag(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_PopItemFlag" pop-item-flag) :VOID)
 
-#+(ecl)
+#+ecl
 (defun pop-item-flag ()
   (ffi:c-inline () () :VOID
     "ImGui_PopItemFlag()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_PushItemWidth" push-item-width) :VOID
   (item-width :FLOAT)
 )
 
-#+(ecl)
+#+ecl
 (defun push-item-width (item-width)
   (ffi:c-inline (item-width) (:FLOAT) :VOID
     "ImGui_PushItemWidth(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_PopItemWidth" pop-item-width) :VOID)
 
-#+(ecl)
+#+ecl
 (defun pop-item-width ()
   (ffi:c-inline () () :VOID
     "ImGui_PopItemWidth()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SetNextItemWidth" set-next-item-width) :VOID
   (item-width :FLOAT)
 )
 
-#+(ecl)
+#+ecl
 (defun set-next-item-width (item-width)
   (ffi:c-inline (item-width) (:FLOAT) :VOID
     "ImGui_SetNextItemWidth(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_CalcItemWidth" calc-item-width) :FLOAT)
 
-#+(ecl)
+#+ecl
 (defun calc-item-width ()
   (ffi:c-inline () () :FLOAT
     "ImGui_CalcItemWidth()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_PushTextWrapPos" push-text-wrap-pos) :VOID
   (wrap-local-pos-x :FLOAT)
 )
 
-#+(ecl)
+#+ecl
 (defun push-text-wrap-pos (wrap-local-pos-x)
   (ffi:c-inline (wrap-local-pos-x) (:FLOAT) :VOID
     "ImGui_PushTextWrapPos(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_PopTextWrapPos" pop-text-wrap-pos) :VOID)
 
-#+(ecl)
+#+ecl
 (defun pop-text-wrap-pos ()
   (ffi:c-inline () () :VOID
     "ImGui_PopTextWrapPos()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetFontTexUvWhitePixel" get-font-tex-uv-white-pixel) VEC2)
 
-#+(ecl)
+#+ecl
 (defun get-font-tex-uv-white-pixel ()
   (ffi:c-inline () () :INT
     "ImGui_GetFontTexUvWhitePixel()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetColorU32" get-color-u32) U32
   (idx COL)
 )
 
-#+(ecl)
+#+ecl
 (defun get-color-u32 (idx)
   (ffi:c-inline (idx) (:INT) :INT
     "ImGui_GetColorU32(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetColorU32Ex" get-color-u32ex) U32
   (idx COL)
   (alpha-mul :FLOAT)
 )
 
-#+(ecl)
+#+ecl
 (defun get-color-u32ex (idx alpha-mul)
   (ffi:c-inline (idx alpha-mul) (:INT :FLOAT) :INT
     "ImGui_GetColorU32Ex(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetColorU32ImU32" get-color-u32im-u32) U32
   (col U32)
 )
 
-#+(ecl)
+#+ecl
 (defun get-color-u32im-u32 (col)
   (ffi:c-inline (col) (:INT) :INT
     "ImGui_GetColorU32ImU32(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetColorU32ImU32Ex" get-color-u32im-u32ex) U32
   (col U32)
   (alpha-mul :FLOAT)
 )
 
-#+(ecl)
+#+ecl
 (defun get-color-u32im-u32ex (col alpha-mul)
   (ffi:c-inline (col alpha-mul) (:INT :FLOAT) :INT
     "ImGui_GetColorU32ImU32Ex(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetStyleColorVec4" get-style-color-vec4) :POINTER
   (idx COL)
 )
 
-#+(ecl)
+#+ecl
 (defun get-style-color-vec4 (idx)
   (ffi:c-inline (idx) (:INT) :POINTER-VOID
     "ImGui_GetStyleColorVec4(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetCursorScreenPos" get-cursor-screen-pos) VEC2)
 
-#+(ecl)
+#+ecl
 (defun get-cursor-screen-pos ()
   (ffi:c-inline () () :INT
     "ImGui_GetCursorScreenPos()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetContentRegionAvail" get-content-region-avail) VEC2)
 
-#+(ecl)
+#+ecl
 (defun get-content-region-avail ()
   (ffi:c-inline () () :INT
     "ImGui_GetContentRegionAvail()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetCursorPos" get-cursor-pos) VEC2)
 
-#+(ecl)
+#+ecl
 (defun get-cursor-pos ()
   (ffi:c-inline () () :INT
     "ImGui_GetCursorPos()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetCursorPosX" get-cursor-pos-x) :FLOAT)
 
-#+(ecl)
+#+ecl
 (defun get-cursor-pos-x ()
   (ffi:c-inline () () :FLOAT
     "ImGui_GetCursorPosX()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetCursorPosY" get-cursor-pos-y) :FLOAT)
 
-#+(ecl)
+#+ecl
 (defun get-cursor-pos-y ()
   (ffi:c-inline () () :FLOAT
     "ImGui_GetCursorPosY()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SetCursorPosX" set-cursor-pos-x) :VOID
   (local-x :FLOAT)
 )
 
-#+(ecl)
+#+ecl
 (defun set-cursor-pos-x (local-x)
   (ffi:c-inline (local-x) (:FLOAT) :VOID
     "ImGui_SetCursorPosX(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SetCursorPosY" set-cursor-pos-y) :VOID
   (local-y :FLOAT)
 )
 
-#+(ecl)
+#+ecl
 (defun set-cursor-pos-y (local-y)
   (ffi:c-inline (local-y) (:FLOAT) :VOID
     "ImGui_SetCursorPosY(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetCursorStartPos" get-cursor-start-pos) VEC2)
 
-#+(ecl)
+#+ecl
 (defun get-cursor-start-pos ()
   (ffi:c-inline () () :INT
     "ImGui_GetCursorStartPos()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_Separator" separator) :VOID)
 
-#+(ecl)
+#+ecl
 (defun separator ()
   (ffi:c-inline () () :VOID
     "ImGui_Separator()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SameLine" same-line) :VOID)
 
-#+(ecl)
+#+ecl
 (defun same-line ()
   (ffi:c-inline () () :VOID
     "ImGui_SameLine()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SameLineEx" same-line-ex) :VOID
   (offset-from-start-x :FLOAT)
   (spacing :FLOAT)
 )
 
-#+(ecl)
+#+ecl
 (defun same-line-ex (offset-from-start-x spacing)
   (ffi:c-inline (offset-from-start-x spacing) (:FLOAT :FLOAT) :VOID
     "ImGui_SameLineEx(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_NewLine" new-line) :VOID)
 
-#+(ecl)
+#+ecl
 (defun new-line ()
   (ffi:c-inline () () :VOID
     "ImGui_NewLine()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_Spacing" spacing) :VOID)
 
-#+(ecl)
+#+ecl
 (defun spacing ()
   (ffi:c-inline () () :VOID
     "ImGui_Spacing()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_Indent" indent) :VOID)
 
-#+(ecl)
+#+ecl
 (defun indent ()
   (ffi:c-inline () () :VOID
     "ImGui_Indent()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_IndentEx" indent-ex) :VOID
   (indent-w :FLOAT)
 )
 
-#+(ecl)
+#+ecl
 (defun indent-ex (indent-w)
   (ffi:c-inline (indent-w) (:FLOAT) :VOID
     "ImGui_IndentEx(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_Unindent" unindent) :VOID)
 
-#+(ecl)
+#+ecl
 (defun unindent ()
   (ffi:c-inline () () :VOID
     "ImGui_Unindent()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_UnindentEx" unindent-ex) :VOID
   (indent-w :FLOAT)
 )
 
-#+(ecl)
+#+ecl
 (defun unindent-ex (indent-w)
   (ffi:c-inline (indent-w) (:FLOAT) :VOID
     "ImGui_UnindentEx(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_BeginGroup" begin-group) :VOID)
 
-#+(ecl)
+#+ecl
 (defun begin-group ()
   (ffi:c-inline () () :VOID
     "ImGui_BeginGroup()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_EndGroup" end-group) :VOID)
 
-#+(ecl)
+#+ecl
 (defun end-group ()
   (ffi:c-inline () () :VOID
     "ImGui_EndGroup()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_AlignTextToFramePadding" align-text-to-frame-padding) :VOID)
 
-#+(ecl)
+#+ecl
 (defun align-text-to-frame-padding ()
   (ffi:c-inline () () :VOID
     "ImGui_AlignTextToFramePadding()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetTextLineHeight" get-text-line-height) :FLOAT)
 
-#+(ecl)
+#+ecl
 (defun get-text-line-height ()
   (ffi:c-inline () () :FLOAT
     "ImGui_GetTextLineHeight()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetTextLineHeightWithSpacing" get-text-line-height-with-spacing) :FLOAT)
 
-#+(ecl)
+#+ecl
 (defun get-text-line-height-with-spacing ()
   (ffi:c-inline () () :FLOAT
     "ImGui_GetTextLineHeightWithSpacing()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetFrameHeight" get-frame-height) :FLOAT)
 
-#+(ecl)
+#+ecl
 (defun get-frame-height ()
   (ffi:c-inline () () :FLOAT
     "ImGui_GetFrameHeight()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetFrameHeightWithSpacing" get-frame-height-with-spacing) :FLOAT)
 
-#+(ecl)
+#+ecl
 (defun get-frame-height-with-spacing ()
   (ffi:c-inline () () :FLOAT
     "ImGui_GetFrameHeightWithSpacing()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_PushID" push-id) :VOID
   (str-id :STRING)
 )
 
-#+(ecl)
+#+ecl
 (defun push-id (str-id)
   (ffi:c-inline (str-id) (:CSTRING) :VOID
     "ImGui_PushID(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_PushIDStr" push-idstr) :VOID
   (str-id-begin :STRING)
   (str-id-end :STRING)
 )
 
-#+(ecl)
+#+ecl
 (defun push-idstr (str-id-begin str-id-end)
   (ffi:c-inline (str-id-begin str-id-end) (:CSTRING :CSTRING) :VOID
     "ImGui_PushIDStr(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_PushIDPtr" push-idptr) :VOID
   (ptr-id :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun push-idptr (ptr-id)
   (ffi:c-inline (ptr-id) (:POINTER-VOID) :VOID
     "ImGui_PushIDPtr(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_PushIDInt" push-idint) :VOID
   (int-id :INT)
 )
 
-#+(ecl)
+#+ecl
 (defun push-idint (int-id)
   (ffi:c-inline (int-id) (:INT) :VOID
     "ImGui_PushIDInt(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_PopID" pop-id) :VOID)
 
-#+(ecl)
+#+ecl
 (defun pop-id ()
   (ffi:c-inline () () :VOID
     "ImGui_PopID()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetID" get-id) ID
   (str-id :STRING)
 )
 
-#+(ecl)
+#+ecl
 (defun get-id (str-id)
   (ffi:c-inline (str-id) (:CSTRING) :INT
     "ImGui_GetID(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetIDStr" get-idstr) ID
   (str-id-begin :STRING)
   (str-id-end :STRING)
 )
 
-#+(ecl)
+#+ecl
 (defun get-idstr (str-id-begin str-id-end)
   (ffi:c-inline (str-id-begin str-id-end) (:CSTRING :CSTRING) :INT
     "ImGui_GetIDStr(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetIDPtr" get-idptr) ID
   (ptr-id :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun get-idptr (ptr-id)
   (ffi:c-inline (ptr-id) (:POINTER-VOID) :INT
     "ImGui_GetIDPtr(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetIDInt" get-idint) ID
   (int-id :INT)
 )
 
-#+(ecl)
+#+ecl
 (defun get-idint (int-id)
   (ffi:c-inline (int-id) (:INT) :INT
     "ImGui_GetIDInt(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_TextUnformatted" text-unformatted) :VOID
   (text :STRING)
 )
 
-#+(ecl)
+#+ecl
 (defun text-unformatted (text)
   (ffi:c-inline (text) (:CSTRING) :VOID
     "ImGui_TextUnformatted(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_TextUnformattedEx" text-unformatted-ex) :VOID
   (text :STRING)
   (text-end :pointer) ; pointer override
 )
 
-#+(ecl)
+#+ecl
 (defun text-unformatted-ex (text text-end)
   (ffi:c-inline (text text-end) (:CSTRING :POINTER-VOID) :VOID
     "ImGui_TextUnformattedEx(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_Text" text) :VOID
   (fmt :STRING)
   &rest
 )
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_TextV" text-v) :VOID
   (fmt :STRING)
   (args :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun text-v (fmt args)
   (ffi:c-inline (fmt args) (:CSTRING :POINTER-VOID) :VOID
     "ImGui_TextV(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_TextDisabled" text-disabled) :VOID
   (fmt :STRING)
   &rest
 )
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_TextDisabledV" text-disabled-v) :VOID
   (fmt :STRING)
   (args :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun text-disabled-v (fmt args)
   (ffi:c-inline (fmt args) (:CSTRING :POINTER-VOID) :VOID
     "ImGui_TextDisabledV(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_TextWrapped" text-wrapped) :VOID
   (fmt :STRING)
   &rest
 )
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_TextWrappedV" text-wrapped-v) :VOID
   (fmt :STRING)
   (args :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun text-wrapped-v (fmt args)
   (ffi:c-inline (fmt args) (:CSTRING :POINTER-VOID) :VOID
     "ImGui_TextWrappedV(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_LabelText" label-text) :VOID
   (label :STRING)
   (fmt :STRING)
   &rest
 )
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_LabelTextV" label-text-v) :VOID
   (label :STRING)
   (fmt :STRING)
   (args :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun label-text-v (label fmt args)
   (ffi:c-inline (label fmt args) (:CSTRING :CSTRING :POINTER-VOID) :VOID
     "ImGui_LabelTextV(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_BulletText" bullet-text) :VOID
   (fmt :STRING)
   &rest
 )
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_BulletTextV" bullet-text-v) :VOID
   (fmt :STRING)
   (args :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun bullet-text-v (fmt args)
   (ffi:c-inline (fmt args) (:CSTRING :POINTER-VOID) :VOID
     "ImGui_BulletTextV(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SeparatorText" separator-text) :VOID
   (label :STRING)
 )
 
-#+(ecl)
+#+ecl
 (defun separator-text (label)
   (ffi:c-inline (label) (:CSTRING) :VOID
     "ImGui_SeparatorText(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_Button" button) :BOOL
   (label :STRING)
 )
 
-#+(ecl)
+#+ecl
 (defun button (label)
   (ffi:c-inline (label) (:CSTRING) :BOOL
     "ImGui_Button(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SmallButton" small-button) :BOOL
   (label :STRING)
 )
 
-#+(ecl)
+#+ecl
 (defun small-button (label)
   (ffi:c-inline (label) (:CSTRING) :BOOL
     "ImGui_SmallButton(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_ArrowButton" arrow-button) :BOOL
   (str-id :STRING)
   (dir IM-DIR)
 )
 
-#+(ecl)
+#+ecl
 (defun arrow-button (str-id dir)
   (ffi:c-inline (str-id dir) (:CSTRING :INT) :BOOL
     "ImGui_ArrowButton(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_Checkbox" checkbox) :BOOL
   (label :STRING)
   (v :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun checkbox (label v)
   (ffi:c-inline (label v) (:CSTRING :POINTER-VOID) :BOOL
     "ImGui_Checkbox(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_CheckboxFlagsIntPtr" checkbox-flags-int-ptr) :BOOL
   (label :STRING)
   (flags :POINTER)
   (flags-value :INT)
 )
 
-#+(ecl)
+#+ecl
 (defun checkbox-flags-int-ptr (label flags flags-value)
   (ffi:c-inline (label flags flags-value) (:CSTRING :POINTER-VOID :INT) :BOOL
     "ImGui_CheckboxFlagsIntPtr(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_CheckboxFlagsUintPtr" checkbox-flags-uint-ptr) :BOOL
   (label :STRING)
   (flags :POINTER)
   (flags-value :UNSIGNED-INT)
 )
 
-#+(ecl)
+#+ecl
 (defun checkbox-flags-uint-ptr (label flags flags-value)
   (ffi:c-inline (label flags flags-value) (:CSTRING :POINTER-VOID :UNSIGNED-INT) :BOOL
     "ImGui_CheckboxFlagsUintPtr(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_RadioButton" radio-button) :BOOL
   (label :STRING)
   (active :BOOL)
 )
 
-#+(ecl)
+#+ecl
 (defun radio-button (label active)
   (ffi:c-inline (label active) (:CSTRING :BOOL) :BOOL
     "ImGui_RadioButton(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_RadioButtonIntPtr" radio-button-int-ptr) :BOOL
   (label :STRING)
   (v :POINTER)
   (v-button :INT)
 )
 
-#+(ecl)
+#+ecl
 (defun radio-button-int-ptr (label v v-button)
   (ffi:c-inline (label v v-button) (:CSTRING :POINTER-VOID :INT) :BOOL
     "ImGui_RadioButtonIntPtr(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_Bullet" bullet) :VOID)
 
-#+(ecl)
+#+ecl
 (defun bullet ()
   (ffi:c-inline () () :VOID
     "ImGui_Bullet()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_TextLink" text-link) :BOOL
   (label :STRING)
 )
 
-#+(ecl)
+#+ecl
 (defun text-link (label)
   (ffi:c-inline (label) (:CSTRING) :BOOL
     "ImGui_TextLink(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_TextLinkOpenURL" text-link-open-url) :BOOL
   (label :STRING)
 )
 
-#+(ecl)
+#+ecl
 (defun text-link-open-url (label)
   (ffi:c-inline (label) (:CSTRING) :BOOL
     "ImGui_TextLinkOpenURL(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_TextLinkOpenURLEx" text-link-open-urlex) :BOOL
   (label :STRING)
   (url :STRING)
 )
 
-#+(ecl)
+#+ecl
 (defun text-link-open-urlex (label url)
   (ffi:c-inline (label url) (:CSTRING :CSTRING) :BOOL
     "ImGui_TextLinkOpenURLEx(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_BeginCombo" begin-combo) :BOOL
   (label :STRING)
   (preview-value :STRING)
   (flags COMBO-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun begin-combo (label preview-value flags)
   (ffi:c-inline (label preview-value flags) (:CSTRING :CSTRING :INT) :BOOL
     "ImGui_BeginCombo(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_EndCombo" end-combo) :VOID)
 
-#+(ecl)
+#+ecl
 (defun end-combo ()
   (ffi:c-inline () () :VOID
     "ImGui_EndCombo()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_ComboChar" combo-char) :BOOL
   (label :STRING)
   (current-item :POINTER)
@@ -4311,13 +4311,13 @@
   (items-count :INT)
 )
 
-#+(ecl)
+#+ecl
 (defun combo-char (label current-item items items-count)
   (ffi:c-inline (label current-item items items-count) (:CSTRING :POINTER-VOID :POINTER-VOID :INT) :BOOL
     "ImGui_ComboChar(#0, #1, #2, #3)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_ComboCharEx" combo-char-ex) :BOOL
   (label :STRING)
   (current-item :POINTER)
@@ -4326,26 +4326,26 @@
   (popup-max-height-in-items :INT)
 )
 
-#+(ecl)
+#+ecl
 (defun combo-char-ex (label current-item items items-count popup-max-height-in-items)
   (ffi:c-inline (label current-item items items-count popup-max-height-in-items) (:CSTRING :POINTER-VOID :POINTER-VOID :INT :INT) :BOOL
     "ImGui_ComboCharEx(#0, #1, #2, #3, #4)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_Combo" combo) :BOOL
   (label :STRING)
   (current-item :POINTER)
   (items-separated-by-zeros :STRING)
 )
 
-#+(ecl)
+#+ecl
 (defun combo (label current-item items-separated-by-zeros)
   (ffi:c-inline (label current-item items-separated-by-zeros) (:CSTRING :POINTER-VOID :CSTRING) :BOOL
     "ImGui_Combo(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_ComboEx" combo-ex) :BOOL
   (label :STRING)
   (current-item :POINTER)
@@ -4353,13 +4353,13 @@
   (popup-max-height-in-items :INT)
 )
 
-#+(ecl)
+#+ecl
 (defun combo-ex (label current-item items-separated-by-zeros popup-max-height-in-items)
   (ffi:c-inline (label current-item items-separated-by-zeros popup-max-height-in-items) (:CSTRING :POINTER-VOID :CSTRING :INT) :BOOL
     "ImGui_ComboEx(#0, #1, #2, #3)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_ComboCallback" combo-callback) :BOOL
   (label :STRING)
   (current-item :POINTER)
@@ -4368,13 +4368,13 @@
   (items-count :INT)
 )
 
-#+(ecl)
+#+ecl
 (defun combo-callback (label current-item getter user-data items-count)
   (ffi:c-inline (label current-item getter user-data items-count) (:CSTRING :POINTER-VOID :POINTER-VOID :POINTER-VOID :INT) :BOOL
     "ImGui_ComboCallback(#0, #1, #2, #3, #4)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_ComboCallbackEx" combo-callback-ex) :BOOL
   (label :STRING)
   (current-item :POINTER)
@@ -4384,25 +4384,25 @@
   (popup-max-height-in-items :INT)
 )
 
-#+(ecl)
+#+ecl
 (defun combo-callback-ex (label current-item getter user-data items-count popup-max-height-in-items)
   (ffi:c-inline (label current-item getter user-data items-count popup-max-height-in-items) (:CSTRING :POINTER-VOID :POINTER-VOID :POINTER-VOID :INT :INT) :BOOL
     "ImGui_ComboCallbackEx(#0, #1, #2, #3, #4, #5)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_DragFloat" drag-float) :BOOL
   (label :STRING)
   (v :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun drag-float (label v)
   (ffi:c-inline (label v) (:CSTRING :POINTER-VOID) :BOOL
     "ImGui_DragFloat(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_DragFloatEx" drag-float-ex) :BOOL
   (label :STRING)
   (v :POINTER)
@@ -4413,25 +4413,25 @@
   (flags SLIDER-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun drag-float-ex (label v v-speed v-min v-max format flags)
   (ffi:c-inline (label v v-speed v-min v-max format flags) (:CSTRING :POINTER-VOID :FLOAT :FLOAT :FLOAT :CSTRING :INT) :BOOL
     "ImGui_DragFloatEx(#0, #1, #2, #3, #4, #5, #6)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_DragFloat2" drag-float2) :BOOL
   (label :STRING)
   (v :pointer)
 )
 
-#+(ecl)
+#+ecl
 (defun drag-float2 (label v)
   (ffi:c-inline (label v) (:CSTRING :POINTER-VOID) :BOOL
     "ImGui_DragFloat2(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_DragFloat2Ex" drag-float2ex) :BOOL
   (label :STRING)
   (v :pointer)
@@ -4442,25 +4442,25 @@
   (flags SLIDER-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun drag-float2ex (label v v-speed v-min v-max format flags)
   (ffi:c-inline (label v v-speed v-min v-max format flags) (:CSTRING :POINTER-VOID :FLOAT :FLOAT :FLOAT :CSTRING :INT) :BOOL
     "ImGui_DragFloat2Ex(#0, #1, #2, #3, #4, #5, #6)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_DragFloat3" drag-float3) :BOOL
   (label :STRING)
   (v :pointer)
 )
 
-#+(ecl)
+#+ecl
 (defun drag-float3 (label v)
   (ffi:c-inline (label v) (:CSTRING :POINTER-VOID) :BOOL
     "ImGui_DragFloat3(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_DragFloat3Ex" drag-float3ex) :BOOL
   (label :STRING)
   (v :pointer)
@@ -4471,25 +4471,25 @@
   (flags SLIDER-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun drag-float3ex (label v v-speed v-min v-max format flags)
   (ffi:c-inline (label v v-speed v-min v-max format flags) (:CSTRING :POINTER-VOID :FLOAT :FLOAT :FLOAT :CSTRING :INT) :BOOL
     "ImGui_DragFloat3Ex(#0, #1, #2, #3, #4, #5, #6)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_DragFloat4" drag-float4) :BOOL
   (label :STRING)
   (v :pointer)
 )
 
-#+(ecl)
+#+ecl
 (defun drag-float4 (label v)
   (ffi:c-inline (label v) (:CSTRING :POINTER-VOID) :BOOL
     "ImGui_DragFloat4(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_DragFloat4Ex" drag-float4ex) :BOOL
   (label :STRING)
   (v :pointer)
@@ -4500,26 +4500,26 @@
   (flags SLIDER-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun drag-float4ex (label v v-speed v-min v-max format flags)
   (ffi:c-inline (label v v-speed v-min v-max format flags) (:CSTRING :POINTER-VOID :FLOAT :FLOAT :FLOAT :CSTRING :INT) :BOOL
     "ImGui_DragFloat4Ex(#0, #1, #2, #3, #4, #5, #6)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_DragFloatRange2" drag-float-range2) :BOOL
   (label :STRING)
   (v-current-min :POINTER)
   (v-current-max :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun drag-float-range2 (label v-current-min v-current-max)
   (ffi:c-inline (label v-current-min v-current-max) (:CSTRING :POINTER-VOID :POINTER-VOID) :BOOL
     "ImGui_DragFloatRange2(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_DragFloatRange2Ex" drag-float-range2ex) :BOOL
   (label :STRING)
   (v-current-min :POINTER)
@@ -4532,25 +4532,25 @@
   (flags SLIDER-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun drag-float-range2ex (label v-current-min v-current-max v-speed v-min v-max format format-max flags)
   (ffi:c-inline (label v-current-min v-current-max v-speed v-min v-max format format-max flags) (:CSTRING :POINTER-VOID :POINTER-VOID :FLOAT :FLOAT :FLOAT :CSTRING :CSTRING :INT) :BOOL
     "ImGui_DragFloatRange2Ex(#0, #1, #2, #3, #4, #5, #6, #7, #8)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_DragInt" drag-int) :BOOL
   (label :STRING)
   (v :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun drag-int (label v)
   (ffi:c-inline (label v) (:CSTRING :POINTER-VOID) :BOOL
     "ImGui_DragInt(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_DragIntEx" drag-int-ex) :BOOL
   (label :STRING)
   (v :POINTER)
@@ -4561,25 +4561,25 @@
   (flags SLIDER-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun drag-int-ex (label v v-speed v-min v-max format flags)
   (ffi:c-inline (label v v-speed v-min v-max format flags) (:CSTRING :POINTER-VOID :FLOAT :INT :INT :CSTRING :INT) :BOOL
     "ImGui_DragIntEx(#0, #1, #2, #3, #4, #5, #6)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_DragInt2" drag-int2) :BOOL
   (label :STRING)
   (v :pointer)
 )
 
-#+(ecl)
+#+ecl
 (defun drag-int2 (label v)
   (ffi:c-inline (label v) (:CSTRING :POINTER-VOID) :BOOL
     "ImGui_DragInt2(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_DragInt2Ex" drag-int2ex) :BOOL
   (label :STRING)
   (v :pointer)
@@ -4590,25 +4590,25 @@
   (flags SLIDER-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun drag-int2ex (label v v-speed v-min v-max format flags)
   (ffi:c-inline (label v v-speed v-min v-max format flags) (:CSTRING :POINTER-VOID :FLOAT :INT :INT :CSTRING :INT) :BOOL
     "ImGui_DragInt2Ex(#0, #1, #2, #3, #4, #5, #6)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_DragInt3" drag-int3) :BOOL
   (label :STRING)
   (v :pointer)
 )
 
-#+(ecl)
+#+ecl
 (defun drag-int3 (label v)
   (ffi:c-inline (label v) (:CSTRING :POINTER-VOID) :BOOL
     "ImGui_DragInt3(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_DragInt3Ex" drag-int3ex) :BOOL
   (label :STRING)
   (v :pointer)
@@ -4619,25 +4619,25 @@
   (flags SLIDER-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun drag-int3ex (label v v-speed v-min v-max format flags)
   (ffi:c-inline (label v v-speed v-min v-max format flags) (:CSTRING :POINTER-VOID :FLOAT :INT :INT :CSTRING :INT) :BOOL
     "ImGui_DragInt3Ex(#0, #1, #2, #3, #4, #5, #6)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_DragInt4" drag-int4) :BOOL
   (label :STRING)
   (v :pointer)
 )
 
-#+(ecl)
+#+ecl
 (defun drag-int4 (label v)
   (ffi:c-inline (label v) (:CSTRING :POINTER-VOID) :BOOL
     "ImGui_DragInt4(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_DragInt4Ex" drag-int4ex) :BOOL
   (label :STRING)
   (v :pointer)
@@ -4648,26 +4648,26 @@
   (flags SLIDER-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun drag-int4ex (label v v-speed v-min v-max format flags)
   (ffi:c-inline (label v v-speed v-min v-max format flags) (:CSTRING :POINTER-VOID :FLOAT :INT :INT :CSTRING :INT) :BOOL
     "ImGui_DragInt4Ex(#0, #1, #2, #3, #4, #5, #6)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_DragIntRange2" drag-int-range2) :BOOL
   (label :STRING)
   (v-current-min :POINTER)
   (v-current-max :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun drag-int-range2 (label v-current-min v-current-max)
   (ffi:c-inline (label v-current-min v-current-max) (:CSTRING :POINTER-VOID :POINTER-VOID) :BOOL
     "ImGui_DragIntRange2(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_DragIntRange2Ex" drag-int-range2ex) :BOOL
   (label :STRING)
   (v-current-min :POINTER)
@@ -4680,26 +4680,26 @@
   (flags SLIDER-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun drag-int-range2ex (label v-current-min v-current-max v-speed v-min v-max format format-max flags)
   (ffi:c-inline (label v-current-min v-current-max v-speed v-min v-max format format-max flags) (:CSTRING :POINTER-VOID :POINTER-VOID :FLOAT :INT :INT :CSTRING :CSTRING :INT) :BOOL
     "ImGui_DragIntRange2Ex(#0, #1, #2, #3, #4, #5, #6, #7, #8)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_DragScalar" drag-scalar) :BOOL
   (label :STRING)
   (data-type DATA-TYPE)
   (p-data :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun drag-scalar (label data-type p-data)
   (ffi:c-inline (label data-type p-data) (:CSTRING :INT :POINTER-VOID) :BOOL
     "ImGui_DragScalar(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_DragScalarEx" drag-scalar-ex) :BOOL
   (label :STRING)
   (data-type DATA-TYPE)
@@ -4711,13 +4711,13 @@
   (flags SLIDER-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun drag-scalar-ex (label data-type p-data v-speed p-min p-max format flags)
   (ffi:c-inline (label data-type p-data v-speed p-min p-max format flags) (:CSTRING :INT :POINTER-VOID :FLOAT :POINTER-VOID :POINTER-VOID :CSTRING :INT) :BOOL
     "ImGui_DragScalarEx(#0, #1, #2, #3, #4, #5, #6, #7)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_DragScalarN" drag-scalar-n) :BOOL
   (label :STRING)
   (data-type DATA-TYPE)
@@ -4725,13 +4725,13 @@
   (components :INT)
 )
 
-#+(ecl)
+#+ecl
 (defun drag-scalar-n (label data-type p-data components)
   (ffi:c-inline (label data-type p-data components) (:CSTRING :INT :POINTER-VOID :INT) :BOOL
     "ImGui_DragScalarN(#0, #1, #2, #3)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_DragScalarNEx" drag-scalar-nex) :BOOL
   (label :STRING)
   (data-type DATA-TYPE)
@@ -4744,13 +4744,13 @@
   (flags SLIDER-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun drag-scalar-nex (label data-type p-data components v-speed p-min p-max format flags)
   (ffi:c-inline (label data-type p-data components v-speed p-min p-max format flags) (:CSTRING :INT :POINTER-VOID :INT :FLOAT :POINTER-VOID :POINTER-VOID :CSTRING :INT) :BOOL
     "ImGui_DragScalarNEx(#0, #1, #2, #3, #4, #5, #6, #7, #8)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SliderFloat" slider-float) :BOOL
   (label :STRING)
   (v :POINTER)
@@ -4758,13 +4758,13 @@
   (v-max :FLOAT)
 )
 
-#+(ecl)
+#+ecl
 (defun slider-float (label v v-min v-max)
   (ffi:c-inline (label v v-min v-max) (:CSTRING :POINTER-VOID :FLOAT :FLOAT) :BOOL
     "ImGui_SliderFloat(#0, #1, #2, #3)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SliderFloatEx" slider-float-ex) :BOOL
   (label :STRING)
   (v :POINTER)
@@ -4774,13 +4774,13 @@
   (flags SLIDER-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun slider-float-ex (label v v-min v-max format flags)
   (ffi:c-inline (label v v-min v-max format flags) (:CSTRING :POINTER-VOID :FLOAT :FLOAT :CSTRING :INT) :BOOL
     "ImGui_SliderFloatEx(#0, #1, #2, #3, #4, #5)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SliderFloat2" slider-float2) :BOOL
   (label :STRING)
   (v :pointer)
@@ -4788,13 +4788,13 @@
   (v-max :FLOAT)
 )
 
-#+(ecl)
+#+ecl
 (defun slider-float2 (label v v-min v-max)
   (ffi:c-inline (label v v-min v-max) (:CSTRING :POINTER-VOID :FLOAT :FLOAT) :BOOL
     "ImGui_SliderFloat2(#0, #1, #2, #3)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SliderFloat2Ex" slider-float2ex) :BOOL
   (label :STRING)
   (v :pointer)
@@ -4804,13 +4804,13 @@
   (flags SLIDER-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun slider-float2ex (label v v-min v-max format flags)
   (ffi:c-inline (label v v-min v-max format flags) (:CSTRING :POINTER-VOID :FLOAT :FLOAT :CSTRING :INT) :BOOL
     "ImGui_SliderFloat2Ex(#0, #1, #2, #3, #4, #5)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SliderFloat3" slider-float3) :BOOL
   (label :STRING)
   (v :pointer)
@@ -4818,13 +4818,13 @@
   (v-max :FLOAT)
 )
 
-#+(ecl)
+#+ecl
 (defun slider-float3 (label v v-min v-max)
   (ffi:c-inline (label v v-min v-max) (:CSTRING :POINTER-VOID :FLOAT :FLOAT) :BOOL
     "ImGui_SliderFloat3(#0, #1, #2, #3)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SliderFloat3Ex" slider-float3ex) :BOOL
   (label :STRING)
   (v :pointer)
@@ -4834,13 +4834,13 @@
   (flags SLIDER-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun slider-float3ex (label v v-min v-max format flags)
   (ffi:c-inline (label v v-min v-max format flags) (:CSTRING :POINTER-VOID :FLOAT :FLOAT :CSTRING :INT) :BOOL
     "ImGui_SliderFloat3Ex(#0, #1, #2, #3, #4, #5)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SliderFloat4" slider-float4) :BOOL
   (label :STRING)
   (v :pointer)
@@ -4848,13 +4848,13 @@
   (v-max :FLOAT)
 )
 
-#+(ecl)
+#+ecl
 (defun slider-float4 (label v v-min v-max)
   (ffi:c-inline (label v v-min v-max) (:CSTRING :POINTER-VOID :FLOAT :FLOAT) :BOOL
     "ImGui_SliderFloat4(#0, #1, #2, #3)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SliderFloat4Ex" slider-float4ex) :BOOL
   (label :STRING)
   (v :pointer)
@@ -4864,25 +4864,25 @@
   (flags SLIDER-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun slider-float4ex (label v v-min v-max format flags)
   (ffi:c-inline (label v v-min v-max format flags) (:CSTRING :POINTER-VOID :FLOAT :FLOAT :CSTRING :INT) :BOOL
     "ImGui_SliderFloat4Ex(#0, #1, #2, #3, #4, #5)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SliderAngle" slider-angle) :BOOL
   (label :STRING)
   (v-rad :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun slider-angle (label v-rad)
   (ffi:c-inline (label v-rad) (:CSTRING :POINTER-VOID) :BOOL
     "ImGui_SliderAngle(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SliderAngleEx" slider-angle-ex) :BOOL
   (label :STRING)
   (v-rad :POINTER)
@@ -4892,13 +4892,13 @@
   (flags SLIDER-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun slider-angle-ex (label v-rad v-degrees-min v-degrees-max format flags)
   (ffi:c-inline (label v-rad v-degrees-min v-degrees-max format flags) (:CSTRING :POINTER-VOID :FLOAT :FLOAT :CSTRING :INT) :BOOL
     "ImGui_SliderAngleEx(#0, #1, #2, #3, #4, #5)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SliderInt" slider-int) :BOOL
   (label :STRING)
   (v :POINTER)
@@ -4906,13 +4906,13 @@
   (v-max :INT)
 )
 
-#+(ecl)
+#+ecl
 (defun slider-int (label v v-min v-max)
   (ffi:c-inline (label v v-min v-max) (:CSTRING :POINTER-VOID :INT :INT) :BOOL
     "ImGui_SliderInt(#0, #1, #2, #3)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SliderIntEx" slider-int-ex) :BOOL
   (label :STRING)
   (v :POINTER)
@@ -4922,13 +4922,13 @@
   (flags SLIDER-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun slider-int-ex (label v v-min v-max format flags)
   (ffi:c-inline (label v v-min v-max format flags) (:CSTRING :POINTER-VOID :INT :INT :CSTRING :INT) :BOOL
     "ImGui_SliderIntEx(#0, #1, #2, #3, #4, #5)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SliderInt2" slider-int2) :BOOL
   (label :STRING)
   (v :pointer)
@@ -4936,13 +4936,13 @@
   (v-max :INT)
 )
 
-#+(ecl)
+#+ecl
 (defun slider-int2 (label v v-min v-max)
   (ffi:c-inline (label v v-min v-max) (:CSTRING :POINTER-VOID :INT :INT) :BOOL
     "ImGui_SliderInt2(#0, #1, #2, #3)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SliderInt2Ex" slider-int2ex) :BOOL
   (label :STRING)
   (v :pointer)
@@ -4952,13 +4952,13 @@
   (flags SLIDER-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun slider-int2ex (label v v-min v-max format flags)
   (ffi:c-inline (label v v-min v-max format flags) (:CSTRING :POINTER-VOID :INT :INT :CSTRING :INT) :BOOL
     "ImGui_SliderInt2Ex(#0, #1, #2, #3, #4, #5)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SliderInt3" slider-int3) :BOOL
   (label :STRING)
   (v :pointer)
@@ -4966,13 +4966,13 @@
   (v-max :INT)
 )
 
-#+(ecl)
+#+ecl
 (defun slider-int3 (label v v-min v-max)
   (ffi:c-inline (label v v-min v-max) (:CSTRING :POINTER-VOID :INT :INT) :BOOL
     "ImGui_SliderInt3(#0, #1, #2, #3)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SliderInt3Ex" slider-int3ex) :BOOL
   (label :STRING)
   (v :pointer)
@@ -4982,13 +4982,13 @@
   (flags SLIDER-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun slider-int3ex (label v v-min v-max format flags)
   (ffi:c-inline (label v v-min v-max format flags) (:CSTRING :POINTER-VOID :INT :INT :CSTRING :INT) :BOOL
     "ImGui_SliderInt3Ex(#0, #1, #2, #3, #4, #5)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SliderInt4" slider-int4) :BOOL
   (label :STRING)
   (v :pointer)
@@ -4996,13 +4996,13 @@
   (v-max :INT)
 )
 
-#+(ecl)
+#+ecl
 (defun slider-int4 (label v v-min v-max)
   (ffi:c-inline (label v v-min v-max) (:CSTRING :POINTER-VOID :INT :INT) :BOOL
     "ImGui_SliderInt4(#0, #1, #2, #3)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SliderInt4Ex" slider-int4ex) :BOOL
   (label :STRING)
   (v :pointer)
@@ -5012,13 +5012,13 @@
   (flags SLIDER-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun slider-int4ex (label v v-min v-max format flags)
   (ffi:c-inline (label v v-min v-max format flags) (:CSTRING :POINTER-VOID :INT :INT :CSTRING :INT) :BOOL
     "ImGui_SliderInt4Ex(#0, #1, #2, #3, #4, #5)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SliderScalar" slider-scalar) :BOOL
   (label :STRING)
   (data-type DATA-TYPE)
@@ -5027,13 +5027,13 @@
   (p-max :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun slider-scalar (label data-type p-data p-min p-max)
   (ffi:c-inline (label data-type p-data p-min p-max) (:CSTRING :INT :POINTER-VOID :POINTER-VOID :POINTER-VOID) :BOOL
     "ImGui_SliderScalar(#0, #1, #2, #3, #4)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SliderScalarEx" slider-scalar-ex) :BOOL
   (label :STRING)
   (data-type DATA-TYPE)
@@ -5044,13 +5044,13 @@
   (flags SLIDER-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun slider-scalar-ex (label data-type p-data p-min p-max format flags)
   (ffi:c-inline (label data-type p-data p-min p-max format flags) (:CSTRING :INT :POINTER-VOID :POINTER-VOID :POINTER-VOID :CSTRING :INT) :BOOL
     "ImGui_SliderScalarEx(#0, #1, #2, #3, #4, #5, #6)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SliderScalarN" slider-scalar-n) :BOOL
   (label :STRING)
   (data-type DATA-TYPE)
@@ -5060,13 +5060,13 @@
   (p-max :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun slider-scalar-n (label data-type p-data components p-min p-max)
   (ffi:c-inline (label data-type p-data components p-min p-max) (:CSTRING :INT :POINTER-VOID :INT :POINTER-VOID :POINTER-VOID) :BOOL
     "ImGui_SliderScalarN(#0, #1, #2, #3, #4, #5)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SliderScalarNEx" slider-scalar-nex) :BOOL
   (label :STRING)
   (data-type DATA-TYPE)
@@ -5078,13 +5078,13 @@
   (flags SLIDER-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun slider-scalar-nex (label data-type p-data components p-min p-max format flags)
   (ffi:c-inline (label data-type p-data components p-min p-max format flags) (:CSTRING :INT :POINTER-VOID :INT :POINTER-VOID :POINTER-VOID :CSTRING :INT) :BOOL
     "ImGui_SliderScalarNEx(#0, #1, #2, #3, #4, #5, #6, #7)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_InputText" input-text) :BOOL
   (label :STRING)
   (buf :STRING)
@@ -5092,13 +5092,13 @@
   (flags INPUT-TEXT-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun input-text (label buf buf-size flags)
   (ffi:c-inline (label buf buf-size flags) (:CSTRING :CSTRING :UNSIGNED-LONG :INT) :BOOL
     "ImGui_InputText(#0, #1, #2, #3)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_InputTextEx" input-text-ex) :BOOL
   (label :STRING)
   (buf :pointer) ; pointer override
@@ -5108,26 +5108,26 @@
   (user-data :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun input-text-ex (label buf buf-size flags callback user-data)
   (ffi:c-inline (label buf buf-size flags callback user-data) (:CSTRING :POINTER-VOID :UNSIGNED-LONG :INT :INT :POINTER-VOID) :BOOL
     "ImGui_InputTextEx(#0, #1, #2, #3, #4, #5)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_InputTextMultiline" input-text-multiline) :BOOL
   (label :STRING)
   (buf :STRING)
   (buf-size :SIZE)
 )
 
-#+(ecl)
+#+ecl
 (defun input-text-multiline (label buf buf-size)
   (ffi:c-inline (label buf buf-size) (:CSTRING :CSTRING :UNSIGNED-LONG) :BOOL
     "ImGui_InputTextMultiline(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_InputTextWithHint" input-text-with-hint) :BOOL
   (label :STRING)
   (hint :STRING)
@@ -5136,13 +5136,13 @@
   (flags INPUT-TEXT-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun input-text-with-hint (label hint buf buf-size flags)
   (ffi:c-inline (label hint buf buf-size flags) (:CSTRING :CSTRING :CSTRING :UNSIGNED-LONG :INT) :BOOL
     "ImGui_InputTextWithHint(#0, #1, #2, #3, #4)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_InputTextWithHintEx" input-text-with-hint-ex) :BOOL
   (label :STRING)
   (hint :STRING)
@@ -5153,25 +5153,25 @@
   (user-data :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun input-text-with-hint-ex (label hint buf buf-size flags callback user-data)
   (ffi:c-inline (label hint buf buf-size flags callback user-data) (:CSTRING :CSTRING :CSTRING :UNSIGNED-LONG :INT :INT :POINTER-VOID) :BOOL
     "ImGui_InputTextWithHintEx(#0, #1, #2, #3, #4, #5, #6)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_InputFloat" input-float) :BOOL
   (label :STRING)
   (v :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun input-float (label v)
   (ffi:c-inline (label v) (:CSTRING :POINTER-VOID) :BOOL
     "ImGui_InputFloat(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_InputFloatEx" input-float-ex) :BOOL
   (label :STRING)
   (v :POINTER)
@@ -5181,25 +5181,25 @@
   (flags INPUT-TEXT-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun input-float-ex (label v step step-fast format flags)
   (ffi:c-inline (label v step step-fast format flags) (:CSTRING :POINTER-VOID :FLOAT :FLOAT :CSTRING :INT) :BOOL
     "ImGui_InputFloatEx(#0, #1, #2, #3, #4, #5)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_InputFloat2" input-float2) :BOOL
   (label :STRING)
   (v :pointer)
 )
 
-#+(ecl)
+#+ecl
 (defun input-float2 (label v)
   (ffi:c-inline (label v) (:CSTRING :POINTER-VOID) :BOOL
     "ImGui_InputFloat2(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_InputFloat2Ex" input-float2ex) :BOOL
   (label :STRING)
   (v :pointer)
@@ -5207,25 +5207,25 @@
   (flags INPUT-TEXT-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun input-float2ex (label v format flags)
   (ffi:c-inline (label v format flags) (:CSTRING :POINTER-VOID :CSTRING :INT) :BOOL
     "ImGui_InputFloat2Ex(#0, #1, #2, #3)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_InputFloat3" input-float3) :BOOL
   (label :STRING)
   (v :pointer)
 )
 
-#+(ecl)
+#+ecl
 (defun input-float3 (label v)
   (ffi:c-inline (label v) (:CSTRING :POINTER-VOID) :BOOL
     "ImGui_InputFloat3(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_InputFloat3Ex" input-float3ex) :BOOL
   (label :STRING)
   (v :pointer)
@@ -5233,25 +5233,25 @@
   (flags INPUT-TEXT-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun input-float3ex (label v format flags)
   (ffi:c-inline (label v format flags) (:CSTRING :POINTER-VOID :CSTRING :INT) :BOOL
     "ImGui_InputFloat3Ex(#0, #1, #2, #3)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_InputFloat4" input-float4) :BOOL
   (label :STRING)
   (v :pointer)
 )
 
-#+(ecl)
+#+ecl
 (defun input-float4 (label v)
   (ffi:c-inline (label v) (:CSTRING :POINTER-VOID) :BOOL
     "ImGui_InputFloat4(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_InputFloat4Ex" input-float4ex) :BOOL
   (label :STRING)
   (v :pointer)
@@ -5259,25 +5259,25 @@
   (flags INPUT-TEXT-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun input-float4ex (label v format flags)
   (ffi:c-inline (label v format flags) (:CSTRING :POINTER-VOID :CSTRING :INT) :BOOL
     "ImGui_InputFloat4Ex(#0, #1, #2, #3)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_InputInt" input-int) :BOOL
   (label :STRING)
   (v :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun input-int (label v)
   (ffi:c-inline (label v) (:CSTRING :POINTER-VOID) :BOOL
     "ImGui_InputInt(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_InputIntEx" input-int-ex) :BOOL
   (label :STRING)
   (v :POINTER)
@@ -5286,64 +5286,64 @@
   (flags INPUT-TEXT-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun input-int-ex (label v step step-fast flags)
   (ffi:c-inline (label v step step-fast flags) (:CSTRING :POINTER-VOID :INT :INT :INT) :BOOL
     "ImGui_InputIntEx(#0, #1, #2, #3, #4)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_InputInt2" input-int2) :BOOL
   (label :STRING)
   (v :pointer)
   (flags INPUT-TEXT-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun input-int2 (label v flags)
   (ffi:c-inline (label v flags) (:CSTRING :POINTER-VOID :INT) :BOOL
     "ImGui_InputInt2(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_InputInt3" input-int3) :BOOL
   (label :STRING)
   (v :pointer)
   (flags INPUT-TEXT-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun input-int3 (label v flags)
   (ffi:c-inline (label v flags) (:CSTRING :POINTER-VOID :INT) :BOOL
     "ImGui_InputInt3(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_InputInt4" input-int4) :BOOL
   (label :STRING)
   (v :pointer)
   (flags INPUT-TEXT-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun input-int4 (label v flags)
   (ffi:c-inline (label v flags) (:CSTRING :POINTER-VOID :INT) :BOOL
     "ImGui_InputInt4(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_InputDouble" input-double) :BOOL
   (label :STRING)
   (v :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun input-double (label v)
   (ffi:c-inline (label v) (:CSTRING :POINTER-VOID) :BOOL
     "ImGui_InputDouble(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_InputDoubleEx" input-double-ex) :BOOL
   (label :STRING)
   (v :POINTER)
@@ -5353,26 +5353,26 @@
   (flags INPUT-TEXT-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun input-double-ex (label v step step-fast format flags)
   (ffi:c-inline (label v step step-fast format flags) (:CSTRING :POINTER-VOID :DOUBLE :DOUBLE :CSTRING :INT) :BOOL
     "ImGui_InputDoubleEx(#0, #1, #2, #3, #4, #5)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_InputScalar" input-scalar) :BOOL
   (label :STRING)
   (data-type DATA-TYPE)
   (p-data :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun input-scalar (label data-type p-data)
   (ffi:c-inline (label data-type p-data) (:CSTRING :INT :POINTER-VOID) :BOOL
     "ImGui_InputScalar(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_InputScalarEx" input-scalar-ex) :BOOL
   (label :STRING)
   (data-type DATA-TYPE)
@@ -5383,13 +5383,13 @@
   (flags INPUT-TEXT-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun input-scalar-ex (label data-type p-data p-step p-step-fast format flags)
   (ffi:c-inline (label data-type p-data p-step p-step-fast format flags) (:CSTRING :INT :POINTER-VOID :POINTER-VOID :POINTER-VOID :CSTRING :INT) :BOOL
     "ImGui_InputScalarEx(#0, #1, #2, #3, #4, #5, #6)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_InputScalarN" input-scalar-n) :BOOL
   (label :STRING)
   (data-type DATA-TYPE)
@@ -5397,13 +5397,13 @@
   (components :INT)
 )
 
-#+(ecl)
+#+ecl
 (defun input-scalar-n (label data-type p-data components)
   (ffi:c-inline (label data-type p-data components) (:CSTRING :INT :POINTER-VOID :INT) :BOOL
     "ImGui_InputScalarN(#0, #1, #2, #3)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_InputScalarNEx" input-scalar-nex) :BOOL
   (label :STRING)
   (data-type DATA-TYPE)
@@ -5415,52 +5415,52 @@
   (flags INPUT-TEXT-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun input-scalar-nex (label data-type p-data components p-step p-step-fast format flags)
   (ffi:c-inline (label data-type p-data components p-step p-step-fast format flags) (:CSTRING :INT :POINTER-VOID :INT :POINTER-VOID :POINTER-VOID :CSTRING :INT) :BOOL
     "ImGui_InputScalarNEx(#0, #1, #2, #3, #4, #5, #6, #7)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_ColorEdit3" color-edit3) :BOOL
   (label :STRING)
   (col :pointer)
   (flags COLOR-EDIT-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun color-edit3 (label col flags)
   (ffi:c-inline (label col flags) (:CSTRING :POINTER-VOID :INT) :BOOL
     "ImGui_ColorEdit3(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_ColorEdit4" color-edit4) :BOOL
   (label :STRING)
   (col :pointer)
   (flags COLOR-EDIT-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun color-edit4 (label col flags)
   (ffi:c-inline (label col flags) (:CSTRING :POINTER-VOID :INT) :BOOL
     "ImGui_ColorEdit4(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_ColorPicker3" color-picker3) :BOOL
   (label :STRING)
   (col :pointer)
   (flags COLOR-EDIT-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun color-picker3 (label col flags)
   (ffi:c-inline (label col flags) (:CSTRING :POINTER-VOID :INT) :BOOL
     "ImGui_ColorPicker3(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_ColorPicker4" color-picker4) :BOOL
   (label :STRING)
   (col :pointer)
@@ -5468,87 +5468,87 @@
   (ref-col :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun color-picker4 (label col flags ref-col)
   (ffi:c-inline (label col flags ref-col) (:CSTRING :POINTER-VOID :INT :POINTER-VOID) :BOOL
     "ImGui_ColorPicker4(#0, #1, #2, #3)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SetColorEditOptions" set-color-edit-options) :VOID
   (flags COLOR-EDIT-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun set-color-edit-options (flags)
   (ffi:c-inline (flags) (:INT) :VOID
     "ImGui_SetColorEditOptions(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_TreeNode" tree-node) :BOOL
   (label :STRING)
 )
 
-#+(ecl)
+#+ecl
 (defun tree-node (label)
   (ffi:c-inline (label) (:CSTRING) :BOOL
     "ImGui_TreeNode(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_TreeNodeStr" tree-node-str) :BOOL
   (str-id :STRING)
   (fmt :STRING)
   &rest
 )
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_TreeNodePtr" tree-node-ptr) :BOOL
   (ptr-id :POINTER)
   (fmt :STRING)
   &rest
 )
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_TreeNodeV" tree-node-v) :BOOL
   (str-id :STRING)
   (fmt :STRING)
   (args :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun tree-node-v (str-id fmt args)
   (ffi:c-inline (str-id fmt args) (:CSTRING :CSTRING :POINTER-VOID) :BOOL
     "ImGui_TreeNodeV(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_TreeNodeVPtr" tree-node-vptr) :BOOL
   (ptr-id :POINTER)
   (fmt :STRING)
   (args :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun tree-node-vptr (ptr-id fmt args)
   (ffi:c-inline (ptr-id fmt args) (:POINTER-VOID :CSTRING :POINTER-VOID) :BOOL
     "ImGui_TreeNodeVPtr(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_TreeNodeEx" tree-node-ex) :BOOL
   (label :STRING)
   (flags TREE-NODE-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun tree-node-ex (label flags)
   (ffi:c-inline (label flags) (:CSTRING :INT) :BOOL
     "ImGui_TreeNodeEx(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_TreeNodeExStr" tree-node-ex-str) :BOOL
   (str-id :STRING)
   (flags TREE-NODE-FLAGS)
@@ -5556,7 +5556,7 @@
   &rest
 )
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_TreeNodeExPtr" tree-node-ex-ptr) :BOOL
   (ptr-id :POINTER)
   (flags TREE-NODE-FLAGS)
@@ -5564,7 +5564,7 @@
   &rest
 )
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_TreeNodeExV" tree-node-ex-v) :BOOL
   (str-id :STRING)
   (flags TREE-NODE-FLAGS)
@@ -5572,13 +5572,13 @@
   (args :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun tree-node-ex-v (str-id flags fmt args)
   (ffi:c-inline (str-id flags fmt args) (:CSTRING :INT :CSTRING :POINTER-VOID) :BOOL
     "ImGui_TreeNodeExV(#0, #1, #2, #3)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_TreeNodeExVPtr" tree-node-ex-vptr) :BOOL
   (ptr-id :POINTER)
   (flags TREE-NODE-FLAGS)
@@ -5586,187 +5586,187 @@
   (args :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun tree-node-ex-vptr (ptr-id flags fmt args)
   (ffi:c-inline (ptr-id flags fmt args) (:POINTER-VOID :INT :CSTRING :POINTER-VOID) :BOOL
     "ImGui_TreeNodeExVPtr(#0, #1, #2, #3)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_TreePush" tree-push) :VOID
   (str-id :STRING)
 )
 
-#+(ecl)
+#+ecl
 (defun tree-push (str-id)
   (ffi:c-inline (str-id) (:CSTRING) :VOID
     "ImGui_TreePush(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_TreePushPtr" tree-push-ptr) :VOID
   (ptr-id :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun tree-push-ptr (ptr-id)
   (ffi:c-inline (ptr-id) (:POINTER-VOID) :VOID
     "ImGui_TreePushPtr(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_TreePop" tree-pop) :VOID)
 
-#+(ecl)
+#+ecl
 (defun tree-pop ()
   (ffi:c-inline () () :VOID
     "ImGui_TreePop()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetTreeNodeToLabelSpacing" get-tree-node-to-label-spacing) :FLOAT)
 
-#+(ecl)
+#+ecl
 (defun get-tree-node-to-label-spacing ()
   (ffi:c-inline () () :FLOAT
     "ImGui_GetTreeNodeToLabelSpacing()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_CollapsingHeader" collapsing-header) :BOOL
   (label :STRING)
   (flags TREE-NODE-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun collapsing-header (label flags)
   (ffi:c-inline (label flags) (:CSTRING :INT) :BOOL
     "ImGui_CollapsingHeader(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_CollapsingHeaderBoolPtr" collapsing-header-bool-ptr) :BOOL
   (label :STRING)
   (p-visible :POINTER)
   (flags TREE-NODE-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun collapsing-header-bool-ptr (label p-visible flags)
   (ffi:c-inline (label p-visible flags) (:CSTRING :POINTER-VOID :INT) :BOOL
     "ImGui_CollapsingHeaderBoolPtr(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SetNextItemOpen" set-next-item-open) :VOID
   (is-open :BOOL)
   (cond COND)
 )
 
-#+(ecl)
+#+ecl
 (defun set-next-item-open (is-open cond)
   (ffi:c-inline (is-open cond) (:BOOL :INT) :VOID
     "ImGui_SetNextItemOpen(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SetNextItemStorageID" set-next-item-storage-id) :VOID
   (storage-id ID)
 )
 
-#+(ecl)
+#+ecl
 (defun set-next-item-storage-id (storage-id)
   (ffi:c-inline (storage-id) (:INT) :VOID
     "ImGui_SetNextItemStorageID(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_Selectable" selectable) :BOOL
   (label :STRING)
 )
 
-#+(ecl)
+#+ecl
 (defun selectable (label)
   (ffi:c-inline (label) (:CSTRING) :BOOL
     "ImGui_Selectable(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SelectableBoolPtr" selectable-bool-ptr) :BOOL
   (label :STRING)
   (p-selected :POINTER)
   (flags SELECTABLE-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun selectable-bool-ptr (label p-selected flags)
   (ffi:c-inline (label p-selected flags) (:CSTRING :POINTER-VOID :INT) :BOOL
     "ImGui_SelectableBoolPtr(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_BeginMultiSelect" begin-multi-select) :POINTER
   (flags MULTI-SELECT-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun begin-multi-select (flags)
   (ffi:c-inline (flags) (:INT) :POINTER-VOID
     "ImGui_BeginMultiSelect(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_BeginMultiSelectEx" begin-multi-select-ex) :POINTER
   (flags MULTI-SELECT-FLAGS)
   (selection-size :INT)
   (items-count :INT)
 )
 
-#+(ecl)
+#+ecl
 (defun begin-multi-select-ex (flags selection-size items-count)
   (ffi:c-inline (flags selection-size items-count) (:INT :INT :INT) :POINTER-VOID
     "ImGui_BeginMultiSelectEx(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_EndMultiSelect" end-multi-select) :POINTER)
 
-#+(ecl)
+#+ecl
 (defun end-multi-select ()
   (ffi:c-inline () () :POINTER-VOID
     "ImGui_EndMultiSelect()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SetNextItemSelectionUserData" set-next-item-selection-user-data) :VOID
   (selection-user-data SELECTION-USER-DATA)
 )
 
-#+(ecl)
+#+ecl
 (defun set-next-item-selection-user-data (selection-user-data)
   (ffi:c-inline (selection-user-data) (:INT) :VOID
     "ImGui_SetNextItemSelectionUserData(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_IsItemToggledSelection" is-item-toggled-selection) :BOOL)
 
-#+(ecl)
+#+ecl
 (defun is-item-toggled-selection ()
   (ffi:c-inline () () :BOOL
     "ImGui_IsItemToggledSelection()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_EndListBox" end-list-box) :VOID)
 
-#+(ecl)
+#+ecl
 (defun end-list-box ()
   (ffi:c-inline () () :VOID
     "ImGui_EndListBox()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_ListBox" list-box) :BOOL
   (label :STRING)
   (current-item :POINTER)
@@ -5775,13 +5775,13 @@
   (height-in-items :INT)
 )
 
-#+(ecl)
+#+ecl
 (defun list-box (label current-item items items-count height-in-items)
   (ffi:c-inline (label current-item items items-count height-in-items) (:CSTRING :POINTER-VOID :POINTER-VOID :INT :INT) :BOOL
     "ImGui_ListBox(#0, #1, #2, #3, #4)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_ListBoxCallback" list-box-callback) :BOOL
   (label :STRING)
   (current-item :POINTER)
@@ -5790,13 +5790,13 @@
   (items-count :INT)
 )
 
-#+(ecl)
+#+ecl
 (defun list-box-callback (label current-item getter user-data items-count)
   (ffi:c-inline (label current-item getter user-data items-count) (:CSTRING :POINTER-VOID :POINTER-VOID :POINTER-VOID :INT) :BOOL
     "ImGui_ListBoxCallback(#0, #1, #2, #3, #4)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_ListBoxCallbackEx" list-box-callback-ex) :BOOL
   (label :STRING)
   (current-item :POINTER)
@@ -5806,26 +5806,26 @@
   (height-in-items :INT)
 )
 
-#+(ecl)
+#+ecl
 (defun list-box-callback-ex (label current-item getter user-data items-count height-in-items)
   (ffi:c-inline (label current-item getter user-data items-count height-in-items) (:CSTRING :POINTER-VOID :POINTER-VOID :POINTER-VOID :INT :INT) :BOOL
     "ImGui_ListBoxCallbackEx(#0, #1, #2, #3, #4, #5)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_PlotLines" plot-lines) :VOID
   (label :STRING)
   (values :POINTER)
   (values-count :INT)
 )
 
-#+(ecl)
+#+ecl
 (defun plot-lines (label values values-count)
   (ffi:c-inline (label values values-count) (:CSTRING :POINTER-VOID :INT) :VOID
     "ImGui_PlotLines(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_PlotLinesCallback" plot-lines-callback) :VOID
   (label :STRING)
   (values-getter :POINTER)
@@ -5833,26 +5833,26 @@
   (values-count :INT)
 )
 
-#+(ecl)
+#+ecl
 (defun plot-lines-callback (label values-getter data values-count)
   (ffi:c-inline (label values-getter data values-count) (:CSTRING :POINTER-VOID :POINTER-VOID :INT) :VOID
     "ImGui_PlotLinesCallback(#0, #1, #2, #3)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_PlotHistogram" plot-histogram) :VOID
   (label :STRING)
   (values :POINTER)
   (values-count :INT)
 )
 
-#+(ecl)
+#+ecl
 (defun plot-histogram (label values values-count)
   (ffi:c-inline (label values values-count) (:CSTRING :POINTER-VOID :INT) :VOID
     "ImGui_PlotHistogram(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_PlotHistogramCallback" plot-histogram-callback) :VOID
   (label :STRING)
   (values-getter :POINTER)
@@ -5860,92 +5860,92 @@
   (values-count :INT)
 )
 
-#+(ecl)
+#+ecl
 (defun plot-histogram-callback (label values-getter data values-count)
   (ffi:c-inline (label values-getter data values-count) (:CSTRING :POINTER-VOID :POINTER-VOID :INT) :VOID
     "ImGui_PlotHistogramCallback(#0, #1, #2, #3)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_BeginMenuBar" begin-menu-bar) :BOOL)
 
-#+(ecl)
+#+ecl
 (defun begin-menu-bar ()
   (ffi:c-inline () () :BOOL
     "ImGui_BeginMenuBar()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_EndMenuBar" end-menu-bar) :VOID)
 
-#+(ecl)
+#+ecl
 (defun end-menu-bar ()
   (ffi:c-inline () () :VOID
     "ImGui_EndMenuBar()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_BeginMainMenuBar" begin-main-menu-bar) :BOOL)
 
-#+(ecl)
+#+ecl
 (defun begin-main-menu-bar ()
   (ffi:c-inline () () :BOOL
     "ImGui_BeginMainMenuBar()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_EndMainMenuBar" end-main-menu-bar) :VOID)
 
-#+(ecl)
+#+ecl
 (defun end-main-menu-bar ()
   (ffi:c-inline () () :VOID
     "ImGui_EndMainMenuBar()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_BeginMenu" begin-menu) :BOOL
   (label :STRING)
 )
 
-#+(ecl)
+#+ecl
 (defun begin-menu (label)
   (ffi:c-inline (label) (:CSTRING) :BOOL
     "ImGui_BeginMenu(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_BeginMenuEx" begin-menu-ex) :BOOL
   (label :STRING)
   (enabled :BOOL)
 )
 
-#+(ecl)
+#+ecl
 (defun begin-menu-ex (label enabled)
   (ffi:c-inline (label enabled) (:CSTRING :BOOL) :BOOL
     "ImGui_BeginMenuEx(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_EndMenu" end-menu) :VOID)
 
-#+(ecl)
+#+ecl
 (defun end-menu ()
   (ffi:c-inline () () :VOID
     "ImGui_EndMenu()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_MenuItem" menu-item) :BOOL
   (label :STRING)
 )
 
-#+(ecl)
+#+ecl
 (defun menu-item (label)
   (ffi:c-inline (label) (:CSTRING) :BOOL
     "ImGui_MenuItem(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_MenuItemEx" menu-item-ex) :BOOL
   (label :STRING)
   (shortcut :STRING)
@@ -5953,13 +5953,13 @@
   (enabled :BOOL)
 )
 
-#+(ecl)
+#+ecl
 (defun menu-item-ex (label shortcut selected enabled)
   (ffi:c-inline (label shortcut selected enabled) (:CSTRING :CSTRING :BOOL :BOOL) :BOOL
     "ImGui_MenuItemEx(#0, #1, #2, #3)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_MenuItemBoolPtr" menu-item-bool-ptr) :BOOL
   (label :STRING)
   (shortcut :STRING)
@@ -5967,305 +5967,305 @@
   (enabled :BOOL)
 )
 
-#+(ecl)
+#+ecl
 (defun menu-item-bool-ptr (label shortcut p-selected enabled)
   (ffi:c-inline (label shortcut p-selected enabled) (:CSTRING :CSTRING :POINTER-VOID :BOOL) :BOOL
     "ImGui_MenuItemBoolPtr(#0, #1, #2, #3)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_BeginTooltip" begin-tooltip) :BOOL)
 
-#+(ecl)
+#+ecl
 (defun begin-tooltip ()
   (ffi:c-inline () () :BOOL
     "ImGui_BeginTooltip()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_EndTooltip" end-tooltip) :VOID)
 
-#+(ecl)
+#+ecl
 (defun end-tooltip ()
   (ffi:c-inline () () :VOID
     "ImGui_EndTooltip()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SetTooltip" set-tooltip) :VOID
   (fmt :STRING)
   &rest
 )
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SetTooltipV" set-tooltip-v) :VOID
   (fmt :STRING)
   (args :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun set-tooltip-v (fmt args)
   (ffi:c-inline (fmt args) (:CSTRING :POINTER-VOID) :VOID
     "ImGui_SetTooltipV(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_BeginItemTooltip" begin-item-tooltip) :BOOL)
 
-#+(ecl)
+#+ecl
 (defun begin-item-tooltip ()
   (ffi:c-inline () () :BOOL
     "ImGui_BeginItemTooltip()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SetItemTooltip" set-item-tooltip) :VOID
   (fmt :STRING)
   &rest
 )
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SetItemTooltipV" set-item-tooltip-v) :VOID
   (fmt :STRING)
   (args :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun set-item-tooltip-v (fmt args)
   (ffi:c-inline (fmt args) (:CSTRING :POINTER-VOID) :VOID
     "ImGui_SetItemTooltipV(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_BeginPopup" begin-popup) :BOOL
   (str-id :STRING)
   (flags WINDOW-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun begin-popup (str-id flags)
   (ffi:c-inline (str-id flags) (:CSTRING :INT) :BOOL
     "ImGui_BeginPopup(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_BeginPopupModal" begin-popup-modal) :BOOL
   (name :STRING)
   (p-open :POINTER)
   (flags WINDOW-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun begin-popup-modal (name p-open flags)
   (ffi:c-inline (name p-open flags) (:CSTRING :POINTER-VOID :INT) :BOOL
     "ImGui_BeginPopupModal(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_EndPopup" end-popup) :VOID)
 
-#+(ecl)
+#+ecl
 (defun end-popup ()
   (ffi:c-inline () () :VOID
     "ImGui_EndPopup()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_OpenPopup" open-popup) :VOID
   (str-id :STRING)
   (popup-flags POPUP-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun open-popup (str-id popup-flags)
   (ffi:c-inline (str-id popup-flags) (:CSTRING :INT) :VOID
     "ImGui_OpenPopup(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_OpenPopupID" open-popup-id) :VOID
   (id ID)
   (popup-flags POPUP-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun open-popup-id (id popup-flags)
   (ffi:c-inline (id popup-flags) (:INT :INT) :VOID
     "ImGui_OpenPopupID(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_OpenPopupOnItemClick" open-popup-on-item-click) :VOID
   (str-id :STRING)
   (popup-flags POPUP-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun open-popup-on-item-click (str-id popup-flags)
   (ffi:c-inline (str-id popup-flags) (:CSTRING :INT) :VOID
     "ImGui_OpenPopupOnItemClick(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_CloseCurrentPopup" close-current-popup) :VOID)
 
-#+(ecl)
+#+ecl
 (defun close-current-popup ()
   (ffi:c-inline () () :VOID
     "ImGui_CloseCurrentPopup()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_BeginPopupContextItem" begin-popup-context-item) :BOOL)
 
-#+(ecl)
+#+ecl
 (defun begin-popup-context-item ()
   (ffi:c-inline () () :BOOL
     "ImGui_BeginPopupContextItem()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_BeginPopupContextItemEx" begin-popup-context-item-ex) :BOOL
   (str-id :STRING)
   (popup-flags POPUP-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun begin-popup-context-item-ex (str-id popup-flags)
   (ffi:c-inline (str-id popup-flags) (:CSTRING :INT) :BOOL
     "ImGui_BeginPopupContextItemEx(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_BeginPopupContextWindow" begin-popup-context-window) :BOOL)
 
-#+(ecl)
+#+ecl
 (defun begin-popup-context-window ()
   (ffi:c-inline () () :BOOL
     "ImGui_BeginPopupContextWindow()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_BeginPopupContextWindowEx" begin-popup-context-window-ex) :BOOL
   (str-id :STRING)
   (popup-flags POPUP-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun begin-popup-context-window-ex (str-id popup-flags)
   (ffi:c-inline (str-id popup-flags) (:CSTRING :INT) :BOOL
     "ImGui_BeginPopupContextWindowEx(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_BeginPopupContextVoid" begin-popup-context-void) :BOOL)
 
-#+(ecl)
+#+ecl
 (defun begin-popup-context-void ()
   (ffi:c-inline () () :BOOL
     "ImGui_BeginPopupContextVoid()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_BeginPopupContextVoidEx" begin-popup-context-void-ex) :BOOL
   (str-id :STRING)
   (popup-flags POPUP-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun begin-popup-context-void-ex (str-id popup-flags)
   (ffi:c-inline (str-id popup-flags) (:CSTRING :INT) :BOOL
     "ImGui_BeginPopupContextVoidEx(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_IsPopupOpen" is-popup-open) :BOOL
   (str-id :STRING)
   (flags POPUP-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun is-popup-open (str-id flags)
   (ffi:c-inline (str-id flags) (:CSTRING :INT) :BOOL
     "ImGui_IsPopupOpen(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_BeginTable" begin-table) :BOOL
   (str-id :STRING)
   (columns :INT)
   (flags TABLE-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun begin-table (str-id columns flags)
   (ffi:c-inline (str-id columns flags) (:CSTRING :INT :INT) :BOOL
     "ImGui_BeginTable(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_EndTable" end-table) :VOID)
 
-#+(ecl)
+#+ecl
 (defun end-table ()
   (ffi:c-inline () () :VOID
     "ImGui_EndTable()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_TableNextRow" table-next-row) :VOID)
 
-#+(ecl)
+#+ecl
 (defun table-next-row ()
   (ffi:c-inline () () :VOID
     "ImGui_TableNextRow()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_TableNextRowEx" table-next-row-ex) :VOID
   (row-flags TABLE-ROW-FLAGS)
   (min-row-height :FLOAT)
 )
 
-#+(ecl)
+#+ecl
 (defun table-next-row-ex (row-flags min-row-height)
   (ffi:c-inline (row-flags min-row-height) (:INT :FLOAT) :VOID
     "ImGui_TableNextRowEx(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_TableNextColumn" table-next-column) :BOOL)
 
-#+(ecl)
+#+ecl
 (defun table-next-column ()
   (ffi:c-inline () () :BOOL
     "ImGui_TableNextColumn()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_TableSetColumnIndex" table-set-column-index) :BOOL
   (column-n :INT)
 )
 
-#+(ecl)
+#+ecl
 (defun table-set-column-index (column-n)
   (ffi:c-inline (column-n) (:INT) :BOOL
     "ImGui_TableSetColumnIndex(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_TableSetupColumn" table-setup-column) :VOID
   (label :STRING)
   (flags TABLE-COLUMN-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun table-setup-column (label flags)
   (ffi:c-inline (label flags) (:CSTRING :INT) :VOID
     "ImGui_TableSetupColumn(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_TableSetupColumnEx" table-setup-column-ex) :VOID
   (label :STRING)
   (flags TABLE-COLUMN-FLAGS)
@@ -6273,388 +6273,388 @@
   (user-id ID)
 )
 
-#+(ecl)
+#+ecl
 (defun table-setup-column-ex (label flags init-width-or-weight user-id)
   (ffi:c-inline (label flags init-width-or-weight user-id) (:CSTRING :INT :FLOAT :INT) :VOID
     "ImGui_TableSetupColumnEx(#0, #1, #2, #3)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_TableSetupScrollFreeze" table-setup-scroll-freeze) :VOID
   (cols :INT)
   (rows :INT)
 )
 
-#+(ecl)
+#+ecl
 (defun table-setup-scroll-freeze (cols rows)
   (ffi:c-inline (cols rows) (:INT :INT) :VOID
     "ImGui_TableSetupScrollFreeze(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_TableHeader" table-header) :VOID
   (label :STRING)
 )
 
-#+(ecl)
+#+ecl
 (defun table-header (label)
   (ffi:c-inline (label) (:CSTRING) :VOID
     "ImGui_TableHeader(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_TableHeadersRow" table-headers-row) :VOID)
 
-#+(ecl)
+#+ecl
 (defun table-headers-row ()
   (ffi:c-inline () () :VOID
     "ImGui_TableHeadersRow()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_TableAngledHeadersRow" table-angled-headers-row) :VOID)
 
-#+(ecl)
+#+ecl
 (defun table-angled-headers-row ()
   (ffi:c-inline () () :VOID
     "ImGui_TableAngledHeadersRow()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_TableGetSortSpecs" table-get-sort-specs) :POINTER)
 
-#+(ecl)
+#+ecl
 (defun table-get-sort-specs ()
   (ffi:c-inline () () :POINTER-VOID
     "ImGui_TableGetSortSpecs()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_TableGetColumnCount" table-get-column-count) :INT)
 
-#+(ecl)
+#+ecl
 (defun table-get-column-count ()
   (ffi:c-inline () () :INT
     "ImGui_TableGetColumnCount()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_TableGetColumnIndex" table-get-column-index) :INT)
 
-#+(ecl)
+#+ecl
 (defun table-get-column-index ()
   (ffi:c-inline () () :INT
     "ImGui_TableGetColumnIndex()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_TableGetRowIndex" table-get-row-index) :INT)
 
-#+(ecl)
+#+ecl
 (defun table-get-row-index ()
   (ffi:c-inline () () :INT
     "ImGui_TableGetRowIndex()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_TableGetColumnName" table-get-column-name) :STRING
   (column-n :INT)
 )
 
-#+(ecl)
+#+ecl
 (defun table-get-column-name (column-n)
   (ffi:c-inline (column-n) (:INT) :CSTRING
     "ImGui_TableGetColumnName(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_TableGetColumnFlags" table-get-column-flags) TABLE-COLUMN-FLAGS
   (column-n :INT)
 )
 
-#+(ecl)
+#+ecl
 (defun table-get-column-flags (column-n)
   (ffi:c-inline (column-n) (:INT) :INT
     "ImGui_TableGetColumnFlags(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_TableSetColumnEnabled" table-set-column-enabled) :VOID
   (column-n :INT)
   (v :BOOL)
 )
 
-#+(ecl)
+#+ecl
 (defun table-set-column-enabled (column-n v)
   (ffi:c-inline (column-n v) (:INT :BOOL) :VOID
     "ImGui_TableSetColumnEnabled(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_TableGetHoveredColumn" table-get-hovered-column) :INT)
 
-#+(ecl)
+#+ecl
 (defun table-get-hovered-column ()
   (ffi:c-inline () () :INT
     "ImGui_TableGetHoveredColumn()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_TableSetBgColor" table-set-bg-color) :VOID
   (target TABLE-BG-TARGET)
   (color U32)
   (column-n :INT)
 )
 
-#+(ecl)
+#+ecl
 (defun table-set-bg-color (target color column-n)
   (ffi:c-inline (target color column-n) (:INT :INT :INT) :VOID
     "ImGui_TableSetBgColor(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_Columns" columns) :VOID)
 
-#+(ecl)
+#+ecl
 (defun columns ()
   (ffi:c-inline () () :VOID
     "ImGui_Columns()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_ColumnsEx" columns-ex) :VOID
   (count :INT)
   (id :STRING)
   (borders :BOOL)
 )
 
-#+(ecl)
+#+ecl
 (defun columns-ex (count id borders)
   (ffi:c-inline (count id borders) (:INT :CSTRING :BOOL) :VOID
     "ImGui_ColumnsEx(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_NextColumn" next-column) :VOID)
 
-#+(ecl)
+#+ecl
 (defun next-column ()
   (ffi:c-inline () () :VOID
     "ImGui_NextColumn()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetColumnIndex" get-column-index) :INT)
 
-#+(ecl)
+#+ecl
 (defun get-column-index ()
   (ffi:c-inline () () :INT
     "ImGui_GetColumnIndex()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetColumnWidth" get-column-width) :FLOAT
   (column-index :INT)
 )
 
-#+(ecl)
+#+ecl
 (defun get-column-width (column-index)
   (ffi:c-inline (column-index) (:INT) :FLOAT
     "ImGui_GetColumnWidth(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SetColumnWidth" set-column-width) :VOID
   (column-index :INT)
   (width :FLOAT)
 )
 
-#+(ecl)
+#+ecl
 (defun set-column-width (column-index width)
   (ffi:c-inline (column-index width) (:INT :FLOAT) :VOID
     "ImGui_SetColumnWidth(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetColumnOffset" get-column-offset) :FLOAT
   (column-index :INT)
 )
 
-#+(ecl)
+#+ecl
 (defun get-column-offset (column-index)
   (ffi:c-inline (column-index) (:INT) :FLOAT
     "ImGui_GetColumnOffset(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SetColumnOffset" set-column-offset) :VOID
   (column-index :INT)
   (offset-x :FLOAT)
 )
 
-#+(ecl)
+#+ecl
 (defun set-column-offset (column-index offset-x)
   (ffi:c-inline (column-index offset-x) (:INT :FLOAT) :VOID
     "ImGui_SetColumnOffset(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetColumnsCount" get-columns-count) :INT)
 
-#+(ecl)
+#+ecl
 (defun get-columns-count ()
   (ffi:c-inline () () :INT
     "ImGui_GetColumnsCount()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_BeginTabBar" begin-tab-bar) :BOOL
   (str-id :STRING)
   (flags TAB-BAR-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun begin-tab-bar (str-id flags)
   (ffi:c-inline (str-id flags) (:CSTRING :INT) :BOOL
     "ImGui_BeginTabBar(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_EndTabBar" end-tab-bar) :VOID)
 
-#+(ecl)
+#+ecl
 (defun end-tab-bar ()
   (ffi:c-inline () () :VOID
     "ImGui_EndTabBar()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_BeginTabItem" begin-tab-item) :BOOL
   (label :STRING)
   (p-open :POINTER)
   (flags TAB-ITEM-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun begin-tab-item (label p-open flags)
   (ffi:c-inline (label p-open flags) (:CSTRING :POINTER-VOID :INT) :BOOL
     "ImGui_BeginTabItem(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_EndTabItem" end-tab-item) :VOID)
 
-#+(ecl)
+#+ecl
 (defun end-tab-item ()
   (ffi:c-inline () () :VOID
     "ImGui_EndTabItem()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_TabItemButton" tab-item-button) :BOOL
   (label :STRING)
   (flags TAB-ITEM-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun tab-item-button (label flags)
   (ffi:c-inline (label flags) (:CSTRING :INT) :BOOL
     "ImGui_TabItemButton(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SetTabItemClosed" set-tab-item-closed) :VOID
   (tab-or-docked-window-label :STRING)
 )
 
-#+(ecl)
+#+ecl
 (defun set-tab-item-closed (tab-or-docked-window-label)
   (ffi:c-inline (tab-or-docked-window-label) (:CSTRING) :VOID
     "ImGui_SetTabItemClosed(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_LogToTTY" log-to-tty) :VOID
   (auto-open-depth :INT)
 )
 
-#+(ecl)
+#+ecl
 (defun log-to-tty (auto-open-depth)
   (ffi:c-inline (auto-open-depth) (:INT) :VOID
     "ImGui_LogToTTY(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_LogToFile" log-to-file) :VOID
   (auto-open-depth :INT)
   (filename :STRING)
 )
 
-#+(ecl)
+#+ecl
 (defun log-to-file (auto-open-depth filename)
   (ffi:c-inline (auto-open-depth filename) (:INT :CSTRING) :VOID
     "ImGui_LogToFile(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_LogToClipboard" log-to-clipboard) :VOID
   (auto-open-depth :INT)
 )
 
-#+(ecl)
+#+ecl
 (defun log-to-clipboard (auto-open-depth)
   (ffi:c-inline (auto-open-depth) (:INT) :VOID
     "ImGui_LogToClipboard(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_LogFinish" log-finish) :VOID)
 
-#+(ecl)
+#+ecl
 (defun log-finish ()
   (ffi:c-inline () () :VOID
     "ImGui_LogFinish()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_LogButtons" log-buttons) :VOID)
 
-#+(ecl)
+#+ecl
 (defun log-buttons ()
   (ffi:c-inline () () :VOID
     "ImGui_LogButtons()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_LogText" log-text) :VOID
   (fmt :STRING)
   &rest
 )
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_LogTextV" log-text-v) :VOID
   (fmt :STRING)
   (args :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun log-text-v (fmt args)
   (ffi:c-inline (fmt args) (:CSTRING :POINTER-VOID) :VOID
     "ImGui_LogTextV(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_BeginDragDropSource" begin-drag-drop-source) :BOOL
   (flags DRAG-DROP-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun begin-drag-drop-source (flags)
   (ffi:c-inline (flags) (:INT) :BOOL
     "ImGui_BeginDragDropSource(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SetDragDropPayload" set-drag-drop-payload) :BOOL
   (type :STRING)
   (data :POINTER)
@@ -6662,401 +6662,401 @@
   (cond COND)
 )
 
-#+(ecl)
+#+ecl
 (defun set-drag-drop-payload (type data sz cond)
   (ffi:c-inline (type data sz cond) (:CSTRING :POINTER-VOID :UNSIGNED-LONG :INT) :BOOL
     "ImGui_SetDragDropPayload(#0, #1, #2, #3)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_EndDragDropSource" end-drag-drop-source) :VOID)
 
-#+(ecl)
+#+ecl
 (defun end-drag-drop-source ()
   (ffi:c-inline () () :VOID
     "ImGui_EndDragDropSource()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_BeginDragDropTarget" begin-drag-drop-target) :BOOL)
 
-#+(ecl)
+#+ecl
 (defun begin-drag-drop-target ()
   (ffi:c-inline () () :BOOL
     "ImGui_BeginDragDropTarget()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_AcceptDragDropPayload" accept-drag-drop-payload) :POINTER
   (type :STRING)
   (flags DRAG-DROP-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun accept-drag-drop-payload (type flags)
   (ffi:c-inline (type flags) (:CSTRING :INT) :POINTER-VOID
     "ImGui_AcceptDragDropPayload(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_EndDragDropTarget" end-drag-drop-target) :VOID)
 
-#+(ecl)
+#+ecl
 (defun end-drag-drop-target ()
   (ffi:c-inline () () :VOID
     "ImGui_EndDragDropTarget()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetDragDropPayload" get-drag-drop-payload) :POINTER)
 
-#+(ecl)
+#+ecl
 (defun get-drag-drop-payload ()
   (ffi:c-inline () () :POINTER-VOID
     "ImGui_GetDragDropPayload()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_BeginDisabled" begin-disabled) :VOID
   (disabled :BOOL)
 )
 
-#+(ecl)
+#+ecl
 (defun begin-disabled (disabled)
   (ffi:c-inline (disabled) (:BOOL) :VOID
     "ImGui_BeginDisabled(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_EndDisabled" end-disabled) :VOID)
 
-#+(ecl)
+#+ecl
 (defun end-disabled ()
   (ffi:c-inline () () :VOID
     "ImGui_EndDisabled()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_PopClipRect" pop-clip-rect) :VOID)
 
-#+(ecl)
+#+ecl
 (defun pop-clip-rect ()
   (ffi:c-inline () () :VOID
     "ImGui_PopClipRect()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SetItemDefaultFocus" set-item-default-focus) :VOID)
 
-#+(ecl)
+#+ecl
 (defun set-item-default-focus ()
   (ffi:c-inline () () :VOID
     "ImGui_SetItemDefaultFocus()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SetKeyboardFocusHere" set-keyboard-focus-here) :VOID)
 
-#+(ecl)
+#+ecl
 (defun set-keyboard-focus-here ()
   (ffi:c-inline () () :VOID
     "ImGui_SetKeyboardFocusHere()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SetKeyboardFocusHereEx" set-keyboard-focus-here-ex) :VOID
   (offset :INT)
 )
 
-#+(ecl)
+#+ecl
 (defun set-keyboard-focus-here-ex (offset)
   (ffi:c-inline (offset) (:INT) :VOID
     "ImGui_SetKeyboardFocusHereEx(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SetNavCursorVisible" set-nav-cursor-visible) :VOID
   (visible :BOOL)
 )
 
-#+(ecl)
+#+ecl
 (defun set-nav-cursor-visible (visible)
   (ffi:c-inline (visible) (:BOOL) :VOID
     "ImGui_SetNavCursorVisible(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SetNextItemAllowOverlap" set-next-item-allow-overlap) :VOID)
 
-#+(ecl)
+#+ecl
 (defun set-next-item-allow-overlap ()
   (ffi:c-inline () () :VOID
     "ImGui_SetNextItemAllowOverlap()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_IsItemHovered" is-item-hovered) :BOOL
   (flags HOVERED-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun is-item-hovered (flags)
   (ffi:c-inline (flags) (:INT) :BOOL
     "ImGui_IsItemHovered(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_IsItemActive" is-item-active) :BOOL)
 
-#+(ecl)
+#+ecl
 (defun is-item-active ()
   (ffi:c-inline () () :BOOL
     "ImGui_IsItemActive()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_IsItemFocused" is-item-focused) :BOOL)
 
-#+(ecl)
+#+ecl
 (defun is-item-focused ()
   (ffi:c-inline () () :BOOL
     "ImGui_IsItemFocused()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_IsItemClicked" is-item-clicked) :BOOL)
 
-#+(ecl)
+#+ecl
 (defun is-item-clicked ()
   (ffi:c-inline () () :BOOL
     "ImGui_IsItemClicked()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_IsItemClickedEx" is-item-clicked-ex) :BOOL
   (mouse-button MOUSE-BUTTON)
 )
 
-#+(ecl)
+#+ecl
 (defun is-item-clicked-ex (mouse-button)
   (ffi:c-inline (mouse-button) (:INT) :BOOL
     "ImGui_IsItemClickedEx(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_IsItemVisible" is-item-visible) :BOOL)
 
-#+(ecl)
+#+ecl
 (defun is-item-visible ()
   (ffi:c-inline () () :BOOL
     "ImGui_IsItemVisible()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_IsItemEdited" is-item-edited) :BOOL)
 
-#+(ecl)
+#+ecl
 (defun is-item-edited ()
   (ffi:c-inline () () :BOOL
     "ImGui_IsItemEdited()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_IsItemActivated" is-item-activated) :BOOL)
 
-#+(ecl)
+#+ecl
 (defun is-item-activated ()
   (ffi:c-inline () () :BOOL
     "ImGui_IsItemActivated()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_IsItemDeactivated" is-item-deactivated) :BOOL)
 
-#+(ecl)
+#+ecl
 (defun is-item-deactivated ()
   (ffi:c-inline () () :BOOL
     "ImGui_IsItemDeactivated()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_IsItemDeactivatedAfterEdit" is-item-deactivated-after-edit) :BOOL)
 
-#+(ecl)
+#+ecl
 (defun is-item-deactivated-after-edit ()
   (ffi:c-inline () () :BOOL
     "ImGui_IsItemDeactivatedAfterEdit()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_IsItemToggledOpen" is-item-toggled-open) :BOOL)
 
-#+(ecl)
+#+ecl
 (defun is-item-toggled-open ()
   (ffi:c-inline () () :BOOL
     "ImGui_IsItemToggledOpen()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_IsAnyItemHovered" is-any-item-hovered) :BOOL)
 
-#+(ecl)
+#+ecl
 (defun is-any-item-hovered ()
   (ffi:c-inline () () :BOOL
     "ImGui_IsAnyItemHovered()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_IsAnyItemActive" is-any-item-active) :BOOL)
 
-#+(ecl)
+#+ecl
 (defun is-any-item-active ()
   (ffi:c-inline () () :BOOL
     "ImGui_IsAnyItemActive()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_IsAnyItemFocused" is-any-item-focused) :BOOL)
 
-#+(ecl)
+#+ecl
 (defun is-any-item-focused ()
   (ffi:c-inline () () :BOOL
     "ImGui_IsAnyItemFocused()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetItemID" get-item-id) ID)
 
-#+(ecl)
+#+ecl
 (defun get-item-id ()
   (ffi:c-inline () () :INT
     "ImGui_GetItemID()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetItemRectMin" get-item-rect-min) VEC2)
 
-#+(ecl)
+#+ecl
 (defun get-item-rect-min ()
   (ffi:c-inline () () :INT
     "ImGui_GetItemRectMin()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetItemRectMax" get-item-rect-max) VEC2)
 
-#+(ecl)
+#+ecl
 (defun get-item-rect-max ()
   (ffi:c-inline () () :INT
     "ImGui_GetItemRectMax()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetItemRectSize" get-item-rect-size) VEC2)
 
-#+(ecl)
+#+ecl
 (defun get-item-rect-size ()
   (ffi:c-inline () () :INT
     "ImGui_GetItemRectSize()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetMainViewport" get-main-viewport) :POINTER)
 
-#+(ecl)
+#+ecl
 (defun get-main-viewport ()
   (ffi:c-inline () () :POINTER-VOID
     "ImGui_GetMainViewport()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetBackgroundDrawList" get-background-draw-list) :POINTER)
 
-#+(ecl)
+#+ecl
 (defun get-background-draw-list ()
   (ffi:c-inline () () :POINTER-VOID
     "ImGui_GetBackgroundDrawList()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetForegroundDrawList" get-foreground-draw-list) :POINTER)
 
-#+(ecl)
+#+ecl
 (defun get-foreground-draw-list ()
   (ffi:c-inline () () :POINTER-VOID
     "ImGui_GetForegroundDrawList()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetTime" get-time) :DOUBLE)
 
-#+(ecl)
+#+ecl
 (defun get-time ()
   (ffi:c-inline () () :DOUBLE
     "ImGui_GetTime()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetFrameCount" get-frame-count) :INT)
 
-#+(ecl)
+#+ecl
 (defun get-frame-count ()
   (ffi:c-inline () () :INT
     "ImGui_GetFrameCount()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetDrawListSharedData" get-draw-list-shared-data) :POINTER)
 
-#+(ecl)
+#+ecl
 (defun get-draw-list-shared-data ()
   (ffi:c-inline () () :POINTER-VOID
     "ImGui_GetDrawListSharedData()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetStyleColorName" get-style-color-name) :STRING
   (idx COL)
 )
 
-#+(ecl)
+#+ecl
 (defun get-style-color-name (idx)
   (ffi:c-inline (idx) (:INT) :CSTRING
     "ImGui_GetStyleColorName(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SetStateStorage" set-state-storage) :VOID
   (storage :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun set-state-storage (storage)
   (ffi:c-inline (storage) (:POINTER-VOID) :VOID
     "ImGui_SetStateStorage(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetStateStorage" get-state-storage) :POINTER)
 
-#+(ecl)
+#+ecl
 (defun get-state-storage ()
   (ffi:c-inline () () :POINTER-VOID
     "ImGui_GetStateStorage()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_CalcTextSize" calc-text-size) VEC2
   (text :STRING)
 )
 
-#+(ecl)
+#+ecl
 (defun calc-text-size (text)
   (ffi:c-inline (text) (:CSTRING) :INT
     "ImGui_CalcTextSize(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_CalcTextSizeEx" calc-text-size-ex) VEC2
   (text :STRING)
   (text-end :STRING)
@@ -7064,24 +7064,24 @@
   (wrap-width :FLOAT)
 )
 
-#+(ecl)
+#+ecl
 (defun calc-text-size-ex (text text-end hide-text-after-double-hash wrap-width)
   (ffi:c-inline (text text-end hide-text-after-double-hash wrap-width) (:CSTRING :CSTRING :BOOL :FLOAT) :INT
     "ImGui_CalcTextSizeEx(#0, #1, #2, #3)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_ColorConvertU32ToFloat4" color-convert-u32to-float4) VEC4
   (in U32)
 )
 
-#+(ecl)
+#+ecl
 (defun color-convert-u32to-float4 (in)
   (ffi:c-inline (in) (:INT) :INT
     "ImGui_ColorConvertU32ToFloat4(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_ColorConvertRGBtoHSV" color-convert-rgbto-hsv) :VOID
   (r :FLOAT)
   (g :FLOAT)
@@ -7091,13 +7091,13 @@
   (out-v :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun color-convert-rgbto-hsv (r g b out-h out-s out-v)
   (ffi:c-inline (r g b out-h out-s out-v) (:FLOAT :FLOAT :FLOAT :POINTER-VOID :POINTER-VOID :POINTER-VOID) :VOID
     "ImGui_ColorConvertRGBtoHSV(#0, #1, #2, #3, #4, #5)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_ColorConvertHSVtoRGB" color-convert-hsvto-rgb) :VOID
   (h :FLOAT)
   (s :FLOAT)
@@ -7107,427 +7107,427 @@
   (out-b :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun color-convert-hsvto-rgb (h s v out-r out-g out-b)
   (ffi:c-inline (h s v out-r out-g out-b) (:FLOAT :FLOAT :FLOAT :POINTER-VOID :POINTER-VOID :POINTER-VOID) :VOID
     "ImGui_ColorConvertHSVtoRGB(#0, #1, #2, #3, #4, #5)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_IsKeyDown" is-key-down) :BOOL
   (key IM-KEY)
 )
 
-#+(ecl)
+#+ecl
 (defun is-key-down (key)
   (ffi:c-inline (key) (:INT) :BOOL
     "ImGui_IsKeyDown(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_IsKeyPressed" is-key-pressed) :BOOL
   (key IM-KEY)
 )
 
-#+(ecl)
+#+ecl
 (defun is-key-pressed (key)
   (ffi:c-inline (key) (:INT) :BOOL
     "ImGui_IsKeyPressed(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_IsKeyPressedEx" is-key-pressed-ex) :BOOL
   (key IM-KEY)
   (repeat :BOOL)
 )
 
-#+(ecl)
+#+ecl
 (defun is-key-pressed-ex (key repeat)
   (ffi:c-inline (key repeat) (:INT :BOOL) :BOOL
     "ImGui_IsKeyPressedEx(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_IsKeyReleased" is-key-released) :BOOL
   (key IM-KEY)
 )
 
-#+(ecl)
+#+ecl
 (defun is-key-released (key)
   (ffi:c-inline (key) (:INT) :BOOL
     "ImGui_IsKeyReleased(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_IsKeyChordPressed" is-key-chord-pressed) :BOOL
   (key-chord KEY-CHORD)
 )
 
-#+(ecl)
+#+ecl
 (defun is-key-chord-pressed (key-chord)
   (ffi:c-inline (key-chord) (:INT) :BOOL
     "ImGui_IsKeyChordPressed(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetKeyPressedAmount" get-key-pressed-amount) :INT
   (key IM-KEY)
   (repeat-delay :FLOAT)
   (rate :FLOAT)
 )
 
-#+(ecl)
+#+ecl
 (defun get-key-pressed-amount (key repeat-delay rate)
   (ffi:c-inline (key repeat-delay rate) (:INT :FLOAT :FLOAT) :INT
     "ImGui_GetKeyPressedAmount(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetKeyName" get-key-name) :STRING
   (key IM-KEY)
 )
 
-#+(ecl)
+#+ecl
 (defun get-key-name (key)
   (ffi:c-inline (key) (:INT) :CSTRING
     "ImGui_GetKeyName(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SetNextFrameWantCaptureKeyboard" set-next-frame-want-capture-keyboard) :VOID
   (want-capture-keyboard :BOOL)
 )
 
-#+(ecl)
+#+ecl
 (defun set-next-frame-want-capture-keyboard (want-capture-keyboard)
   (ffi:c-inline (want-capture-keyboard) (:BOOL) :VOID
     "ImGui_SetNextFrameWantCaptureKeyboard(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_Shortcut" shortcut) :BOOL
   (key-chord KEY-CHORD)
   (flags INPUT-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun shortcut (key-chord flags)
   (ffi:c-inline (key-chord flags) (:INT :INT) :BOOL
     "ImGui_Shortcut(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SetNextItemShortcut" set-next-item-shortcut) :VOID
   (key-chord KEY-CHORD)
   (flags INPUT-FLAGS)
 )
 
-#+(ecl)
+#+ecl
 (defun set-next-item-shortcut (key-chord flags)
   (ffi:c-inline (key-chord flags) (:INT :INT) :VOID
     "ImGui_SetNextItemShortcut(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SetItemKeyOwner" set-item-key-owner) :VOID
   (key IM-KEY)
 )
 
-#+(ecl)
+#+ecl
 (defun set-item-key-owner (key)
   (ffi:c-inline (key) (:INT) :VOID
     "ImGui_SetItemKeyOwner(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_IsMouseDown" is-mouse-down) :BOOL
   (button MOUSE-BUTTON)
 )
 
-#+(ecl)
+#+ecl
 (defun is-mouse-down (button)
   (ffi:c-inline (button) (:INT) :BOOL
     "ImGui_IsMouseDown(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_IsMouseClicked" is-mouse-clicked) :BOOL
   (button MOUSE-BUTTON)
 )
 
-#+(ecl)
+#+ecl
 (defun is-mouse-clicked (button)
   (ffi:c-inline (button) (:INT) :BOOL
     "ImGui_IsMouseClicked(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_IsMouseClickedEx" is-mouse-clicked-ex) :BOOL
   (button MOUSE-BUTTON)
   (repeat :BOOL)
 )
 
-#+(ecl)
+#+ecl
 (defun is-mouse-clicked-ex (button repeat)
   (ffi:c-inline (button repeat) (:INT :BOOL) :BOOL
     "ImGui_IsMouseClickedEx(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_IsMouseReleased" is-mouse-released) :BOOL
   (button MOUSE-BUTTON)
 )
 
-#+(ecl)
+#+ecl
 (defun is-mouse-released (button)
   (ffi:c-inline (button) (:INT) :BOOL
     "ImGui_IsMouseReleased(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_IsMouseDoubleClicked" is-mouse-double-clicked) :BOOL
   (button MOUSE-BUTTON)
 )
 
-#+(ecl)
+#+ecl
 (defun is-mouse-double-clicked (button)
   (ffi:c-inline (button) (:INT) :BOOL
     "ImGui_IsMouseDoubleClicked(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_IsMouseReleasedWithDelay" is-mouse-released-with-delay) :BOOL
   (button MOUSE-BUTTON)
   (delay :FLOAT)
 )
 
-#+(ecl)
+#+ecl
 (defun is-mouse-released-with-delay (button delay)
   (ffi:c-inline (button delay) (:INT :FLOAT) :BOOL
     "ImGui_IsMouseReleasedWithDelay(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetMouseClickedCount" get-mouse-clicked-count) :INT
   (button MOUSE-BUTTON)
 )
 
-#+(ecl)
+#+ecl
 (defun get-mouse-clicked-count (button)
   (ffi:c-inline (button) (:INT) :INT
     "ImGui_GetMouseClickedCount(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_IsMousePosValid" is-mouse-pos-valid) :BOOL
   (mouse-pos :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun is-mouse-pos-valid (mouse-pos)
   (ffi:c-inline (mouse-pos) (:POINTER-VOID) :BOOL
     "ImGui_IsMousePosValid(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_IsAnyMouseDown" is-any-mouse-down) :BOOL)
 
-#+(ecl)
+#+ecl
 (defun is-any-mouse-down ()
   (ffi:c-inline () () :BOOL
     "ImGui_IsAnyMouseDown()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetMousePos" get-mouse-pos) VEC2)
 
-#+(ecl)
+#+ecl
 (defun get-mouse-pos ()
   (ffi:c-inline () () :INT
     "ImGui_GetMousePos()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetMousePosOnOpeningCurrentPopup" get-mouse-pos-on-opening-current-popup) VEC2)
 
-#+(ecl)
+#+ecl
 (defun get-mouse-pos-on-opening-current-popup ()
   (ffi:c-inline () () :INT
     "ImGui_GetMousePosOnOpeningCurrentPopup()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_IsMouseDragging" is-mouse-dragging) :BOOL
   (button MOUSE-BUTTON)
   (lock-threshold :FLOAT)
 )
 
-#+(ecl)
+#+ecl
 (defun is-mouse-dragging (button lock-threshold)
   (ffi:c-inline (button lock-threshold) (:INT :FLOAT) :BOOL
     "ImGui_IsMouseDragging(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetMouseDragDelta" get-mouse-drag-delta) VEC2
   (button MOUSE-BUTTON)
   (lock-threshold :FLOAT)
 )
 
-#+(ecl)
+#+ecl
 (defun get-mouse-drag-delta (button lock-threshold)
   (ffi:c-inline (button lock-threshold) (:INT :FLOAT) :INT
     "ImGui_GetMouseDragDelta(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_ResetMouseDragDelta" reset-mouse-drag-delta) :VOID)
 
-#+(ecl)
+#+ecl
 (defun reset-mouse-drag-delta ()
   (ffi:c-inline () () :VOID
     "ImGui_ResetMouseDragDelta()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_ResetMouseDragDeltaEx" reset-mouse-drag-delta-ex) :VOID
   (button MOUSE-BUTTON)
 )
 
-#+(ecl)
+#+ecl
 (defun reset-mouse-drag-delta-ex (button)
   (ffi:c-inline (button) (:INT) :VOID
     "ImGui_ResetMouseDragDeltaEx(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetMouseCursor" get-mouse-cursor) MOUSE-CURSOR)
 
-#+(ecl)
+#+ecl
 (defun get-mouse-cursor ()
   (ffi:c-inline () () :INT
     "ImGui_GetMouseCursor()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SetMouseCursor" set-mouse-cursor) :VOID
   (cursor-type MOUSE-CURSOR)
 )
 
-#+(ecl)
+#+ecl
 (defun set-mouse-cursor (cursor-type)
   (ffi:c-inline (cursor-type) (:INT) :VOID
     "ImGui_SetMouseCursor(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SetNextFrameWantCaptureMouse" set-next-frame-want-capture-mouse) :VOID
   (want-capture-mouse :BOOL)
 )
 
-#+(ecl)
+#+ecl
 (defun set-next-frame-want-capture-mouse (want-capture-mouse)
   (ffi:c-inline (want-capture-mouse) (:BOOL) :VOID
     "ImGui_SetNextFrameWantCaptureMouse(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetClipboardText" get-clipboard-text) :STRING)
 
-#+(ecl)
+#+ecl
 (defun get-clipboard-text ()
   (ffi:c-inline () () :CSTRING
     "ImGui_GetClipboardText()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SetClipboardText" set-clipboard-text) :VOID
   (text :STRING)
 )
 
-#+(ecl)
+#+ecl
 (defun set-clipboard-text (text)
   (ffi:c-inline (text) (:CSTRING) :VOID
     "ImGui_SetClipboardText(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_LoadIniSettingsFromDisk" load-ini-settings-from-disk) :VOID
   (ini-filename :STRING)
 )
 
-#+(ecl)
+#+ecl
 (defun load-ini-settings-from-disk (ini-filename)
   (ffi:c-inline (ini-filename) (:CSTRING) :VOID
     "ImGui_LoadIniSettingsFromDisk(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_LoadIniSettingsFromMemory" load-ini-settings-from-memory) :VOID
   (ini-data :STRING)
   (ini-size :SIZE)
 )
 
-#+(ecl)
+#+ecl
 (defun load-ini-settings-from-memory (ini-data ini-size)
   (ffi:c-inline (ini-data ini-size) (:CSTRING :UNSIGNED-LONG) :VOID
     "ImGui_LoadIniSettingsFromMemory(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SaveIniSettingsToDisk" save-ini-settings-to-disk) :VOID
   (ini-filename :STRING)
 )
 
-#+(ecl)
+#+ecl
 (defun save-ini-settings-to-disk (ini-filename)
   (ffi:c-inline (ini-filename) (:CSTRING) :VOID
     "ImGui_SaveIniSettingsToDisk(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SaveIniSettingsToMemory" save-ini-settings-to-memory) :STRING
   (out-ini-size :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun save-ini-settings-to-memory (out-ini-size)
   (ffi:c-inline (out-ini-size) (:POINTER-VOID) :CSTRING
     "ImGui_SaveIniSettingsToMemory(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_DebugTextEncoding" debug-text-encoding) :VOID
   (text :STRING)
 )
 
-#+(ecl)
+#+ecl
 (defun debug-text-encoding (text)
   (ffi:c-inline (text) (:CSTRING) :VOID
     "ImGui_DebugTextEncoding(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_DebugFlashStyleColor" debug-flash-style-color) :VOID
   (idx COL)
 )
 
-#+(ecl)
+#+ecl
 (defun debug-flash-style-color (idx)
   (ffi:c-inline (idx) (:INT) :VOID
     "ImGui_DebugFlashStyleColor(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_DebugStartItemPicker" debug-start-item-picker) :VOID)
 
-#+(ecl)
+#+ecl
 (defun debug-start-item-picker ()
   (ffi:c-inline () () :VOID
     "ImGui_DebugStartItemPicker()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_DebugCheckVersionAndDataLayout" debug-check-version-and-data-layout) :BOOL
   (version-str :STRING)
   (sz-io :SIZE)
@@ -7538,140 +7538,140 @@
   (sz-drawidx :SIZE)
 )
 
-#+(ecl)
+#+ecl
 (defun debug-check-version-and-data-layout (version-str sz-io sz-style sz-vec2 sz-vec4 sz-drawvert sz-drawidx)
   (ffi:c-inline (version-str sz-io sz-style sz-vec2 sz-vec4 sz-drawvert sz-drawidx) (:CSTRING :UNSIGNED-LONG :UNSIGNED-LONG :UNSIGNED-LONG :UNSIGNED-LONG :UNSIGNED-LONG :UNSIGNED-LONG) :BOOL
     "ImGui_DebugCheckVersionAndDataLayout(#0, #1, #2, #3, #4, #5, #6)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_DebugLog" debug-log) :VOID
   (fmt :STRING)
   &rest
 )
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_DebugLogV" debug-log-v) :VOID
   (fmt :STRING)
   (args :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun debug-log-v (fmt args)
   (ffi:c-inline (fmt args) (:CSTRING :POINTER-VOID) :VOID
     "ImGui_DebugLogV(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SetAllocatorFunctions" set-allocator-functions) :VOID
   (alloc-func MEM-ALLOC-FUNC)
   (free-func MEM-FREE-FUNC)
   (user-data :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun set-allocator-functions (alloc-func free-func user-data)
   (ffi:c-inline (alloc-func free-func user-data) (:INT :INT :POINTER-VOID) :VOID
     "ImGui_SetAllocatorFunctions(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetAllocatorFunctions" get-allocator-functions) :VOID
   (p-alloc-func :POINTER)
   (p-free-func :POINTER)
   (p-user-data :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun get-allocator-functions (p-alloc-func p-free-func p-user-data)
   (ffi:c-inline (p-alloc-func p-free-func p-user-data) (:POINTER-VOID :POINTER-VOID :POINTER-VOID) :VOID
     "ImGui_GetAllocatorFunctions(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_MemAlloc" mem-alloc) :POINTER
   (size :SIZE)
 )
 
-#+(ecl)
+#+ecl
 (defun mem-alloc (size)
   (ffi:c-inline (size) (:UNSIGNED-LONG) :POINTER-VOID
     "ImGui_MemAlloc(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_MemFree" mem-free) :VOID
   (ptr :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun mem-free (ptr)
   (ffi:c-inline (ptr) (:POINTER-VOID) :VOID
     "ImGui_MemFree(#0)"
     :one-liner t))
 
 ;; Manual helper function
-#-(ecl)
+#-ecl
 (defcfun ("ImVector_Construct" vector-construct) :VOID
   (vector :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun vector-construct (vector)
   (ffi:c-inline (vector) (:POINTER-VOID) :VOID
     "ImVector_Construct(#0)"
     :one-liner t))
 
 ;; Manual helper function
-#-(ecl)
+#-ecl
 (defcfun ("ImVector_Destruct" vector-destruct) :VOID
   (vector :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun vector-destruct (vector)
   (ffi:c-inline (vector) (:POINTER-VOID) :VOID
     "ImVector_Destruct(#0)"
     :one-liner t))
 
 ;; Manual helper function
-#-(ecl)
+#-ecl
 (defcfun ("ImStr_FromCharStr" str-from-char-str) :POINTER
   (b :STRING)
 )
 
-#+(ecl)
+#+ecl
 (defun str-from-char-str (b)
   (ffi:c-inline (b) (:CSTRING) :POINTER-VOID
     "ImStr_FromCharStr(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiStyle_ScaleAllSizes" style-scale-all-sizes) :VOID
   (self :POINTER)
   (scale-factor :FLOAT)
 )
 
-#+(ecl)
+#+ecl
 (defun style-scale-all-sizes (self scale-factor)
   (ffi:c-inline (self scale-factor) (:POINTER-VOID :FLOAT) :VOID
     "ImGuiStyle_ScaleAllSizes(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiIO_AddKeyEvent" io-add-key-event) :VOID
   (self :POINTER)
   (key IM-KEY)
   (down :BOOL)
 )
 
-#+(ecl)
+#+ecl
 (defun io-add-key-event (self key down)
   (ffi:c-inline (self key down) (:POINTER-VOID :INT :BOOL) :VOID
     "ImGuiIO_AddKeyEvent(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiIO_AddKeyAnalogEvent" io-add-key-analog-event) :VOID
   (self :POINTER)
   (key IM-KEY)
@@ -7679,112 +7679,112 @@
   (v :FLOAT)
 )
 
-#+(ecl)
+#+ecl
 (defun io-add-key-analog-event (self key down v)
   (ffi:c-inline (self key down v) (:POINTER-VOID :INT :BOOL :FLOAT) :VOID
     "ImGuiIO_AddKeyAnalogEvent(#0, #1, #2, #3)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiIO_AddMousePosEvent" io-add-mouse-pos-event) :VOID
   (self :POINTER)
   (x :FLOAT)
   (y :FLOAT)
 )
 
-#+(ecl)
+#+ecl
 (defun io-add-mouse-pos-event (self x y)
   (ffi:c-inline (self x y) (:POINTER-VOID :FLOAT :FLOAT) :VOID
     "ImGuiIO_AddMousePosEvent(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiIO_AddMouseButtonEvent" io-add-mouse-button-event) :VOID
   (self :POINTER)
   (button :INT)
   (down :BOOL)
 )
 
-#+(ecl)
+#+ecl
 (defun io-add-mouse-button-event (self button down)
   (ffi:c-inline (self button down) (:POINTER-VOID :INT :BOOL) :VOID
     "ImGuiIO_AddMouseButtonEvent(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiIO_AddMouseWheelEvent" io-add-mouse-wheel-event) :VOID
   (self :POINTER)
   (wheel-x :FLOAT)
   (wheel-y :FLOAT)
 )
 
-#+(ecl)
+#+ecl
 (defun io-add-mouse-wheel-event (self wheel-x wheel-y)
   (ffi:c-inline (self wheel-x wheel-y) (:POINTER-VOID :FLOAT :FLOAT) :VOID
     "ImGuiIO_AddMouseWheelEvent(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiIO_AddMouseSourceEvent" io-add-mouse-source-event) :VOID
   (self :POINTER)
   (source IM-MOUSE-SOURCE)
 )
 
-#+(ecl)
+#+ecl
 (defun io-add-mouse-source-event (self source)
   (ffi:c-inline (self source) (:POINTER-VOID :INT) :VOID
     "ImGuiIO_AddMouseSourceEvent(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiIO_AddFocusEvent" io-add-focus-event) :VOID
   (self :POINTER)
   (focused :BOOL)
 )
 
-#+(ecl)
+#+ecl
 (defun io-add-focus-event (self focused)
   (ffi:c-inline (self focused) (:POINTER-VOID :BOOL) :VOID
     "ImGuiIO_AddFocusEvent(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiIO_AddInputCharacter" io-add-input-character) :VOID
   (self :POINTER)
   (c :UNSIGNED-INT)
 )
 
-#+(ecl)
+#+ecl
 (defun io-add-input-character (self c)
   (ffi:c-inline (self c) (:POINTER-VOID :UNSIGNED-INT) :VOID
     "ImGuiIO_AddInputCharacter(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiIO_AddInputCharacterUTF16" io-add-input-character-utf16) :VOID
   (self :POINTER)
   (c WCHAR16)
 )
 
-#+(ecl)
+#+ecl
 (defun io-add-input-character-utf16 (self c)
   (ffi:c-inline (self c) (:POINTER-VOID :INT) :VOID
     "ImGuiIO_AddInputCharacterUTF16(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiIO_AddInputCharactersUTF8" io-add-input-characters-utf8) :VOID
   (self :POINTER)
   (str :STRING)
 )
 
-#+(ecl)
+#+ecl
 (defun io-add-input-characters-utf8 (self str)
   (ffi:c-inline (self str) (:POINTER-VOID :CSTRING) :VOID
     "ImGuiIO_AddInputCharactersUTF8(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiIO_SetKeyEventNativeData" io-set-key-event-native-data) :VOID
   (self :POINTER)
   (key IM-KEY)
@@ -7792,13 +7792,13 @@
   (native-scancode :INT)
 )
 
-#+(ecl)
+#+ecl
 (defun io-set-key-event-native-data (self key native-keycode native-scancode)
   (ffi:c-inline (self key native-keycode native-scancode) (:POINTER-VOID :INT :INT :INT) :VOID
     "ImGuiIO_SetKeyEventNativeData(#0, #1, #2, #3)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiIO_SetKeyEventNativeDataEx" io-set-key-event-native-data-ex) :VOID
   (self :POINTER)
   (key IM-KEY)
@@ -7807,71 +7807,71 @@
   (native-legacy-index :INT)
 )
 
-#+(ecl)
+#+ecl
 (defun io-set-key-event-native-data-ex (self key native-keycode native-scancode native-legacy-index)
   (ffi:c-inline (self key native-keycode native-scancode native-legacy-index) (:POINTER-VOID :INT :INT :INT :INT) :VOID
     "ImGuiIO_SetKeyEventNativeDataEx(#0, #1, #2, #3, #4)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiIO_SetAppAcceptingEvents" io-set-app-accepting-events) :VOID
   (self :POINTER)
   (accepting-events :BOOL)
 )
 
-#+(ecl)
+#+ecl
 (defun io-set-app-accepting-events (self accepting-events)
   (ffi:c-inline (self accepting-events) (:POINTER-VOID :BOOL) :VOID
     "ImGuiIO_SetAppAcceptingEvents(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiIO_ClearEventsQueue" io-clear-events-queue) :VOID
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun io-clear-events-queue (self)
   (ffi:c-inline (self) (:POINTER-VOID) :VOID
     "ImGuiIO_ClearEventsQueue(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiIO_ClearInputKeys" io-clear-input-keys) :VOID
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun io-clear-input-keys (self)
   (ffi:c-inline (self) (:POINTER-VOID) :VOID
     "ImGuiIO_ClearInputKeys(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiIO_ClearInputMouse" io-clear-input-mouse) :VOID
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun io-clear-input-mouse (self)
   (ffi:c-inline (self) (:POINTER-VOID) :VOID
     "ImGuiIO_ClearInputMouse(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiInputTextCallbackData_DeleteChars" input-text-callback-data-delete-chars) :VOID
   (self :POINTER)
   (pos :INT)
   (bytes-count :INT)
 )
 
-#+(ecl)
+#+ecl
 (defun input-text-callback-data-delete-chars (self pos bytes-count)
   (ffi:c-inline (self pos bytes-count) (:POINTER-VOID :INT :INT) :VOID
     "ImGuiInputTextCallbackData_DeleteChars(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiInputTextCallbackData_InsertChars" input-text-callback-data-insert-chars) :VOID
   (self :POINTER)
   (pos :INT)
@@ -7879,558 +7879,558 @@
   (text-end :STRING)
 )
 
-#+(ecl)
+#+ecl
 (defun input-text-callback-data-insert-chars (self pos text text-end)
   (ffi:c-inline (self pos text text-end) (:POINTER-VOID :INT :CSTRING :CSTRING) :VOID
     "ImGuiInputTextCallbackData_InsertChars(#0, #1, #2, #3)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiInputTextCallbackData_SelectAll" input-text-callback-data-select-all) :VOID
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun input-text-callback-data-select-all (self)
   (ffi:c-inline (self) (:POINTER-VOID) :VOID
     "ImGuiInputTextCallbackData_SelectAll(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiInputTextCallbackData_ClearSelection" input-text-callback-data-clear-selection) :VOID
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun input-text-callback-data-clear-selection (self)
   (ffi:c-inline (self) (:POINTER-VOID) :VOID
     "ImGuiInputTextCallbackData_ClearSelection(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiInputTextCallbackData_HasSelection" input-text-callback-data-has-selection) :BOOL
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun input-text-callback-data-has-selection (self)
   (ffi:c-inline (self) (:POINTER-VOID) :BOOL
     "ImGuiInputTextCallbackData_HasSelection(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiPayload_Clear" payload-clear) :VOID
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun payload-clear (self)
   (ffi:c-inline (self) (:POINTER-VOID) :VOID
     "ImGuiPayload_Clear(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiPayload_IsDataType" payload-is-data-type) :BOOL
   (self :POINTER)
   (type :STRING)
 )
 
-#+(ecl)
+#+ecl
 (defun payload-is-data-type (self type)
   (ffi:c-inline (self type) (:POINTER-VOID :CSTRING) :BOOL
     "ImGuiPayload_IsDataType(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiPayload_IsPreview" payload-is-preview) :BOOL
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun payload-is-preview (self)
   (ffi:c-inline (self) (:POINTER-VOID) :BOOL
     "ImGuiPayload_IsPreview(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiPayload_IsDelivery" payload-is-delivery) :BOOL
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun payload-is-delivery (self)
   (ffi:c-inline (self) (:POINTER-VOID) :BOOL
     "ImGuiPayload_IsDelivery(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiTextFilter_ImGuiTextRange_empty" text-filter-im-gui-text-range-empty) :BOOL
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun text-filter-im-gui-text-range-empty (self)
   (ffi:c-inline (self) (:POINTER-VOID) :BOOL
     "ImGuiTextFilter_ImGuiTextRange_empty(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiTextFilter_ImGuiTextRange_split" text-filter-im-gui-text-range-split) :VOID
   (self :POINTER)
   (separator :CHAR)
   (out :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun text-filter-im-gui-text-range-split (self separator out)
   (ffi:c-inline (self separator out) (:POINTER-VOID :CHAR :POINTER-VOID) :VOID
     "ImGuiTextFilter_ImGuiTextRange_split(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiTextFilter_Draw" text-filter-draw) :BOOL
   (self :POINTER)
   (label :STRING)
   (width :FLOAT)
 )
 
-#+(ecl)
+#+ecl
 (defun text-filter-draw (self label width)
   (ffi:c-inline (self label width) (:POINTER-VOID :CSTRING :FLOAT) :BOOL
     "ImGuiTextFilter_Draw(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiTextFilter_PassFilter" text-filter-pass-filter) :BOOL
   (self :POINTER)
   (text :STRING)
   (text-end :STRING)
 )
 
-#+(ecl)
+#+ecl
 (defun text-filter-pass-filter (self text text-end)
   (ffi:c-inline (self text text-end) (:POINTER-VOID :CSTRING :CSTRING) :BOOL
     "ImGuiTextFilter_PassFilter(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiTextFilter_Build" text-filter-build) :VOID
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun text-filter-build (self)
   (ffi:c-inline (self) (:POINTER-VOID) :VOID
     "ImGuiTextFilter_Build(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiTextFilter_Clear" text-filter-clear) :VOID
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun text-filter-clear (self)
   (ffi:c-inline (self) (:POINTER-VOID) :VOID
     "ImGuiTextFilter_Clear(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiTextFilter_IsActive" text-filter-is-active) :BOOL
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun text-filter-is-active (self)
   (ffi:c-inline (self) (:POINTER-VOID) :BOOL
     "ImGuiTextFilter_IsActive(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiTextBuffer_begin" text-buffer-begin) :STRING
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun text-buffer-begin (self)
   (ffi:c-inline (self) (:POINTER-VOID) :CSTRING
     "ImGuiTextBuffer_begin(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiTextBuffer_end" text-buffer-end) :STRING
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun text-buffer-end (self)
   (ffi:c-inline (self) (:POINTER-VOID) :CSTRING
     "ImGuiTextBuffer_end(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiTextBuffer_size" text-buffer-size) :INT
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun text-buffer-size (self)
   (ffi:c-inline (self) (:POINTER-VOID) :INT
     "ImGuiTextBuffer_size(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiTextBuffer_empty" text-buffer-empty) :BOOL
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun text-buffer-empty (self)
   (ffi:c-inline (self) (:POINTER-VOID) :BOOL
     "ImGuiTextBuffer_empty(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiTextBuffer_clear" text-buffer-clear) :VOID
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun text-buffer-clear (self)
   (ffi:c-inline (self) (:POINTER-VOID) :VOID
     "ImGuiTextBuffer_clear(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiTextBuffer_resize" text-buffer-resize) :VOID
   (self :POINTER)
   (size :INT)
 )
 
-#+(ecl)
+#+ecl
 (defun text-buffer-resize (self size)
   (ffi:c-inline (self size) (:POINTER-VOID :INT) :VOID
     "ImGuiTextBuffer_resize(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiTextBuffer_reserve" text-buffer-reserve) :VOID
   (self :POINTER)
   (capacity :INT)
 )
 
-#+(ecl)
+#+ecl
 (defun text-buffer-reserve (self capacity)
   (ffi:c-inline (self capacity) (:POINTER-VOID :INT) :VOID
     "ImGuiTextBuffer_reserve(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiTextBuffer_c_str" text-buffer-c-str) :STRING
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun text-buffer-c-str (self)
   (ffi:c-inline (self) (:POINTER-VOID) :CSTRING
     "ImGuiTextBuffer_c_str(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiTextBuffer_append" text-buffer-append) :VOID
   (self :POINTER)
   (str :STRING)
   (str-end :STRING)
 )
 
-#+(ecl)
+#+ecl
 (defun text-buffer-append (self str str-end)
   (ffi:c-inline (self str str-end) (:POINTER-VOID :CSTRING :CSTRING) :VOID
     "ImGuiTextBuffer_append(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiTextBuffer_appendf" text-buffer-appendf) :VOID
   (self :POINTER)
   (fmt :STRING)
   &rest
 )
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiTextBuffer_appendfv" text-buffer-appendfv) :VOID
   (self :POINTER)
   (fmt :STRING)
   (args :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun text-buffer-appendfv (self fmt args)
   (ffi:c-inline (self fmt args) (:POINTER-VOID :CSTRING :POINTER-VOID) :VOID
     "ImGuiTextBuffer_appendfv(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiStorage_Clear" storage-clear) :VOID
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun storage-clear (self)
   (ffi:c-inline (self) (:POINTER-VOID) :VOID
     "ImGuiStorage_Clear(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiStorage_GetInt" storage-get-int) :INT
   (self :POINTER)
   (key ID)
   (default-val :INT)
 )
 
-#+(ecl)
+#+ecl
 (defun storage-get-int (self key default-val)
   (ffi:c-inline (self key default-val) (:POINTER-VOID :INT :INT) :INT
     "ImGuiStorage_GetInt(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiStorage_SetInt" storage-set-int) :VOID
   (self :POINTER)
   (key ID)
   (val :INT)
 )
 
-#+(ecl)
+#+ecl
 (defun storage-set-int (self key val)
   (ffi:c-inline (self key val) (:POINTER-VOID :INT :INT) :VOID
     "ImGuiStorage_SetInt(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiStorage_GetBool" storage-get-bool) :BOOL
   (self :POINTER)
   (key ID)
   (default-val :BOOL)
 )
 
-#+(ecl)
+#+ecl
 (defun storage-get-bool (self key default-val)
   (ffi:c-inline (self key default-val) (:POINTER-VOID :INT :BOOL) :BOOL
     "ImGuiStorage_GetBool(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiStorage_SetBool" storage-set-bool) :VOID
   (self :POINTER)
   (key ID)
   (val :BOOL)
 )
 
-#+(ecl)
+#+ecl
 (defun storage-set-bool (self key val)
   (ffi:c-inline (self key val) (:POINTER-VOID :INT :BOOL) :VOID
     "ImGuiStorage_SetBool(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiStorage_GetFloat" storage-get-float) :FLOAT
   (self :POINTER)
   (key ID)
   (default-val :FLOAT)
 )
 
-#+(ecl)
+#+ecl
 (defun storage-get-float (self key default-val)
   (ffi:c-inline (self key default-val) (:POINTER-VOID :INT :FLOAT) :FLOAT
     "ImGuiStorage_GetFloat(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiStorage_SetFloat" storage-set-float) :VOID
   (self :POINTER)
   (key ID)
   (val :FLOAT)
 )
 
-#+(ecl)
+#+ecl
 (defun storage-set-float (self key val)
   (ffi:c-inline (self key val) (:POINTER-VOID :INT :FLOAT) :VOID
     "ImGuiStorage_SetFloat(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiStorage_GetVoidPtr" storage-get-void-ptr) :POINTER
   (self :POINTER)
   (key ID)
 )
 
-#+(ecl)
+#+ecl
 (defun storage-get-void-ptr (self key)
   (ffi:c-inline (self key) (:POINTER-VOID :INT) :POINTER-VOID
     "ImGuiStorage_GetVoidPtr(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiStorage_SetVoidPtr" storage-set-void-ptr) :VOID
   (self :POINTER)
   (key ID)
   (val :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun storage-set-void-ptr (self key val)
   (ffi:c-inline (self key val) (:POINTER-VOID :INT :POINTER-VOID) :VOID
     "ImGuiStorage_SetVoidPtr(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiStorage_GetIntRef" storage-get-int-ref) :POINTER
   (self :POINTER)
   (key ID)
   (default-val :INT)
 )
 
-#+(ecl)
+#+ecl
 (defun storage-get-int-ref (self key default-val)
   (ffi:c-inline (self key default-val) (:POINTER-VOID :INT :INT) :POINTER-VOID
     "ImGuiStorage_GetIntRef(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiStorage_GetBoolRef" storage-get-bool-ref) :POINTER
   (self :POINTER)
   (key ID)
   (default-val :BOOL)
 )
 
-#+(ecl)
+#+ecl
 (defun storage-get-bool-ref (self key default-val)
   (ffi:c-inline (self key default-val) (:POINTER-VOID :INT :BOOL) :POINTER-VOID
     "ImGuiStorage_GetBoolRef(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiStorage_GetFloatRef" storage-get-float-ref) :POINTER
   (self :POINTER)
   (key ID)
   (default-val :FLOAT)
 )
 
-#+(ecl)
+#+ecl
 (defun storage-get-float-ref (self key default-val)
   (ffi:c-inline (self key default-val) (:POINTER-VOID :INT :FLOAT) :POINTER-VOID
     "ImGuiStorage_GetFloatRef(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiStorage_GetVoidPtrRef" storage-get-void-ptr-ref) :POINTER
   (self :POINTER)
   (key ID)
   (default-val :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun storage-get-void-ptr-ref (self key default-val)
   (ffi:c-inline (self key default-val) (:POINTER-VOID :INT :POINTER-VOID) :POINTER-VOID
     "ImGuiStorage_GetVoidPtrRef(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiStorage_BuildSortByKey" storage-build-sort-by-key) :VOID
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun storage-build-sort-by-key (self)
   (ffi:c-inline (self) (:POINTER-VOID) :VOID
     "ImGuiStorage_BuildSortByKey(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiStorage_SetAllInt" storage-set-all-int) :VOID
   (self :POINTER)
   (val :INT)
 )
 
-#+(ecl)
+#+ecl
 (defun storage-set-all-int (self val)
   (ffi:c-inline (self val) (:POINTER-VOID :INT) :VOID
     "ImGuiStorage_SetAllInt(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiListClipper_Begin" list-clipper-begin) :VOID
   (self :POINTER)
   (items-count :INT)
   (items-height :FLOAT)
 )
 
-#+(ecl)
+#+ecl
 (defun list-clipper-begin (self items-count items-height)
   (ffi:c-inline (self items-count items-height) (:POINTER-VOID :INT :FLOAT) :VOID
     "ImGuiListClipper_Begin(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiListClipper_End" list-clipper-end) :VOID
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun list-clipper-end (self)
   (ffi:c-inline (self) (:POINTER-VOID) :VOID
     "ImGuiListClipper_End(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiListClipper_Step" list-clipper-step) :BOOL
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun list-clipper-step (self)
   (ffi:c-inline (self) (:POINTER-VOID) :BOOL
     "ImGuiListClipper_Step(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiListClipper_IncludeItemByIndex" list-clipper-include-item-by-index) :VOID
   (self :POINTER)
   (item-index :INT)
 )
 
-#+(ecl)
+#+ecl
 (defun list-clipper-include-item-by-index (self item-index)
   (ffi:c-inline (self item-index) (:POINTER-VOID :INT) :VOID
     "ImGuiListClipper_IncludeItemByIndex(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiListClipper_IncludeItemsByIndex" list-clipper-include-items-by-index) :VOID
   (self :POINTER)
   (item-begin :INT)
   (item-end :INT)
 )
 
-#+(ecl)
+#+ecl
 (defun list-clipper-include-items-by-index (self item-begin item-end)
   (ffi:c-inline (self item-begin item-end) (:POINTER-VOID :INT :INT) :VOID
     "ImGuiListClipper_IncludeItemsByIndex(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiListClipper_SeekCursorForItem" list-clipper-seek-cursor-for-item) :VOID
   (self :POINTER)
   (item-index :INT)
 )
 
-#+(ecl)
+#+ecl
 (defun list-clipper-seek-cursor-for-item (self item-index)
   (ffi:c-inline (self item-index) (:POINTER-VOID :INT) :VOID
     "ImGuiListClipper_SeekCursorForItem(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImColor_SetHSV" color-set-hsv) :VOID
   (self :POINTER)
   (h :FLOAT)
@@ -8439,13 +8439,13 @@
   (a :FLOAT)
 )
 
-#+(ecl)
+#+ecl
 (defun color-set-hsv (self h s v a)
   (ffi:c-inline (self h s v a) (:POINTER-VOID :FLOAT :FLOAT :FLOAT :FLOAT) :VOID
     "ImColor_SetHSV(#0, #1, #2, #3, #4)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImColor_HSV" color-hsv) COLOR
   (h :FLOAT)
   (s :FLOAT)
@@ -8453,236 +8453,236 @@
   (a :FLOAT)
 )
 
-#+(ecl)
+#+ecl
 (defun color-hsv (h s v a)
   (ffi:c-inline (h s v a) (:FLOAT :FLOAT :FLOAT :FLOAT) :INT
     "ImColor_HSV(#0, #1, #2, #3)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiSelectionBasicStorage_ApplyRequests" selection-basic-storage-apply-requests) :VOID
   (self :POINTER)
   (ms-io :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun selection-basic-storage-apply-requests (self ms-io)
   (ffi:c-inline (self ms-io) (:POINTER-VOID :POINTER-VOID) :VOID
     "ImGuiSelectionBasicStorage_ApplyRequests(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiSelectionBasicStorage_Contains" selection-basic-storage-contains) :BOOL
   (self :POINTER)
   (id ID)
 )
 
-#+(ecl)
+#+ecl
 (defun selection-basic-storage-contains (self id)
   (ffi:c-inline (self id) (:POINTER-VOID :INT) :BOOL
     "ImGuiSelectionBasicStorage_Contains(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiSelectionBasicStorage_Clear" selection-basic-storage-clear) :VOID
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun selection-basic-storage-clear (self)
   (ffi:c-inline (self) (:POINTER-VOID) :VOID
     "ImGuiSelectionBasicStorage_Clear(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiSelectionBasicStorage_Swap" selection-basic-storage-swap) :VOID
   (self :POINTER)
   (r :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun selection-basic-storage-swap (self r)
   (ffi:c-inline (self r) (:POINTER-VOID :POINTER-VOID) :VOID
     "ImGuiSelectionBasicStorage_Swap(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiSelectionBasicStorage_SetItemSelected" selection-basic-storage-set-item-selected) :VOID
   (self :POINTER)
   (id ID)
   (selected :BOOL)
 )
 
-#+(ecl)
+#+ecl
 (defun selection-basic-storage-set-item-selected (self id selected)
   (ffi:c-inline (self id selected) (:POINTER-VOID :INT :BOOL) :VOID
     "ImGuiSelectionBasicStorage_SetItemSelected(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiSelectionBasicStorage_GetNextSelectedItem" selection-basic-storage-get-next-selected-item) :BOOL
   (self :POINTER)
   (opaque-it :POINTER)
   (out-id :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun selection-basic-storage-get-next-selected-item (self opaque-it out-id)
   (ffi:c-inline (self opaque-it out-id) (:POINTER-VOID :POINTER-VOID :POINTER-VOID) :BOOL
     "ImGuiSelectionBasicStorage_GetNextSelectedItem(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiSelectionBasicStorage_GetStorageIdFromIndex" selection-basic-storage-get-storage-id-from-index) ID
   (self :POINTER)
   (idx :INT)
 )
 
-#+(ecl)
+#+ecl
 (defun selection-basic-storage-get-storage-id-from-index (self idx)
   (ffi:c-inline (self idx) (:POINTER-VOID :INT) :INT
     "ImGuiSelectionBasicStorage_GetStorageIdFromIndex(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiSelectionExternalStorage_ApplyRequests" selection-external-storage-apply-requests) :VOID
   (self :POINTER)
   (ms-io :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun selection-external-storage-apply-requests (self ms-io)
   (ffi:c-inline (self ms-io) (:POINTER-VOID :POINTER-VOID) :VOID
     "ImGuiSelectionExternalStorage_ApplyRequests(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImDrawCmd_GetTexID" draw-cmd-get-tex-id) TEXTURE-ID
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun draw-cmd-get-tex-id (self)
   (ffi:c-inline (self) (:POINTER-VOID) :INT
     "ImDrawCmd_GetTexID(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImDrawListSplitter_Clear" draw-list-splitter-clear) :VOID
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun draw-list-splitter-clear (self)
   (ffi:c-inline (self) (:POINTER-VOID) :VOID
     "ImDrawListSplitter_Clear(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImDrawListSplitter_ClearFreeMemory" draw-list-splitter-clear-free-memory) :VOID
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun draw-list-splitter-clear-free-memory (self)
   (ffi:c-inline (self) (:POINTER-VOID) :VOID
     "ImDrawListSplitter_ClearFreeMemory(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImDrawListSplitter_Split" draw-list-splitter-split) :VOID
   (self :POINTER)
   (draw-list :POINTER)
   (count :INT)
 )
 
-#+(ecl)
+#+ecl
 (defun draw-list-splitter-split (self draw-list count)
   (ffi:c-inline (self draw-list count) (:POINTER-VOID :POINTER-VOID :INT) :VOID
     "ImDrawListSplitter_Split(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImDrawListSplitter_Merge" draw-list-splitter-merge) :VOID
   (self :POINTER)
   (draw-list :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun draw-list-splitter-merge (self draw-list)
   (ffi:c-inline (self draw-list) (:POINTER-VOID :POINTER-VOID) :VOID
     "ImDrawListSplitter_Merge(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImDrawListSplitter_SetCurrentChannel" draw-list-splitter-set-current-channel) :VOID
   (self :POINTER)
   (draw-list :POINTER)
   (channel-idx :INT)
 )
 
-#+(ecl)
+#+ecl
 (defun draw-list-splitter-set-current-channel (self draw-list channel-idx)
   (ffi:c-inline (self draw-list channel-idx) (:POINTER-VOID :POINTER-VOID :INT) :VOID
     "ImDrawListSplitter_SetCurrentChannel(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImDrawList_PushClipRectFullScreen" draw-list-push-clip-rect-full-screen) :VOID
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun draw-list-push-clip-rect-full-screen (self)
   (ffi:c-inline (self) (:POINTER-VOID) :VOID
     "ImDrawList_PushClipRectFullScreen(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImDrawList_PopClipRect" draw-list-pop-clip-rect) :VOID
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun draw-list-pop-clip-rect (self)
   (ffi:c-inline (self) (:POINTER-VOID) :VOID
     "ImDrawList_PopClipRect(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImDrawList_PopTexture" draw-list-pop-texture) :VOID
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun draw-list-pop-texture (self)
   (ffi:c-inline (self) (:POINTER-VOID) :VOID
     "ImDrawList_PopTexture(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImDrawList_GetClipRectMin" draw-list-get-clip-rect-min) VEC2
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun draw-list-get-clip-rect-min (self)
   (ffi:c-inline (self) (:POINTER-VOID) :INT
     "ImDrawList_GetClipRectMin(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImDrawList_GetClipRectMax" draw-list-get-clip-rect-max) VEC2
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun draw-list-get-clip-rect-max (self)
   (ffi:c-inline (self) (:POINTER-VOID) :INT
     "ImDrawList_GetClipRectMax(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImDrawList_AddPolyline" draw-list-add-polyline) :VOID
   (self :POINTER)
   (points :POINTER)
@@ -8692,13 +8692,13 @@
   (thickness :FLOAT)
 )
 
-#+(ecl)
+#+ecl
 (defun draw-list-add-polyline (self points num-points col flags thickness)
   (ffi:c-inline (self points num-points col flags thickness) (:POINTER-VOID :POINTER-VOID :INT :INT :INT :FLOAT) :VOID
     "ImDrawList_AddPolyline(#0, #1, #2, #3, #4, #5)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImDrawList_AddConvexPolyFilled" draw-list-add-convex-poly-filled) :VOID
   (self :POINTER)
   (points :POINTER)
@@ -8706,13 +8706,13 @@
   (col U32)
 )
 
-#+(ecl)
+#+ecl
 (defun draw-list-add-convex-poly-filled (self points num-points col)
   (ffi:c-inline (self points num-points col) (:POINTER-VOID :POINTER-VOID :INT :INT) :VOID
     "ImDrawList_AddConvexPolyFilled(#0, #1, #2, #3)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImDrawList_AddConcavePolyFilled" draw-list-add-concave-poly-filled) :VOID
   (self :POINTER)
   (points :POINTER)
@@ -8720,48 +8720,48 @@
   (col U32)
 )
 
-#+(ecl)
+#+ecl
 (defun draw-list-add-concave-poly-filled (self points num-points col)
   (ffi:c-inline (self points num-points col) (:POINTER-VOID :POINTER-VOID :INT :INT) :VOID
     "ImDrawList_AddConcavePolyFilled(#0, #1, #2, #3)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImDrawList_PathClear" draw-list-path-clear) :VOID
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun draw-list-path-clear (self)
   (ffi:c-inline (self) (:POINTER-VOID) :VOID
     "ImDrawList_PathClear(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImDrawList_PathFillConvex" draw-list-path-fill-convex) :VOID
   (self :POINTER)
   (col U32)
 )
 
-#+(ecl)
+#+ecl
 (defun draw-list-path-fill-convex (self col)
   (ffi:c-inline (self col) (:POINTER-VOID :INT) :VOID
     "ImDrawList_PathFillConvex(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImDrawList_PathFillConcave" draw-list-path-fill-concave) :VOID
   (self :POINTER)
   (col U32)
 )
 
-#+(ecl)
+#+ecl
 (defun draw-list-path-fill-concave (self col)
   (ffi:c-inline (self col) (:POINTER-VOID :INT) :VOID
     "ImDrawList_PathFillConcave(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImDrawList_PathStroke" draw-list-path-stroke) :VOID
   (self :POINTER)
   (col U32)
@@ -8769,26 +8769,26 @@
   (thickness :FLOAT)
 )
 
-#+(ecl)
+#+ecl
 (defun draw-list-path-stroke (self col flags thickness)
   (ffi:c-inline (self col flags thickness) (:POINTER-VOID :INT :INT :FLOAT) :VOID
     "ImDrawList_PathStroke(#0, #1, #2, #3)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImDrawList_AddCallback" draw-list-add-callback) :VOID
   (self :POINTER)
   (callback DRAW-CALLBACK)
   (userdata :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun draw-list-add-callback (self callback userdata)
   (ffi:c-inline (self callback userdata) (:POINTER-VOID :INT :POINTER-VOID) :VOID
     "ImDrawList_AddCallback(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImDrawList_AddCallbackEx" draw-list-add-callback-ex) :VOID
   (self :POINTER)
   (callback DRAW-CALLBACK)
@@ -8796,254 +8796,254 @@
   (userdata-size :SIZE)
 )
 
-#+(ecl)
+#+ecl
 (defun draw-list-add-callback-ex (self callback userdata userdata-size)
   (ffi:c-inline (self callback userdata userdata-size) (:POINTER-VOID :INT :POINTER-VOID :UNSIGNED-LONG) :VOID
     "ImDrawList_AddCallbackEx(#0, #1, #2, #3)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImDrawList_AddDrawCmd" draw-list-add-draw-cmd) :VOID
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun draw-list-add-draw-cmd (self)
   (ffi:c-inline (self) (:POINTER-VOID) :VOID
     "ImDrawList_AddDrawCmd(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImDrawList_CloneOutput" draw-list-clone-output) :POINTER
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun draw-list-clone-output (self)
   (ffi:c-inline (self) (:POINTER-VOID) :POINTER-VOID
     "ImDrawList_CloneOutput(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImDrawList_ChannelsSplit" draw-list-channels-split) :VOID
   (self :POINTER)
   (count :INT)
 )
 
-#+(ecl)
+#+ecl
 (defun draw-list-channels-split (self count)
   (ffi:c-inline (self count) (:POINTER-VOID :INT) :VOID
     "ImDrawList_ChannelsSplit(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImDrawList_ChannelsMerge" draw-list-channels-merge) :VOID
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun draw-list-channels-merge (self)
   (ffi:c-inline (self) (:POINTER-VOID) :VOID
     "ImDrawList_ChannelsMerge(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImDrawList_ChannelsSetCurrent" draw-list-channels-set-current) :VOID
   (self :POINTER)
   (n :INT)
 )
 
-#+(ecl)
+#+ecl
 (defun draw-list-channels-set-current (self n)
   (ffi:c-inline (self n) (:POINTER-VOID :INT) :VOID
     "ImDrawList_ChannelsSetCurrent(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImDrawList_PrimReserve" draw-list-prim-reserve) :VOID
   (self :POINTER)
   (idx-count :INT)
   (vtx-count :INT)
 )
 
-#+(ecl)
+#+ecl
 (defun draw-list-prim-reserve (self idx-count vtx-count)
   (ffi:c-inline (self idx-count vtx-count) (:POINTER-VOID :INT :INT) :VOID
     "ImDrawList_PrimReserve(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImDrawList_PrimUnreserve" draw-list-prim-unreserve) :VOID
   (self :POINTER)
   (idx-count :INT)
   (vtx-count :INT)
 )
 
-#+(ecl)
+#+ecl
 (defun draw-list-prim-unreserve (self idx-count vtx-count)
   (ffi:c-inline (self idx-count vtx-count) (:POINTER-VOID :INT :INT) :VOID
     "ImDrawList_PrimUnreserve(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImDrawList_PrimWriteIdx" draw-list-prim-write-idx) :VOID
   (self :POINTER)
   (idx DRAW-IDX)
 )
 
-#+(ecl)
+#+ecl
 (defun draw-list-prim-write-idx (self idx)
   (ffi:c-inline (self idx) (:POINTER-VOID :INT) :VOID
     "ImDrawList_PrimWriteIdx(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImDrawList_PopTextureID" draw-list-pop-texture-id) :VOID
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun draw-list-pop-texture-id (self)
   (ffi:c-inline (self) (:POINTER-VOID) :VOID
     "ImDrawList_PopTextureID(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImDrawList__SetDrawListSharedData" draw-list--set-draw-list-shared-data) :VOID
   (self :POINTER)
   (data :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun draw-list--set-draw-list-shared-data (self data)
   (ffi:c-inline (self data) (:POINTER-VOID :POINTER-VOID) :VOID
     "ImDrawList__SetDrawListSharedData(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImDrawList__ResetForNewFrame" draw-list--reset-for-new-frame) :VOID
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun draw-list--reset-for-new-frame (self)
   (ffi:c-inline (self) (:POINTER-VOID) :VOID
     "ImDrawList__ResetForNewFrame(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImDrawList__ClearFreeMemory" draw-list--clear-free-memory) :VOID
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun draw-list--clear-free-memory (self)
   (ffi:c-inline (self) (:POINTER-VOID) :VOID
     "ImDrawList__ClearFreeMemory(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImDrawList__PopUnusedDrawCmd" draw-list--pop-unused-draw-cmd) :VOID
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun draw-list--pop-unused-draw-cmd (self)
   (ffi:c-inline (self) (:POINTER-VOID) :VOID
     "ImDrawList__PopUnusedDrawCmd(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImDrawList__TryMergeDrawCmds" draw-list--try-merge-draw-cmds) :VOID
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun draw-list--try-merge-draw-cmds (self)
   (ffi:c-inline (self) (:POINTER-VOID) :VOID
     "ImDrawList__TryMergeDrawCmds(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImDrawList__OnChangedClipRect" draw-list--on-changed-clip-rect) :VOID
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun draw-list--on-changed-clip-rect (self)
   (ffi:c-inline (self) (:POINTER-VOID) :VOID
     "ImDrawList__OnChangedClipRect(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImDrawList__OnChangedTexture" draw-list--on-changed-texture) :VOID
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun draw-list--on-changed-texture (self)
   (ffi:c-inline (self) (:POINTER-VOID) :VOID
     "ImDrawList__OnChangedTexture(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImDrawList__OnChangedVtxOffset" draw-list--on-changed-vtx-offset) :VOID
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun draw-list--on-changed-vtx-offset (self)
   (ffi:c-inline (self) (:POINTER-VOID) :VOID
     "ImDrawList__OnChangedVtxOffset(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImDrawList__CalcCircleAutoSegmentCount" draw-list--calc-circle-auto-segment-count) :INT
   (self :POINTER)
   (radius :FLOAT)
 )
 
-#+(ecl)
+#+ecl
 (defun draw-list--calc-circle-auto-segment-count (self radius)
   (ffi:c-inline (self radius) (:POINTER-VOID :FLOAT) :INT
     "ImDrawList__CalcCircleAutoSegmentCount(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImDrawData_Clear" draw-data-clear) :VOID
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun draw-data-clear (self)
   (ffi:c-inline (self) (:POINTER-VOID) :VOID
     "ImDrawData_Clear(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImDrawData_AddDrawList" draw-data-add-draw-list) :VOID
   (self :POINTER)
   (draw-list :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun draw-data-add-draw-list (self draw-list)
   (ffi:c-inline (self draw-list) (:POINTER-VOID :POINTER-VOID) :VOID
     "ImDrawData_AddDrawList(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImDrawData_DeIndexAllBuffers" draw-data-de-index-all-buffers) :VOID
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun draw-data-de-index-all-buffers (self)
   (ffi:c-inline (self) (:POINTER-VOID) :VOID
     "ImDrawData_DeIndexAllBuffers(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImTextureData_Create" texture-data-create) :VOID
   (self :POINTER)
   (format IM-TEXTURE-FORMAT)
@@ -9051,224 +9051,224 @@
   (h :INT)
 )
 
-#+(ecl)
+#+ecl
 (defun texture-data-create (self format w h)
   (ffi:c-inline (self format w h) (:POINTER-VOID :INT :INT :INT) :VOID
     "ImTextureData_Create(#0, #1, #2, #3)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImTextureData_DestroyPixels" texture-data-destroy-pixels) :VOID
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun texture-data-destroy-pixels (self)
   (ffi:c-inline (self) (:POINTER-VOID) :VOID
     "ImTextureData_DestroyPixels(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImTextureData_GetPixels" texture-data-get-pixels) :POINTER
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun texture-data-get-pixels (self)
   (ffi:c-inline (self) (:POINTER-VOID) :POINTER-VOID
     "ImTextureData_GetPixels(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImTextureData_GetPixelsAt" texture-data-get-pixels-at) :POINTER
   (self :POINTER)
   (x :INT)
   (y :INT)
 )
 
-#+(ecl)
+#+ecl
 (defun texture-data-get-pixels-at (self x y)
   (ffi:c-inline (self x y) (:POINTER-VOID :INT :INT) :POINTER-VOID
     "ImTextureData_GetPixelsAt(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImTextureData_GetSizeInBytes" texture-data-get-size-in-bytes) :INT
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun texture-data-get-size-in-bytes (self)
   (ffi:c-inline (self) (:POINTER-VOID) :INT
     "ImTextureData_GetSizeInBytes(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImTextureData_GetPitch" texture-data-get-pitch) :INT
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun texture-data-get-pitch (self)
   (ffi:c-inline (self) (:POINTER-VOID) :INT
     "ImTextureData_GetPitch(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImTextureData_GetTexRef" texture-data-get-tex-ref) TEXTURE-REF
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun texture-data-get-tex-ref (self)
   (ffi:c-inline (self) (:POINTER-VOID) :INT
     "ImTextureData_GetTexRef(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImTextureData_GetTexID" texture-data-get-tex-id) TEXTURE-ID
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun texture-data-get-tex-id (self)
   (ffi:c-inline (self) (:POINTER-VOID) :INT
     "ImTextureData_GetTexID(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImTextureData_SetTexID" texture-data-set-tex-id) :VOID
   (self :POINTER)
   (tex-id TEXTURE-ID)
 )
 
-#+(ecl)
+#+ecl
 (defun texture-data-set-tex-id (self tex-id)
   (ffi:c-inline (self tex-id) (:POINTER-VOID :INT) :VOID
     "ImTextureData_SetTexID(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImTextureData_SetStatus" texture-data-set-status) :VOID
   (self :POINTER)
   (status IM-TEXTURE-STATUS)
 )
 
-#+(ecl)
+#+ecl
 (defun texture-data-set-status (self status)
   (ffi:c-inline (self status) (:POINTER-VOID :INT) :VOID
     "ImTextureData_SetStatus(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImFontGlyphRangesBuilder_Clear" font-glyph-ranges-builder-clear) :VOID
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun font-glyph-ranges-builder-clear (self)
   (ffi:c-inline (self) (:POINTER-VOID) :VOID
     "ImFontGlyphRangesBuilder_Clear(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImFontGlyphRangesBuilder_GetBit" font-glyph-ranges-builder-get-bit) :BOOL
   (self :POINTER)
   (n :SIZE)
 )
 
-#+(ecl)
+#+ecl
 (defun font-glyph-ranges-builder-get-bit (self n)
   (ffi:c-inline (self n) (:POINTER-VOID :UNSIGNED-LONG) :BOOL
     "ImFontGlyphRangesBuilder_GetBit(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImFontGlyphRangesBuilder_SetBit" font-glyph-ranges-builder-set-bit) :VOID
   (self :POINTER)
   (n :SIZE)
 )
 
-#+(ecl)
+#+ecl
 (defun font-glyph-ranges-builder-set-bit (self n)
   (ffi:c-inline (self n) (:POINTER-VOID :UNSIGNED-LONG) :VOID
     "ImFontGlyphRangesBuilder_SetBit(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImFontGlyphRangesBuilder_AddChar" font-glyph-ranges-builder-add-char) :VOID
   (self :POINTER)
   (c WCHAR)
 )
 
-#+(ecl)
+#+ecl
 (defun font-glyph-ranges-builder-add-char (self c)
   (ffi:c-inline (self c) (:POINTER-VOID :INT) :VOID
     "ImFontGlyphRangesBuilder_AddChar(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImFontGlyphRangesBuilder_AddText" font-glyph-ranges-builder-add-text) :VOID
   (self :POINTER)
   (text :STRING)
   (text-end :STRING)
 )
 
-#+(ecl)
+#+ecl
 (defun font-glyph-ranges-builder-add-text (self text text-end)
   (ffi:c-inline (self text text-end) (:POINTER-VOID :CSTRING :CSTRING) :VOID
     "ImFontGlyphRangesBuilder_AddText(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImFontGlyphRangesBuilder_AddRanges" font-glyph-ranges-builder-add-ranges) :VOID
   (self :POINTER)
   (ranges :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun font-glyph-ranges-builder-add-ranges (self ranges)
   (ffi:c-inline (self ranges) (:POINTER-VOID :POINTER-VOID) :VOID
     "ImFontGlyphRangesBuilder_AddRanges(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImFontGlyphRangesBuilder_BuildRanges" font-glyph-ranges-builder-build-ranges) :VOID
   (self :POINTER)
   (out-ranges :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun font-glyph-ranges-builder-build-ranges (self out-ranges)
   (ffi:c-inline (self out-ranges) (:POINTER-VOID :POINTER-VOID) :VOID
     "ImFontGlyphRangesBuilder_BuildRanges(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImFontAtlas_AddFont" font-atlas-add-font) :POINTER
   (self :POINTER)
   (font-cfg :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun font-atlas-add-font (self font-cfg)
   (ffi:c-inline (self font-cfg) (:POINTER-VOID :POINTER-VOID) :POINTER-VOID
     "ImFontAtlas_AddFont(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImFontAtlas_AddFontDefault" font-atlas-add-font-default) :POINTER
   (self :POINTER)
   (font-cfg :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun font-atlas-add-font-default (self font-cfg)
   (ffi:c-inline (self font-cfg) (:POINTER-VOID :POINTER-VOID) :POINTER-VOID
     "ImFontAtlas_AddFontDefault(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImFontAtlas_AddFontFromFileTTF" font-atlas-add-font-from-file-ttf) :POINTER
   (self :POINTER)
   (filename :STRING)
@@ -9277,13 +9277,13 @@
   (glyph-ranges :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun font-atlas-add-font-from-file-ttf (self filename size-pixels font-cfg glyph-ranges)
   (ffi:c-inline (self filename size-pixels font-cfg glyph-ranges) (:POINTER-VOID :CSTRING :FLOAT :POINTER-VOID :POINTER-VOID) :POINTER-VOID
     "ImFontAtlas_AddFontFromFileTTF(#0, #1, #2, #3, #4)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImFontAtlas_AddFontFromMemoryTTF" font-atlas-add-font-from-memory-ttf) :POINTER
   (self :POINTER)
   (font-data :POINTER)
@@ -9293,13 +9293,13 @@
   (glyph-ranges :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun font-atlas-add-font-from-memory-ttf (self font-data font-data-size size-pixels font-cfg glyph-ranges)
   (ffi:c-inline (self font-data font-data-size size-pixels font-cfg glyph-ranges) (:POINTER-VOID :POINTER-VOID :INT :FLOAT :POINTER-VOID :POINTER-VOID) :POINTER-VOID
     "ImFontAtlas_AddFontFromMemoryTTF(#0, #1, #2, #3, #4, #5)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImFontAtlas_AddFontFromMemoryCompressedTTF" font-atlas-add-font-from-memory-compressed-ttf) :POINTER
   (self :POINTER)
   (compressed-font-data :POINTER)
@@ -9309,13 +9309,13 @@
   (glyph-ranges :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun font-atlas-add-font-from-memory-compressed-ttf (self compressed-font-data compressed-font-data-size size-pixels font-cfg glyph-ranges)
   (ffi:c-inline (self compressed-font-data compressed-font-data-size size-pixels font-cfg glyph-ranges) (:POINTER-VOID :POINTER-VOID :INT :FLOAT :POINTER-VOID :POINTER-VOID) :POINTER-VOID
     "ImFontAtlas_AddFontFromMemoryCompressedTTF(#0, #1, #2, #3, #4, #5)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImFontAtlas_AddFontFromMemoryCompressedBase85TTF" font-atlas-add-font-from-memory-compressed-base85ttf) :POINTER
   (self :POINTER)
   (compressed-font-data-base85 :STRING)
@@ -9324,103 +9324,103 @@
   (glyph-ranges :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun font-atlas-add-font-from-memory-compressed-base85ttf (self compressed-font-data-base85 size-pixels font-cfg glyph-ranges)
   (ffi:c-inline (self compressed-font-data-base85 size-pixels font-cfg glyph-ranges) (:POINTER-VOID :CSTRING :FLOAT :POINTER-VOID :POINTER-VOID) :POINTER-VOID
     "ImFontAtlas_AddFontFromMemoryCompressedBase85TTF(#0, #1, #2, #3, #4)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImFontAtlas_RemoveFont" font-atlas-remove-font) :VOID
   (self :POINTER)
   (font :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun font-atlas-remove-font (self font)
   (ffi:c-inline (self font) (:POINTER-VOID :POINTER-VOID) :VOID
     "ImFontAtlas_RemoveFont(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImFontAtlas_Clear" font-atlas-clear) :VOID
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun font-atlas-clear (self)
   (ffi:c-inline (self) (:POINTER-VOID) :VOID
     "ImFontAtlas_Clear(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImFontAtlas_CompactCache" font-atlas-compact-cache) :VOID
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun font-atlas-compact-cache (self)
   (ffi:c-inline (self) (:POINTER-VOID) :VOID
     "ImFontAtlas_CompactCache(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImFontAtlas_SetFontLoader" font-atlas-set-font-loader) :VOID
   (self :POINTER)
   (font-loader :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun font-atlas-set-font-loader (self font-loader)
   (ffi:c-inline (self font-loader) (:POINTER-VOID :POINTER-VOID) :VOID
     "ImFontAtlas_SetFontLoader(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImFontAtlas_ClearInputData" font-atlas-clear-input-data) :VOID
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun font-atlas-clear-input-data (self)
   (ffi:c-inline (self) (:POINTER-VOID) :VOID
     "ImFontAtlas_ClearInputData(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImFontAtlas_ClearFonts" font-atlas-clear-fonts) :VOID
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun font-atlas-clear-fonts (self)
   (ffi:c-inline (self) (:POINTER-VOID) :VOID
     "ImFontAtlas_ClearFonts(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImFontAtlas_ClearTexData" font-atlas-clear-tex-data) :VOID
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun font-atlas-clear-tex-data (self)
   (ffi:c-inline (self) (:POINTER-VOID) :VOID
     "ImFontAtlas_ClearTexData(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImFontAtlas_Build" font-atlas-build) :BOOL
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun font-atlas-build (self)
   (ffi:c-inline (self) (:POINTER-VOID) :BOOL
     "ImFontAtlas_Build(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImFontAtlas_GetTexDataAsAlpha8" font-atlas-get-tex-data-as-alpha8) :VOID
   (self :POINTER)
   (out-pixels :POINTER)
@@ -9429,13 +9429,13 @@
   (out-bytes-per-pixel :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun font-atlas-get-tex-data-as-alpha8 (self out-pixels out-width out-height out-bytes-per-pixel)
   (ffi:c-inline (self out-pixels out-width out-height out-bytes-per-pixel) (:POINTER-VOID :POINTER-VOID :POINTER-VOID :POINTER-VOID :POINTER-VOID) :VOID
     "ImFontAtlas_GetTexDataAsAlpha8(#0, #1, #2, #3, #4)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImFontAtlas_GetTexDataAsRGBA32" font-atlas-get-tex-data-as-rgba32) :VOID
   (self :POINTER)
   (out-pixels :POINTER)
@@ -9444,135 +9444,135 @@
   (out-bytes-per-pixel :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun font-atlas-get-tex-data-as-rgba32 (self out-pixels out-width out-height out-bytes-per-pixel)
   (ffi:c-inline (self out-pixels out-width out-height out-bytes-per-pixel) (:POINTER-VOID :POINTER-VOID :POINTER-VOID :POINTER-VOID :POINTER-VOID) :VOID
     "ImFontAtlas_GetTexDataAsRGBA32(#0, #1, #2, #3, #4)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImFontAtlas_SetTexID" font-atlas-set-tex-id) :VOID
   (self :POINTER)
   (id TEXTURE-ID)
 )
 
-#+(ecl)
+#+ecl
 (defun font-atlas-set-tex-id (self id)
   (ffi:c-inline (self id) (:POINTER-VOID :INT) :VOID
     "ImFontAtlas_SetTexID(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImFontAtlas_IsBuilt" font-atlas-is-built) :BOOL
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun font-atlas-is-built (self)
   (ffi:c-inline (self) (:POINTER-VOID) :BOOL
     "ImFontAtlas_IsBuilt(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImFontAtlas_GetGlyphRangesDefault" font-atlas-get-glyph-ranges-default) :POINTER
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun font-atlas-get-glyph-ranges-default (self)
   (ffi:c-inline (self) (:POINTER-VOID) :POINTER-VOID
     "ImFontAtlas_GetGlyphRangesDefault(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImFontAtlas_GetGlyphRangesGreek" font-atlas-get-glyph-ranges-greek) :POINTER
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun font-atlas-get-glyph-ranges-greek (self)
   (ffi:c-inline (self) (:POINTER-VOID) :POINTER-VOID
     "ImFontAtlas_GetGlyphRangesGreek(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImFontAtlas_GetGlyphRangesKorean" font-atlas-get-glyph-ranges-korean) :POINTER
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun font-atlas-get-glyph-ranges-korean (self)
   (ffi:c-inline (self) (:POINTER-VOID) :POINTER-VOID
     "ImFontAtlas_GetGlyphRangesKorean(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImFontAtlas_GetGlyphRangesJapanese" font-atlas-get-glyph-ranges-japanese) :POINTER
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun font-atlas-get-glyph-ranges-japanese (self)
   (ffi:c-inline (self) (:POINTER-VOID) :POINTER-VOID
     "ImFontAtlas_GetGlyphRangesJapanese(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImFontAtlas_GetGlyphRangesChineseFull" font-atlas-get-glyph-ranges-chinese-full) :POINTER
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun font-atlas-get-glyph-ranges-chinese-full (self)
   (ffi:c-inline (self) (:POINTER-VOID) :POINTER-VOID
     "ImFontAtlas_GetGlyphRangesChineseFull(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImFontAtlas_GetGlyphRangesChineseSimplifiedCommon" font-atlas-get-glyph-ranges-chinese-simplified-common) :POINTER
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun font-atlas-get-glyph-ranges-chinese-simplified-common (self)
   (ffi:c-inline (self) (:POINTER-VOID) :POINTER-VOID
     "ImFontAtlas_GetGlyphRangesChineseSimplifiedCommon(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImFontAtlas_GetGlyphRangesCyrillic" font-atlas-get-glyph-ranges-cyrillic) :POINTER
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun font-atlas-get-glyph-ranges-cyrillic (self)
   (ffi:c-inline (self) (:POINTER-VOID) :POINTER-VOID
     "ImFontAtlas_GetGlyphRangesCyrillic(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImFontAtlas_GetGlyphRangesThai" font-atlas-get-glyph-ranges-thai) :POINTER
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun font-atlas-get-glyph-ranges-thai (self)
   (ffi:c-inline (self) (:POINTER-VOID) :POINTER-VOID
     "ImFontAtlas_GetGlyphRangesThai(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImFontAtlas_GetGlyphRangesVietnamese" font-atlas-get-glyph-ranges-vietnamese) :POINTER
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun font-atlas-get-glyph-ranges-vietnamese (self)
   (ffi:c-inline (self) (:POINTER-VOID) :POINTER-VOID
     "ImFontAtlas_GetGlyphRangesVietnamese(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImFontAtlas_AddCustomRect" font-atlas-add-custom-rect) FONT-ATLAS-RECT-ID
   (self :POINTER)
   (width :INT)
@@ -9580,63 +9580,63 @@
   (out-r :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun font-atlas-add-custom-rect (self width height out-r)
   (ffi:c-inline (self width height out-r) (:POINTER-VOID :INT :INT :POINTER-VOID) :INT
     "ImFontAtlas_AddCustomRect(#0, #1, #2, #3)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImFontAtlas_RemoveCustomRect" font-atlas-remove-custom-rect) :VOID
   (self :POINTER)
   (id FONT-ATLAS-RECT-ID)
 )
 
-#+(ecl)
+#+ecl
 (defun font-atlas-remove-custom-rect (self id)
   (ffi:c-inline (self id) (:POINTER-VOID :INT) :VOID
     "ImFontAtlas_RemoveCustomRect(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImFontAtlas_GetCustomRect" font-atlas-get-custom-rect) :BOOL
   (self :POINTER)
   (id FONT-ATLAS-RECT-ID)
   (out-r :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun font-atlas-get-custom-rect (self id out-r)
   (ffi:c-inline (self id out-r) (:POINTER-VOID :INT :POINTER-VOID) :BOOL
     "ImFontAtlas_GetCustomRect(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImFontAtlas_AddCustomRectRegular" font-atlas-add-custom-rect-regular) FONT-ATLAS-RECT-ID
   (self :POINTER)
   (w :INT)
   (h :INT)
 )
 
-#+(ecl)
+#+ecl
 (defun font-atlas-add-custom-rect-regular (self w h)
   (ffi:c-inline (self w h) (:POINTER-VOID :INT :INT) :INT
     "ImFontAtlas_AddCustomRectRegular(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImFontAtlas_GetCustomRectByIndex" font-atlas-get-custom-rect-by-index) :POINTER
   (self :POINTER)
   (id FONT-ATLAS-RECT-ID)
 )
 
-#+(ecl)
+#+ecl
 (defun font-atlas-get-custom-rect-by-index (self id)
   (ffi:c-inline (self id) (:POINTER-VOID :INT) :POINTER-VOID
     "ImFontAtlas_GetCustomRectByIndex(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImFontAtlas_CalcCustomRectUV" font-atlas-calc-custom-rect-uv) :VOID
   (self :POINTER)
   (r :POINTER)
@@ -9644,131 +9644,131 @@
   (out-uv-max :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun font-atlas-calc-custom-rect-uv (self r out-uv-min out-uv-max)
   (ffi:c-inline (self r out-uv-min out-uv-max) (:POINTER-VOID :POINTER-VOID :POINTER-VOID :POINTER-VOID) :VOID
     "ImFontAtlas_CalcCustomRectUV(#0, #1, #2, #3)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImFontBaked_ClearOutputData" font-baked-clear-output-data) :VOID
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun font-baked-clear-output-data (self)
   (ffi:c-inline (self) (:POINTER-VOID) :VOID
     "ImFontBaked_ClearOutputData(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImFontBaked_FindGlyph" font-baked-find-glyph) :POINTER
   (self :POINTER)
   (c WCHAR)
 )
 
-#+(ecl)
+#+ecl
 (defun font-baked-find-glyph (self c)
   (ffi:c-inline (self c) (:POINTER-VOID :INT) :POINTER-VOID
     "ImFontBaked_FindGlyph(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImFontBaked_FindGlyphNoFallback" font-baked-find-glyph-no-fallback) :POINTER
   (self :POINTER)
   (c WCHAR)
 )
 
-#+(ecl)
+#+ecl
 (defun font-baked-find-glyph-no-fallback (self c)
   (ffi:c-inline (self c) (:POINTER-VOID :INT) :POINTER-VOID
     "ImFontBaked_FindGlyphNoFallback(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImFontBaked_GetCharAdvance" font-baked-get-char-advance) :FLOAT
   (self :POINTER)
   (c WCHAR)
 )
 
-#+(ecl)
+#+ecl
 (defun font-baked-get-char-advance (self c)
   (ffi:c-inline (self c) (:POINTER-VOID :INT) :FLOAT
     "ImFontBaked_GetCharAdvance(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImFontBaked_IsGlyphLoaded" font-baked-is-glyph-loaded) :BOOL
   (self :POINTER)
   (c WCHAR)
 )
 
-#+(ecl)
+#+ecl
 (defun font-baked-is-glyph-loaded (self c)
   (ffi:c-inline (self c) (:POINTER-VOID :INT) :BOOL
     "ImFontBaked_IsGlyphLoaded(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImFont_IsGlyphInFont" font-is-glyph-in-font) :BOOL
   (self :POINTER)
   (c WCHAR)
 )
 
-#+(ecl)
+#+ecl
 (defun font-is-glyph-in-font (self c)
   (ffi:c-inline (self c) (:POINTER-VOID :INT) :BOOL
     "ImFont_IsGlyphInFont(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImFont_IsLoaded" font-is-loaded) :BOOL
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun font-is-loaded (self)
   (ffi:c-inline (self) (:POINTER-VOID) :BOOL
     "ImFont_IsLoaded(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImFont_GetDebugName" font-get-debug-name) :STRING
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun font-get-debug-name (self)
   (ffi:c-inline (self) (:POINTER-VOID) :CSTRING
     "ImFont_GetDebugName(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImFont_GetFontBaked" font-get-font-baked) :POINTER
   (self :POINTER)
   (font-size :FLOAT)
 )
 
-#+(ecl)
+#+ecl
 (defun font-get-font-baked (self font-size)
   (ffi:c-inline (self font-size) (:POINTER-VOID :FLOAT) :POINTER-VOID
     "ImFont_GetFontBaked(#0, #1)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImFont_GetFontBakedEx" font-get-font-baked-ex) :POINTER
   (self :POINTER)
   (font-size :FLOAT)
   (density :FLOAT)
 )
 
-#+(ecl)
+#+ecl
 (defun font-get-font-baked-ex (self font-size density)
   (ffi:c-inline (self font-size density) (:POINTER-VOID :FLOAT :FLOAT) :POINTER-VOID
     "ImFont_GetFontBakedEx(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImFont_CalcTextSizeA" font-calc-text-size-a) VEC2
   (self :POINTER)
   (size :FLOAT)
@@ -9777,13 +9777,13 @@
   (text-begin :STRING)
 )
 
-#+(ecl)
+#+ecl
 (defun font-calc-text-size-a (self size max-width wrap-width text-begin)
   (ffi:c-inline (self size max-width wrap-width text-begin) (:POINTER-VOID :FLOAT :FLOAT :FLOAT :CSTRING) :INT
     "ImFont_CalcTextSizeA(#0, #1, #2, #3, #4)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImFont_CalcTextSizeAEx" font-calc-text-size-aex) VEC2
   (self :POINTER)
   (size :FLOAT)
@@ -9794,13 +9794,13 @@
   (out-remaining :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun font-calc-text-size-aex (self size max-width wrap-width text-begin text-end out-remaining)
   (ffi:c-inline (self size max-width wrap-width text-begin text-end out-remaining) (:POINTER-VOID :FLOAT :FLOAT :FLOAT :CSTRING :CSTRING :POINTER-VOID) :INT
     "ImFont_CalcTextSizeAEx(#0, #1, #2, #3, #4, #5, #6)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImFont_CalcWordWrapPosition" font-calc-word-wrap-position) :STRING
   (self :POINTER)
   (size :FLOAT)
@@ -9809,13 +9809,13 @@
   (wrap-width :FLOAT)
 )
 
-#+(ecl)
+#+ecl
 (defun font-calc-word-wrap-position (self size text text-end wrap-width)
   (ffi:c-inline (self size text text-end wrap-width) (:POINTER-VOID :FLOAT :CSTRING :CSTRING :FLOAT) :CSTRING
     "ImFont_CalcWordWrapPosition(#0, #1, #2, #3, #4)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImFont_CalcWordWrapPositionA" font-calc-word-wrap-position-a) :STRING
   (self :POINTER)
   (scale :FLOAT)
@@ -9824,203 +9824,203 @@
   (wrap-width :FLOAT)
 )
 
-#+(ecl)
+#+ecl
 (defun font-calc-word-wrap-position-a (self scale text text-end wrap-width)
   (ffi:c-inline (self scale text text-end wrap-width) (:POINTER-VOID :FLOAT :CSTRING :CSTRING :FLOAT) :CSTRING
     "ImFont_CalcWordWrapPositionA(#0, #1, #2, #3, #4)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImFont_ClearOutputData" font-clear-output-data) :VOID
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun font-clear-output-data (self)
   (ffi:c-inline (self) (:POINTER-VOID) :VOID
     "ImFont_ClearOutputData(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImFont_AddRemapChar" font-add-remap-char) :VOID
   (self :POINTER)
   (from-codepoint WCHAR)
   (to-codepoint WCHAR)
 )
 
-#+(ecl)
+#+ecl
 (defun font-add-remap-char (self from-codepoint to-codepoint)
   (ffi:c-inline (self from-codepoint to-codepoint) (:POINTER-VOID :INT :INT) :VOID
     "ImFont_AddRemapChar(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImFont_IsGlyphRangeUnused" font-is-glyph-range-unused) :BOOL
   (self :POINTER)
   (c-begin :UNSIGNED-INT)
   (c-last :UNSIGNED-INT)
 )
 
-#+(ecl)
+#+ecl
 (defun font-is-glyph-range-unused (self c-begin c-last)
   (ffi:c-inline (self c-begin c-last) (:POINTER-VOID :UNSIGNED-INT :UNSIGNED-INT) :BOOL
     "ImFont_IsGlyphRangeUnused(#0, #1, #2)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiViewport_GetCenter" viewport-get-center) VEC2
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun viewport-get-center (self)
   (ffi:c-inline (self) (:POINTER-VOID) :INT
     "ImGuiViewport_GetCenter(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiViewport_GetWorkCenter" viewport-get-work-center) VEC2
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun viewport-get-work-center (self)
   (ffi:c-inline (self) (:POINTER-VOID) :INT
     "ImGuiViewport_GetWorkCenter(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiPlatformIO_ClearPlatformHandlers" platform-io-clear-platform-handlers) :VOID
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun platform-io-clear-platform-handlers (self)
   (ffi:c-inline (self) (:POINTER-VOID) :VOID
     "ImGuiPlatformIO_ClearPlatformHandlers(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGuiPlatformIO_ClearRendererHandlers" platform-io-clear-renderer-handlers) :VOID
   (self :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun platform-io-clear-renderer-handlers (self)
   (ffi:c-inline (self) (:POINTER-VOID) :VOID
     "ImGuiPlatformIO_ClearRendererHandlers(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_PushFont" push-font) :VOID
   (font :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun push-font (font)
   (ffi:c-inline (font) (:POINTER-VOID) :VOID
     "ImGui_PushFont(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_SetWindowFontScale" set-window-font-scale) :VOID
   (scale :FLOAT)
 )
 
-#+(ecl)
+#+ecl
 (defun set-window-font-scale (scale)
   (ffi:c-inline (scale) (:FLOAT) :VOID
     "ImGui_SetWindowFontScale(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_PushButtonRepeat" push-button-repeat) :VOID
   (repeat :BOOL)
 )
 
-#+(ecl)
+#+ecl
 (defun push-button-repeat (repeat)
   (ffi:c-inline (repeat) (:BOOL) :VOID
     "ImGui_PushButtonRepeat(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_PopButtonRepeat" pop-button-repeat) :VOID)
 
-#+(ecl)
+#+ecl
 (defun pop-button-repeat ()
   (ffi:c-inline () () :VOID
     "ImGui_PopButtonRepeat()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_PushTabStop" push-tab-stop) :VOID
   (tab-stop :BOOL)
 )
 
-#+(ecl)
+#+ecl
 (defun push-tab-stop (tab-stop)
   (ffi:c-inline (tab-stop) (:BOOL) :VOID
     "ImGui_PushTabStop(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_PopTabStop" pop-tab-stop) :VOID)
 
-#+(ecl)
+#+ecl
 (defun pop-tab-stop ()
   (ffi:c-inline () () :VOID
     "ImGui_PopTabStop()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetContentRegionMax" get-content-region-max) VEC2)
 
-#+(ecl)
+#+ecl
 (defun get-content-region-max ()
   (ffi:c-inline () () :INT
     "ImGui_GetContentRegionMax()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetWindowContentRegionMin" get-window-content-region-min) VEC2)
 
-#+(ecl)
+#+ecl
 (defun get-window-content-region-min ()
   (ffi:c-inline () () :INT
     "ImGui_GetWindowContentRegionMin()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_GetWindowContentRegionMax" get-window-content-region-max) VEC2)
 
-#+(ecl)
+#+ecl
 (defun get-window-content-region-max ()
   (ffi:c-inline () () :INT
     "ImGui_GetWindowContentRegionMax()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_EndChildFrame" end-child-frame) :VOID)
 
-#+(ecl)
+#+ecl
 (defun end-child-frame ()
   (ffi:c-inline () () :VOID
     "ImGui_EndChildFrame()"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_ShowStackToolWindow" show-stack-tool-window) :VOID
   (p-open :POINTER)
 )
 
-#+(ecl)
+#+ecl
 (defun show-stack-tool-window (p-open)
   (ffi:c-inline (p-open) (:POINTER-VOID) :VOID
     "ImGui_ShowStackToolWindow(#0)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_ComboObsolete" combo-obsolete) :BOOL
   (label :STRING)
   (current-item :POINTER)
@@ -10029,13 +10029,13 @@
   (items-count :INT)
 )
 
-#+(ecl)
+#+ecl
 (defun combo-obsolete (label current-item old-callback user-data items-count)
   (ffi:c-inline (label current-item old-callback user-data items-count) (:CSTRING :POINTER-VOID :POINTER-VOID :POINTER-VOID :INT) :BOOL
     "ImGui_ComboObsolete(#0, #1, #2, #3, #4)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_ComboObsoleteEx" combo-obsolete-ex) :BOOL
   (label :STRING)
   (current-item :POINTER)
@@ -10045,13 +10045,13 @@
   (popup-max-height-in-items :INT)
 )
 
-#+(ecl)
+#+ecl
 (defun combo-obsolete-ex (label current-item old-callback user-data items-count popup-max-height-in-items)
   (ffi:c-inline (label current-item old-callback user-data items-count popup-max-height-in-items) (:CSTRING :POINTER-VOID :POINTER-VOID :POINTER-VOID :INT :INT) :BOOL
     "ImGui_ComboObsoleteEx(#0, #1, #2, #3, #4, #5)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_ListBoxObsolete" list-box-obsolete) :BOOL
   (label :STRING)
   (current-item :POINTER)
@@ -10060,13 +10060,13 @@
   (items-count :INT)
 )
 
-#+(ecl)
+#+ecl
 (defun list-box-obsolete (label current-item old-callback user-data items-count)
   (ffi:c-inline (label current-item old-callback user-data items-count) (:CSTRING :POINTER-VOID :POINTER-VOID :POINTER-VOID :INT) :BOOL
     "ImGui_ListBoxObsolete(#0, #1, #2, #3, #4)"
     :one-liner t))
 
-#-(ecl)
+#-ecl
 (defcfun ("ImGui_ListBoxObsoleteEx" list-box-obsolete-ex) :BOOL
   (label :STRING)
   (current-item :POINTER)
@@ -10076,7 +10076,7 @@
   (height-in-items :INT)
 )
 
-#+(ecl)
+#+ecl
 (defun list-box-obsolete-ex (label current-item old-callback user-data items-count height-in-items)
   (ffi:c-inline (label current-item old-callback user-data items-count height-in-items) (:CSTRING :POINTER-VOID :POINTER-VOID :POINTER-VOID :INT :INT) :BOOL
     "ImGui_ListBoxObsoleteEx(#0, #1, #2, #3, #4, #5)"

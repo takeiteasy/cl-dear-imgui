@@ -746,7 +746,7 @@
          (ret-type   (if ret-desc (map-type-description ret-desc) :void))
          (args       (gethash "arguments" func)))
     (with-output-to-string (s)
-      (format s "#-(ecl)~%")
+      (format s "#-ecl~%")
       (format s "(defcfun (~S ~A) ~S~%" shim-name lisp-name ret-type)
       (when args
         (loop for arg across args
@@ -911,23 +911,23 @@
 (defun generate-library-definition (stream)
   "Generate define-foreign-library form for dcimgui (CFFI) and ECL equivalents."
   ;; CFFI version
-  (format stream "#-(ecl)~%")
+  (format stream "#-ecl~%")
   (format stream "(eval-when (:compile-toplevel :load-toplevel :execute)~%")
   (format stream "  (pushnew (asdf:system-relative-pathname :cl-dear-imgui \"./\")~%")
   (format stream "           cffi:*foreign-library-directories*~%")
   (format stream "           :test #'equal))~%~%")
-  (format stream "#-(ecl)~%")
+  (format stream "#-ecl~%")
   (format stream "(define-foreign-library dcimgui~%")
   (format stream "  (:darwin \"libdcimgui.dylib\")~%")
   (format stream "  (:unix \"libdcimgui.so\")~%")
   (format stream "  (:windows \"dcimgui.dll\")~%")
   (format stream "  (t (:default \"libdcimgui\")))~%~%")
-  (format stream "#-(ecl)~%")
+  (format stream "#-ecl~%")
   (format stream "(use-foreign-library dcimgui)~%~%")
   ;; ECL version: inline C header + platform library load
-  (format stream "#+(ecl)~%")
+  (format stream "#+ecl~%")
   (format stream "(ffi:clines \"#include \\\"dcimgui.h\\\"\")~%~%")
-  (format stream "#+(ecl)~%")
+  (format stream "#+ecl~%")
   (format stream "(progn~%")
   (format stream "  #+darwin (ffi:load-foreign-object \"libdcimgui.dylib\")~%")
   (format stream "  #+(and unix (not darwin)) (ffi:load-foreign-object \"libdcimgui.so\")~%")
@@ -988,7 +988,7 @@
                  (format stream ";; Flags enum (bitfield) - combine with LOGIOR~%"))
 
                ;; CFFI defcenum (non-ECL only)
-               (format stream "#-(ecl)~%")
+               (format stream "#-ecl~%")
                (format stream "(defcenum ~A~%" lisp-name)
 
                ;; Generate enum elements
@@ -1016,7 +1016,7 @@
 
                ;; ECL: defconstant for each element value
                (when (and elements (> (length elements) 0))
-                 (format stream "#+(ecl)~%")
+                 (format stream "#+ecl~%")
                  (format stream "(progn~%")
                  (loop for element across elements
                        do (let* ((elem-name      (gethash "name" element))
@@ -1218,7 +1218,7 @@
         (loop for line across preceding
               do (format stream "~A~%" line))))
 
-    (format stream "#-(ecl)~%")
+    (format stream "#-ecl~%")
     (format stream "(defctype ~A ~S)~%~%"
             lisp-name
             cffi-type)))
@@ -1260,7 +1260,7 @@
       (when is-anonymous
         (format stream ";; Anonymous struct~%"))
 
-      (format stream "#-(ecl)~%")
+      (format stream "#-ecl~%")
       (format stream "(~A ~A~%"
               (if is-union "defcunion" "defcstruct")
               lisp-name)
@@ -1378,7 +1378,7 @@
                  (format stream ";; Manual helper function~%"))
 
                ;; CFFI defcfun (non-ECL)
-               (format stream "#-(ecl)~%")
+               (format stream "#-ecl~%")
                (format stream "(defcfun (~S ~A) ~S"
                        c-name
                        lisp-name
@@ -1487,7 +1487,7 @@ Used to handle out-pointer parameters that are incorrectly typed as :STRING.")
     (t :int)))
 
 (defun generate-ecl-function (stream func &optional c-name-override)
-  "Emit a #+(ecl) (defun ...) wrapper using ffi:c-inline for FUNC.
+  "Emit a #+ecl (defun ...) wrapper using ffi:c-inline for FUNC.
    Skips varargs and by-value struct functions (returns NIL for those)."
   (when (or (func-has-real-varargs-p func)
             (func-has-by-value-struct-arg-p func))
@@ -1526,7 +1526,7 @@ Used to handle out-pointer parameters that are incorrectly typed as :STRING.")
     (setf ecl-types  (nreverse ecl-types))
     (let ((c-args (loop for i from 0 below (length lisp-names)
                         collect (format nil "#~D" i))))
-      (format stream "#+(ecl)~%")
+      (format stream "#+ecl~%")
       (format stream "(defun ~A (~{~A~^ ~})~%" lisp-name lisp-names)
       (format stream "  (ffi:c-inline (~{~A~^ ~}) (~{~S~^ ~}) ~S~%"
               lisp-names ecl-types ecl-ret)
@@ -1535,7 +1535,7 @@ Used to handle out-pointer parameters that are incorrectly typed as :STRING.")
     t))
 
 (defun generate-ecl-lisp-shim (func)
-  "Generate ECL #+(ecl) defun wrapper calling the generated C shim for FUNC.
+  "Generate ECL #+ecl defun wrapper calling the generated C shim for FUNC.
    The shim C name is used (e.g. ImGui_SetNextWindowPosXY) but the Lisp symbol
    uses the original function name.  Returns NIL if function cannot be generated."
   (when (func-has-real-varargs-p func)
@@ -1560,7 +1560,7 @@ Used to handle out-pointer parameters that are incorrectly typed as :STRING.")
     (let ((c-args (loop for i from 0 below (length lparams)
                         collect (format nil "#~D" i))))
       (with-output-to-string (s)
-        (format s "#+(ecl)~%")
+        (format s "#+ecl~%")
         (format s "(defun ~A (~{~A~^ ~})~%" lisp-name lparams)
         (format s "  (ffi:c-inline (~{~A~^ ~}) (~{~S~^ ~}) ~S~%"
                 lparams ecl-types ecl-ret)
