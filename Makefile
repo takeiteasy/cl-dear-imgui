@@ -14,6 +14,13 @@
 #   - Windows: brew install mingw-w64 (or apt install g++-mingw-w64-x86-64). Override with WIN_CXX=...
 #   - macOS universal: uses clang++ -target + lipo, no extra tools needed
 
+# imgui/ and dear_bindings/ are git submodules. A non-recursive clone leaves them
+# empty, so guard the build with a clear message rather than a confusing
+# "no rule to make target imgui/imgui.cpp".
+ifeq ($(wildcard imgui/imgui.cpp),)
+  $(error imgui/ submodule is not checked out - run: git submodule update --init)
+endif
+
 IMGUI_DIR  := imgui
 IMGUI_SRCS := $(IMGUI_DIR)/imgui.cpp \
               $(IMGUI_DIR)/imgui_draw.cpp \

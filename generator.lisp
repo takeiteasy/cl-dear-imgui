@@ -288,10 +288,25 @@
               stripped-element)))
     (camel-case-to-kebab without-enum-prefix)))
 
+(defun cl-symbol-collision-p (name)
+  "True if NAME (a kebab-case string) upcases to a symbol whose home package is
+   COMMON-LISP (e.g. \"cond\" -> CL:COND). Defining a CFFI foreign type on such a
+   symbol provokes a full WARNING from CFFI (which ASDF escalates to a build
+   failure), so these names get an im- prefix, matching how enum type names are
+   already disambiguated. Keyword-package symbols are deliberately not treated as
+   collisions: almost every short word is an interned keyword, and CFFI only
+   objects to CL-package type names."
+  (let ((sym (find-symbol (string-upcase name) '#:common-lisp)))
+    (and sym (eq (symbol-package sym) (find-package '#:common-lisp)))))
+
 (defun format-type-name (c-name)
   "Convert C type name to Lisp type name.
-   ImGuiTableSortSpecs -> table-sort-specs"
-  (string-right-trim "-" (camel-case-to-kebab (strip-imgui-prefix c-name))))
+   ImGuiTableSortSpecs -> table-sort-specs
+   ImGuiCond           -> im-cond   (would otherwise collide with CL:COND)"
+  (let ((name (string-right-trim "-" (camel-case-to-kebab (strip-imgui-prefix c-name)))))
+    (if (cl-symbol-collision-p name)
+        (concatenate 'string "im-" name)
+        name)))
 
 (defun parse-constant-value (content)
   "Parse constant value from string to appropriate Lisp representation."

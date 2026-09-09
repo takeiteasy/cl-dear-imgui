@@ -2,6 +2,17 @@
 
 Common Lisp CFFI + ECL bindings for [Dear ImGui](https://github.com/ocornut/imgui) using [dear_bindings](https://github.com/dearimgui/dear_bindings). This project provides automatically generated bindings for Dear ImGui. The bindings are generated from the `dcimgui.json` metadata file produced by the dear_bindings Python tool. 
 
+## Clone
+
+`imgui/` and `dear_bindings/` are git submodules, pinned to the revisions the
+committed `dcimgui.*` bindings were generated against.
+
+```bash
+git clone --recursive https://github.com/takeiteasy/cl-dear-imgui
+# or, in an existing checkout:
+git submodule update --init
+```
+
 ## Build 
 
 ```bash

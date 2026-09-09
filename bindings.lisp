@@ -2837,7 +2837,7 @@
 (defctype data-type :INT)
 
 #-ecl
-(defctype cond :INT)
+(defctype im-cond :INT)
 
 #-ecl
 (defctype col :INT)
@@ -3228,7 +3228,7 @@
 #-ecl
 (defcfun ("ImGui_SetNextWindowCollapsed" set-next-window-collapsed) :VOID
   (collapsed :BOOL)
-  (cond COND)
+  (cond IM-COND)
 )
 
 #+ecl
@@ -3260,7 +3260,7 @@
 #-ecl
 (defcfun ("ImGui_SetWindowCollapsed" set-window-collapsed) :VOID
   (collapsed :BOOL)
-  (cond COND)
+  (cond IM-COND)
 )
 
 #+ecl
@@ -3282,7 +3282,7 @@
 (defcfun ("ImGui_SetWindowCollapsedStr" set-window-collapsed-str) :VOID
   (name :STRING)
   (collapsed :BOOL)
-  (cond COND)
+  (cond IM-COND)
 )
 
 #+ecl
@@ -5660,7 +5660,7 @@
 #-ecl
 (defcfun ("ImGui_SetNextItemOpen" set-next-item-open) :VOID
   (is-open :BOOL)
-  (cond COND)
+  (cond IM-COND)
 )
 
 #+ecl
@@ -6659,7 +6659,7 @@
   (type :STRING)
   (data :POINTER)
   (sz :SIZE)
-  (cond COND)
+  (cond IM-COND)
 )
 
 #+ecl

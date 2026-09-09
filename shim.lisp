@@ -23,13 +23,13 @@
 (defcfun ("ImGui_SetNextWindowPosXY" set-next-window-pos) :VOID
   (pos-x :FLOAT)
   (pos-y :FLOAT)
-  (cond COND)
+  (cond IM-COND)
 )
 
 (defcfun ("ImGui_SetNextWindowPosExXY" set-next-window-pos-ex) :VOID
   (pos-x :FLOAT)
   (pos-y :FLOAT)
-  (cond COND)
+  (cond IM-COND)
   (pivot-x :FLOAT)
   (pivot-y :FLOAT)
 )
@@ -37,7 +37,7 @@
 (defcfun ("ImGui_SetNextWindowSizeXY" set-next-window-size) :VOID
   (size-x :FLOAT)
   (size-y :FLOAT)
-  (cond COND)
+  (cond IM-COND)
 )
 
 (defcfun ("ImGui_SetNextWindowSizeConstraintsXY" set-next-window-size-constraints) :VOID
@@ -62,27 +62,27 @@
 (defcfun ("ImGui_SetWindowPosXY" set-window-pos) :VOID
   (pos-x :FLOAT)
   (pos-y :FLOAT)
-  (cond COND)
+  (cond IM-COND)
 )
 
 (defcfun ("ImGui_SetWindowSizeXY" set-window-size) :VOID
   (size-x :FLOAT)
   (size-y :FLOAT)
-  (cond COND)
+  (cond IM-COND)
 )
 
 (defcfun ("ImGui_SetWindowPosStrXY" set-window-pos-str) :VOID
   (name :STRING)
   (pos-x :FLOAT)
   (pos-y :FLOAT)
-  (cond COND)
+  (cond IM-COND)
 )
 
 (defcfun ("ImGui_SetWindowSizeStrXY" set-window-size-str) :VOID
   (name :STRING)
   (size-x :FLOAT)
   (size-y :FLOAT)
-  (cond COND)
+  (cond IM-COND)
 )
 
 (defcfun ("ImGui_PushStyleColorImVec4XYZW" push-style-color-im-vec4) :VOID
